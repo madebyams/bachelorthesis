@@ -1,0 +1,20 @@
+# LaTeX CI for GitLab
+# Builds the thesis PDF on every push and on a monthly schedule
+
+stages:
+  - build
+
+build_pdf:
+  stage: build
+  tags:
+    - amd64
+  image: ghcr.io/dante-ev/texlive:latest
+  script:
+    - latexmk -pdf -interaction=nonstopmode -file-line-error htwsaar-i-mst-vorlage.tex
+  artifacts:
+    paths:
+      - "*.pdf"
+    expire_in: 30 days
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
