@@ -192,15 +192,19 @@ efiizienter zu gestalten gibt es sogenannte Resource Directorires, welche Buch f
 
 Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichten Schicht und der Request-Response Schicht. Die Nachrichtenschicht ist dafür 
 zuständig, dass eine Nachricht zunächst per UDP übermittelt wird. Dabei gibt es folgende Typen von Nachrichten: Confirmable, Non-confirmable, Acknowledgement und Reset. Confirmable verlangt vom Kommunikationspartner eine
-Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Eine Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung seperat oder
-mit der Antwort zusammen übermittelt wird. Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4-byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einem Statuscode
-und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haven kann. Dies verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
+Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Eine Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung seperat (``Seperate Response'') oder
+mit der Antwort zusammen (``Piggybacked Response'') übermittelt wird. Die Reset Nachricht teilt mit, dass die Nachricht zwar angekommen ist, diese aber aufgrund von fehlendem Kontext nicht verarbeitet werden kann. Solch eine Reset-Nachricht wird auch 
+verwendet, um die Erreichbarkeit des Kommunikationspartners sicherzustellen.
+Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4-byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einem Statuscode
+bei einer Antwort oder die Methode (GET, DELETE, PUT, POSt) bei einer Anfrage und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haven kann. Dies verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
 um zur passenden Anfrage die passende Antwort zu übermitteln. Danach können weitere Optionen hinzugefügt werden, welche dann mit dem Payload-Marker (Ein Byte gefüllt mit Einsen) abgeschlossen werden. Nach dem Payload 
 Marker kann der Payload (also zu übermittelnde Daten) beigefügt werden. Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_constrained_2014}
 
 Durch diese Nachrichten wird dann das Request/Response Pattern umgesetzt. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
 ``stop-and-wait retransmission'' bei confirmable Nachrichten verwendet. \cite{shelby_constrained_2014} Das bedeutet, dass man beim Absenden für jeden gesendeten Frame auf eine Acknowledge Nachricht wartet, um weiterzusenden. Erhält man diese
-Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995}
+Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response Schicht realisiert ein REST-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
+entwickeln und nicht streng resourcenorientert wie bei REST.\cite{burke_restful_2013} Dabei werden Resourcen und Dienste ähnlich zu REST mit URIs realisiert und auch sind die Status-Codes angelehnt an HTTP mit 2.xx für eine erfolgreiche Übertragung, 4.xx für clientseitigen und 5.xx für 
+serverseitigen Fehler.
 
 \subsection{MQTT}
 
