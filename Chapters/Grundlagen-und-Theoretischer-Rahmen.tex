@@ -174,7 +174,7 @@ Zusammenfassend also:
 \end{enumerate} \cite{meinhardt_iot_2021} \cite{fleisch_geschaftsmodelle_2015}
 
 Die Geräte, an welche Sensoren und Aktuatoren angeschlossen sind nennt man auch "constrained devices", welche durch ihre Konnektivität ein Netwerk Formen. Diese einzelnen Sensoren und Aktoren in
-diesem Netzwerk nennt man dann "constrained nodes". \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern wie dem ESP32. Ein Protokoll, welches genutzt wird um mit Knoten 
+diesem Netzwerk nennt man dann "constrained nodes". \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern \cite{shelby_constrained_2014} wie dem ESP32. Ein Protokoll, welches genutzt wird um mit Knoten 
 in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014} \cite{shelby_constrained_2014}
 
 
@@ -189,6 +189,18 @@ Dies wird in RFC7252 auch Resource Discovery genannt und geschieht über das Con
 
 Die direkte Suche von Resourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also 
 efiizienter zu gestalten gibt es sogenannte Resource Directorires, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird entspricht auch RFC6690. \cite{amsuss_constrained_2022}
+
+Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichten Schicht und der Request-Response Schicht. Die Nachrichtenschicht ist dafür 
+zuständig, dass eine Nachricht zunächst per UDP übermittelt wird. Dabei gibt es folgende Typen von Nachrichten: Confirmable, Non-confirmable, Acknowledgement und Reset. Confirmable verlangt vom Kommunikationspartner eine
+Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Eine Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung seperat oder
+mit der Antwort zusammen übermittelt wird. Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4-byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einem Statuscode
+und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haven kann. Dies verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
+um zur passenden Anfrage die passende Antwort zu übermitteln. Danach können weitere Optionen hinzugefügt werden, welche dann mit dem Payload-Marker (Ein Byte gefüllt mit Einsen) abgeschlossen werden. Nach dem Payload 
+Marker kann der Payload (also zu übermittelnde Daten) beigefügt werden. Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_constrained_2014}
+
+Durch diese Nachrichten wird dann das Request/Response Pattern umgesetzt. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
+``stop-and-wait retransmission'' bei confirmable Nachrichten verwendet. \cite{shelby_constrained_2014} Das bedeutet, dass man beim Absenden für jeden gesendeten Frame auf eine Acknowledge Nachricht wartet, um weiterzusenden. Erhält man diese
+Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995}
 
 \subsection{MQTT}
 
