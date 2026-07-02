@@ -20,6 +20,8 @@ Die Prozessmodellierung verfolgt nach Leimeister die folgenden Ziele:
 
 Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder BPMN modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird auf EPK eingegangen.
 
+ARIS, Flowable, Camunda 
+
 \subsection{EPK}
 
 Leimeister definiert EPK (ereignisgesteuerte Prozesskette) als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen Ereignissen und
@@ -61,18 +63,18 @@ Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
     \item Steuerungs-/und Prozesssicht ("[...] Zusammenhänge der zuvor genannten Beschreibungssichten in zeitlich-sachlogischen Beziehungen [...]") \cite{leimeister_einfuhrung_2015}
 \end{itemize}
 
-Seidlmeier wiederum definiert ARIS als Produktgruppe, welche auf die Optimierung von Unternehmensprozessen zielt. Diese besteht aus den Produkten: \cite{seidlmeier_prozessmodellierung_2019}
+Seidlmeier wiederum definiert ARIS als Produktgruppe, welche auf die Optimierung von Unternehmensprozessen zielt. Einige der Produkte in der Gruppe: \cite{seidlmeier_prozessmodellierung_2019}
 
 \begin{itemize}
     \item ARIS Business Strategy
     \item ARIS Architect
     \item ARIS Cloud
     \item ARIS Simulation
-    \item ARIS Process Governance
-    \item ARIS Process Performance Manager
-\end{itemize} \cite{seidlmeier_prozessmodellierung_2019}
+    \item ARIS Process Governance 
+    \item ARIS Process Mining
+\end{itemize} \cite{seidlmeier_prozessmodellierung_2019} \cite{software_gmbh_aris_nodate}
 
-In dieser Arbeit werden ARIS Business Architect und ARIS Simulation verwendet.
+In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation zur Implementierung des Prototypen verwendet.
 
 \section{Eingebettete Systeme}
 
@@ -117,6 +119,13 @@ Dies wird in RFC7252 auch Resource Discovery genannt und geschieht über das Con
 Die direkte Suche von Resourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also 
 efiizienter zu gestalten gibt es sogenannte Resource Directorires, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird entspricht auch RFC6690. \cite{amsuss_constrained_2022}
 
+\subsection{MQTT}
+
+Wendzel definiert MQTT als ein Protokoll, was auch in resourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish Subscribe Architektur, wodurch
+Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, die die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
+Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Verteiler, wo Publisher Daten teilen und von Subscribern angenommen werden. Hierbei haben Publisher und
+Subscriber keine Kenntnis voneinander. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008}
+
 \section{Sockets}
 
 Unter einem Socket versteht man eine "Verallgemeinerung des Mechanismus für den Dateizugriff unter UNIX, das einen Endpunkt für die Kommunikation bereitstellt.
@@ -124,3 +133,10 @@ Unter einem Socket versteht man eine "Verallgemeinerung des Mechanismus für den
 oder ein bestimmtes Gerät bindet,[...], aber es kann Sockets erstellen, ohne sie an bestimmte Zieladressen binden zu müssen. Die Applikation kann jedes Mal, wenn sie das 
 Socket nutzt [...], eine Zieladresse angeben[...] (z.B. wenn eine TCP-Verbindung aufgebaut wird)"\cite{comer_tcpip_2003} Nach Inden bieten Sockets dabei eine streambasierte 
 Kommunikationsmöglichkeit, um Daten bidirektional zu übertragen. \cite{inden_weg_2020}
+
+\section{WebSockets}
+
+Gemäß RFC6455 versteht man unter WebSockets ein Kommunikationsprotokoll, das Browser basierten Anwendungen
+eine bidirektionale Verbindung zum Server ermöglicht. Diese wurden davor mit mehreren HTTP-Anfragen realisiert, 
+während WebSockets mittels eines Handshakes via HTTP, eine WebSocket Verbindung anfragt und man nach erfolgreichem 
+Handshake eine bidirektionale Verbindung aufgebaut hat. \cite{fette_websocket_2011}
