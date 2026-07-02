@@ -4,8 +4,8 @@ Es werden Begriffe definiert, um eine Grundlage für den Leser zu legen, um dies
 
 \section{Prozesse}
 
-Geschäftsprozesse (kurz: Prozesse) sind "[...] zielgerichtete zeitlich-logische Folgen oder Vorgangsketten von Tätigkeiten [...], dessen Ziele aus der 
-Unternehmensstrategie abgeleitet sind." \cite{stahlknecht_einfuhrung_2005} Diese Abfolge muss durch ein Startereignis begonnen und mit einem Endereignis 
+Geschäftsprozesse (kurz: Prozesse) sind ``[...] zielgerichtete zeitlich-logische Folgen oder Vorgangsketten von Tätigkeiten [...], dessen Ziele aus der 
+Unternehmensstrategie abgeleitet sind.'' \cite{stahlknecht_einfuhrung_2005} Diese Abfolge muss durch ein Startereignis begonnen und mit einem Endereignis 
 abgeschlossen werden. \cite{leimeister_einfuhrung_2015}
 
 \section{Prozessmodellierung}
@@ -13,28 +13,53 @@ abgeschlossen werden. \cite{leimeister_einfuhrung_2015}
 Die Prozessmodellierung verfolgt nach Leimeister die folgenden Ziele: 
 
 \begin{itemize}
-    \item "Dokumentation von Sachverhalten sowie der erleichterten Kommunikation im Unternehmen [...]" \cite{leimeister_einfuhrung_2015}
-    \item "Analyse von Problemen und Fehlern sowie der verschiedenen Gestaltungshypothesen[...]" \cite{leimeister_einfuhrung_2015}
-    \item Die Gestaltung von Prozessen "um Abläufe und deren automatisierte Abarbeitung zu erklären[...]" \cite{leimeister_einfuhrung_2015}
+    \item ``Dokumentation von Sachverhalten sowie der erleichterten Kommunikation im Unternehmen [...]'' \cite{leimeister_einfuhrung_2015}
+    \item ``Analyse von Problemen und Fehlern sowie der verschiedenen Gestaltungshypothesen[...]'' \cite{leimeister_einfuhrung_2015}
+    \item Die Gestaltung von Prozessen ``um Abläufe und deren automatisierte Abarbeitung zu erklären[...]'' \cite{leimeister_einfuhrung_2015}
 \end{itemize}
 
-Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder BPMN modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird auf EPK eingegangen.
-
-ARIS, Flowable, Camunda 
+Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder BPMN modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
 
 \subsection{EPK}
 
 Leimeister definiert EPK (ereignisgesteuerte Prozesskette) als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen Ereignissen und
-Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren "und", "oder" und das "exklusive oder" \cite{nuttgens_geschaftsprozesmodellierung_1998}
+Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren ``AND'', ``OR'' und ``XOR'' \cite{nuttgens_geschaftsprozesmodellierung_1998}
 
 Ein wesentliches Merkmal von EPK ist die Darstellung eines Prozesses in eine zeitlich-logische Abfolge von Funktionen und dem Einbau von Entscheidungslogik durch
 Ereignisse. \cite{nuttgens_geschaftsprozesmodellierung_1998}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Graphics/Test_EPC_Diagram.png}
+    \caption{Beispiel eines modellierten Prozesses in EPK für eine Kundenbestellung}
+    \label{fig:beispiel_epk}
+\end{figure}
+
+Ereignisse beschreiben Zustände eines Prozesses (bspw. ``Bestellung erhalten'' oder ``Produkt nicht verfügbar''), welcher den Verlauf eines Prozesses beeinflusst.\cite{gadatsch_grundkurs_2008}
+Vergleichbar sind Ereignisse mit logischen Aussagen, dessen Ergebnisse wahr oder falsch sind. Somit kann man diese als boole'schen Aussagen interpretieren. Funktionen (oder auch Aktivitäten) hingegen beschreiben 
+eine Tätigkeit oder eine Aufgabe eines Geschäftsprozesses (bspw. ``Prüfe den Produktbestand'' oder ``Erstelle Rechnung'') und überführen einen Eingangszustand in einen Ausgangszustand \cite{gadatsch_grundkurs_2008}. Dies kann man mit Anweisungen im Programmcode 
+interpretieren. Funktionen können dabei Datenobjekte enthalten, um benötigte und resultierende Daten zu modellieren. Außerdem können organisatorische Einheiten und benötigte Software 
+an eine Funktion gebunden werden. EPK ermöglicht es Funktionen in sich in Teilfunktionen aufzuteilen. Ist es nicht mehr möglich eine Funktion weiter aufzuteilen, so spricht man von einer Elementarfunktion. Ereignisse und Funktionen können durch Kanten 
+verbunden und in eine logische Reihenfolge gebracht werden. Dadurch wird der
+Ablauf eines Prozesses und auch der Datenfluss beschrieben. \cite{gadatsch_grundkurs_2008} 
+
+Gemäß der EPK-Syntax gilt, dass ein Prozess mit einem Start-Ereignis beginnen und mit einem End-Ereignis enden muss. End-Ereignisse können dabei 
+neue Prozesse auslösen. Auf ein Ereignis muss eine Funktion folgen \cite{gadatsch_grundkurs_2008}, jedoch können auf Funktionen weitere Funktionen folgen oder Ereignisse. Um auf der 
+Basis einer Funktionsausgabe Entscheidungen zu treffen, gibt es Verknüpfungsoperatoren, welche es ermöglichen die Ausgabe einer Funktion mit den benachbarten
+Ereignissen abzugleichen und einem Entscheidungsweg im Prozess zu folgen.\cite{gadatsch_grundkurs_2008} Ein Beispiel wäre die Überprüfung der Kreditwürdigkeit eines Kunden als Funktion. Je nachdem
+welches Ereignis (bspw. ``Kreditwürdig'' oder ``Nicht kreditwürdig'') gemäß der Verknüpfung zutrifft, wird der entsprechende Entscheidungsweg genommen. 
+
+TODO: Verknüpfungsoperatoren definieren mit Rump und Gadatsch als Quelle
+
+In dieser Arbeit wird eine reduzierte Fassung von EPK betrachtet, welche azyklisch ist, das Datenobjekt nicht enthält und Funktionen elementar sind.
 
 \subsection{Geschäftsprozessorchestrierung}
 
 Unter Geschäftsprozessorchestrierung versteht man die Ausführung und Verwaltung von Geschäftsprozessen. \cite{kampik_agent-based_2019}
 
 Seidlmeier definiert die Steuerung eines Prozesses von einer organisatorischen Einheit als Orchestrierung. \cite{seidlmeier_prozessmodellierung_2019}
+
+In dieser Arbeit wird Geschäftsprozessorchestrierung umgesetzt durch Ausführung der Prozesschritte gemäß der Modellierung.
 
 \section{Prozessautomatisierung}
 
@@ -56,11 +81,11 @@ Reduktion der Komplexität der Prozessmodellierung durch Spaltung der Unternehme
 Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
 
 \begin{itemize}
-    \item Organisationssicht ("[...]Organisationseinheiten der Aufbauorganisation des Unternehmens")\cite{leimeister_einfuhrung_2015}
-    \item Funktionssicht ("Betriebswirtschaftlich relevante Funktionen[...]")\cite{leimeister_einfuhrung_2015}
-    \item Datensicht ("[...]Betriebswirtschaftlich relevante Funktionsobjekte[...]")\cite{leimeister_einfuhrung_2015}
-    \item Leistungssicht ("[...] Sach- oder Dienstleistungen als Ergebnisse von Prozessen[...]")\cite{leimeister_einfuhrung_2015}
-    \item Steuerungs-/und Prozesssicht ("[...] Zusammenhänge der zuvor genannten Beschreibungssichten in zeitlich-sachlogischen Beziehungen [...]") \cite{leimeister_einfuhrung_2015}
+    \item Organisationssicht (``[...]Organisationseinheiten der Aufbauorganisation des Unternehmens'')\cite{leimeister_einfuhrung_2015}
+    \item Funktionssicht (``Betriebswirtschaftlich relevante Funktionen[...]'')\cite{leimeister_einfuhrung_2015}
+    \item Datensicht (``[...]Betriebswirtschaftlich relevante Funktionsobjekte[...]'')\cite{leimeister_einfuhrung_2015}
+    \item Leistungssicht (``[...] Sach- oder Dienstleistungen als Ergebnisse von Prozessen[...]'')\cite{leimeister_einfuhrung_2015}
+    \item Steuerungs-/und Prozesssicht (``[...] Zusammenhänge der zuvor genannten Beschreibungssichten in zeitlich-sachlogischen Beziehungen [...]'') \cite{leimeister_einfuhrung_2015}
 \end{itemize}
 
 Seidlmeier wiederum definiert ARIS als Produktgruppe, welche auf die Optimierung von Unternehmensprozessen zielt. Einige der Produkte in der Gruppe: \cite{seidlmeier_prozessmodellierung_2019}
@@ -80,6 +105,14 @@ In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation
 
 Nach Hünning und Thaller ist ein eingebettetes System "[...] ein durch Software kontrollierter Computer oder 
 Mikroprozessor, der Teil eines größeren Systems ist, dessen primäre Funktion nicht rechenorientiert ist." \cite{huning_eingebettete_2019} \cite{thaller_software-engineering_1997}
+
+Barr und Massa definierren ein eingebettetes System als eine Kombination aus Computer Hardware und Software mit zusätzlichen mechanischen und elektronischen Bauteilen, 
+um eine spezifische Funktion zu erfüllen. [...] Der Kontrast dazu ist der PC, bei welchem der Hersteller nicht weiß, wofür dieser verwendet wird. [...] ``Eingebettete 
+Systeme sind oft eine Komponente in einem größeren System. Beispielsweise enthalten moderne Autos und LKW's viele eingebettete Systeme. Ein eingebettetes System ist 
+für das ABS zuständig, ein anderes überwacht und steuert die Emissionen des Fahrzeugs, während ein drittes die Informationen dem Nutzer am Cockpit anzeigt.'' \cite{barr_programming_2006}
+
+Prozessoren, welche dabei in eingebetteten Systemen verwendet werden sind Mikroprozessoren, Mikrocontroller und DSP-Chips.\cite{barr_programming_2006} \cite{marwedel_eingebettete_2008} In dieser Arbeit wird ein Mikrocontroller des
+Herstellers Espressif Systems (Shanghai, China) verwendet.
 
 \subsection{ESP32}
 
