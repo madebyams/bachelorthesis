@@ -7,7 +7,7 @@ stages:
 build_pdf:
   stage: build
   tags:
-    - amd64
+    - linux_amd64
   image: ghcr.io/dante-ev/texlive:latest
   script:
     - latexmk -pdf -interaction=nonstopmode -file-line-error htwsaar-i-mst-vorlage.tex
