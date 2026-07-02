@@ -84,22 +84,23 @@ Tätigkeiten ausgeführt werden. \cite{heinrich_wirtschaftsinformatik-lexikon_19
 Dumas et. al definieren die Prozessautomatisierung als "die Konfiguration oder Implementierung eines IT-Systems [...], um den zukünftigen Prozess
 zu unterstützen." \cite{dumas_grundlagen_2021}
 
+Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern.
+
 \section{Orchestrierung}
 
 Unter Geschäftsprozessorchestrierung (kurz: Orchestrierung) versteht man die koordinierte Ausführung von Geschäftsprozessen. \cite{kampik_agent-based_2019}
 Seidlmeier definiert die Steuerung eines Prozesses von einer organisatorischen Einheit als Orchestrierung. \cite{seidlmeier_prozessmodellierung_2019}
 
-Neben dem Begriff der Orchestrierung gibt es auch den Begriff der Choreographie \cite{dumas_web_2008}. Der Unterschied hierbei liegt darin, dass eine Choreographie
-die Interaktion zwischen Komponenten spezifiziert und die Komponenten selbst durch eine Realisierung dieser, die Geschäftsprozesse anstoßen. Anders als bei der Orchestrierung, wo Geschäftsprozesse 
-direkt vom Mediator (der orchestrierenden Einheit) angestoßen werden. Zwar wurde dies in \cite{dumas_web_2008} auf Webdienste angewandt, jedoch ist dies auch auf 
-Geschäftsprozesse übertragbar.
+Neben dem Begriff Orchestrierung gibt es auch den Begriff Choerographie. Papazoglu beschreibt den Unterschied zwischen diesen beiden Begriffen wie folgt:
 
-Um den Unterschied zwischen Prozessorchestrierung und Prozessautomatisierung darzustellen, können wir die Definitionen von Automatisierung und 
-Orchestrierung aus dem Cloud-Bereich betrachten: Während Automatisierung einzelne Aufgaben ausführt, beschreibt Orchestrierung die koordinierte 
-Automatisierung gemäß von Prozessen und deren Abhängigkeiten. Somit ist Automatisierung ein Teil von Orchestrierung, wobei Orchestrierung für die Einhaltung
-von prozessgemäßer Reihenfolge verantwortet.
+``Orchestration describes how services interact [...], including the business logic and execution order [...] Choreography is typically associated with [...], rules of interactions and agreements that occur between
+business-process end points rather than a specific business process[...]'' \cite{papazoglou_service-oriented_2007}. Orchestrierung ist also somit auf einen Prozess bezogen, während Choregraphie 
+sich auf mehrere Prozesse ausdehnt.
 
-In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozesschritte gemäß der Modellierung.
+Aus dieser Definition und der Definition zur Automation lässt sich also sagen: Automation beschäftigt sich innerhalb eines Prozesses mit der Ausführung eines Schrittes, die Orchestrierung verantwortet
+die Ausführung eines gesamten Prozesses, während die Choreography sich über mehrere Prozesse hinweg bewegt.
+
+In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozesschritte gemäß der Modellierung. 
 
 \section{ARIS-Toolset}
 
