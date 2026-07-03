@@ -211,8 +211,9 @@ serverseitigen Fehler.
 
 Wendzel definiert MQTT als ein Protokoll, was auch in resourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish Subscribe Architektur, wodurch
 Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, die die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
-Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Verteiler, wo Publisher Daten teilen und von Subscribern angenommen werden. Hierbei haben Publisher und
-Subscriber keine Kenntnis voneinander. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008}
+Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Vermittler zwischen dem Publisher und den Subscribern. Damit hier Nachrichten auch an die gewünschten Geräte versendet werden, werden 
+Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscriber'' \cite{brandes_mikrocontroller_2024}.Publisher und Subscriber keine Kenntnis und sind auf einer logischen Ebene entkoppelt voneinander. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008} 
+Wie auch CoAP ist MQTT ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines Quality of Service (kurz: QoS) möglich.\cite{brandes_mikrocontroller_2024}
 
 \section{Sockets}
 
