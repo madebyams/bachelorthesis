@@ -41,11 +41,94 @@ Der Code-Generator nimmt ein Ausführungdsmodell und generiert Codedateien für 
 Befehlsschritte.
 
 \subsection{Datenmodelle}
+
+Für die einzelnen Komponenten werden die folgenden Datenmodelle definiert:
+
+\subsubsection{Prozessmodell}
+
+Gegeben sei ein Prozess $P$. Dieses wird durch ein Prozessmodell dargestellt.
+
+Das Prozessmodell enthält 
+
+\begin{itemize}
+    \item das Startereignis $e_S \in E$,
+    \item das Endereignis $e_E \in E$,
+    \item die Knotenmenge $V$,
+    \item die Kanten aus $A$ realisiert durch eine Adjazenzliste gemäß der Relation $N$
+    \item eine verkettete Liste der Knoten $v \in V$ in topologischer Sortierung
+\end{itemize}
+
+Dieses stellt den Prozess als Graphen nach Lengener et.al dar, welcher mit Tiefensuche traversiert
+und in das Ausführungsmodell kompiliert wird. Jeder Knoten $v \in V$ enthält den Namen des Prozesses und
+eine eindeutige ID, welche die einzelnen Prozessschritte und Knoten voneinander unterscheidet.
+
+\subsubsection{Ausführungsmodell}
+
+Sei $X$ die Menge aller Executables. $X$ hat die Teilmengen $X_S$ für die Menge aller elementaren Executables (SingleExecutables)
+und $X_G$ für die Menge aller gruppierten Executables (ExecutableGroup). Eine ExecutableGroup $x_G \in X_G$ kann beschrieben werden
+als ein Tupel aus $Q^n \times P$, bestehend der Menge aller ExecutableQueues $Q$ (FIFO-Warteschlangen bestehend aus $x \in X$) und 
+der Relation $P: Q^k \rightarrow \mathbb{B}; (k \leq n)$, welche die Bedingung der ExecutionGroup darstellt um Verknüpfungsoperatoren umzusetzen.
+$n \in \mathbb{N}$ ist dabei die Anzahl der Operanden des Verknüpfungsoperators eines Prozesses $P$.
+Eine SingleExecutables $x_S \in X_S$ enthält eine ID identisch zum passenden $v \in V$ und dem Rückgabetypen des Prozesses oder der Funktion.
+
+\subsubsection{Rückgabetypen}
+
+Der Rückgabetyp von $x_S \in X_S$ kann formal als die Menge eines Rückgabewertes $r_{x_S}$ definiert werden und wird wie folgt ermittelt:
+
+\begin{enumerate}
+    \item Gilt: $v \in E$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \mathbb{B}$ 
+    \item Gilt: $v \in F$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \mathbb{N}^{+}$ 
+\end{enumerate}
+
+\subsubsection{Codegenerierungsmodell}
+
+Sei $C$ die Menge alle Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
+den Rückgabetypen sowie den ersten 16 Bytes einer SHA256-Prüfsumme einer ID $i$. Sowohl Rückgabetyp als auch $i$ stammen aus der übereinstimmenden Single-Executable $x_S \in X_S$. 
+Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+
 \subsection{Schnittstellen}
+
+In dieser Arbeit wird CoAP als Kommunikationsprotokoll zwischen der Execution-Engine und dem IoT-System verwendet.
+
 \subsubsection{Gegenüberstellung von MQTT und CoAP}
 
-\section{Ausführbarkeit}
-\subsection{Ausführungdsmodell auf Basis eines Prozessmodells}
+TODO: Tabelle für die Gegenüberstellung
+
+\subsubsection{Definition der CoAP Schnittstelle}
+
+Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlich zu REST Endpunkte, für verschiedene Resourcen. 
+Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher auf einem Mikrocontroller läuft:
+Die Schemata werden in einer TypeScript ähnlichen Syntax dargestellt.
+
+\textbf{GET /health}
+
+Gibt den Status und Tempertatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgeliert werden kann.
+
+Die Antwort hat folgendes Schema:
+
+\begin{lstlisting}[caption={Schema der Antwort}, label=lst:health-answer]
+{
+    "status": string,
+    "temperature": float
+}
+\end{lstlisting}
+
+\textbf{PUT /<SHA-256 Prüfsumme der Single-Executable ID>}
+
+Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
+kein Payload mitgegeben werden.
+
+Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
+ist hierbei wie folgt:
+
+\begin{lstlisting}[caption={Schema der Antwort}, label=lst:single-executable-answer]
+{
+    "result": unsigned uint8_t | bool, 
+    "timeSpent": usigned uint32_t
+}
+\end{lstlisting}
+
+\section{Ausführung}
 \subsection{Übersetzung des Prozessmodells}
 \subsection{Zustandslogik zur Kompilierung des Prozessmodells}
 \subsection{Logik zur Ausführung des Ausführungsmodells}
