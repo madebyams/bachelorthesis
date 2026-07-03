@@ -152,8 +152,21 @@ Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espe
 Anbindung, GPIO Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
 Neben den angegebenen Features, verfügt der ESP32 über Peripherien wie SPI, I2C, I2S, CAN, UART, etc. \cite{brandes_mikrocontroller_2024} 
 
-Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programmieren. In dieser Arbeit wird die ESP-IDF (Espressif IoT Development Framework) des Herstellers verwendet, 
-welche Bibliotheken und Werkzeuge für die Entwicklung des ESP32 bietet. \cite{hercog_design_2023}
+Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programmieren. Einige dieser Möglichkeiten sind:
+
+\begin{itemize}
+    \item Arduino-IDE (C/C++)
+    \item ESP-IDF (C/C++)
+    \item Eclipse mit Konfigurationen zur Entwicklung von ESP32-Firmware 
+    \item Micropython mit der uPyCraft-IDE 
+    \item Lua mit dem NodeMCU Betriebssystem für den ESP32
+\end{itemize} \cite{brandes_mikrocontroller_2024}
+
+In dieser Arbeit wird die ESP-IDF (Espressif IoT Development Framework) des Herstellers verwendet, welche Bibliotheken und Werkzeuge für die 
+Entwicklung des ESP32 bietet. \cite{hercog_design_2023} Dabei wird der Code mit dem Echtzeitbetriebssystem FreeRTOS kompiliert, welches neben der
+Ausführung des Codes auch für die Behandlung von Events zuständig ist \cite{zuiev_research_2024} und parallel laufende Prozesse 
+(in FreeRTOS: Tasks) verwalten muss. Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetreibssystemen im Vordergrund, was
+durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024}
 
 \section{IoT}
 
@@ -213,7 +226,7 @@ Wendzel definiert MQTT als ein Protokoll, was auch in resourcenbeschränkten Sit
 Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, die die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
 Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Vermittler zwischen dem Publisher und den Subscribern. Damit hier Nachrichten auch an die gewünschten Geräte versendet werden, werden 
 Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscriber'' \cite{brandes_mikrocontroller_2024}.Publisher und Subscriber keine Kenntnis und sind auf einer logischen Ebene entkoppelt voneinander. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008} 
-Wie auch CoAP ist MQTT ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines Quality of Service (kurz: QoS) möglich.\cite{brandes_mikrocontroller_2024}
+Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines Quality of Service (kurz: QoS) möglich.\cite{brandes_mikrocontroller_2024}
 
 \section{Sockets}
 
