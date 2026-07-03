@@ -24,18 +24,11 @@ Wie anfangs schon beschrieben hat das System die folgenden Komponenten:
 Der EPK-Compiler ist dafür zuständig das Prozessmodell in ein Ausführungsmodell zu übersetzen.
 Dies geschieht durch Einlesen der Prozesssprache, welche dann in jedem Schritt das Ausführungsmodell Stück für Stück aufbaut.
 
-\subsection{Ausführungsmodell}
-
-Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
-Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
-Modell wird dann von der Execution-Engine eingelesen, welche dann die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
-auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses modellieren.
-
-\subsection{Execution-Engine}
+\subsubsection{Execution-Engine}
 
 Die Execution-Engine nimmt ein Ausführungsmodell an und führt dieses schrittweise auf dem IoT-System aus.
 
-\subsection{Code-Generator}
+\subsubsection{Code-Generator}
 
 Der Code-Generator nimmt ein Ausführungdsmodell und generiert Codedateien für das Ziel IoT-System gemäß der einzelnen 
 Befehlsschritte.
@@ -55,7 +48,6 @@ Das Prozessmodell enthält
     \item das Endereignis $e_E \in E$,
     \item die Knotenmenge $V$,
     \item die Kanten aus $A$ realisiert durch eine Adjazenzliste gemäß der Relation $N$
-    \item eine verkettete Liste der Knoten $v \in V$ in topologischer Sortierung
 \end{itemize}
 
 Dieses stellt den Prozess als Graphen nach Lengener et.al dar, welcher mit Tiefensuche traversiert
@@ -63,11 +55,25 @@ und in das Ausführungsmodell kompiliert wird. Jeder Knoten $v \in V$ enthält d
 eine eindeutige ID, welche die einzelnen Prozessschritte und Knoten voneinander unterscheidet.
 
 \subsubsection{Ausführungsmodell}
+Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
+Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
+Modell wird dann von der Execution-Engine eingelesen, welche dann die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
+auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses modellieren. Formal kann es wie folgt definiert werden:
 
 Sei $X$ die Menge aller Executables. $X$ hat die Teilmengen $X_S$ für die Menge aller elementaren Executables (SingleExecutables)
 und $X_G$ für die Menge aller gruppierten Executables (ExecutableGroup). Eine ExecutableGroup $x_G \in X_G$ kann beschrieben werden
 als ein Tupel aus $Q^n \times P$, bestehend der Menge aller ExecutableQueues $Q$ (FIFO-Warteschlangen bestehend aus $x \in X$) und 
-der Relation $P: Q^k \rightarrow \mathbb{B}; (k \leq n)$, welche die Bedingung der ExecutionGroup darstellt um Verknüpfungsoperatoren umzusetzen.
+der Abbildung $\rho: Q^k \rightarrow \mathbb{B}; (k \leq n)$, welche die Bedingung der ExecutionGroup darstellt um Verknüpfungsoperatoren umzusetzen.
+Im Fall von EPK werden die Verknüpfungsoperatoren wie folgt dargestellt: 
+
+\begin{itemize}
+    \item XOR: $k = 1$
+    \item OR $k \leq 1$
+    \item AND: $k = n$
+\end{itemize}
+
+$k$ und somit auch $q \in Q^k$ werden zur Laufzeit durch Evaluierung der ExecutableQueue von $x_g \in X_G$ ermittelt. 
+
 $n \in \mathbb{N}$ ist dabei die Anzahl der Operanden des Verknüpfungsoperators eines Prozesses $P$.
 Eine SingleExecutables $x_S \in X_S$ enthält eine ID identisch zum passenden $v \in V$ und dem Rückgabetypen des Prozesses oder der Funktion.
 
@@ -77,7 +83,7 @@ Der Rückgabetyp von $x_S \in X_S$ kann formal als die Menge eines Rückgabewert
 
 \begin{enumerate}
     \item Gilt: $v \in E$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \mathbb{B}$ 
-    \item Gilt: $v \in F$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \mathbb{N}^{+}$ 
+    \item Gilt: $v \in F$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \{0 \geq n \leq 255 | n \in \mathbb{N}\}$ 
 \end{enumerate}
 
 \subsubsection{Codegenerierungsmodell}
@@ -113,10 +119,13 @@ Die Antwort hat folgendes Schema:
 }
 \end{lstlisting}
 
-\textbf{PUT /<SHA-256 Prüfsumme der Single-Executable ID>}
+Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
+
+\textbf{PUT /<$h$[0:15]>}
 
 Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
-kein Payload mitgegeben werden.
+kein Payload mitgegeben werden. Dies begründet auch die Entscheidung PUT zu verwenden. Normalerweise wird für eine Ausführung POST
+genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload zwingend benötigt wird, erschien PUT sinnvoller.
 
 Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
 ist hierbei wie folgt:
@@ -124,9 +133,11 @@ ist hierbei wie folgt:
 \begin{lstlisting}[caption={Schema der Antwort}, label=lst:single-executable-answer]
 {
     "result": unsigned uint8_t | bool, 
-    "timeSpent": usigned uint32_t
+    "timeSpent": uint32_t
 }
 \end{lstlisting}
+
+TODO: Remote call interface des SimulationsServers einfügen 
 
 \section{Ausführung}
 \subsection{Übersetzung des Prozessmodells}
@@ -134,7 +145,7 @@ ist hierbei wie folgt:
 \subsection{Logik zur Ausführung des Ausführungsmodells}
 
 \section{Animation der Automatisierung}
-\subsection{Gegenüberstellung von TCP und HTTP}
+\subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
 \subsection{Analogie: WebSockets}
 
 \section{Generierung des Firmwarequellcodes}
