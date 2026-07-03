@@ -50,9 +50,9 @@ Diese Arbeit verwendet für die EPK-Syntax eine Kombination aus den Definitionen
 Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph $G$, welchen man als Tupel $G = (V, A, N)$ definiert. Es gilt:
 
 \begin{itemize}
-    \item $V$ beschreibt die Knotenmenge,
-    \item $A$ die Kantenmenge,
-    \item $N$ eine Relation, wo einer Kante ein Tupel aus $V \times V$ zugeordnet wird,
+    \item $V$ beschreibt die Knotenmenge von $G$,
+    \item $A$ die Kantenmenge von $G$,
+    \item $N$ eine Relation, wo einer Kante ein Tupel aus $V \times V$ zugeordnet wird  von $G$,
     \item $E$ die Menge der Ereignisse,
     \item $F$ die Menge der Funktionen und
     \item $O$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} lässt sich 
@@ -74,6 +74,8 @@ In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} gilt:
         \forall f \in F, e \in K \backslash O: F \xrightarrow{\small v}_{ \small C} e \Rightarrow e \in E \cup F
     $$
 \end{itemize}
+
+Ein Prozess $P$ lässt sich somit definieren als ein 3-Tupel $P = (G, E, F)$
 
 \section{Prozessautomatisierung}
 
