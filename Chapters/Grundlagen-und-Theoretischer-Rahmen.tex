@@ -163,10 +163,10 @@ Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programm
 \end{itemize} \cite{brandes_mikrocontroller_2024}
 
 In dieser Arbeit wird die ESP-IDF (Espressif IoT Development Framework) des Herstellers verwendet, welche Bibliotheken und Werkzeuge für die 
-Entwicklung des ESP32 bietet. \cite{hercog_design_2023} Dabei wird der Code mit dem Echtzeitbetriebssystem FreeRTOS kompiliert, welches neben der
-Ausführung des Codes auch für die Behandlung von Events zuständig ist \cite{zuiev_research_2024} und parallel laufende Prozesse 
+Entwicklung des ESP32 bietet. \cite{hercog_design_2023} ESP-IDF baut die Firmware bestehend aus FreeRTOS und dem Nutzerquellcode als Haupttask. Neben der
+Ausführung von Tasks ist das Echtzeitbetreibssystemen auch für die Behandlung von Events (in diesem Fall: Wi-Fi und CoAP Events beim CoAP-Server auf dem ESP32) zuständig ist \cite{zuiev_research_2024} und nebenläufige Prozesse 
 (in FreeRTOS: Tasks) verwalten muss. Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetreibssystemen im Vordergrund, was
-durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024}
+durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024} 
 
 \section{IoT}
 
