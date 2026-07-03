@@ -200,7 +200,8 @@ bei einer Antwort oder die Methode (GET, DELETE, PUT, POSt) bei einer Anfrage un
 um zur passenden Anfrage die passende Antwort zu übermitteln. Danach können weitere Optionen hinzugefügt werden, welche dann mit dem Payload-Marker (Ein Byte gefüllt mit Einsen) abgeschlossen werden. Nach dem Payload 
 Marker kann der Payload (also zu übermittelnde Daten) beigefügt werden. Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_constrained_2014}
 
-Durch diese Nachrichten wird dann das Request/Response Pattern umgesetzt. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
+Im Vergleich zu HTTP, wo die Anfrage mit der stehenenden Verbindung der Anfrage beantwortet werden, setzt CoAP das Request/Response Pattern durch Nachrichten um, wo die Anfrage und die Antwort seperate asynchrone UDP-Nachrichten sind, dessen 
+Zugehörigkeiten durch Tokens geregelt werden. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
 ``stop-and-wait retransmission'' bei confirmable Nachrichten verwendet. \cite{shelby_constrained_2014} Das bedeutet, dass man beim Absenden für jeden gesendeten Frame auf eine Acknowledge Nachricht wartet, um weiterzusenden. Erhält man diese
 Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response Schicht realisiert ein REST-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
 entwickeln und nicht streng resourcenorientert wie bei REST.\cite{burke_restful_2013} Dabei werden Resourcen und Dienste ähnlich zu REST mit URIs realisiert und auch sind die Status-Codes angelehnt an HTTP mit 2.xx für eine erfolgreiche Übertragung, 4.xx für clientseitigen und 5.xx für 
