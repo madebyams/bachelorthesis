@@ -137,9 +137,38 @@ ist hierbei wie folgt:
 }
 \end{lstlisting}
 
-TODO: Remote call interface des SimulationsServers einfügen 
+\subsubsection{Schnittstelle des Simulationsservers}
+
+Der Simulationsserver der Produktgruppe ARIS bietet eine Schnittstelle zur Benutzeroberfläche an, welche die Simulation von Prozessen steuert. Diese ist 
+bekannt unter \texttt{ISimulation}. Diese Schnittstelle verbindet außerdem ARIS mit der internen Prozesssimulationsengine. Auf Basis dieser
+Schnittstelle fand eine Umdefinition statt. Darüber hinaus fielen dadurch einige Endpunkte weg.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+Name                        &   Parameter                                                           & Funktion \\
+\midrule
+getSessionID                &   keine Parameter                                                     & -         \\
+initSimulation              &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells und Aufbau des Ausführungsmodell  \\
+terminateCache              &   keine Parameter                                                     & Wird nicht verwendet, da Caching nicht benötigt wird           \\ 
+runSimulation               &   keine Parameter                                                     & Ausführung des Ausführungsmodell und Livestreaming über Socket \\
+stopSimulation              &   keine Parameter                                                     & Stoppen der Ausführung und des Livestreaming  \\
+getNextStepGroup            &   Parameter                                                           & Vorheriger Endpunkt um den nächsten Prozessschritt zu bekommen  \\
+getAvailableStatistics      &   Sprache                                                             & Abfragen des Statistikkatalogs (Verfügbare Statistiken)  \\
+getVersion                  &   keine Parameter                                                     & Serverversion  \\
+generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodell und Serialisierung des Aufbaumodells in JSON, um Codegenerierung auf dem Client zu starten  \\
+exportDetailedStatistics    &   keine Parameter                                                     & Serialisierung der Ausführungsstatistik in das CSV-Tabellenformat  \\
+initStreamConnection        &   keine Parameter                                                     & Erstellen eines Serversockets, um das Live-Streaming der Ausführung zu ermöglichen\\
+closeStreamConnection       &   keine Parameter                                                     & Schließen der erstellten Socketverbindung \\
+\bottomrule
+\end{tabularx}
+\caption{Übersicht der Simulationsschnittstelle}
+\label{fig:simulation-interface}
+\end{table}
 
 \section{Ausführung}
+
 \subsection{Übersetzung des Prozessmodells}
 \subsection{Zustandslogik zur Kompilierung des Prozessmodells}
 \subsection{Logik zur Ausführung des Ausführungsmodells}
