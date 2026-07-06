@@ -208,11 +208,11 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 
 \begin{align}
     Q = \{q_0, q_1, q_2\} \\
-    \Sigma =  A\\
+    \Sigma =  V\\
     \Gamma = \{\#, S, B\} \cup \Sigma \\
-    q_0 = e_S \\
+    q_0 = q_0 \\
     Z_0 = \# \\
-    F = \{e_E\} \\
+    F = \{q_2\} \\
     \delta(q_0, \epsilon, \epsilon) = \{(q_1, S\#)\} \\
     \delta(q_1, \epsilon, S) = \{(q_1, e_s\ B\ e_E)\} \\
     \delta(q_1, \epsilon, B) = \{(q_1, e_I)\} \\
@@ -244,7 +244,7 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 
 \section{Animation der Automatisierung}
 
-Nach Kompilierung des Prozessmodells in das Ausführungsmodell, 
+Nach Kompilierung des Prozessmodells in das Ausführungsmodell, kann dieses ausgeführt werden. 
 
 \subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
 \subsection{Analogie: WebSockets}
