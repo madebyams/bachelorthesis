@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Seite-1" id="1jm7AaVAwCFEaPOQsrpJ">
+    <mxGraphModel dx="1801" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="EX0_xFypHotgCRyUggmf-4" edge="1" parent="1" source="EX0_xFypHotgCRyUggmf-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="EX0_xFypHotgCRyUggmf-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="EX0_xFypHotgCRyUggmf-8" connectable="0" parent="EX0_xFypHotgCRyUggmf-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$0) \epsilon, \epsilon \mapsto S \#$$" vertex="1">
+          <mxGeometry relative="1" x="-0.1662" as="geometry">
+            <mxPoint x="17" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EX0_xFypHotgCRyUggmf-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="$$q_0$$" vertex="1">
+          <mxGeometry height="80" width="80" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-3" edge="1" parent="1" source="EX0_xFypHotgCRyUggmf-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="EX0_xFypHotgCRyUggmf-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-4" connectable="0" parent="vbCcuO6z8I0hAOn6Vvcw-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$17) \epsilon, \# \mapsto \epsilon$$" vertex="1">
+          <mxGeometry relative="1" x="-0.2675" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EX0_xFypHotgCRyUggmf-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="$$q_1$$" vertex="1">
+          <mxGeometry height="80" width="80" x="320" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="EX0_xFypHotgCRyUggmf-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="$$q_2$$" vertex="1">
+          <mxGeometry height="80" width="80" x="320" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-2" edge="1" parent="1" source="EX0_xFypHotgCRyUggmf-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;innerLoopWaypoints=1;curved=1;" target="EX0_xFypHotgCRyUggmf-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-5" connectable="0" parent="vbCcuO6z8I0hAOn6Vvcw-2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$1)\ \epsilon, S \mapsto e_S \ A \ e_E$$" vertex="1">
+          <mxGeometry relative="1" x="0.1605" y="-1" as="geometry">
+            <mxPoint x="71" y="-65" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-6" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$2)\ \epsilon, A \mapsto e_I$$" vertex="1">
+          <mxGeometry x="490" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-7" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$3)\ \epsilon, A \mapsto f$$" vertex="1">
+          <mxGeometry x="490" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-8" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$4)\ \epsilon, A \mapsto S_{XOR}\ A\ J_{XOR}$$" vertex="1">
+          <mxGeometry x="490" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-9" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$5)\ \epsilon, A \mapsto S_{OR}\ A\ J_{OR}$$" vertex="1">
+          <mxGeometry x="650" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-10" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$5)\ \epsilon, A \mapsto S_{OR}\ A\ J_{OR}$$" vertex="1">
+          <mxGeometry x="650" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-11" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$6)\ \epsilon, A \mapsto S_{AND}\ A\ J_{AND}$$" vertex="1">
+          <mxGeometry x="650" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-12" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$7)\ e_S, e_S \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="650" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-13" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$8)\ e_E, e_E \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="650" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-14" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$9)\ e_I, e_I \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="787" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-15" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$10)\ f, f \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="787" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-16" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$11)\ S_{XOR}, S_{XOR} \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="787" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-17" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$12)\ J_{XOR}, J_{XOR} \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="787" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-18" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$13)\ S_{OR}, S_{OR} \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="920" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-19" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$14)\ J_{OR}, J_{OR} \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="920" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-20" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$15)\ S_{AND}, S_{AND} \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="930" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vbCcuO6z8I0hAOn6Vvcw-21" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$16)\ J_{AND}, J_{AND} \mapsto \epsilon$$" vertex="1">
+          <mxGeometry x="930" y="140" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

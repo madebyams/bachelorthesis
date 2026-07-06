@@ -169,11 +169,83 @@ closeStreamConnection       &   keine Parameter                                 
 
 \section{Ausführung}
 
+Die Ausführung des Prozesses findet durch das Ausführungsmodell statt. Dieses wird aus dem Prozessmodell abgeleitet und schrittweise bei der 
+Ausführung durchgangen. 
+
 \subsection{Übersetzung des Prozessmodells}
-\subsection{Zustandslogik zur Kompilierung des Prozessmodells}
+
+Das Prozessmodell wird nach Definition als azyklischer und gerichteter Graph betrachtet. Dabei enthält jeder Knoten den Namen des Prozess, den 
+Knotentypen (Prozess, Funktion oder Verknüpfungsoperator) sowie eine eindeutige Identifikation. 
+
+\begin{figure}[H]
+    \centering
+    \subfloat[Ein Beispielprozess modelliert mit EPK\label{fig:beisielprozess}]{
+        \includegraphics[width=0.48\textwidth]{Graphics/Beispielprozess.png}
+    }
+
+    \hfill
+
+    \subfloat[Beispielprozess aus \ref{fig:beisielprozess} als gerichteter, azyklischer Graph\label{fig:beisielprozess-graph}]{
+        \includegraphics[width=0.4\textwidth]{Graphics/BeispielprozessGraph.png}
+    }
+\end{figure}
+
+Bei der Kompilierung wird der Graph gemäß der Tiefensuche traversiert und es werden alle Split-Operatoren mit der ID ihres pasenden Join-Operatoren und 
+die Join-Operatoren mit der ID ihres passenden Split-Operatoren versehen. Dies ermöglicht es die Verknüpfungen sinnvoll miteinander zu gruppieren.
+
+Danach findet nochmals eine Traveriserung gemäß der Tiefensuche statt und jeder Knoten im Graph wird behandelt und kompiliert. Die Kompilierung kann man
+formal wie folgt modellieren:
+
+Gegeben sei ein Prozess $P$ mit $e_S \in E$ als Anfangs- und $e_E \in E$ als Endereignis des Prozesses. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G$ enthält. Durch die Tiefensuche in $G$ bekommt man
+alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge an Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
+
+\begin{align}
+    S := e_S \; B \; e_E \\
+    B := f \; | \; e \; | \; f \; B \; | \; e \; B \; | \; S_{OR} \; B \; J_{OR} \; | \; S_{XOR} B \; J_{XOR} \; | \; S_{AND} \; B \; J_{AND} 
+\end{align}
+
+Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruieren:
+
+\begin{align}
+    Q = \{q_0, q_1, q_2\} \\
+    \Sigma =  A\\
+    \Gamma = \{\#, S, B\} \cup \Sigma \\
+    q_0 = e_S \\
+    Z_0 = \# \\
+    F = \{e_E\} \\
+    \delta(q_0, \epsilon, \epsilon) = \{(q_1, S\#)\} \\
+    \delta(q_1, \epsilon, S) = \{(q_1, e_s\ B\ e_E)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, e_I)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, f)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, S_{XOR}\ B\ J_{XOR})\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, S_{OR}\ B\ J_{OR})\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, S_{AND}\ B\ J_{AND})\} \\
+    \delta(q_1, e_S, e_S) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, e_E, e_E) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, e_I, e_I) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, f, f) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, S_{XOR}, S_{XOR}) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, J_{XOR}, J_{XOR}) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, S_{OR}, S_{OR}) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, J_{OR}, J_{OR}) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, S_{AND}, S_{AND}) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, J_{AND}, J_{AND}) = \{(q_1, \epsilon)\} \\
+    A_P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)
+\end{align}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Graphics/Kellerautomat.png}
+    \caption{Kellerautomat der Grammatik}
+    \label{fig:kellerautomat}
+\end{figure}
+
 \subsection{Logik zur Ausführung des Ausführungsmodells}
 
 \section{Animation der Automatisierung}
+
+Nach Kompilierung des Prozessmodells in das Ausführungsmodell, 
+
 \subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
 \subsection{Analogie: WebSockets}
 

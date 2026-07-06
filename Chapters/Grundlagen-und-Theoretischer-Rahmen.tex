@@ -6,7 +6,7 @@ Es werden Begriffe definiert, um eine Grundlage für den Leser zu legen, um dies
 
 Geschäftsprozesse (kurz: Prozesse) sind ``[...] zielgerichtete zeitlich-logische Folgen oder Vorgangsketten von Tätigkeiten [...], dessen Ziele aus der 
 Unternehmensstrategie abgeleitet sind.'' \cite{stahlknecht_einfuhrung_2005} Diese Abfolge muss durch ein Startereignis begonnen und mit einem Endereignis 
-abgeschlossen werden. \cite{leimeister_einfuhrung_2015}
+abgeschlossen werden. \cite{leimeister_einfuhrung_2015} 
 
 \section{Prozessmodellierung}
 
@@ -53,10 +53,10 @@ Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph
     \item $V$ beschreibt die Knotenmenge von $G$,
     \item $A$ die Kantenmenge von $G$,
     \item $N$ eine Relation, wo einer Kante ein Tupel aus $V \times V$ zugeordnet wird  von $G$,
-    \item $E$ die Menge der Ereignisse,
-    \item $F$ die Menge der Funktionen und
-    \item $O$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} lässt sich 
-    $O$ in paarweise disjunkte Teilmengen $O_{OR}, O_{XOR}$ und $O_{AND}$ aufteilen, sodass $O = O_{OR} \cup O_{XOR} \cup O_{AND}$.
+    \item $E \subset A$ die Menge der Ereignisse,
+    \item $F \subset A$ die Menge der Funktionen und
+    \item $O \subset A$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} lässt sich 
+    $O$ in paarweise disjunkte Teilmengen $O_{OR} = \{S_{OR}, J_{OR}\}, O_{XOR} = \{S_{XOR}, J_{XOR}\}$ und $O_{AND} = \{S_{AND}, J_{AND}\}$ aufteilen, sodass $O = O_{OR} \cup O_{XOR} \cup O_{AND}$.
     \item Für $V$ gilt: $V = E \cup F$
     \item Funktionen und Ereignisse sind atomar, sodass eine Aufteilung innerhalb von Funktionen oder Ereignissen nicht möglich ist
 \end{itemize}
@@ -76,6 +76,26 @@ In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} gilt:
 \end{itemize}
 
 Ein Prozess $P$ lässt sich somit definieren als ein 3-Tupel $P = (G, E, F)$
+
+\section{Kellerautomat}
+
+Bei einem Kellerautomaten handelt es sich um ein Berechnungsmodell, was einem nicht-deterministischem Automaten mit $\epsilon$ Kanten ähnelt. 
+Der Unterschied zu einem $\epsilon$-NEA und einem Kellerautomaten liegt darin, dass der Kellerautomat über einen Kellerspeicher verfügt, um Symbole 
+aus einem Kelleralphabet zu hinterlegen. Kellerautomaten werden verwendet, um kontextfreie Sprachen zu evaluieren. \cite{hopcroft_einfuhrung_nodate}
+
+Formal wird ein Kellerautomat $A_K$ als folgendes Tupel definiert:
+
+\begin{align}
+    A_K = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)
+\end{align}
+
+$Q$ beschreibt die Menge aller Zustände des Automaten, $\Sigma$ beschreibt das Eingabealphabet für den 
+Kellerautomaten, $\Gamma$ beschreibt das Alphabet aller Symbole des Kellerspeichers, $\delta: Q \times \Sigma \times \Gamma \rightarrow Q \times \Gamma$ beschreibt 
+die Übergangsfunktion, $q_0$ beschreibt den Anfangszustand, $Z_0$ das Startsymbol auf dem Kellerspeicher und $F$ ist die Menge
+aller akzeptierten Zustände. Ein Kellerautomat akzeptiert ein Wort, wenn ein Endzustand erreicht oder der 
+Kellerspeicher leer ist. \cite{hopcroft_einfuhrung_nodate} 
+
+TODO: Muss der Kellerautomat erweitert werden?
 
 \section{Prozessautomatisierung}
 
