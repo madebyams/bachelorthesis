@@ -83,7 +83,7 @@ Der Rückgabetyp von $x_S \in X_S$ kann formal als die Menge eines Rückgabewert
 
 \begin{enumerate}
     \item Gilt: $v \in E$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \mathbb{B}$ 
-    \item Gilt: $v \in F$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \{0 \geq n \leq 255 | n \in \mathbb{N}\}$ 
+    \item Gilt: $v \in F$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \{0 \leq n \leq 255 | n \in \mathbb{N}\}$ 
 \end{enumerate}
 
 \subsubsection{Codegenerierungsmodell}
@@ -196,14 +196,16 @@ die Join-Operatoren mit der ID ihres passenden Split-Operatoren versehen. Dies e
 Danach findet nochmals eine Traveriserung gemäß der Tiefensuche statt und jeder Knoten im Graph wird behandelt und kompiliert. Die Kompilierung kann man
 formal wie folgt modellieren:
 
-Gegeben sei ein Prozess $P$ mit $e_S \in E$ als Anfangs- und $e_E \in E$ als Endereignis des Prozesses. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G$ enthält. Durch die Tiefensuche in $G$ bekommt man
+Gegeben sei ein Prozess $P$ mit $e_S \in E$ als Anfangs- und $e_E \in E$ als Endereignis des Prozesses. $e_I \in E \setminus \{e_s, e_e\}$ Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G$ enthält. Durch die Tiefensuche in $G$ bekommt man
 alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge an Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
 
 \begin{align}
     S := e_S \; B \; e_E \\
-    B := f \; | \; e \; | \; f \; B \; | \; e \; B \; | \; S_{OR} \; B \; J_{OR} \; | \; S_{XOR} B \; J_{XOR} \; | \; S_{AND} \; B \; J_{AND} 
+    B := f \; | \; e_I \; | \; f \; B \; | \; e_I \; B \; | \; S_{OR} \; B \; J_{OR} \; | \; S_{XOR} B \; J_{XOR} \; | \; S_{AND} \; B \; J_{AND} \; \\
+    | \; S_{OR} \; B \; J_{OR} \; B\; | \; S_{XOR} B \; J_{XOR} \; B \; | \; S_{AND} \; B \; J_{AND} \; B \; 
 \end{align}
 
+Ein Wort auf $L$ beschreibt einen Pfad der Tiefensuche.
 Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruieren:
 
 \begin{align}
@@ -213,13 +215,18 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
     q_0 = q_0 \\
     Z_0 = \# \\
     F = \{q_2\} \\
-    \delta(q_0, \epsilon, \epsilon) = \{(q_1, S\#)\} \\
-    \delta(q_1, \epsilon, S) = \{(q_1, e_s\ B\ e_E)\} \\
+    \delta(q_0, \epsilon, \#) = \{(q_1, S\ \#)\} \\
+    \delta(q_1, \epsilon, S) = \{(q_1, e_S\ B\ e_E)\} \\
     \delta(q_1, \epsilon, B) = \{(q_1, e_I)\} \\
     \delta(q_1, \epsilon, B) = \{(q_1, f)\} \\
     \delta(q_1, \epsilon, B) = \{(q_1, S_{XOR}\ B\ J_{XOR})\} \\
     \delta(q_1, \epsilon, B) = \{(q_1, S_{OR}\ B\ J_{OR})\} \\
     \delta(q_1, \epsilon, B) = \{(q_1, S_{AND}\ B\ J_{AND})\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, e_I\ B)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, f\ B)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, S_{XOR}\ B\ J_{XOR}\ B)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, S_{OR}\ B\ J_{OR}\ B)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, S_{AND}\ B\ J_{AND}\ B)\} \\
     \delta(q_1, e_S, e_S) = \{(q_1, \epsilon)\} \\
     \delta(q_1, e_E, e_E) = \{(q_1, \epsilon)\} \\
     \delta(q_1, e_I, e_I) = \{(q_1, \epsilon)\} \\
@@ -230,6 +237,7 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
     \delta(q_1, J_{OR}, J_{OR}) = \{(q_1, \epsilon)\} \\
     \delta(q_1, S_{AND}, S_{AND}) = \{(q_1, \epsilon)\} \\
     \delta(q_1, J_{AND}, J_{AND}) = \{(q_1, \epsilon)\} \\
+    \delta(q_1, \epsilon, \#) = \{(q_2, \epsilon)\} \\
     A_P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)
 \end{align}
 
