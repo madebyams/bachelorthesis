@@ -7,9 +7,9 @@
     \label{fig:systemarchitektur}
 \end{figure}
 
-Diese Arbeit setzt ein System bestehend aus einem \textbf{EPK-Compiler} für modellierte EPK-Prozesse in ARIS, welche ein definiertes \textbf{Ausführungdsmodell} liefert,
+Diese Arbeit setzt ein System bestehend aus einem \textbf{EPK-Compiler} für modellierte EPK-Prozesse in ARIS, welche ein definiertes \textbf{Ausführungsmodell} liefert,
 einer \textbf{Execution-Engine} mit \textbf{Live-Animationsanbindung zu ARIS} und einem \textbf{Codegenerator}, um die Entwicklung der Firmware 
-basierend auf dem Ausführungdsmodell zu realisieren.
+basierend auf dem Ausführungsmodell zu realisieren.
 
 \section{Architektur und Prinzipien}
 
@@ -30,7 +30,7 @@ Die Execution-Engine nimmt ein Ausführungsmodell an und führt dieses schrittwe
 
 \subsubsection{Code-Generator}
 
-Der Code-Generator nimmt ein Ausführungdsmodell und generiert Codedateien für das Ziel IoT-System gemäß der einzelnen 
+Der Code-Generator nimmt ein Ausführungsmodell und generiert Codedateien für das Ziel IoT-System gemäß der einzelnen 
 Befehlsschritte.
 
 \subsection{Datenmodelle}
@@ -39,20 +39,24 @@ Für die einzelnen Komponenten werden die folgenden Datenmodelle definiert:
 
 \subsubsection{Prozessmodell}
 
-Gegeben sei ein Prozess $P$. Dieses wird durch ein Prozessmodell dargestellt.
+Gegeben sei ein Prozess $P$. Dieser wird durch ein Prozessmodell dargestellt.
 
 Das Prozessmodell enthält 
 
 \begin{itemize}
     \item das Startereignis $e_S \in E$,
     \item das Endereignis $e_E \in E$,
-    \item die Knotenmenge $V$,
-    \item die Kanten aus $A$ realisiert durch eine Adjazenzliste gemäß der Relation $N$
+    \item den Prozessgraphen $G_P$ dargestellt als dessen Adjazenzliste
 \end{itemize}
 
-Dieses stellt den Prozess als Graphen nach Lengener et.al dar, welcher mit Tiefensuche traversiert
-und in das Ausführungsmodell kompiliert wird. Jeder Knoten $v \in V$ enthält den Namen des Prozesses und
-eine eindeutige ID, welche die einzelnen Prozessschritte und Knoten voneinander unterscheidet.
+Es kann auch als ein 3-Tupel 
+
+$$P = (G_P, e_S, e_E)$$
+
+dargestellt werden.
+
+Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefensuche traversiert
+und in das Ausführungsmodell kompiliert wird. 
 
 \subsubsection{Ausführungsmodell}
 Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
@@ -60,37 +64,26 @@ Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl 
 Modell wird dann von der Execution-Engine eingelesen, welche dann die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
 auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses modellieren. Formal kann es wie folgt definiert werden:
 
-Sei $X$ die Menge aller Executables. $X$ hat die Teilmengen $X_S$ für die Menge aller elementaren Executables (SingleExecutables)
-und $X_G$ für die Menge aller gruppierten Executables (ExecutableGroup). Eine ExecutableGroup $x_G \in X_G$ kann beschrieben werden
-als ein Tupel aus $Q^n \times P$, bestehend der Menge aller ExecutableQueues $Q$ (FIFO-Warteschlangen bestehend aus $x \in X$) und 
-der Abbildung $\rho: Q^k \rightarrow \mathbb{B}; (k \leq n)$, welche die Bedingung der ExecutionGroup darstellt um Verknüpfungsoperatoren umzusetzen.
-Im Fall von EPK werden die Verknüpfungsoperatoren wie folgt dargestellt: 
-
-\begin{itemize}
-    \item XOR: $k = 1$
-    \item OR $k \leq 1$
-    \item AND: $k = n$
-\end{itemize}
-
-$k$ und somit auch $q \in Q^k$ werden zur Laufzeit durch Evaluierung der ExecutableQueue von $x_g \in X_G$ ermittelt. 
-
-$n \in \mathbb{N}$ ist dabei die Anzahl der Operanden des Verknüpfungsoperators eines Prozesses $P$.
-Eine SingleExecutables $x_S \in X_S$ enthält eine ID identisch zum passenden $v \in V$ und dem Rückgabetypen des Prozesses oder der Funktion.
-
-\subsubsection{Rückgabetypen}
-
-Der Rückgabetyp von $x_S \in X_S$ kann formal als die Menge eines Rückgabewertes $r_{x_S}$ definiert werden und wird wie folgt ermittelt:
+Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückgabetypen. Dann gilt:
 
 \begin{enumerate}
-    \item Gilt: $v \in E$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \mathbb{B}$ 
-    \item Gilt: $v \in F$ für ein $v$ mit derselben ID wie $x_S$, so ist der Rückgabwert $r \in \{0 \leq n \leq 255 | n \in \mathbb{N}\}$ 
+    \item {
+        \begin{align}
+            X_S = \{(i,t) | i \in \mathbb{N} \land t \in T\} \\
+            X_S \subset X
+        \end{align}
+
+        $X_S$ ist die Menge aller elementaren Executables.
+    }
+    \item $X_Q = \bigcup_{k = 2} X^k$ ist die Menge aller Executable-Queues
+    \item $X_G = \{(g, i, \rho) |g \in \mathcal{P}(X^*) \land i \in \mathbb{N} \land \rho: X^* \mapsto \mathbb{B}\}$, beschreibt die Menge der Executable Gruppen.
 \end{enumerate}
+
 
 \subsubsection{Codegenerierungsmodell}
 
-Sei $C$ die Menge alle Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
-den Rückgabetypen sowie den ersten 16 Bytes einer SHA256-Prüfsumme einer ID $i$. Sowohl Rückgabetyp als auch $i$ stammen aus der übereinstimmenden Single-Executable $x_S \in X_S$. 
-Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+Sei $C = \{(n, h, t) | n \in S \land h \in \{sha256(i) | i \in \mathbb{N}\} \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
+den Rückgabetypen sowie die ersten 16 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
 
 \subsection{Schnittstellen}
 
@@ -98,17 +91,34 @@ In dieser Arbeit wird CoAP als Kommunikationsprotokoll zwischen der Execution-En
 
 \subsubsection{Gegenüberstellung von MQTT und CoAP}
 
-TODO: Tabelle für die Gegenüberstellung
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{MQTT} & \textbf{CoAP} \\
+\midrule
+$-$ Nutzt Publish-Subscribe Pattern, wodurch Warte-Mechanismus zur Ausführung eingebaut werden muss & $+$ Nutzt Request-Response Pattern, sodass man eine Antwort nach Ausführung eines Schrittes erhält \\
+\addlinespace
+$-$ Zustellungsbestätigungen in TCP könnten Latenz einbringen & $+$ Nutzt UDP, wo ACK nicht zwingend benötigt wird \\
+\addlinespace
+$-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zuweisung erfolgt durch Tokens, die im Request-/Response-Paket enthalten sind \\
+\bottomrule
+\end{tabularx}
+\caption{Gegenüberstellung von MQTT und CoAP hinsichtlich der Prozessschritt-Ausführung}
+\label{tab:mqtt-coap}
+\end{table}
+
+Auf dieser Grundlage habe ich mich dazu entschieden CoAP für diesen Fall zu verwenden.
 
 \subsubsection{Definition der CoAP Schnittstelle}
 
 Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlich zu REST Endpunkte, für verschiedene Resourcen. 
 Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher auf einem Mikrocontroller läuft:
-Die Schemata werden in einer TypeScript ähnlichen Syntax dargestellt.
+Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 
 \textbf{GET /health}
 
-Gibt den Status und Tempertatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgeliert werden kann.
+Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgegeben werden kann.
 
 Die Antwort hat folgendes Schema:
 
@@ -132,7 +142,7 @@ ist hierbei wie folgt:
 
 \begin{lstlisting}[caption={Schema der Antwort}, label=lst:single-executable-answer]
 {
-    "result": unsigned uint8_t | bool, 
+    "result": uint8_t | bool, 
     "timeSpent": uint32_t
 }
 \end{lstlisting}
@@ -157,14 +167,14 @@ stopSimulation              &   keine Parameter                                 
 getNextStepGroup            &   Parameter                                                           & Vorheriger Endpunkt um den nächsten Prozessschritt zu bekommen  \\
 getAvailableStatistics      &   Sprache                                                             & Abfragen des Statistikkatalogs (Verfügbare Statistiken)  \\
 getVersion                  &   keine Parameter                                                     & Serverversion  \\
-generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodell und Serialisierung des Aufbaumodells in JSON, um Codegenerierung auf dem Client zu starten  \\
+generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodells und Serialisierung des Ausführungsmodells in JSON, um Codegenerierung auf dem Client zu starten  \\
 exportDetailedStatistics    &   keine Parameter                                                     & Serialisierung der Ausführungsstatistik in das CSV-Tabellenformat  \\
 initStreamConnection        &   keine Parameter                                                     & Erstellen eines Serversockets, um das Live-Streaming der Ausführung zu ermöglichen\\
 closeStreamConnection       &   keine Parameter                                                     & Schließen der erstellten Socketverbindung \\
 \bottomrule
 \end{tabularx}
 \caption{Übersicht der Simulationsschnittstelle}
-\label{fig:simulation-interface}
+\label{tab:simulation-interface}
 \end{table}
 
 \section{Ausführung}
@@ -173,14 +183,10 @@ Die Ausführung des Prozesses findet durch das Ausführungsmodell statt. Dieses 
 Ausführung durchgangen. 
 
 \subsection{Übersetzung des Prozessmodells}
-
-Das Prozessmodell wird nach Definition als azyklischer und gerichteter Graph betrachtet. Dabei enthält jeder Knoten den Namen des Prozess, den 
-Knotentypen (Prozess, Funktion oder Verknüpfungsoperator) sowie eine eindeutige Identifikation. 
-
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \subfloat[Ein Beispielprozess modelliert mit EPK\label{fig:beisielprozess}]{
-        \includegraphics[width=0.48\textwidth]{Graphics/Beispielprozess.png}
+        \includegraphics[width=0.4\textwidth]{Graphics/Beispielprozess.png}
     }
 
     \hfill
@@ -188,21 +194,42 @@ Knotentypen (Prozess, Funktion oder Verknüpfungsoperator) sowie eine eindeutige
     \subfloat[Beispielprozess aus \ref{fig:beisielprozess} als gerichteter, azyklischer Graph\label{fig:beisielprozess-graph}]{
         \includegraphics[width=0.4\textwidth]{Graphics/BeispielprozessGraph.png}
     }
+\caption{Ein Prozess in zwei Darstellungen}
 \end{figure}
 
-Bei der Kompilierung wird der Graph gemäß der Tiefensuche traversiert und es werden alle Split-Operatoren mit der ID ihres pasenden Join-Operatoren und 
-die Join-Operatoren mit der ID ihres passenden Split-Operatoren versehen. Dies ermöglicht es die Verknüpfungen sinnvoll miteinander zu gruppieren.
+Vor der Kompilierung findet eine Vorverarbeitung statt, wo die Abbildung $\tau$ gefüllt wird.
 
-Danach findet nochmals eine Traveriserung gemäß der Tiefensuche statt und jeder Knoten im Graph wird behandelt und kompiliert. Die Kompilierung kann man
+
+Zur Kompilierung muss noch folgendes definiert werden:
+
+\begin{itemize}
+    \item $succ(v): V \rightarrow \mathcal{P}(V) = \{w | \exists a \in A: (a,(v,w)) \in N\}$ \\
+    \item {
+        $\gamma: V \times V \rightarrow X^* \\$
+        $$\gamma(v, s) = \begin{cases}
+                \epsilon \text{, falls } v = s \\
+                (id(v), bool) \cdot \gamma(w,s) \text{, falls } v \in E, succ(v) = \{w\} \\
+                (id(v), int) \cdot \gamma(w,s) \text{, falls } v \in F, succ(v) = \{w\}  \\
+                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert = 1) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{XOR} \\
+                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert \geq 1) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{OR} \\
+                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert = \vert succ(v) \vert) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{AND} \\
+                \gamma(w, s) \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND}
+            \end{cases}$$
+    }
+\end{itemize}
+
+Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren und wird danach kompiliert. Die Validierung kann man
 formal wie folgt modellieren:
 
-Gegeben sei ein Prozess $P$ mit $e_S \in E$ als Anfangs- und $e_E \in E$ als Endereignis des Prozesses. $e_I \in E \setminus \{e_s, e_e\}$ Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G$ enthält. Durch die Tiefensuche in $G$ bekommt man
-alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge an Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
+Gegeben sei ein Prozess $P$. $e_I \in E \setminus \{e_S, e_E\}$ beschreibt alle Zwischenereignisse von $P$. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G_P$ enthält. 
+Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge an Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
 
 \begin{align}
     S := e_S \; B \; e_E \\
-    B := f \; | \; e_I \; | \; f \; B \; | \; e_I \; B \; | \; S_{OR} \; B \; J_{OR} \; | \; S_{XOR} B \; J_{XOR} \; | \; S_{AND} \; B \; J_{AND} \; \\
-    | \; S_{OR} \; B \; J_{OR} \; B\; | \; S_{XOR} B \; J_{XOR} \; B \; | \; S_{AND} \; B \; J_{AND} \; B \; 
+    B := f \; | \; f \; e_I \; B \; | \; f \; U \\
+    U := \; S_{OR} \; W \; J_{OR} \; | \; S_{XOR} W \; J_{XOR} \; | \; S_{AND} \; W \; J_{AND} \; \\
+    | \; S_{OR} \; W \; J_{OR} \; e_I \; B\; | \; S_{XOR} W \; J_{XOR} \; e_I \; B \; | \; S_{AND} \; W \; J_{AND} \; e_I \; B \; \\
+    W := e_I \; B
 \end{align}
 
 Ein Wort auf $L$ beschreibt einen Pfad der Tiefensuche.
@@ -211,22 +238,21 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 \begin{align}
     Q = \{q_0, q_1, q_2\} \\
     \Sigma =  V\\
-    \Gamma = \{\#, S, B\} \cup \Sigma \\
-    q_0 = q_0 \\
+    \Gamma = \{\#, S, B, U, W\} \cup \Sigma \\
     Z_0 = \# \\
-    F = \{q_2\} \\
-    \delta(q_0, \epsilon, \#) = \{(q_1, S\ \#)\} \\
-    \delta(q_1, \epsilon, S) = \{(q_1, e_S\ B\ e_E)\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, e_I)\} \\
+    Q_F = \{q_2\} \\
+    \delta(q_0, \epsilon, \#) = \{(q_1, S\; \#)\} \\
+    \delta(q_1, \epsilon, S) = \{(q_1, e_S\; B\; e_E)\} \\
     \delta(q_1, \epsilon, B) = \{(q_1, f)\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, S_{XOR}\ B\ J_{XOR})\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, S_{OR}\ B\ J_{OR})\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, S_{AND}\ B\ J_{AND})\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, e_I\ B)\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, f\ B)\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, S_{XOR}\ B\ J_{XOR}\ B)\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, S_{OR}\ B\ J_{OR}\ B)\} \\
-    \delta(q_1, \epsilon, B) = \{(q_1, S_{AND}\ B\ J_{AND}\ B)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, f\; e_I \; B)\} \\
+    \delta(q_1, \epsilon, B) = \{(q_1, f\; U)\} \\
+    \delta(q_1, \epsilon, U) = \{(q_1, S_{XOR}\; W\; J_{XOR})\} \\
+    \delta(q_1, \epsilon, U) = \{(q_1, S_{OR}\; W\; J_{OR})\} \\
+    \delta(q_1, \epsilon, U) = \{(q_1, S_{AND}\; W\; J_{AND})\} \\
+    \delta(q_1, \epsilon, U) = \{(q_1, S_{XOR}\; W\; J_{XOR}\; e_I \; B)\} \\
+    \delta(q_1, \epsilon, U) = \{(q_1, S_{OR}\; W\; J_{OR}\; \; e_I \; B)\} \\
+    \delta(q_1, \epsilon, U) = \{(q_1, S_{AND}\; W\; J_{AND}\; e_I \; B)\} \\
+    \delta(q_1, \epsilon, W) = \{(q_1, e_I\; B)\} \\
     \delta(q_1, e_S, e_S) = \{(q_1, \epsilon)\} \\
     \delta(q_1, e_E, e_E) = \{(q_1, \epsilon)\} \\
     \delta(q_1, e_I, e_I) = \{(q_1, \epsilon)\} \\
@@ -238,7 +264,7 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
     \delta(q_1, S_{AND}, S_{AND}) = \{(q_1, \epsilon)\} \\
     \delta(q_1, J_{AND}, J_{AND}) = \{(q_1, \epsilon)\} \\
     \delta(q_1, \epsilon, \#) = \{(q_2, \epsilon)\} \\
-    A_P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)
+    A_P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, Q_F)
 \end{align}
 
 \begin{figure}[H]
@@ -248,13 +274,59 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
     \label{fig:kellerautomat}
 \end{figure}
 
+
+Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Wie vorhin schon erwähnt wird nach erfolgreicher 
+Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$:
+
+$$x_q = \gamma(e_S, e_E)$$
+
 \subsection{Logik zur Ausführung des Ausführungsmodells}
+
+Die Ausführung des Ausführungsmodells $x_q$ findet statt, indem man durch das Tupel iteriert und dabei hat man folgende Fallunterscheidung:
+
+\begin{enumerate}
+    \item Ist $x_{q{_i}} \in X_S$, so wird das Executable ausgeführt 
+    \item Ist $x_{q{_i}} \in X_G$ werden die ersten Komponenten aller Subqueues ausgeführt. Dann werden die Subqueues gefiltert, welche erfolgreich ausgeführt worden sind
+    und diese Menge wird in $\rho$ eingesetzt, um den Verknüpfungsoperator zu realisieren.
+\end{enumerate}
 
 \section{Animation der Automatisierung}
 
-Nach Kompilierung des Prozessmodells in das Ausführungsmodell, kann dieses ausgeführt werden. 
+Nach Kompilierung des Prozessmodells in das Ausführungsmodell, kann dieses ausgeführt werden. Bevor die Ausführung durchgeführt wird,
+wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Der Server reagiert auf die Anfrage mit der Anfrage an das Betriebssystems für einen Port.
+Dieser Port wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
+Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt, was der Client verwenden kann um die aktiven EPK-Knoten zu animieren.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Graphics/Live-Streaming.png}
+    \caption{Diagram, welches Livestreaming zur Animation darstellt}
+    \label{fig:live-streaming}
+\end{figure}
+
+
+Dieses Verhalten ist sehr ähnlich zu WebSockets, wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
 
 \subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
-\subsection{Analogie: WebSockets}
+
+\begin{table}[]
+\centering
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X }
+\toprule
+Polling                                                      & bidirektionale Verbindung \\
+\midrule
+- Mehrfacher Verbindungsaufbau für jeden Prozessschritt      & + ein Verbindungsaufbau gefolgt von kontinuierlichem Datenaustausch \\
++ Geregelte Semantik durch HTTP-Methoden                     & - Semantik muss selbst definiert werden                          \\
+- Blockierendes Request Response bringt Latenz               & + Durch kontinuierlichen Datenaustausch niedrige Latenz \\
+\bottomrule                         
+\end{tabularx}
+\caption{Gegenüberstellung}
+\label{tab:polling-vs-birectional}
+\end{table}
+
+Auf dieser Basis kam ich zu dem Entschluss statt Polling, bidirektionale Verbindungen zu nutzen für die Animation.
 
 \section{Generierung des Firmwarequellcodes}
+
+Bei der Generierung des Firmwarequellcodes wird rekursiv durch das Ausführungsmodell gegangen, um alle SingleExecutables $x_S$ in die entsprechenden
+C++-Codeblöcke umzuwandeln.
