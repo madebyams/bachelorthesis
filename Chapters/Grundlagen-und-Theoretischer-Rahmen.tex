@@ -10,7 +10,7 @@ abgeschlossen werden. \cite{leimeister_einfuhrung_2015}
 
 \section{Prozessmodellierung}
 
-Bei der Prozessmodellierung werden Geschäftsprozesse in einem Unternehmens gemäß einer Notation dokumentiert, sodass Transparenz und Verständnis 
+Bei der Prozessmodellierung werden Geschäftsprozesse in einem Unternehmen gemäß einer Notation dokumentiert, sodass Transparenz und Verständnis 
 bei Mitarbeitern und Fachexperten sichergestellt werden kann. Auf der Basis der modellierten Prozesse können dann Optimierungen durchgeführt werden. \cite{rump_geschaftsprozesmanagement_1999}
 
 Die Prozessmodellierung verfolgt nach Leimeister die folgenden Ziele: 
@@ -47,34 +47,26 @@ Ablauf eines Prozesses und auch der Datenfluss beschrieben. \cite{gadatsch_grund
 
 Diese Arbeit verwendet für die EPK-Syntax eine Kombination aus den Definitionen von Rump \cite{rump_geschaftsprozesmanagement_1999-1} und Langner, Schneider, Wehler\cite{langner_ereignisgesteuerte_1997}:
 
-Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph $G$, welchen man als Tupel $G = (V, A, N)$ definiert. Es gilt:
+Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph $G_P$, welchen man als Tupel $G_P = (V, A, N)$ definiert. Es gilt:
 
 \begin{itemize}
-    \item $V$ beschreibt die Knotenmenge von $G$,
-    \item $A$ die Kantenmenge von $G$,
-    \item $N$ eine Relation, wo einer Kante ein Tupel aus $V \times V$ zugeordnet wird  von $G$,
+    \item $V$ beschreibt die Knotenmenge von $G_P$,
+    \item $A$ die Kantenmenge von $G_P$,
+    \item $N$ eine Relation, wo einer Kante aus $A$ ein Tupel aus $V \times V$ zugeordnet wird  von $G_P$,
     \item $E \subset V$ die Menge der Ereignisse,
     \item $F \subset V$ die Menge der Funktionen und
     \item $O \subset V$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} lässt sich 
-    $O$ in paarweise disjunkte Teilmengen $O_{OR} = \{S_{OR}, J_{OR}\}, O_{XOR} = \{S_{XOR}, J_{XOR}\}$ und $O_{AND} = \{S_{AND}, J_{AND}\}$ aufteilen, sodass $O = O_{OR} \cup O_{XOR} \cup O_{AND}$.
+    $O$ in paarweise disjunkte Teilmengen $O_{OR} = (S_{OR} \cup J_{OR}), O_{XOR} = (S_{XOR} \cup J_{XOR})$ und $O_{AND} = (S_{AND} \cup J_{AND})$ aufteilen, sodass $O = O_{OR} \cup O_{XOR} \cup O_{AND}$.
     \item Funktionen und Ereignisse sind atomar, sodass eine Aufteilung innerhalb von Funktionen oder Ereignissen nicht möglich ist
+    \item $id: V \mapsto \mathbb{N}$ bildet einen Knoten auf dessen ID ab
+    \item $S$ beschreibt die Menge aller Strings
+    \item $\nu: V \times S$ ist eine Relation wo einem Knoten ein Name zugewiesen wird
+    \item $\tau: O \mapsto \mathbb{N}$ ist eine Funktion, wo einem Split-Operator der dazugehörige Join-Operator und einem Join-Operator der dazugehörige Splitoperator übergeben wird
 \end{itemize}
 
-In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} gilt:
-
-\begin{itemize}
-    \item Prozesswegweiser werden entnommen. Damit sind $E, F$ und $O$ paarweise disjunkt und für $K$ aus \cite{rump_geschaftsprozesmanagement_1999-1} gilt:
+In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} werden Prozesswegweiser entnommen. Damit sind $E, F$ und $O$ paarweise disjunkt und für $K$ aus \cite{rump_geschaftsprozesmanagement_1999-1} gilt:
     
-    $$K = E \cup F \cup O$$
-
-    \item Es Kanten von Funktionen zu Funktionen geben. Es gilt also: 
-    
-    $$
-        \forall f \in F, e \in K \backslash O: F \xrightarrow{\small v}_{ \small C} e \Rightarrow e \in E \cup F
-    $$
-\end{itemize}
-
-Ein Prozess $P$ lässt sich somit definieren als ein 3-Tupel $P = (G, E, F)$
+$$K = V = E \cup F \cup O$$
 
 \section{Kellerautomat}
 
@@ -85,14 +77,14 @@ aus einem Kelleralphabet zu hinterlegen. Kellerautomaten werden verwendet, um ko
 Formal wird ein Kellerautomat $A_K$ als folgendes Tupel definiert:
 
 \begin{align}
-    A_K = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)
+    A_K = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, Q_F)
 \end{align}
 
 $Q$ beschreibt die Menge aller Zustände des Automaten, $\Sigma$ beschreibt das Eingabealphabet für den 
 Kellerautomaten, $\Gamma$ beschreibt das Alphabet aller Symbole des Kellerspeichers, $\delta: Q \times (\Sigma \cup \{\epsilon\}) \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma*)$ beschreibt 
-die Übergangsfunktion, $q_0$ beschreibt den Anfangszustand, $Z_0$ das Startsymbol auf dem Kellerspeicher und $F$ ist die Menge
-aller akzeptierten Zustände. Ein Kellerautomat akzeptiert ein Wort, wenn ein Endzustand erreicht oder der 
-Kellerspeicher leer ist. \cite{hopcroft_einfuhrung_nodate} 
+die Übergangsfunktion, $q_0$ beschreibt den Anfangszustand, $Z_0$ das Startsymbol auf dem Kellerspeicher und $Q_F \subset Q$ ist die Menge
+aller akzeptierten Zustände. Ein Kellerautomat akzeptiert ein Wort, wenn entweder ein Endzustand erreicht oder der 
+Kellerspeicher leer ist. In dieser Arbeit wird bei einem Endzustand akzeptiert.\cite{hopcroft_einfuhrung_nodate} 
 
 \section{Prozessautomatisierung}
 
@@ -100,7 +92,7 @@ Gemäß Heinrich und Lutz J. versteht man unter Automatisierung
 den Vorgang [...] von Arbeitsgängen [...], die ohne unmittelbare menschliche 
 Tätigkeiten ausgeführt werden. \cite{heinrich_wirtschaftsinformatik-lexikon_1989}
 
-Dumas et. al definieren die Prozessautomatisierung als "die Konfiguration oder Implementierung eines IT-Systems [...], um den zukünftigen Prozess
+Dumas et al. definieren die Prozessautomatisierung als "die Konfiguration oder Implementierung eines IT-Systems [...], um den zukünftigen Prozess
 zu unterstützen." \cite{dumas_grundlagen_2021}
 
 Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern.
@@ -110,14 +102,14 @@ Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern
 Unter Geschäftsprozessorchestrierung (kurz: Orchestrierung) versteht man die koordinierte Ausführung von Geschäftsprozessen. \cite{kampik_agent-based_2019}
 Seidlmeier definiert die Steuerung eines Prozesses von einer organisatorischen Einheit als Orchestrierung. \cite{seidlmeier_prozessmodellierung_2019}
 
-Neben dem Begriff Orchestrierung gibt es auch den Begriff Choerographie. Papazoglu beschreibt den Unterschied zwischen diesen beiden Begriffen wie folgt:
+Neben dem Begriff Orchestrierung gibt es auch den Begriff Choreographie. Papazoglu beschreibt den Unterschied zwischen diesen beiden Begriffen wie folgt:
 
 ``Orchestration describes how services interact [...], including the business logic and execution order [...] Choreography is typically associated with [...], rules of interactions and agreements that occur between
-business-process end points rather than a specific business process[...]'' \cite{papazoglou_service-oriented_2007}. Orchestrierung ist also somit auf einen Prozess bezogen, während Choregraphie 
+business-process end points rather than a specific business process[...]'' \cite{papazoglou_service-oriented_2007}. Orchestrierung ist also somit auf einen Prozess bezogen, während Choreographie
 sich auf mehrere Prozesse ausdehnt.
 
 Aus dieser Definition und der Definition zur Automation lässt sich also sagen: Automation beschäftigt sich innerhalb eines Prozesses mit der Ausführung eines Schrittes, die Orchestrierung verantwortet
-die Ausführung eines gesamten Prozesses, während die Choreography sich über mehrere Prozesse hinweg bewegt.
+die Ausführung eines gesamten Prozesses, während die Choreographie sich über mehrere Prozesse hinweg bewegt.
 
 In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozesschritte gemäß der Modellierung. 
 
@@ -127,7 +119,7 @@ Das ARIS-Toolset ist gemäß Scheer ein [...] Softwaresystem zur Analyse, Modell
 Navigation von Geschäftsprozessen. [...] Die Grundlage für das ARIS-Toolset wird von der 
 Repository-Struktur gelegt, welche sich aus dem Konzept des ARIS-Haus gebildet hat. \cite{scheer_aris_1994} \cite{rump_geschaftsprozesmanagement_1999-1}
 
-Nach Leimeister ARIS bietet also eine Umsetzung prozessorientierter Organisationsgestaltung [...] an. Der Anspruch liegt dabei auf der 
+Nach Leimeister bietet ARIS also eine Umsetzung prozessorientierter Organisationsgestaltung [...] an. Der Anspruch liegt dabei auf der 
 Reduktion der Komplexität der Prozessmodellierung durch Spaltung der Unternehmensarchitektur durch die ARIS Methode in fünf 
 Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
 
@@ -157,7 +149,7 @@ In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation
 Nach Hünning und Thaller ist ein eingebettetes System "[...] ein durch Software kontrollierter Computer oder 
 Mikroprozessor, der Teil eines größeren Systems ist, dessen primäre Funktion nicht rechenorientiert ist." \cite{huning_eingebettete_2019} \cite{thaller_software-engineering_1997}
 
-Barr und Massa definierren ein eingebettetes System als eine Kombination aus Computer Hardware und Software mit zusätzlichen mechanischen und elektronischen Bauteilen, 
+Barr und Massa definieren ein eingebettetes System als eine Kombination aus Computer Hardware und Software mit zusätzlichen mechanischen und elektronischen Bauteilen, 
 um eine spezifische Funktion zu erfüllen. [...] Der Kontrast dazu ist der PC, bei welchem der Hersteller nicht weiß, wofür dieser verwendet wird. [...] ``Eingebettete 
 Systeme sind oft eine Komponente in einem größeren System. Beispielsweise enthalten moderne Autos und LKW's viele eingebettete Systeme. Ein eingebettetes System ist 
 für das ABS zuständig, ein anderes überwacht und steuert die Emissionen des Fahrzeugs, während ein drittes die Informationen dem Nutzer am Cockpit anzeigt.'' \cite{barr_programming_2006}
@@ -167,7 +159,7 @@ Herstellers Espressif Systems (Shanghai, China) verwendet.
 
 \subsection{ESP32}
 
-Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Esperssif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte WLAN und Bluetooth
+Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte WLAN und Bluetooth
 Anbindung, GPIO Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
 Neben den angegebenen Features, verfügt der ESP32 über Peripherien wie SPI, I2C, I2S, CAN, UART, etc. \cite{brandes_mikrocontroller_2024} 
 
@@ -183,17 +175,17 @@ Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programm
 
 In dieser Arbeit wird die ESP-IDF (Espressif IoT Development Framework) des Herstellers verwendet, welche Bibliotheken und Werkzeuge für die 
 Entwicklung des ESP32 bietet. \cite{hercog_design_2023} ESP-IDF baut die Firmware bestehend aus FreeRTOS und dem Nutzerquellcode als Haupttask. Neben der
-Ausführung von Tasks ist das Echtzeitbetreibssystemen auch für die Behandlung von Events (in diesem Fall: Wi-Fi und CoAP Events beim CoAP-Server auf dem ESP32) zuständig ist \cite{zuiev_research_2024} und nebenläufige Prozesse 
-(in FreeRTOS: Tasks) verwalten muss. Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetreibssystemen im Vordergrund, was
+Ausführung von Tasks ist das Echtzeitbetriebssystem auch für die Behandlung von Events (in diesem Fall: Wi-Fi und CoAP Events beim CoAP-Server auf dem ESP32) zuständig ist \cite{zuiev_research_2024} und nebenläufige Prozesse 
+(in FreeRTOS: Tasks) verwalten muss. Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetriebssystemen im Vordergrund, was
 durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024} 
 
 \section{IoT}
 
-Es gibt keine eingdeutige Definition für IoT. Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
-eingebetteten Geräten, welche Kommunikationsdienste auf der Basis von Internetprotokollen anbieten. Diese Geräte werden gänig als ``Objekte''
+Es gibt keine eindeutige Definition für IoT. Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
+eingebetteten Geräten, welche Kommunikationsdienste auf der Basis von Internetprotokollen anbieten. Diese Geräte werden gängig als ``Objekte''
 oder ``Smarte Objekte'' bezeichnet. Diese Objekte kommunizieren miteinander und brauchen keinen menschlichen Einfluss. \cite{balas_internet_2019}\cite{tschofenig_architectural_2015}\cite{wendzel_it-sicherheit_2018}
 
-Den Nutzen von IoT kann man dabei durch die Wertschöpfungsebenen der IoT nach Fleisch beschreiben: man hat ein physisches Produkt (erste Ebene). Dieser ist nun mit Senoren sowie Aktoren ausgestattet (zweite Ebene) und 
+Den Nutzen von IoT kann man dabei durch die Wertschöpfungsebenen der IoT nach Fleisch beschreiben: man hat ein physisches Produkt (erste Ebene). Dieser ist nun mit Sensoren sowie Aktoren ausgestattet (zweite Ebene) und 
 hat eine Verbindung zum Internet (dritte Ebene). Zu Analysezwecken stehen diese Daten nun zur Verfügung (vierte Ebene) aus denen man weitere Dienste für Kunden anbieten kann. (fünfte Ebene) \cite{meinhardt_iot_2021}
 Zusammenfassend also:
 
@@ -205,7 +197,7 @@ Zusammenfassend also:
     \item Digitale Leistungen
 \end{enumerate} \cite{meinhardt_iot_2021} \cite{fleisch_geschaftsmodelle_2015}
 
-Die Geräte, an welche Sensoren und Aktuatoren angeschlossen sind nennt man auch "constrained devices", welche durch ihre Konnektivität ein Netwerk Formen. Diese einzelnen Sensoren und Aktoren in
+Die Geräte, an welche Sensoren und Aktuatoren angeschlossen sind nennt man auch "constrained devices", welche durch ihre Konnektivität ein Netzwerk formen. Diese einzelnen Sensoren und Aktoren in
 diesem Netzwerk nennt man dann "constrained nodes". \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern \cite{shelby_constrained_2014} wie dem ESP32. Ein Protokoll, welches genutzt wird um mit Knoten 
 in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014} \cite{shelby_constrained_2014}
 
@@ -213,26 +205,26 @@ in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014}
 \subsection{CoAP}
 
 Gemäß RFC7252 ist CoAP (Constrained Application Protocol) [...] ein spezialisiertes Internettransferprotokoll, welches für eingeschränkte Knoten und Netzwerke genutzt wird.
-Diese Knoten haben meißt einen 8-Bit Mikrocontroller mit kleinen ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
-welche eine hohe Paketfehöerrate und einen typischen Durchfluss von 10s bei kbit/s hat. Das Protokoll ist konzipiert für Maschine zu Maschine Anwendungen wie etwa
+Diese Knoten haben meist einen 8-Bit Mikrocontroller mit kleinen ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
+welche eine hohe Paketfehlerrate und einen typischen Durchfluss von 10s bei kbit/s hat. Das Protokoll ist konzipiert für Maschine zu Maschine Anwendungen wie etwa
 Smart-Energie oder Bauautomatisierung. \cite{thaller_software-engineering_1997}\cite{wendzel_it-sicherheit_2018}
-CoAP baut dabei auf UDP auf und bringt damit einen komapkten Header mit. Zudem können CoAP-Clients auch Dienste und Resourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
+CoAP baut dabei auf UDP auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Resourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
 Dies wird in RFC7252 auch Resource Discovery genannt und geschieht über das Constrained RESTful Environments Link Format, was in RFC6690 beschrieben wird. \cite{shelby_constrained_2014}
 
 Die direkte Suche von Resourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also 
-efiizienter zu gestalten gibt es sogenannte Resource Directorires, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird entspricht auch RFC6690. \cite{amsuss_constrained_2022}
+effizienter zu gestalten gibt es sogenannte Resource Directories, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird entspricht auch RFC6690. \cite{amsuss_constrained_2022}
 
 Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichten Schicht und der Request-Response Schicht. Die Nachrichtenschicht ist dafür 
 zuständig, dass eine Nachricht zunächst per UDP übermittelt wird. Dabei gibt es folgende Typen von Nachrichten: Confirmable, Non-confirmable, Acknowledgement und Reset. Confirmable verlangt vom Kommunikationspartner eine
-Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Eine Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung seperat (``Seperate Response'') oder
+Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Eine Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung separat (``Separate Response'') oder
 mit der Antwort zusammen (``Piggybacked Response'') übermittelt wird. Die Reset Nachricht teilt mit, dass die Nachricht zwar angekommen ist, diese aber aufgrund von fehlendem Kontext nicht verarbeitet werden kann. Solch eine Reset-Nachricht wird auch 
 verwendet, um die Erreichbarkeit des Kommunikationspartners sicherzustellen.
 Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4-byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einem Statuscode
-bei einer Antwort oder die Methode (GET, DELETE, PUT, POSt) bei einer Anfrage und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haven kann. Dies verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
+bei einer Antwort oder die Methode (GET, DELETE, PUT, POST) bei einer Anfrage und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haben kann. Dies verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
 um zur passenden Anfrage die passende Antwort zu übermitteln. Danach können weitere Optionen hinzugefügt werden, welche dann mit dem Payload-Marker (Ein Byte gefüllt mit Einsen) abgeschlossen werden. Nach dem Payload 
 Marker kann der Payload (also zu übermittelnde Daten) beigefügt werden. Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_constrained_2014}
 
-Im Vergleich zu HTTP, wo die Anfrage mit der stehenenden Verbindung der Anfrage beantwortet werden, setzt CoAP das Request/Response Pattern durch Nachrichten um, wo die Anfrage und die Antwort seperate asynchrone UDP-Nachrichten sind, dessen 
+Im Vergleich zu HTTP, wo die Anfrage mit der stehenden Verbindung der Anfrage beantwortet werden, setzt CoAP das Request/Response Pattern durch Nachrichten um, wo die Anfrage und die Antwort seperate asynchrone UDP-Nachrichten sind, dessen 
 Zugehörigkeiten durch Tokens geregelt werden. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
 ``stop-and-wait retransmission'' bei confirmable Nachrichten verwendet. \cite{shelby_constrained_2014} Das bedeutet, dass man beim Absenden für jeden gesendeten Frame auf eine Acknowledge Nachricht wartet, um weiterzusenden. Erhält man diese
 Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response Schicht realisiert ein REST-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
@@ -244,13 +236,13 @@ serverseitigen Fehler.
 Wendzel definiert MQTT als ein Protokoll, was auch in resourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish Subscribe Architektur, wodurch
 Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, die die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
 Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Vermittler zwischen dem Publisher und den Subscribern. Damit hier Nachrichten auch an die gewünschten Geräte versendet werden, werden 
-Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscriber'' \cite{brandes_mikrocontroller_2024}.Publisher und Subscriber keine Kenntnis und sind auf einer logischen Ebene entkoppelt voneinander. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008} 
+Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscriber'' \cite{brandes_mikrocontroller_2024}. Publisher und Subscriber haben keine Kenntnis voneinander und sind auf einer logischen Ebene entkoppelt. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008} 
 Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines Quality of Service (kurz: QoS) möglich.\cite{brandes_mikrocontroller_2024}
 
 \section{Sockets}
 
 Unter einem Socket versteht man eine "Verallgemeinerung des Mechanismus für den Dateizugriff unter UNIX, das einen Endpunkt für die Kommunikation bereitstellt.
-[...] Der wesentliche Unterschied zwischen Datei- und Socket-Deskriptioren besteht darin, dass das Betriebssystem einen Datei-Deskriptor an eine bestimmte Datei
+[...] Der wesentliche Unterschied zwischen Datei- und Socket-Deskriptoren besteht darin, dass das Betriebssystem einen Datei-Deskriptor an eine bestimmte Datei
 oder ein bestimmtes Gerät bindet,[...], aber es kann Sockets erstellen, ohne sie an bestimmte Zieladressen binden zu müssen. Die Applikation kann jedes Mal, wenn sie das 
 Socket nutzt [...], eine Zieladresse angeben[...] (z.B. wenn eine TCP-Verbindung aufgebaut wird)"\cite{comer_tcpip_2003} Nach Inden bieten Sockets dabei eine streambasierte 
 Kommunikationsmöglichkeit, um Daten bidirektional zu übertragen. \cite{inden_weg_2020}

@@ -7,47 +7,47 @@ Anbei werden Arbeiten aufgelistet, die Ähnlichkeiten zu dieser Arbeit haben und
 \subsection{Flowable}
 
 Flowable ist eine "Workflow Management Platform und Java Geschäftsprozessengine", welche Notationen wie BPMN, CMMN und DMN 
-untertützt und ausführt. \cite{doan_using_2022} Auch ist es möglich Flowable als Engine in eigenen Java-Projekten zu nutzen. \cite{flowable_ag_getting_nodate}
+unterstützt und ausführt. \cite{doan_using_2022} Auch ist es möglich Flowable als Engine in eigenen Java-Projekten zu nutzen. \cite{flowable_ag_getting_nodate}
 Auch wird damit geworben, dass Flowable eine IoT-Anbindung anbietet. Auf diese wird in dessen Produktdokumentation nicht eingegangen. Somit ist 
 die Anbindung von IoT Systemen bei der Flowable Prozessengine nicht nachweisbar. \cite{flowable_ag_digitize_nodate}
 
 \subsection{Camunda}
 
-Bei Camunda handelt es sich ebenfalls um eine Workflow Engine, welche verwendet wird, um Geschäftsprozesse, welche mit der BPMN 2.0 Notationen
+Bei Camunda handelt es sich ebenfalls um eine Workflow Engine, welche verwendet wird, um Geschäftsprozesse, welche mit der BPMN 2.0 Notation
 modelliert worden sind, auszuführen. \cite{david_exploring_2023} Die Software wurde mit Java entwickelt und die Prozessengine läuft 
 dementsprechend auf der Java Virtual Machine. Darüber hinaus hat sie auch eine Integration zu den Frameworks Spring und Java EE, sodass Camunda auch
 als Bibliothek von Entwicklern genutzt werden kann. \cite{fernandez_camunda_2013}
 
 \subsection{EMD - Erweiterbare und adaptive Elektro-Mobilitätsdienste}
 
-In dieser Arbeit geht es um die Entiwcklung von Diensten und Werkzeugen, um Innovationen im E-Mobilitätsbereich 
+In dieser Arbeit geht es um die Entwicklung von Diensten und Werkzeugen, um Innovationen im E-Mobilitätsbereich 
 zu erforschen. Ein Produkt aus dieser Arbeit ist ein weiterentwickeltes BPMN Tool, das benötigte Dienste integrieren und 
 Prozesse durch einen BPMN-Interpreter ausführen und orchestrieren kann. Dabei wurden Geräte wie eBike-Ladestationen,
 Parkplatzschranke und gerätenahe Sensorik verwendet.\cite{fahndrich_emd_2016}
 
 \subsection{Agent-based Business Process Orchestration for IoT}
 
-In dieser Arbeit wird ein Geschäftsprozess in BPMN modelliert und mit Agenten und IoT vernküpft. Dabei kommen auch menschliche
+In dieser Arbeit wird ein Geschäftsprozess in BPMN modelliert und mit Agenten und IoT verknüpft. Dabei kommen auch menschliche
 Akteure ins Spiel. Standards die dabei verwendet werden sind O-MI und O-DF. Dabei wurde aber nicht auf echter Hardware, sondern mit 
 Mock-Ups gearbeitet. Technologien die für die Orchestrierungsebene verwendet worden sind, sind Java und Node.js. 
-In der Diskussion wurde die Embedded-Schicht als Thema für zukünfitge Forschungsarbeiten aufgegriffen. \cite{kampik_agent-based_2019}
+In der Diskussion wurde die Embedded-Schicht als Thema für zukünftige Forschungsarbeiten aufgegriffen. \cite{kampik_agent-based_2019}
 
 \subsection{Bridging BPMN and Edge-IoT: A Reactor-based architecture for real-time, AI-driven workflow orchestration}
 
 Hier wurde eine Reactor-basierte Architektur entwickelt, um Edge-Geräte durch die Zeebe-Execution-Engine des Herstellers Camunda auf 
-BPMN Prozesse reagieren zu lassen. Dies wurde noch nicht auf richtiger Hardware ausgeführt, sondern mit Simulationen. Dabei dient die Zeebee-Engine
+BPMN Prozesse reagieren zu lassen. Dies wurde noch nicht auf richtiger Hardware ausgeführt, sondern mit Simulationen. Dabei dient die Zeebe-Engine
 als Orchestrator. \cite{thahir_bridging_2026}
 
 \subsection{Modelling and executing IoT-enhanced business processes through BPMN and microservices}
 
 In der Arbeit \textit{Modelling and executing IoT-enhanced business processes through BPMN and microservices} behandelt Valderas die Ausführung von 
-IoT-gekoppelten Prozessen. Dabei werden die Prozesse in BPMN notiert und mit der Camunda Exection Engine ausgeführt, welche einen Raspberry Pi ansteuern. 
+IoT-gekoppelten Prozessen. Dabei werden die Prozesse in BPMN notiert und mit der Camunda Execution Engine ausgeführt, welche einen Raspberry Pi ansteuern. 
 \cite{valderas_modelling_2022}
 
 \subsection{Evaluation der verwandten Arbeiten}
 
-All diese Arbeiten haben die Modellierungssprache BPMN oder CMNN verwendet, jedoch wurden EPC's in diesem Kontext noch nicht beleuchtet. Und das ist der Beitrag dieser
-Arbeit. Dieser beinhaltet einen Compiler, welches EPC-Modelle in ein ausführbares Format umwandelt und auf dieser Basis IoT-Geräte über das CoAP Protokoll ansteuert.
+All diese Arbeiten haben die Modellierungssprache BPMN oder CMMN verwendet, jedoch wurden EPC's in diesem Kontext noch nicht beleuchtet. Und das ist der Beitrag dieser
+Arbeit. Dieser beinhaltet einen Compiler, welcher EPC-Modelle in ein ausführbares Format umwandelt und auf dieser Basis IoT-Geräte über das CoAP Protokoll ansteuert.
 Darüber hinaus wird auch der Rahmen für Firmware-Code damit generiert, sodass die Entwicklung von prozessorientierter Software erleichtert werden kann.
 
 \section{Systemanforderungen}
@@ -64,5 +64,5 @@ Die Systemanforderungen kann man anhand von User Stories definieren. Diese werde
     \item Ich als \textbf{Softwareentwickler} möchte eine Programmierschnittstelle zur Prozessschicht, sodass \textbf{Produktionshardware leicht an das Prozessgeschehen
     angebunden werden kann}.
 
-    \item Ich als \textbf{Prozessanalyst} möchte \textbf{einen Verlauf vergangener Prozesse} einsehen, sodass \textbf{Schwachstellen und Engpässe bei Prozesen ermittelt werden können}. (S3)
+    \item Ich als \textbf{Prozessanalyst} möchte \textbf{einen Verlauf vergangener Prozesse} einsehen, sodass \textbf{Schwachstellen und Engpässe bei Prozessen ermittelt werden können}.
 \end{enumerate}
