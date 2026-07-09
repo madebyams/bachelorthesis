@@ -68,24 +68,6 @@ In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} werden Prozessw
     
 $$K = V = E \cup F \cup O$$
 
-\section{Kellerautomat}
-
-Bei einem Kellerautomaten handelt es sich um ein Berechnungsmodell, was einem nicht-deterministischem Automaten mit $\epsilon$ Kanten ähnelt. 
-Der Unterschied zwischen einem $\epsilon$-NEA und einem Kellerautomaten liegt darin, dass der Kellerautomat über einen Kellerspeicher verfügt, um Symbole 
-aus einem Kelleralphabet zu hinterlegen. Kellerautomaten werden verwendet, um kontextfreie Sprachen zu evaluieren. \cite{hopcroft_einfuhrung_nodate}
-
-Formal wird ein Kellerautomat $A_K$ als folgendes Tupel definiert:
-
-\begin{align}
-    A_K = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, Q_F)
-\end{align}
-
-$Q$ beschreibt die Menge aller Zustände des Automaten, $\Sigma$ beschreibt das Eingabealphabet für den 
-Kellerautomaten, $\Gamma$ beschreibt das Alphabet aller Symbole des Kellerspeichers, $\delta: Q \times (\Sigma \cup \{\epsilon\}) \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma*)$ beschreibt 
-die Übergangsfunktion, $q_0$ beschreibt den Anfangszustand, $Z_0$ das Startsymbol auf dem Kellerspeicher und $Q_F \subset Q$ ist die Menge
-aller akzeptierten Zustände. Ein Kellerautomat akzeptiert ein Wort, wenn entweder ein Endzustand erreicht oder der 
-Kellerspeicher leer ist. In dieser Arbeit wird bei einem Endzustand akzeptiert.\cite{hopcroft_einfuhrung_nodate} 
-
 \section{Prozessautomatisierung}
 
 Gemäß Heinrich und Lutz J. versteht man unter Automatisierung
