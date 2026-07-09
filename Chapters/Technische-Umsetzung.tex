@@ -71,7 +71,7 @@ Der Compiler wird in Java mit folgenden Klassen realisiert:
 Der eigentliche EPK-Compiler ist \texttt{ExecutionQueueBuilder}. Dieser Funktioniert so, dass der aktuelle Kompilierzustand sich in \texttt{ExecutionQueueBuilderContext}
 befindet. Dieser besteht aus einem Flag \texttt{started}, um zu wissen ob das Startereignis schon verarbeitet wurde, der zu füllenden ExecutionQueue und einem \texttt{Process}
 Objekt. Zur Buchführung von Verknüpfungsoperatoren enthält der \texttt{ExecutionQueueBuilderContext} einen Stapel \texttt{groupDeque}, um die aktuell geöffnete Verknüpfung sich zu merken
-und die Hash-Map \texttt{groupIndexMap}, um zu wissen welcher Pfad im aktuellen Verknüpfungsoperator verarbeitet wird. Dazu kommen noch eine \texttt{AutomationEventBuffer} Referenz, welche einem
+und die Hash-Map \texttt{groupIndexMap}, um zu wissen welcher Pfad im aktuellen Verknüpfungsoperator verarbeitet wird. Dazu kommen noch eine \texttt{AAutomationEventBuffer} Referenz, welche einem
 \texttt{SingleExecutable} durchgegeben wird, um dessen Ausführung zu dokumentieren und eine verkettete Liste \texttt{SingleExecutables}, welche zur Codegenerierung verwendet wird.
 
 Die Kompilierung findet wie folgt statt: Es wird durch den Prozessgraphen $G_P$ mittels Tiefensuche traversiert (durch \texttt{Utils.traverse}) und abhängig vom Knoten wird der passende \texttt{Handler} aus der 
@@ -143,6 +143,8 @@ Konfigurationsänderungen schneller umgesetzt werden können. Dieses Docker-Imag
 
 Bei der Firmwarecodegenerierung werden alle SingleExecutable Instanzen durch JSON serialisiert und werden an ein Python-Skript übergeben, 
 welches ein ESP-IDF Projekt anlegt und anhand der serialisierten SingleExecutables die einzelnen CoAP-Handler Klassen erzeugt.
+Der generierte Firmwarecode behandelt schon Aspekte wie Aufbau einer WLAN- und CoAP Verbindung, sowie die Registierung bei dem Resource Directory.
+Der Entwickler muss nur noch die Ausführungslogik implementieren.
 
 \subsection{Integration in ESP-IDF}
 
@@ -171,8 +173,66 @@ dieses JSON-Dokument einliest und auf dieser Basis CoAP-Handler Klassen erstellt
 \end{figure}
 
 \section{Ausgabe von Ausführungsstatistiken}
+
+Bei der Kompilierung des EPK-Modells in eine \texttt{ExecutionQueue} wird gemäß \ref{epk-compiler} jeder \texttt{SingleExecutable} 
+eine Referenz zu einem \texttt{AAutomationEventBuffer} zugewiesen. Bei der Ausführung eines \texttt{SingleExecutable} wird die Methode 
+\texttt{add} der \texttt{AAutomationEventBuffer} Referenz aufgerufen, sodass die Ausführung mitsamt Executable-ID, Rückgabwert, 
+Verarbeitungszeit auf dem ESP32 sowie Start- und Endzeitpunkt hinterlegt werden. Dieser Puffer kann später serialisiert werden und zu 
+Optimierungszwecken des Prozesses oder auch zur Nachverfolgungen von Durchläufen verwendet werden.
+
 \section{Integration in ARIS}
+
+In dieser Arbeit wurde die ARIS Version 10.2025.10 (TODO: Fix it) verwendet. Hierbei handelt es sich um ein verteiltes System aus Servern, welche unterschiedliche 
+Funktionen anboten und zwei Arten von Clients: einem webbasierten Client und einem Rich-Client, welcher in Java entwickelt wurde. Sowohl der Web-Client als auch der 
+Java-Client boten die Simulation von modellierten Prozessen an, jedoch bot der Rich-Client noch die Möglichkeit die einzelnen Prozessschritte zu animieren. Dabei ist
+sind alle Prozessschritte ausgegraut und der aktive Prozessschritt leuchtet in der respektiven Farbe auf. Unter dem verteilten Systemen aus Servern gibt es auch einen 
+Server, welcher für die Simulation zuständig war. Da Live-Monitoring auch eine der Systemanforderungen war, wurde für die Entwicklung des Prototypen der Rich-Client sowie 
+der Simulationsserver als Basis genommen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Graphics/ARIS-System.png}
+    \caption{Systemdiagram in ARIS}
+    \label{fig:aris-system-diagram}
+\end{figure}
+
 \subsection{Ersetzen der Simulationsschnittstelle}
-\subsection{Anpassung an der Nutzeroberfläche}
+
+Die Logik der Simulation in ARIS wird durch den Simulationsserver realisiert. Dort wird die Simulation mittels einer Simulationsengine durchgeführt. Diese Simulationsengine
+baut intern ein Prozessmodell auf und führt auf Basis dieses Prozessmodells die Simulation durch. Die Schnittstelle auf dem Simulationsserver,
+welcher die Interaktion mit der Simulationsengine anbot ist die Schnittstelle \texttt{ISimulation}. Den Schnittstellenvertrag, welchen \texttt{ISimulation} aufsetzt ist
+ähnlich zu dem der definierten Automationsschnitstelle. \ref{automation-server-interface} Es wurden jedoch nicht alle Methoden der Schnittstelle benötigt und neue Methoden mussten 
+definiert werden, weshalb die Schnittstelle dieser Arbeit sich von \texttt{ISimulation} in ARIS unterscheidet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Graphics/ARIS-Ist-Zustand.png}
+    \caption{Ist-Zustand bei ARIS}
+    \label{fig:aris-ist-zustand}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Graphics/ARIS-Soll-Zustand.png}
+    \caption{Soll-Zustand bei ARIS}
+    \label{fig:aris-soll-zustand}
+\end{figure}
+
 \subsection{Bereitstellung von Ausführungsstatistiken für ARIS Process Mining}
+
+Zur Bereitstellung der Ausführungsstatistik wird der \texttt{AAutomationBuffer} im CSV-Format serialisiert. Dem
+Nutzer wird dabei die Möglichkeit gegeben einen Speicherort für die CSV-Datei anzugeben. Anhand des CSV-Strings wird
+eine CSV-Datei am Speicherort, welcher vom Nutzer angegeben wurde, abgespeichert.
+
+\subsection{Codegenerierung}
+
+Für die Codegenerierung wird zunächst vom Nutzer der Projektname, der Gerätename für das Resource-Directory sowie der Ablageort 
+für den Projektordner abgefragt. Es wird dann ein neuer Prozess gestartet, welcher das Codegenerierungsskript startet und Ausgaben 
+des Skripts werden dem Nutzer angezeigt, sodass die Codegenerierung mit verfolgt werden kann. Dies erleichtert auch das Finden von Fehlern 
+und kann bei der Weiterentwicklung oder dem Debugging des Codegenerierungsskripts helfen.
+
 \subsection{Animation der Automatisierung}
+
+Die Animation der Automatisierung wurde gemäß des Konzepts aus \ref{automation-animation} umgesetzt. Dabei wurde für den Server ein Objekt
+der Klasse \texttt{java.net.ServerSocket} und für den Client eine \texttt{java.net.Socket} Instanz verwendet. Die ID des aktuell ausgeführten 
+SingleExecutables wird in der \texttt{run} Methode der \texttt{ExecutionQueue} ausgegeben.
