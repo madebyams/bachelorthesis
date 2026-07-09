@@ -149,11 +149,10 @@ ist hierbei wie folgt:
 }
 \end{lstlisting}
 
-\subsubsection{Schnittstelle des Simulationsservers}
+\subsubsection{Schnittstelle des Automationsservers}
+\ref{automation-server-interface}
 
-Der Simulationsserver der Produktgruppe ARIS bietet eine Schnittstelle zur Benutzeroberfläche an, welche die Simulation von Prozessen steuert. Diese ist 
-bekannt unter \texttt{ISimulation}. Diese Schnittstelle verbindet außerdem ARIS mit der internen Prozesssimulationsengine. Auf Basis dieser
-Schnittstelle fand eine Umdefinition statt. Darüber hinaus fielen dadurch einige Endpunkte weg.
+Der Automationsserver bietet eine Schnittstelle an, welche die Automation von Prozessen steuert.
 
 \begin{table}[H]
 \centering
@@ -293,7 +292,7 @@ Die Ausführung des Ausführungsmodells $x_q$ findet statt, indem man durch das 
 \end{enumerate}
 
 \section{Animation der Automatisierung}
-
+\label{automation-animation}
 Nach Kompilierung des Prozessmodells in das Ausführungsmodell, kann dieses ausgeführt werden. Bevor die Ausführung durchgeführt wird,
 wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Der Server reagiert auf die Anfrage mit der Anfrage an das Betriebssystems für einen Port.
 Dieser Port wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
