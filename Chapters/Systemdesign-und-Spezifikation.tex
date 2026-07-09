@@ -150,7 +150,7 @@ ist hierbei wie folgt:
 \end{lstlisting}
 
 \subsubsection{Schnittstelle des Automationsservers}
-\ref{automation-server-interface}
+\label{automation-server-interface}
 
 Der Automationsserver bietet eine Schnittstelle an, welche die Automation von Prozessen steuert.
 
@@ -211,7 +211,7 @@ Zur Kompilierung muss noch folgendes definiert werden:
                 \epsilon \text{, falls } v = s \\
                 (id(v), bool) \cdot \gamma(w,s) \text{, falls } v \in E, succ(v) = \{w\} \\
                 (id(v), int) \cdot \gamma(w,s) \text{, falls } v \in F, succ(v) = \{w\}  \\
-                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert = 1) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{XOR} \\
+                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = (\vert x \vert = 1)) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{XOR} \\
                 (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert \geq 1) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{OR} \\
                 (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert = \vert succ(v) \vert) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{AND} \\
                 \gamma(w, s) \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND}
@@ -234,7 +234,7 @@ Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Da
 \end{align}
 
 Ein Wort auf $L$ beschreibt einen Pfad der Tiefensuche.
-Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruieren:
+Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruieren: \cite{hopcroft_einfuhrung_nodate}
 
 \begin{align}
     Q = \{q_0, q_1, q_2\} \\
@@ -276,8 +276,8 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 \end{figure}
 
 
-Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Wie vorhin schon erwähnt wird nach erfolgreicher 
-Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$:
+Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem leeren Keller. Wie vorhin schon erwähnt 
+wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$:
 
 $$x_q = \gamma(e_S, e_E)$$
 
