@@ -67,23 +67,24 @@ auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses m
 Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückgabetypen. Dann gilt:
 
 \begin{enumerate}
+    \item $T = \{bool, int\}$ sei die Menge der Rückgabetypen
+    \item $X_S = \{(i,t)\; | i \in \mathbb{N} \land t \in T\}$ sei die Menge der SingleExecutables 
+    \item $X_Q = \bigcup_{k = 2} X^k$ sei die Menge der Executable-Queues
     \item {
-        \begin{align}
-            X_S = \{(i,t) | i \in \mathbb{N} \land t \in T\} \\
-            X_S \subset X
-        \end{align}
-
-        $X_S$ ist die Menge aller elementaren Executables.
+        $X_G = \{(i, g, \rho)\; | i \in \mathbb{N} \land g \in \mathcal{P(X_Q)} \land \rho: X_Q \rightarrow X_Q\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
+        des Verknüpfungsoperator beschreiben, $i$ die ID des Splitoperators ist und $\rho$ die Entscheidungsfunktion abhänging des Verknüpfungsoperators ist.
     }
-    \item $X_Q = \bigcup_{k = 2} X^k$ ist die Menge aller Executable-Queues
-    \item $X_G = \{(g, i, \rho) |g \in \mathcal{P}(X^*) \land i \in \mathbb{N} \land \rho: X^* \mapsto \mathbb{B}\}$, beschreibt die Menge der Executable Gruppen.
+    \item $X = X_S \cup X_G$ sei die Menge der Executables
 \end{enumerate}
 
 
 \subsubsection{Codegenerierungsmodell}
+\label{code-generation-model}
 
-Sei $C = \{(n, h, t) | n \in S \land h \in \{sha256(i) | i \in \mathbb{N}\} \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
+Sei $C = \{(i, n, t) | i \in \mathbb{N} \land n \in S \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
 den Rückgabetypen sowie die ersten 16 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+
+
 
 \subsection{Schnittstellen}
 
@@ -97,18 +98,20 @@ In dieser Arbeit wird CoAP als Kommunikationsprotokoll zwischen der Execution-En
 \toprule
 \textbf{MQTT} & \textbf{CoAP} \\
 \midrule
-$-$ Nutzt Publish-Subscribe Pattern, wodurch Warte-Mechanismus zur Ausführung eingebaut werden muss & $+$ Nutzt Request-Response Pattern, sodass man eine Antwort nach Ausführung eines Schrittes erhält \\
+$-$ Nutzt Publish-Subscribe Pattern, wodurch Warte-Mechanismus für den Erhalt des Rückgabewerts eingebaut werden muss \cite{al-fuqaha_internet_2015} & $+$ Nutzt Request-Response Pattern, sodass man eine Antwort nach Ausführung eines Schrittes erhält \cite{al-fuqaha_internet_2015} \\
 \addlinespace
-$-$ Zustellungsbestätigungen in TCP könnten Latenz einbringen & $+$ Nutzt UDP, wo ACK nicht zwingend benötigt wird \\
+$-$ MQTT basiert auf TCP. Dieses bringt beim Verbindungsaufbau mit dem Drei-Wege-Handshake Latenz ein. \cite{kurose_computernetzwerke_2014} & $+$ UDP benötigt keinen Drei-Wege-Handshake und baut die Verbindung schneller auf \cite{kurose_computernetzwerke_2014} \\
 \addlinespace
-$-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zuweisung erfolgt durch Tokens, die im Request-/Response-Paket enthalten sind \\
+$-$ Die Header-Größe bei MQTT beträgt 2 Byte \cite{noauthor_information_2016}. Addiert mit der Header-Größe von 20 Bytes bei TCP hat der Gesamtheader eine Größe von 22 Bytes. Dies kann für Constrained-Network von Nachteil sein, da das Paket größer ist. & $+$ CoAP hat hingegen eine Header-Größe von 4 Bytes. Jedoch bringt UDP eine Header-Größe von 8 Bytes, wodurch der Header-Overhead sich auf 12 Bytes beläuft \\
+\addlinespace
+$-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zuweisung erfolgt durch Tokens, die im Request-/Response-Paket enthalten sind \cite{10.1109/COMST.2015.2444095} \\
 \bottomrule
 \end{tabularx}
 \caption{Gegenüberstellung von MQTT und CoAP hinsichtlich der Prozessschritt-Ausführung}
 \label{tab:mqtt-coap}
 \end{table}
 
-Auf dieser Grundlage habe ich mich dazu entschieden CoAP für diesen Fall zu verwenden.
+Auf dieser Grundlage wurde entschieden CoAP als Kommunikationsprotokoll zwischen der Orchestrierungsschicht und dem IoT-System zu verwenden.
 
 
 \subsubsection{Definition der CoAP Schnittstelle}
@@ -170,7 +173,7 @@ getAvailableStatistics      &   Sprache                                         
 getVersion                  &   keine Parameter                                                     & Serverversion  \\
 generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodells und Serialisierung des Ausführungsmodells in JSON, um Codegenerierung auf dem Client zu starten  \\
 exportDetailedStatistics    &   keine Parameter                                                     & Serialisierung der Ausführungsstatistik in das CSV-Tabellenformat  \\
-initStreamConnection        &   keine Parameter                                                     & Erstellen eines Serversockets, um das Live-Streaming der Ausführung zu ermöglichen\\
+initStreamConnection        &   keine Parameter                                                     & Erstellen eines Serversockets, um das Live-Streaming der Ausführung für die Animation zu ermöglichen\\
 closeStreamConnection       &   keine Parameter                                                     & Schließen der erstellten Socketverbindung \\
 \bottomrule
 \end{tabularx}
@@ -206,15 +209,14 @@ Zur Kompilierung muss noch folgendes definiert werden:
 \begin{itemize}
     \item $succ(v): V \rightarrow \mathcal{P}(V) = \{w | \exists a \in A: (a,(v,w)) \in N\}$ \\
     \item {
-        $\gamma: V \times V \rightarrow X^* \\$
-        $$\gamma(v, s) = \begin{cases}
-                \epsilon \text{, falls } v = s \\
-                (id(v), bool) \cdot \gamma(w,s) \text{, falls } v \in E, succ(v) = \{w\} \\
-                (id(v), int) \cdot \gamma(w,s) \text{, falls } v \in F, succ(v) = \{w\}  \\
-                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = (\vert x \vert = 1)) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{XOR} \\
-                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert \geq 1) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{OR} \\
-                (\{\gamma(w, \tau(v)) | w \in succ(v)\}, id(v), \rho(x) = \vert x \vert = \vert succ(v) \vert) \cdot \gamma(\tau(v),s) \text{ , falls } v \in S_{AND} \\
-                \gamma(w, s) \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND}
+        $\gamma: V \times \mathcal{P}(X) \\$
+        $$\gamma(v) = \begin{cases}
+                \{(id(v), bool)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in E \text{ und } succ(v) \ne \emptyset \\
+                \{(id(v), int)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in F \text{ und } succ(v) \ne \emptyset \\
+                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, XOR)\} \cup \{\gamma(x | x \in succ(\tau(v)))\} \text{ , falls } v \in S_{XOR} \\
+                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, OR)\} \cup \{\gamma(x | x \in succ(\tau(v)))\} \text{ , falls } v \in S_{OR} \\
+                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, AND)\} \cup \{\gamma(x | x \in succ(\tau(v)))\} \text{ , falls } v \in S_{AND} \\
+                \emptyset \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND} \\
             \end{cases}$$
     }
 \end{itemize}
@@ -279,7 +281,7 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem leeren Keller. Wie vorhin schon erwähnt 
 wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$:
 
-$$x_q = \gamma(e_S, e_E)$$
+$$x_q = \gamma(e_S)$$
 
 \subsection{Logik zur Ausführung des Ausführungsmodells}
 
@@ -310,7 +312,7 @@ Dieses Verhalten ist sehr ähnlich zu WebSockets, wo zunächst eine WebSocket-Ve
 
 \subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
 
-\begin{table}[]
+\begin{table}[H]
 \centering
 \begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X }
 \toprule
@@ -325,7 +327,7 @@ Polling                                                      & bidirektionale Ve
 \label{tab:polling-vs-birectional}
 \end{table}
 
-Auf dieser Basis kam ich zu dem Entschluss statt Polling, bidirektionale Verbindungen zu nutzen für die Animation.
+Auf dieser Grundlage wurde entschieden mit bidirektionale Verbindungen statt Polling, für die Animation zu arbeiten.
 
 \section{Generierung des Firmwarequellcodes}
 
