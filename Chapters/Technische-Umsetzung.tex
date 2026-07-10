@@ -48,7 +48,7 @@ Die Konstruktion des Prozessmodells wird mit den folgenden Klassen realisiert:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Ausführungsmodell-UML.png}
+    \includegraphics[width=0.8\textwidth]{Graphics/Process-Builder-UML.png}
     \caption{UML Diagramm des Prozessmodellkonstruktionsklassen}
     \label{fig:process-builder-uml}
 \end{figure}
@@ -63,7 +63,7 @@ Der Compiler wird in Java mit folgenden Klassen realisiert:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Ausführungsmodell-UML.png}
+    \includegraphics[width=0.8\textwidth]{Graphics/EPK-Compiler-UML.png}
     \caption{UML Diagramm des EPK-Compilers}
     \label{fig:epk-compiler-uml}
 \end{figure}
@@ -72,7 +72,8 @@ Der eigentliche EPK-Compiler ist \texttt{ExecutionQueueBuilder}. Dieser Funktion
 befindet. Dieser besteht aus einem Flag \texttt{started}, um zu wissen ob das Startereignis schon verarbeitet wurde, der zu füllenden ExecutionQueue und einem \texttt{Process}
 Objekt. Zur Buchführung von Verknüpfungsoperatoren enthält der \texttt{ExecutionQueueBuilderContext} einen Stapel \texttt{groupDeque}, um die aktuell geöffnete Verknüpfung sich zu merken
 und die Hash-Map \texttt{groupIndexMap}, um zu wissen welcher Pfad im aktuellen Verknüpfungsoperator verarbeitet wird. Dazu kommen noch eine \texttt{AAutomationEventBuffer} Referenz, welche einem
-\texttt{SingleExecutable} durchgegeben wird, um dessen Ausführung zu dokumentieren und eine verkettete Liste \texttt{SingleExecutables}, welche zur Codegenerierung verwendet wird.
+\texttt{SingleExecutable} durchgegeben wird, um dessen Ausführung zu dokumentieren und die aktuell ausgeführte \texttt{SingleExecutable} an den Client zur Animation in Echtzeit zu übertragen. Dazu 
+beinhaltet es eine verkettete Liste \texttt{SingleExecutables}, welche zur Codegenerierung verwendet wird.
 
 Die Kompilierung findet wie folgt statt: Es wird durch den Prozessgraphen $G_P$ mittels Tiefensuche traversiert (durch \texttt{Utils.traverse}) und abhängig vom Knoten wird der passende \texttt{Handler} aus der 
 \texttt{HandlerFactory} angefragt, um den Knoten zu verarbeiten. Sowohl \texttt{TaskHandler} als auch die einzelnen  \texttt{EventHandler} verarbeiten den Knoten zu einem \texttt{SingleExecutable} Objekt, welches
@@ -144,7 +145,10 @@ Konfigurationsänderungen schneller umgesetzt werden können. Dieses Docker-Imag
 Bei der Firmwarecodegenerierung werden alle SingleExecutable Instanzen durch JSON serialisiert und werden an ein Python-Skript übergeben, 
 welches ein ESP-IDF Projekt anlegt und anhand der serialisierten SingleExecutables die einzelnen CoAP-Handler Klassen erzeugt.
 Der generierte Firmwarecode behandelt schon Aspekte wie Aufbau einer WLAN- und CoAP Verbindung, sowie die Registierung bei dem Resource Directory.
-Der Entwickler muss nur noch die Ausführungslogik implementieren.
+Für jede Executable gibt es in dem generierten Code eine Klasse, welche die CoAP-Anfrage annimmt und die Ausführungslogik ansteuert. Diese Ausführungslogik 
+wird vom Entwickler entweder in eine Funktion \texttt{measure} (für Executables mit Rückgabetyp \texttt{bool}) oder  in eine Funktion \texttt{act} (für Executables mit Rückgabetyp \texttt{int})  
+implementiert. Nach der Kompilierung erhält man Firmware, welche man auf einen ESP32 lädt. Dieser verbindet sich zunächst mit dem WLAN-Netzwerk, welches man während der Entwicklung angegeben hat. 
+Dann werden alle Handler initalisiert und beim Resource-Directory registriert.
 
 \subsection{Integration in ESP-IDF}
 
@@ -161,28 +165,50 @@ werden.
 
 \subsection{Übersetzung des Ausführungsmodells in C++}
 
-Aus \ref{epk-compiler} ist zu entnehmen, dass ein \texttt{ExecutionQueueBuilderContext} eine verkettete Liste an \texttt{SingleExecutable}
-Instanzen enthält. Diese Liste wird mit JSON serialisiert und als JSON-Datei abgespeichert. Danach wird ein Python-Skript ausgeführt, welches 
-dieses JSON-Dokument einliest und auf dieser Basis CoAP-Handler Klassen erstellt.
+Aus \ref{epk-compiler} ist zu entnehmen, dass ein \texttt{ExecutionQueueBuilderContext} eine verkettete Liste an SingleExecutables enthält.
+Diese Liste wird zu einem dynamischen Array von Codegenerierungselementen gemäß \ref{code-generation-model} überführt. In Java wird das 
+Codegenerierungsmodell mit der Klasse \texttt{} implementiert. Dieses dynamische Array wird anhand des JSON-Formats serialisiert, sodass man ein 
+JSON-Dokument der folgenden Form erhält: 
+
+Sei $(i, n, t) \in C$:
+
+\begin{lstlisting}
+\[
+    \{
+        "id": $i$,
+        "name": $n$, 
+        "type": $t$
+    \}, 
+    
+    ...
+\]
+\end{lstlisting}
+
+Danach wird ein Python-Skript ausgeführt, welches dieses JSON-Dokument einliest. Es iteriert durch das Array und für jedes Codeelement wird eine 
+Handlerklasse gebaut. Dabei wernden Jinja2-Template Dateien mit den Werten des Codeelements gefüllt. Diese Template-Dateien enthalten eine abstrahierte Version 
+der Header- und Sourcedatei einer Handlerklasse. Am Ende erhält man ein ESP-IDF Projekt, bestehend aus einer \texttt{main}-Komponente, einer \texttt{wifi}-Komponente,
+einer \texttt{coap}-Komponente sowie die generierten Handler als eigene ESP-IDF Komponenten.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Graphics/Codegen-Diagram.png}
-    \caption{Work}
+    \caption{Einfache Darstellung der Codegenerierung}
     \label{fig:idf-project-classes}
 \end{figure}
+
+
 
 \section{Ausgabe von Ausführungsstatistiken}
 
 Bei der Kompilierung des EPK-Modells in eine \texttt{ExecutionQueue} wird gemäß \ref{epk-compiler} jeder \texttt{SingleExecutable} 
 eine Referenz zu einem \texttt{AAutomationEventBuffer} zugewiesen. Bei der Ausführung eines \texttt{SingleExecutable} wird die Methode 
 \texttt{add} der \texttt{AAutomationEventBuffer} Referenz aufgerufen, sodass die Ausführung mitsamt Executable-ID, Rückgabwert, 
-Verarbeitungszeit auf dem ESP32 sowie Start- und Endzeitpunkt hinterlegt werden. Dieser Puffer kann später serialisiert werden und zu 
+Verarbeitungszeit auf dem ESP32 sowie Start- und Endzeitpunkt hinterlegt werden und an den Client live übermittelt wird. Dieser Puffer kann später serialisiert werden und zu 
 Optimierungszwecken des Prozesses oder auch zur Nachverfolgungen von Durchläufen verwendet werden.
 
 \section{Integration in ARIS}
 
-In dieser Arbeit wurde die ARIS Version 10.2025.10 (TODO: Fix it) verwendet. Hierbei handelt es sich um ein verteiltes System aus Servern, welche unterschiedliche 
+In dieser Arbeit wurde die ARIS Version 10 verwendet. Hierbei handelt es sich um ein verteiltes System aus Servern, welche unterschiedliche 
 Funktionen anboten und zwei Arten von Clients: einem webbasierten Client und einem Rich-Client, welcher in Java entwickelt wurde. Sowohl der Web-Client als auch der 
 Java-Client boten die Simulation von modellierten Prozessen an, jedoch bot der Rich-Client noch die Möglichkeit die einzelnen Prozessschritte zu animieren. Dabei ist
 sind alle Prozessschritte ausgegraut und der aktive Prozessschritt leuchtet in der respektiven Farbe auf. Unter dem verteilten Systemen aus Servern gibt es auch einen 
@@ -235,4 +261,29 @@ und kann bei der Weiterentwicklung oder dem Debugging des Codegenerierungsskript
 
 Die Animation der Automatisierung wurde gemäß des Konzepts aus \ref{automation-animation} umgesetzt. Dabei wurde für den Server ein Objekt
 der Klasse \texttt{java.net.ServerSocket} und für den Client eine \texttt{java.net.Socket} Instanz verwendet. Die ID des aktuell ausgeführten 
-SingleExecutables wird in der \texttt{run} Methode der \texttt{ExecutionQueue} ausgegeben.
+SingleExecutables wird in der \texttt{run} Methode der \texttt{ExecutionQueue} ausgegeben. Für die Verbindungsanfrage und den Verbindungsabbau wurden
+\texttt{ISimulation} die Methoden \texttt{initStreamConnection}(siehe \ref{automation-server-interface}) und \texttt{closeStreamConnection}(siehe \ref{automation-server-interface}) hinzugefügt.
+
+\subsubsection{Client-seitige Umsetzung}
+
+Auf dem Client wurde die Animation so umgesetzt, dass auf einem seperaten Thread durch Polling die nächsten Schritte abgefrafgt hat, da die 
+Simulation schon bei der Initialisierung der Simulationsumgebung ausgeführt und die Simulation auf dem Client nur noch nachgespielt wird. Dabei werden 
+auch kumulative Statistikdaten gesammelt basierend auf der ausgeführten Simulation. Dementsprechend hatte die ursprüngliche Animation auch Statistikdaten
+benötigt, die in der Echtzeitausführung nicht geliefert werden können. Es musste also eine neue Methode zum Aufleuchten eines Prozessschrittes implementiert
+werden. Aus der gegebenen Methode konnte die eigentliche Animationsmethode extrahiert werden. Zum Aufleuchten des Prozessschrittes musste dabei die ID des 
+Prozessschrittes (also $id(v)$) übergeben werden. Somit wird bei der Ausführung nach erfolgreichem Verbindungsaufbau via TCP ein seperater Thread gestartet, 
+welcher die aktuell ausgeführte Executable-ID vom Server erhält und diese ID an die Animationsmethode übergibt.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Graphics/Animation-Implementation-Diagram.png}
+    \caption{Detaillierteres Diagramm zur Animation der Automation}
+    \label{fig:detailed-animation-diagram}
+\end{figure}
+
+\subsubsection{Server-seitige Umsetzung}
+
+Auf dem Server wird bei der Verbindungsanfrage ein \texttt{java.net.ServerSocket} Objekt erzeugt. Dabei wird ein freier Port vom Betriebssystem angefragt, welcher
+nach erfolgreicher Instanziierung des ServerSockets an den Client als Antwort zur Verbindungsanfrage übermittelt wird. Dazu wird ein neuer Thread erstellt, welcher auf eine 
+Client Verbindung wartet. Beim Starten der Simulation wird überprüft, ob eine Client-Socket Verbindung besteht. Ist das der Fall, so wird die Client Referenz an den 
+\texttt{AAutomationEventBuffer} übergeben, sodass während der Ausführung die ID der aktuell ausgeführten \texttt{SingleExecutable} übertragen wird.
