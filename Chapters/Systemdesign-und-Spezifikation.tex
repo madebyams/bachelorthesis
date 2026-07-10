@@ -69,14 +69,14 @@ Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückg
 \begin{enumerate}
     \item $T = \{bool, int\}$ sei die Menge der Rückgabetypen
     \item $X_S = \{(i,t)\; | i \in \mathbb{N} \land t \in T\}$ sei die Menge der SingleExecutables 
-    \item $X_Q = \bigcup_{k = 2} X^k$ sei die Menge der Executable-Queues
     \item {
-        $X_G = \{(i, g, \rho)\; | i \in \mathbb{N} \land g \in \mathcal{P(X_Q)} \land \rho: X_Q \rightarrow X_Q\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
+        $X_G = \{(i, g, \rho)\; | i \in \mathbb{N} \land g \in \mathcal{P}(X) \land \rho: \mathcal{P}(X) \rightarrow \mathcal{P}(X)\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
         des Verknüpfungsoperator beschreiben, $i$ die ID des Splitoperators ist und $\rho$ die Entscheidungsfunktion abhänging des Verknüpfungsoperators ist.
     }
     \item $X = X_S \cup X_G$ sei die Menge der Executables
 \end{enumerate}
 
+Die ExecutionQueue wird dargestellt als ein Element von $\mathcal{P}(X)$
 
 \subsubsection{Codegenerierungsmodell}
 \label{code-generation-model}
@@ -209,7 +209,7 @@ Zur Kompilierung muss noch folgendes definiert werden:
 \begin{itemize}
     \item $succ(v): V \rightarrow \mathcal{P}(V) = \{w | \exists a \in A: (a,(v,w)) \in N\}$ \\
     \item {
-        $\gamma: V \times \mathcal{P}(X) \\$
+        $\gamma: V \rightarrow \mathcal{P}(X) \\$
         $$\gamma(v) = \begin{cases}
                 \{(id(v), bool)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in E \text{ und } succ(v) \ne \emptyset \\
                 \{(id(v), int)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in F \text{ und } succ(v) \ne \emptyset \\
