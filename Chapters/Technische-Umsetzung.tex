@@ -14,60 +14,31 @@ Zur Realisierung der Automationsschnitstelle wurden die folgenden Klassen implem
 
 \textbf{Prozessmodell}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Prozess-UML.png}
-    \caption{UML Diagramm der Prozessmodellimplementierung}
-    \label{fig:prozess-uml}
-\end{figure}
-
 Die Klasse \texttt{Process} beschreibt das Prozessmodell $P$ und der Graph $G_P$ wird durch eine Adjazenzliste realisiert. 
 Zu Kompilierungszwecken werden das Start- und Endereignis in der Klasse als Attribute hinterlegt. Die Knotenmenge $V$ wird durch die Klasse 
-\texttt{Node} realisiert. Dabei wird die Teilmengenbeziehung von $E$, $O$ und $F$ durch Vererbung in Java umgesetzt. 
+\texttt{Node} realisiert. Dabei wird die Teilmengenbeziehung von $E$, $O$ und $F$ durch Vererbung in Java umgesetzt. Das 
+UML-Diagramm der Prozessmodellimplementierung ist unter \ref{process-model-uml} zu finden.
 
 \textbf{Ausführungsmodell}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Ausführungsmodell-UML.png}
-    \caption{UML Diagramm des Ausführungsmodellimplementierung}
-    \label{fig:executable-uml}
-\end{figure}
 
 Die Klasse \texttt{ExeuctionQueue} implementiert das Ausführungsmodell, welche eine ExecutionQueue aus $X^*$ darstellt. Analog zu dem Modell gibt es 
 die Klassen \texttt{SingleExecutable} und \texttt{ExeuctionGroup}. Zur Kommunikation mit dem IoT-System gibt es die Klassen \texttt{MCUResponseResult} mit dessen Implementierungen, 
 \texttt{MCUResponse} sowie \texttt{MCUConnection} mit der Implementierung \texttt{CoAPMCUConnection}, die eine Kommunikation über CoAP bereitstellt, um die Befehle über CoAP zu verschicken.
 Die Datenstruktur, welche die \texttt{SingleExecutable} Instanzen enthält wird mit der Java Warteschlangenimplementierung \texttt{Queue<Exeuctable>} realisiert.
+Das entsprechende UML-Diagramm ist unter \ref{execution-model-uml} zu finden.
 
 \subsection{Konstruktion des Prozessmodells}
 
 Das Prozessmodell ist in XML serialisiert und muss dementsprechend deserialisiert werden. Bei dieser Deserialisierung findet
 auch die Konstruktion der \texttt{Process} Klasse statt.
 
-Die Konstruktion des Prozessmodells wird mit den folgenden Klassen realisiert:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Process-Builder-UML.png}
-    \caption{UML Diagramm des Prozessmodellkonstruktionsklassen}
-    \label{fig:process-builder-uml}
-\end{figure}
-
+Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als UML-Diagramm unter \ref{process-model-construction-uml} aufgeführt.
 Die einzelnen \texttt{*Extractor} Klassen erfüllen die Funktion, aus dem XML-Dokument die Elemente zu extrahieren. Diese Elemente werden in \texttt{ProcessExtractor} gesammelt
 und zu einem \texttt{Process} (siehe \ref{fig:prozess-uml}) konstruiert. Nach der Konstruktion des \texttt{Process} Objekts wird die Vorverarbeitung durchgeführt, um $\tau$ zu
 realisieren mittels \texttt{OperatorPreprocessor}.
 
 \subsection{EPK-Compiler}
-\label{epk-compiler}
-Der Compiler wird in Java mit folgenden Klassen realisiert:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/EPK-Compiler-UML.png}
-    \caption{UML Diagramm des EPK-Compilers}
-    \label{fig:epk-compiler-uml}
-\end{figure}
-
+Das UML-Diagramm des EPK-Compiler ist unter \ref{epk-compiler-uml} zu finden.
 Der eigentliche EPK-Compiler ist \texttt{ExecutionQueueBuilder}. Dieser Funktioniert so, dass der aktuelle Kompilierzustand sich in \texttt{ExecutionQueueBuilderContext}
 befindet. Dieser besteht aus einem Flag \texttt{started}, um zu wissen ob das Startereignis schon verarbeitet wurde, der zu füllenden ExecutionQueue und einem \texttt{Process}
 Objekt. Zur Buchführung von Verknüpfungsoperatoren enthält der \texttt{ExecutionQueueBuilderContext} einen Stapel \texttt{groupDeque}, um die aktuell geöffnete Verknüpfung sich zu merken
@@ -78,7 +49,7 @@ beinhaltet es eine verkettete Liste \texttt{SingleExecutables}, welche zur Codeg
 Die Kompilierung findet wie folgt statt: Es wird durch den Prozessgraphen $G_P$ mittels Tiefensuche traversiert (durch \texttt{Utils.traverse}) und abhängig vom Knoten wird der passende \texttt{Handler} aus der 
 \texttt{HandlerFactory} angefragt, um den Knoten zu verarbeiten. Sowohl \texttt{TaskHandler} als auch die einzelnen  \texttt{EventHandler} verarbeiten den Knoten zu einem \texttt{SingleExecutable} Objekt, welches
 in der \texttt{ExeuctionQueue} des \texttt{ExecutionQueueBuilderContext} hinterlegt wird. \texttt{SplitOperatorHandler} und \texttt{JoinOperatorHandler} verarbeiten die Verknüpfungsoperatoren und verarbeiten die darin 
-gekapselte Struktur zu einer \texttt{ExecutableGroup}.
+gekapselte Struktur zu einer \texttt{ExecutableGroup}. 
 
 \subsection{Ausführung des Ausführungsmodells}
 
