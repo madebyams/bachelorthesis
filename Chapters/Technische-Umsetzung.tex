@@ -17,7 +17,7 @@ Zur Realisierung der Automationsschnitstelle wurden die folgenden Klassen implem
 Die Klasse \texttt{Process} beschreibt das Prozessmodell $P$ und der Graph $G_P$ wird durch eine Adjazenzliste realisiert. 
 Zu Kompilierungszwecken werden das Start- und Endereignis in der Klasse als Attribute hinterlegt. Die Knotenmenge $V$ wird durch die Klasse 
 \texttt{Node} realisiert. Dabei wird die Teilmengenbeziehung von $E$, $O$ und $F$ durch Vererbung in Java umgesetzt. Das 
-UML-Diagramm der Prozessmodellimplementierung ist unter \ref{process-model-uml} zu finden.
+UML-Diagramm der Prozessmodellimplementierung ist unter \ref{fig:prozess-uml} zu finden.
 
 \textbf{Ausführungsmodell}
 
@@ -25,20 +25,20 @@ Die Klasse \texttt{ExeuctionQueue} implementiert das Ausführungsmodell, welche 
 die Klassen \texttt{SingleExecutable} und \texttt{ExeuctionGroup}. Zur Kommunikation mit dem IoT-System gibt es die Klassen \texttt{MCUResponseResult} mit dessen Implementierungen, 
 \texttt{MCUResponse} sowie \texttt{MCUConnection} mit der Implementierung \texttt{CoAPMCUConnection}, die eine Kommunikation über CoAP bereitstellt, um die Befehle über CoAP zu verschicken.
 Die Datenstruktur, welche die \texttt{SingleExecutable} Instanzen enthält wird mit der Java Warteschlangenimplementierung \texttt{Queue<Exeuctable>} realisiert.
-Das entsprechende UML-Diagramm ist unter \ref{execution-model-uml} zu finden.
+Das entsprechende UML-Diagramm ist unter \ref{fig:executable-uml} zu finden.
 
 \subsection{Konstruktion des Prozessmodells}
 
 Das Prozessmodell ist in XML serialisiert und muss dementsprechend deserialisiert werden. Bei dieser Deserialisierung findet
 auch die Konstruktion der \texttt{Process} Klasse statt.
 
-Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als UML-Diagramm unter \ref{process-model-construction-uml} aufgeführt.
+Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als UML-Diagramm unter \ref{fig:process-builder-uml} aufgeführt.
 Die einzelnen \texttt{*Extractor} Klassen erfüllen die Funktion, aus dem XML-Dokument die Elemente zu extrahieren. Diese Elemente werden in \texttt{ProcessExtractor} gesammelt
 und zu einem \texttt{Process} (siehe \ref{fig:prozess-uml}) konstruiert. Nach der Konstruktion des \texttt{Process} Objekts wird die Vorverarbeitung durchgeführt, um $\tau$ zu
 realisieren mittels \texttt{OperatorPreprocessor}.
 
 \subsection{EPK-Compiler}
-Das UML-Diagramm des EPK-Compiler ist unter \ref{epk-compiler-uml} zu finden.
+Das UML-Diagramm des EPK-Compiler ist unter \ref{fig:epk-compiler-uml} zu finden.
 Der eigentliche EPK-Compiler ist \texttt{ExecutionQueueBuilder}. Dieser Funktioniert so, dass der aktuelle Kompilierzustand sich in \texttt{ExecutionQueueBuilderContext}
 befindet. Dieser besteht aus einem Flag \texttt{started}, um zu wissen ob das Startereignis schon verarbeitet wurde, der zu füllenden ExecutionQueue und einem \texttt{Process}
 Objekt. Zur Buchführung von Verknüpfungsoperatoren enthält der \texttt{ExecutionQueueBuilderContext} einen Stapel \texttt{groupDeque}, um die aktuell geöffnete Verknüpfung sich zu merken
@@ -136,7 +136,7 @@ werden.
 
 \subsection{Übersetzung des Ausführungsmodells in C++}
 
-Aus \ref{epk-compiler} ist zu entnehmen, dass ein \texttt{ExecutionQueueBuilderContext} eine verkettete Liste an SingleExecutables enthält.
+Aus \ref{fig:epk-compiler-uml} ist zu entnehmen, dass ein \texttt{ExecutionQueueBuilderContext} eine verkettete Liste an SingleExecutables enthält.
 Diese Liste wird zu einem dynamischen Array von Codegenerierungselementen gemäß \ref{code-generation-model} überführt. In Java wird das 
 Codegenerierungsmodell mit der Klasse \texttt{} implementiert. Dieses dynamische Array wird anhand des JSON-Formats serialisiert, sodass man ein 
 JSON-Dokument der folgenden Form erhält: 
@@ -171,7 +171,7 @@ einer \texttt{coap}-Komponente sowie die generierten Handler als eigene ESP-IDF 
 
 \section{Ausgabe von Ausführungsstatistiken}
 
-Bei der Kompilierung des EPK-Modells in eine \texttt{ExecutionQueue} wird gemäß \ref{epk-compiler} jeder \texttt{SingleExecutable} 
+Bei der Kompilierung des EPK-Modells in eine \texttt{ExecutionQueue} wird gemäß \ref{fig:epk-compiler-uml} jeder \texttt{SingleExecutable} 
 eine Referenz zu einem \texttt{AAutomationEventBuffer} zugewiesen. Bei der Ausführung eines \texttt{SingleExecutable} wird die Methode 
 \texttt{add} der \texttt{AAutomationEventBuffer} Referenz aufgerufen, sodass die Ausführung mitsamt Executable-ID, Rückgabwert, 
 Verarbeitungszeit auf dem ESP32 sowie Start- und Endzeitpunkt hinterlegt werden und an den Client live übermittelt wird. Dieser Puffer kann später serialisiert werden und zu 

@@ -20,6 +20,7 @@ Dieses System besteht aus vielen Komponenten, welche sich in ARIS und der ESP-ID
 Wie anfangs schon beschrieben hat das System die folgenden Komponenten:
 
 \subsubsection{EPK-Compiler}
+\label{epk-compiler}
 
 Der EPK-Compiler ist dafür zuständig das Prozessmodell in ein Ausführungsmodell zu übersetzen.
 Dies geschieht durch Einlesen der Prozesssprache, welche dann in jedem Schritt das Ausführungsmodell Stück für Stück aufbaut.
@@ -209,7 +210,7 @@ Zur Kompilierung muss noch folgendes definiert werden:
 \begin{itemize}
     \item $succ(v): V \rightarrow \mathcal{P}(V) = \{w | \exists a \in A: (a,(v,w)) \in N\}$ \\
     \item {
-        $\gamma: V \rightarrow \mathcal{P}(X) \\$
+        $\gamma: V \rightarrow (X_S \cup X_G) \\$
         $$\gamma(v) = \begin{cases}
                 \{(id(v), bool)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in E \text{ und } succ(v) \ne \emptyset \\
                 \{(id(v), int)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in F \text{ und } succ(v) \ne \emptyset \\
@@ -278,7 +279,7 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 \end{figure}
 
 
-Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem leeren Keller. Wie vorhin schon erwähnt 
+Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem Endzustand. Wie vorhin schon erwähnt 
 wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$:
 
 $$x_q = \gamma(e_S)$$
