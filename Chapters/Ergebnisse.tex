@@ -58,6 +58,32 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
 \end{enumerate}
 
 \section{Validierung}
+
+Zur Validierung der Implementierung wird ein demonstrativer Produktionsprozess verwendet. Hierbei wird ein Haus aus Bauklötzen konstruiert. 
+Der Hardwaremodellaufbau, der den Prozess ausführen soll besteht aus den folgenden Komponenten:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Graphics/Validierungsaufbau.pdf}
+    \caption{Aufbau des Validierungsexperiments}
+    \label{fig:brick-house-diagram}
+\end{figure}
+
+Als nächstes wird der Prozess mittels EPK modelliert.
+
 \subsection{Modellierung eines Prozesses und Generieren von Firmwarecode}
+
+Mit ARIS wurde der Prozess modelliert. Das EPK-Modell ist unter Abbildung \ref{fig:brick-house-epk}
+
+Durch die Codegenerierung erhält man ein ESP-IDF Projekt zur Entwicklung der prozessorientierten Firmware. 
+Diese wird in C/C++ entwickelt und man erhält die folgende Projektstruktur:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Graphics/Baukloetzchen-Ordner-Struktur.png}
+    \caption{Ordnerstruktur des Firmwareprojekts}
+    \label{fig:firmware-code-project-structure}
+\end{figure}
+
 \subsection{Entwicklung anhand des Firwarecodeframeworks}
 \subsection{Ausführung des Automationsprozesses}

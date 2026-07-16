@@ -182,12 +182,15 @@ closeStreamConnection       &   keine Parameter                                 
 \label{tab:simulation-interface}
 \end{table}
 
-\section{Ausführung}
+\section{EPK-Compiler}
 
-Die Ausführung des Prozesses findet durch das Ausführungsmodell statt. Dieses wird aus dem Prozessmodell abgeleitet und schrittweise bei der 
-Ausführung durchgangen. 
+Bevor ein Prozess ausgeführt wird, muss dieser in das Ausführungsmodell übersetzt werden. Diese Aufgabe wird von dem EPK-Compiler übernommen.
 
-\subsection{Übersetzung des Prozessmodells}
+\subsection{Eingabe- und Ausgabesprache}
+
+Bei der Eingabesprache handelt es sich um EPK serialisiert im XML-Format. Die Ausgangssprache ist das Ausführungsmodell
+
+\subsection{Statische Semantik}
 \begin{figure}[htbp]
     \centering
     \subfloat[Ein Beispielprozess modelliert mit EPK\label{fig:beisielprozess}]{
@@ -202,25 +205,9 @@ Ausführung durchgangen.
 \caption{Ein Prozess in zwei Darstellungen}
 \end{figure}
 
+\subsection{Statische Analyse und Vorverarbeitung der Konnektoren}
+
 Vor der Kompilierung findet eine Vorverarbeitung statt, wo die Abbildung $\tau$ gefüllt wird.
-
-
-Zur Kompilierung muss noch folgendes definiert werden:
-
-\begin{itemize}
-    \item $succ(v): V \rightarrow \mathcal{P}(V) = \{w | \exists a \in A: (a,(v,w)) \in N\}$ \\
-    \item {
-        $\gamma: V \rightarrow (X_S \cup X_G) \\$
-        $$\gamma(v) = \begin{cases}
-                \{(id(v), bool)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in E \text{ und } succ(v) \ne \emptyset \\
-                \{(id(v), int)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in F \text{ und } succ(v) \ne \emptyset \\
-                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, XOR)\} \cup \{\gamma(x | x \in succ(\tau(v)))\} \text{ , falls } v \in S_{XOR} \\
-                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, OR)\} \cup \{\gamma(x | x \in succ(\tau(v)))\} \text{ , falls } v \in S_{OR} \\
-                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, AND)\} \cup \{\gamma(x | x \in succ(\tau(v)))\} \text{ , falls } v \in S_{AND} \\
-                \emptyset \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND} \\
-            \end{cases}$$
-    }
-\end{itemize}
 
 Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren und wird danach kompiliert. Die Validierung kann man
 formal wie folgt modellieren:
@@ -284,7 +271,26 @@ wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine Execut
 
 $$x_q = \gamma(e_S)$$
 
-\subsection{Logik zur Ausführung des Ausführungsmodells}
+\subsection{Übersetzungsregeln}
+
+Zur Kompilierung müssen die folgenden Übersetzungsregeln definiert werden:
+
+\begin{itemize}
+    \item $succ(v): V \rightarrow \mathcal{P}(V) = \{w | \exists a \in A: (a,(v,w)) \in N\}$ \\
+    \item {
+        $\gamma: V \rightarrow (X_S \cup X_G) \\$
+        $$\gamma(v) = \begin{cases}
+                \{(id(v), bool)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in E \text{ und } succ(v) \ne \emptyset \\
+                \{(id(v), int)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in F \text{ und } succ(v) \ne \emptyset \\
+                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, XOR)\} \cup \{\gamma(x) | x \in succ(\tau(v))\} \text{ , falls } v \in S_{XOR} \\
+                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, OR)\} \cup \{\gamma(x) | x \in succ(\tau(v))\} \text{ , falls } v \in S_{OR} \\
+                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, AND)\} \cup \{\gamma(x) | x \in succ(\tau(v))\} \text{ , falls } v \in S_{AND} \\
+                \emptyset \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND} \\
+            \end{cases}$$
+    }
+\end{itemize}
+
+\section{Ausführung des Ausführungsmodells}
 
 Die Ausführung des Ausführungsmodells $x_q$ findet statt, indem man durch das Tupel iteriert und dabei hat man folgende Fallunterscheidung:
 
