@@ -60,6 +60,8 @@ Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefen
 und in das Ausführungsmodell kompiliert wird. 
 
 \subsubsection{Ausführungsmodell}
+Für das Ausführungsmodell wird die Listendefinition gemäß \cite{smolka_programmierung_2012} verwendet.
+
 Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
 Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
 Modell wird dann von der Execution-Engine eingelesen, welche dann die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
@@ -71,13 +73,13 @@ Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückg
     \item $T = \{bool, int\}$ sei die Menge der Rückgabetypen
     \item $X_S = \{(i,t)\; | i \in \mathbb{N} \land t \in T\}$ sei die Menge der SingleExecutables 
     \item {
-        $X_G = \{(i, g, \rho)\; | i \in \mathbb{N} \land g \in \mathcal{P}(X) \land \rho: \mathcal{P}(X) \rightarrow \mathcal{P}(X)\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
+        $X_G = \{(i, g)\; | i \in \mathbb{N} \land g \in \text{List}(X_S \cup X_G)\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
         des Verknüpfungsoperator beschreiben, $i$ die ID des Splitoperators ist und $\rho$ die Entscheidungsfunktion abhänging des Verknüpfungsoperators ist.
     }
     \item $X = X_S \cup X_G$ sei die Menge der Executables
 \end{enumerate}
 
-Die ExecutionQueue wird dargestellt als ein Element von $\mathcal{P}(X)$
+Die ExecutionQueue wird dargestellt als ein Element von $\text{List}(X_S \cup X_G)$.
 
 \subsubsection{Codegenerierungsmodell}
 \label{code-generation-model}
@@ -271,34 +273,108 @@ wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine Execut
 
 $$x_q = \gamma(e_S)$$
 
-\subsection{Übersetzungsregeln}
-
+\subsection{Übersetzung}
 Zur Kompilierung müssen die folgenden Übersetzungsregeln definiert werden:
 
 \begin{itemize}
-    \item $succ(v): V \rightarrow \mathcal{P}(V) = \{w | \exists a \in A: (a,(v,w)) \in N\}$ \\
+    \item $\text{succ}(v): V \rightarrow \mathcal{P}(V) = \{w \mid \exists a \in A: (a,(v,w)) \in N\}$ \\
+    \item $\text{succ}_{\text{List}}(v): V \rightarrow \text{List}(V) = [w_1, ..., w_k] \text{ mit } id(w_1) < ... < id(w_k), \{w_1, ..., w_k\} = \text{succ}(v)$ \\
     \item {
-        $\gamma: V \rightarrow (X_S \cup X_G) \\$
-        $$\gamma(v) = \begin{cases}
-                \{(id(v), bool)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in E \text{ und } succ(v) \ne \emptyset \\
-                \{(id(v), int)\} \cup \{\gamma(w) | w \in succ(v)\} \text{ , falls } v \in F \text{ und } succ(v) \ne \emptyset \\
-                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, XOR)\} \cup \{\gamma(x) | x \in succ(\tau(v))\} \text{ , falls } v \in S_{XOR} \\
-                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, OR)\} \cup \{\gamma(x) | x \in succ(\tau(v))\} \text{ , falls } v \in S_{OR} \\
-                \{(id(v), \{\{\gamma(w)\} | w \in succ(v)\}, AND)\} \cup \{\gamma(x) | x \in succ(\tau(v))\} \text{ , falls } v \in S_{AND} \\
-                \emptyset \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND} \\
-            \end{cases}$$
+        $\gamma: V \rightarrow \text{List}(X_S \cup X_G) \\$
+        $$\footnotesize
+        \gamma(v) = \left\{
+        \begin{array}{@{}l@{}}
+        [(id(v), bool)] \text{ , falls } v = e_E \\[4pt]
+        [(id(v), bool)]\ @\ [\gamma(w_1)] @\ \dots\ @ [\gamma(w_k)] \\
+        \quad \text{mit } [w_1,\dots,w_k] = \text{succ}_{\text{List}}(v) \text{ , falls } v \in E \\[4pt]
+        [(id(v), int)]\ @\ [\gamma(w_1)] @\ \dots\ @ [\gamma(w_k)] \\
+        \quad \text{mit } [w_1,\dots,w_k] = \text{succ}_{\text{List}}(v) \text{ , falls } v \in F \\[4pt]
+        [(id(v), [[\gamma(w_1)] @\ \dots\ @ [\gamma(w_k)]])]\ @\ [\gamma(x_1)] @\ \dots\ @ [\gamma(x_m)] \\
+        \quad \text{mit } [w_1,\dots,w_k] = \text{succ}_{\text{List}}(v) \text{ und } [x_1,\dots,x_m] = \text{succ}_{\text{List}}(\tau(v)) \text{ , falls } v \in S_{XOR} \\[6pt]
+        [(id(v), [[\gamma(w_1)] @\ \dots\ @ [\gamma(w_k)]])]\ @\ [\gamma(x_1)] @\ \dots\ @ [\gamma(x_m)] \\
+        \quad \text{mit } [w_1,\dots,w_k] = \text{succ}_{\text{List}}(v) \text{ und } [x_1,\dots,x_m] = \text{succ}_{\text{List}}(\tau(v)) \text{ , falls } v \in S_{OR} \\[6pt]
+        [(id(v), [[\gamma(w_1)] @\ \dots\ @ [\gamma(w_k)]])]\ @\ [\gamma(x_1)] @\ \dots\ @ [\gamma(x_m)] \\
+        \quad \text{mit } [w_1,\dots,w_k] = \text{succ}_{\text{List}}(v) \text{ und } [x_1,\dots,x_m] = \text{succ}_{\text{List}}(\tau(v)) \text{ , falls } v \in S_{AND} \\[6pt]
+        \text{nil} \text{ , falls } v \in J_{XOR} \cup J_{OR} \cup J_{AND}
+        \end{array}
+        \right.
+        \normalsize$$
     }
 \end{itemize}
 
+Am Ende erhält man eine Liste der Form $[(0, bool), \dots, (n, bool)]$
+
 \section{Ausführung des Ausführungsmodells}
 
-Die Ausführung des Ausführungsmodells $x_q$ findet statt, indem man durch das Tupel iteriert und dabei hat man folgende Fallunterscheidung:
+Die Ausführung kann mit folgendem Standard-ML von \cite{smolka_programmierung_2012} beschrieben werden:
 
-\begin{enumerate}
-    \item Ist $x_{q{_i}} \in X_S$, so wird das Executable ausgeführt 
-    \item Ist $x_{q{_i}} \in X_G$ werden die ersten Komponenten aller Subqueues ausgeführt. Dann werden die Subqueues gefiltert, welche erfolgreich ausgeführt worden sind
-    und diese Menge wird in $\rho$ eingesetzt, um den Verknüpfungsoperator zu realisieren.
-\end{enumerate}
+\begin{lstlisting}
+datatype returnType = Boolean | Int;
+datatype returnValue = 
+    BooleanValue of bool |
+    IntValue of int;
+datatype executable = 
+    SingleExecutable of int * returnType |
+    XORGroup of int * executable list list |
+    ORGroup of int * executable list list | 
+    ANDGroup of int * executable list list;
+
+fun runOnMcu (id: int) = (*Fuehrt Executable gemaess der ID auf dem Mikrocontroller aus*)
+
+fun runHead (SingleExecutable(i, Int)) = runOnMcu(i)
+|   runHead (SingleExecutable(i, Boolean)) = runOnMcu(i)
+|   runHead _ = raise Fail "Cannot eval group head";
+
+fun isTruePath nil = false
+|   isTruePath (head::_) = 
+    case runHead head of 
+        (i, BooleanValue true) => true
+    |   _ => false;
+
+fun run nil  = nil 
+|   run (SingleExecutable(i, Int)::ne) = [runOnMcu(i)] @ run(ne)
+|   run (SingleExecutable(i, Boolean)::ne) = [runOnMcu(i)] @ run(ne)
+|   run (XORGroup(i, nil)::nil) = nil
+|   run (ORGroup(i, nil)::nil) = nil
+|   run (ANDGroup(i, nil)::nil) = nil
+|   run (XORGroup(i, nil)::ne) = run(ne)
+|   run (ORGroup(i, nil)::ne) = run(ne)
+|   run (ANDGroup(i, nil)::ne) = run(ne)
+|   run (XORGroup(i, groups)::ne) = run(validate(XORGroup(i, groups)) @ ne)
+|   run (ORGroup(i, groups)::ne) = run(validate(ORGroup(i, groups)) @ ne)
+|   run (ANDGroup(i, groups)::ne) = run(validate(ANDGroup(i, groups)) @ ne)
+
+and validate(XORGroup(i, groups)) =let
+    val truePaths = List.filter isTruePath groups
+in
+    case truePaths of
+        [path] => path
+        | _ => raise Fail "XOR need exactly one true path"
+end
+|   validate(ORGroup(i, groups)) = let
+    val truePaths = List.filter isTruePath groups;
+    val truePathsAmount = List.length truePaths;
+in
+    if truePathsAmount >= 1 then
+        List.concat truePaths
+    else
+        raise Fail "OR needs at least one true path"
+end
+|   validate(ANDGroup(i, groups)) = let
+    val truePaths = List.filter isTruePath groups;
+    val truePathsAmount = List.length truePaths;
+    val executedHeadsAmount = List.length groups;
+in
+    if truePathsAmount = executedHeadsAmount then
+        List.concat truePaths
+    else
+        raise Fail "OR needs at least one true path"
+end;
+\end{lstlisting}
+
+Bei einer SingleExecutable wird die Funktion passend zur Executable auf dem Mikrocontroller ausgeführt. Bei einer ExecutableGroup 
+werden die direkten Nachbarn der Pfade ausgeführt und es wird entsprechend der Logik des Verknüpfungsoperators eine Entscheidung 
+getroffen zum auszuführenden Pfad.
 
 \section{Animation der Automatisierung}
 \label{automation-animation}
