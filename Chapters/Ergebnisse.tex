@@ -71,6 +71,13 @@ Der Hardwaremodellaufbau, der den Prozess ausführen soll besteht aus den folgen
 
 Als nächstes wird der Prozess mittels EPK modelliert.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Graphics/Bauklötzchenhaus-EPK-2.png}
+    \caption{EPK-Diagramm des Bauklötzchenhaus}
+    \label{fig:brick-house-epk-diagram}
+\end{figure}
+
 \subsection{Modellierung eines Prozesses und Generieren von Firmwarecode}
 
 Mit ARIS wurde der Prozess modelliert. Das EPK-Modell ist unter Abbildung \ref{fig:brick-house-epk} zu erkennen.
@@ -85,5 +92,13 @@ Diese wird in C/C++ entwickelt und man erhält die folgende Projektstruktur:
     \label{fig:firmware-code-project-structure}
 \end{figure}
 
+
 \subsection{Entwicklung anhand des Firwarecodeframeworks}
+
+Die Firmware ist in einem ESP-IDF Projekt, was in C/C++ geschrieben wird.
+Diese wird in ESP-IDF Komponenten aufgeteilt. Dabei ist jede einzelne Komponente 
+ein Prozessschritt.
+
 \subsection{Ausführung des Automationsprozesses}
+
+Dadurch, dass die Firmware entwickelt wurde, kann bei ARIS der Prozess gestartet werden. 

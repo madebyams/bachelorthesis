@@ -1,0 +1,82 @@
+\chapter{Diskussion}
+
+Nach der Umsetzung und der Validierung werden einige Aspekte dieser Arbeit kritisch reflektiert.
+
+\section{Reflektion des Projekts im Hinblick auf Zielsetzung}
+\label{reflection}
+
+Die Grundvoraussetzung, dass ein in EPK modellierter Prozess auf einem IoT-System ausgeführt und orchestiert werden kann ist mit 
+dieser Arbeit belegt worden. Dieses Ziel wurde also erreicht. Ein kritischer Punkt, der nun reinkommt ist, 
+dass nun Personal für diese Features geschult werden muss bzw. die Systeme, welche dieses Feature nutzen möchten dementsprechende Updates 
+durchführen müssen. Auch kommt noch die Umrüstung der Industrieanlagen dazu, wo jede Anlage mit einem ESP32 verbunden werden muss, um eine 
+Anbindung und Steuerung über bspw. ARIS zu gewährleisten.
+
+\section{Gefahren für die Gültigkeit}
+
+Auch wenn der Protoyp gemäß der Zielsetzung funktioniert, gibt es einige Risiken zu beachten. Besonders
+im Sicherheitsaspekt.
+
+\subsection{Absicherung des Animationssockets}
+
+Zurzeit laufen die TCP-Sockets zur Animation während der Ausführung ohne jegliche Absicherung. Dies kann dazu 
+führen, dass Daten abgelesen werden können zwischen dem ARIS-Server und Client. Hier kann durch Nutzung von TLS
+die Verbindung abgesichert werden.
+
+\subsection{Absicherung des Resource Directory Servers}
+
+Auch beim Resource Direcotry Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser 
+ist kritischer, da dort die Zieladdressen der ESP32 liegen, welche angesteuert werden sollen. Hier kann man eine Absicherung 
+gewährleisten durch Nutzung von dTLS für den Resource Directory Server.
+
+\section{Kritische Bewertung der Architektur und Systemlimitationen}
+
+Die Arbeit wurde mit der Software ARIS umgesetzt, welche modifiziert wurde. Auch gab es hier einige kritische Punkte, während 
+der Umsetzung welches diskutiert werden sollten.
+
+\subsection{Latenz durch Netzwerkkommunikation}
+
+Das Ziel der Arbeit war, dass Prozesse in Echtzeit von ARIS angesteuert werden. Durch Nutzung von CoAP auf Basis von UDP kann man 
+einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch wird es immer eine Latenz geben, welche abhängig von 
+den Netzwerkgegebenheiten ist.
+
+\subsection{Bottleneck durch die JVM auf Server und Client}
+
+Neben der Netzwerklatenz kommt auch noch der Aspekt, dass die JVM durch ihre Garbage-Collection kein deterministisches Verhalten liefert und 
+es zu unbestimmten Zeiten zu Verlangsamungen kommen kann. Dies kann auch das angestrebte Echtzeitverhalten der Orchestierung beeinflussen. In solchen
+Fällen ist es hilfreich mit Sprachen wie C/C++ zu arbeiten, wo man durch eigene Speicherverwaltung eine stabile Performance gewährleisten kann.
+
+\subsection{Fehlerbehandlung (synchron und asynchron)}
+
+Aktuell ist die Fehlerbehandlung auf dem ESP32 durch ein passendes Request-Response Muster gewährleistet. Auf ARIS hingegen ist die Fehlerbehandlung mit
+Laufzeitausnahmen umgesetzt. Hier kann durch normale Ausnahmen eine bessere Fehlerbehandlung umgesetzt werden, sodass es nicht zu einem hängendem Programm kommt.
+
+\subsection{Continous Integration und Continous Delivery}
+
+Die Nutzung von Continous Integration und Continous Delivery für ARIS ist durch deren Infrastruktur auf GitHub gegeben. Für die Firmware des ESP32 kann Continous-Integration 
+umgesetzt werden durch Testen und Bauen des Codes auf Plattformen wie GitHub mit Actions oder GitLab mit GitLab CI. 
+
+\section{Ausblick}
+
+Neben der Umsetzung der Lösungen der kritischen Punkte, gibt es auch weitere mögliche Aussichten für das Resultat dieser Arbeit.
+
+\subsection{Modularisierung durch Einführung von unterschiedlichen Notationsfrontends, Zielbackends und Eventloggingformaten}
+
+Aktuell unterstützt der Protoyp die EPK-Notation, läuft auf ARIS und generiert Code für den ESP32. Jedoch können auch Frontends für andere Notationen 
+wie BPMN oder BPMN-2.0 entwickelt werden und auch kann man für unterschiedliche Prozessverwaltungsplattformen das passende Backend entwickeln.
+Neben diesen zwei Aspekten kann auch die Codegenerierung für weitere Mikrocontroller wie Arduino oder STM32 ausgeweitet werden. Auch kann das Logging der 
+Ausführung in anderen Formaten umgesetzt werden, sodass weitere Auswertung auf Basis dieser Daten durchgeführt werden können.
+
+\subsection{Open-Sourcing des Ausführungsmodells, Codegeneration, Event-Logging und Live-Monitoring}
+
+Der Eigenanteil dieser Arbeit ist der Compiler, das Ausführungsmodell sowie die Codegenerierung und das Live-Monitoring. Dadurch, dass es sehr viel Potenzial gibt das ganze weiter 
+auszubauen ist es sinnvoll, diese Anteile (mit Ausnahme der ARIS-Komponenten) der Öffentlichkeit zugänglich zu machen, um die Automatisierung und Orchestierung von industriellen Geschäftsprozessen 
+durch Open-Source Entwicklung voranzutreiben.
+
+\section{Fazit zur Praxistauglichkeit}
+
+Durch Execution-Engines wie Flowable und Camunda hat man schon gesehen, dass Prozesse automatisiert werden können. Jedoch tut diese Arbeit auch neben dieser Prozessautomatisierung, ein Rahmenwerk festlegen, 
+sodass Software gemäß von Geschäftsprozessen entwickelt werden kann. Diese prozessorientierte Softwareentwicklung kann in der Praxis sehr sinnvoll sein und durch Vereinfachung von Entwicklungsprozessen durch 
+Lösungen wie Codegenerierung ist es umsetzbar. Kritisch kann es jedoch werden bei der Aufrüstung der industriellen Komponenten, da hier Anbindungen gemacht werden müssen zwischen der Anlage und dem Mikrocontroller, 
+für eine Verbindung zwischen ARIS und den Anlagen wie in \ref{reflection} angesprochen. Es ist also im Fazit umsetzbar softwareseitig, jedoch kann es auf der Hardwareseite zu Schwierigkeiten kommen. Sei es durch Inkompatibilität 
+oder einfach der fehlenden Möglichkeit der Anbindung an die Anlage. Es benötigt Anlagen mit Periphärien oder einer Schnittstelle, um einen Mikrocontroller zu integrieren. Hierbei kann man sich ein Beispiel an 
+Periphärien wie CAN aus der Automobilindsutrie nehmen, welche CAN zur Realisierung von OBD verwenden.
