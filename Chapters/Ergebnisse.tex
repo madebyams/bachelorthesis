@@ -64,19 +64,20 @@ Der Hardwaremodellaufbau, der den Prozess ausführen soll besteht aus den folgen
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Validierungsaufbau.pdf}
+    \includegraphics[width=0.8\textwidth]{Graphics/Diagramm-Validierung.pdf}
     \caption{Aufbau des Validierungsexperiments}
     \label{fig:brick-house-diagram}
 \end{figure}
 
-Als nächstes wird der Prozess mittels EPK modelliert.
+Der ESP32 dient zum Empfang und der Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit 
+2 Arduino-Nano, welche jeweils einen HC-SR04 Abstandssensor und einen MS-18 Servo-Motor haben. Der HC-SR04 Sensor ist zur Erkennung von Objekten (in diesem 
+Fall die Existennz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Bauklötzchenhaus-EPK-2.png}
-    \caption{EPK-Diagramm des Bauklötzchenhaus}
-    \label{fig:brick-house-epk-diagram}
-\end{figure}
+Als nächstes wird der Prozess mittels EPK modelliert. Die Modellierung ist unter \ref{fig:brick-house-epk-diagram} vorzufinden.
+
+Dieser Aufbau soll die Verwendung in der Industrie zeigen: 
+Eine schon vorhandene Anlage (Das System aus Arduino-Nano mit dem Sensor und Aktor) wird an das Prozessfrontend (ARIS) über ein Modul angebunden (ESP32), welches 
+die Orchestrierung ermöglicht.
 
 \subsection{Modellierung eines Prozesses und Generieren von Firmwarecode}
 
@@ -92,12 +93,19 @@ Diese wird in C/C++ entwickelt und man erhält die folgende Projektstruktur:
     \label{fig:firmware-code-project-structure}
 \end{figure}
 
-
 \subsection{Entwicklung anhand des Firwarecodeframeworks}
 
 Die Firmware ist in einem ESP-IDF Projekt, was in C/C++ geschrieben wird.
 Diese wird in ESP-IDF Komponenten aufgeteilt. Dabei ist jede einzelne Komponente 
 ein Prozessschritt.
+
+Neben der Firmware des ESP32 muss auch die Firmware der Arduino-Nano's programmiert werden. Dies geschieht ebenfalls mit C++ über das 
+PlatformIO-Framework, da diese den Build-Prozess wesentlich erleichtert und auch Möglichkeiten bietet, die Firmware auch mit Continous Integration
+zu testen.
+
+Diese Trennung von Anlage und Orchestrierungsmodul ermöglicht ein modulares System, wo jede Komponente ihre eigene Verantwortung hat. Dies ermöglicht auch 
+einfachere Erweiterbarkeit von Funktionen ohne das Netzwerk- und Protkollcode sich mit dem Code zur Anlagensteuerung vermischt. Dies nennt man auch 
+Seperation of Concerns.
 
 \subsection{Ausführung des Automationsprozesses}
 
