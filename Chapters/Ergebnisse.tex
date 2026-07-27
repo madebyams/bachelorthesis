@@ -70,8 +70,9 @@ Der Hardwaremodellaufbau, der den Prozess ausführen soll besteht aus den folgen
 \end{figure}
 
 Der ESP32 dient zum Empfang und der Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit 
-2 Arduino-Nano, welche jeweils einen HC-SR04 Abstandssensor und einen MS-18 Servo-Motor haben. Der HC-SR04 Sensor ist zur Erkennung von Objekten (in diesem 
-Fall die Existennz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. 
+2 Arduino-Uno, welche jeweils einen HC-SR04 Abstandssensor und einen MS-18 Servo-Motor haben. Der HC-SR04 Sensor ist zur Erkennung von Objekten (in diesem 
+Fall die Existennz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. Die Kommunikation zwischen dem ESP und den Arduino-Uno 
+erfolgt über I2C.
 
 Als nächstes wird der Prozess mittels EPK modelliert. Die Modellierung ist unter \ref{fig:brick-house-epk-diagram} vorzufinden.
 
@@ -99,7 +100,7 @@ Die Firmware ist in einem ESP-IDF Projekt, was in C/C++ geschrieben wird.
 Diese wird in ESP-IDF Komponenten aufgeteilt. Dabei ist jede einzelne Komponente 
 ein Prozessschritt.
 
-Neben der Firmware des ESP32 muss auch die Firmware der Arduino-Nano's programmiert werden. Dies geschieht ebenfalls mit C++ über das 
+Neben der Firmware des ESP32 muss auch die Firmware der Uno's programmiert werden. Dies geschieht ebenfalls mit C++ über das 
 PlatformIO-Framework, da diese den Build-Prozess wesentlich erleichtert und auch Möglichkeiten bietet, die Firmware auch mit Continous Integration
 zu testen.
 
