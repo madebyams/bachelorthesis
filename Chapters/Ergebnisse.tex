@@ -16,13 +16,28 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
     \item Ich als \textbf{Softwareentwickler} möchte \textbf{Produktionsanlagen einfach an die Prozessschicht anbinden},
     sodass \textbf{neue Anlagen integriert werden können}.
 
+    $\to$ Definitions of Done:
+
+    \begin{itemize}
+        \item Man kann aus einem EPK-Prozessmodell eine Schablone erstellen zur Entwicklung von Firmwarecode.
+        \item Die Schablone lässt sich fehlerfrei kompilieren.
+    \end{itemize}
+
     $\to$ Die Anbindung der Produktionsanlagen an die Prozessschicht wurde durch den ESP32-Mikrocontroller realisiert.
-    Dieser kommuniziert mit der Execution-Engine über das CoAP-Protkoll. Ein Rahmen für die Firmware kann durch die 
+    Dieser kommuniziert mit der Execution-Engine über das CoAP-Protkoll. Eine Schablone für die Firmware kann durch die 
     Codegenerierung aus der ExecutionQueue erzeugt werden, was die Anbindung noch weiter vereinfacht und die Einrichtung der
     Kommunikationsebene auf der Firmwareseite wird durch die Generierung für den Entwickler abgenommen.
 
     \item Ich als \textbf{Geschäftsleiter} möchte \textbf{meine Produktionsprozesse gemäß meiner Modellierung durchführen},
     sodass \textbf{die Produktionen selbst konsistent und messbar sind}.
+
+    $\to$ Definitions of Done:
+
+    \begin{itemize}
+        \item Ein EPK-Modell lässt sich in das Ausführungsformat übersetzen.
+        \item Das Ausführungsformat wird gemäß des EPK-Modells ausgeführt.
+        \item \item Am Ende einer Ausführung hat man Zugang zu einem Ausfürhungsbericht.
+    \end{itemize}
 
     $\to$ Dadurch, dass der Firmwarecode sich an dem Prozessmodell orientiert und die Orchestrierung gemäß des Prozessgraphen 
     stattfindet, ist diese Anforderung erfüllt. Auch ist die Messbarkeit durch sowohl die Schnittstelle in \ref{coap-interface} 
@@ -32,11 +47,24 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
     \item Ich als \textbf{Controller} möchte \textbf{laufende Prozesse überwachen}, sodass \textbf{die Effizienz von Geschäftsprozessen 
     gemessen und optimiert werden kann}.
 
-    $to$ Die Implementierung des Live-Streamings während der Ausführung eines Prozesses erlaubt eine Überwachung der laufenden Prozesse, sodass 
+    $\to$ Definitions of Done:
+
+    \begin{itemize}
+        \item Die Ausführung eines Prozessdurchlaufs lässt sich visuell mitverfolgen auf der Prozessschicht.
+    \end{itemize}
+
+    $\to$ Die Implementierung des Live-Streamings während der Ausführung eines Prozesses erlaubt eine Überwachung der laufenden Prozesse, sodass 
     auch diese Anforderung erfüllt wurde.
 
     \item Ich als \textbf{Analyst} möchte \textbf{einen Verlauf vergangener Prozesse einsehen}, sodass \textbf{Schwachstellen und Engpässe
     ermittelt werden können}.
+
+    $\to$ Defintions of Done:
+
+    \begin{itemize}
+        \item Nach einer Ausführung ist es möglich einen Ausführungsbericht zu generieren.
+        \item Dieser Ausführungsbericht ist in einem Format, welches verwendet werden kann, um Engpässe zu ermitteln.
+    \end{itemize}
 
     $\to$ Dadurch, dass die einzelnen Ausführungsschritte geloggt werden, bekommt man so den Verlauf der vergangenen Prozesse. Durch Informationen wie 
     Start- End- und Ausführungszeit können Schwachstellen und Engpässe innerhalb eines Prozesses identifiziert und optimiert werden.
@@ -44,17 +72,31 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
     \item Ich als \textbf{Kunde} möchte \textbf{über den aktuellen Stand meines Produktes informiert werden}, sodass \textbf{ich die nächsten
     Schritte mit dem Produkt planen kann}.
 
+    $\to$ Definitions of Done:
+
+    \begin{itemize}
+        \item Die Ausführung eines Prozessdurchlaufs lässt sich visuell mitverfolgen für den Kunden über eine eigene Sicht.
+        \item Es können Benachrichtigungen an den Kunden verschickt werden, wenn ein bestimmter Schritt ausgeführt wurde.
+    \end{itemize}
+
     $\to$ Dieser Punkt konnte nicht implementiert werden, jedoch kann man bei dem Client-Socket des Live-Streamings bei der Ausführung die Möglichkeit einbinden,
     die Live-Daten an den Kunden zu übermitteln, sodass dieser auch über den akutellen Stand der Produktion informiert ist.
     
     \item Ich als \textbf{Administrator} möchte \textbf{ein wartbares IoT-System haben}, sodass \textbf{im Falle eines Aufball schnell reagiert
     werden kann, um den Produktionsfluss nicht zu stark beeinträchtigen}.
 
+    $\to$ Definitions of Done:
+
+    \begin{itemize}
+        \item Es ist möglich die Prozess Hardware einfach auszutauschen ohne das gesamte System zu beeinflussen
+        \item Durch Ausführungsberichte ist es möglich die fehlerhafte Hardware schnell ausfindig zu machen.
+    \end{itemize}
+
     $\to$ Der generierte Code ist für ESP32-Mikrocontroller konzipiert. Im Falle eines Ausfalls kann durch das Live-Streaming und Logging erfasst werden, an welcher 
     Stufe der Ausfall stattfand. Durch einen Lookup in der Resource-Directory kann man dann den Mikrocontroller ermitteln, welcher für den Ausfall verantwortlich war. 
     Die entsprechende Firmware kann auf einen neuen ESP32-Mikrocontroller geladen und mit dem kaputten Mikrocontroller ausgestauscht werden, falls der Mikrocontroller 
-    die Fehlerquelle war. Aber auch im Falle, dass der Mikrocontroller nicht die Fehlerquelle ist, kann dadurch die Fehlerquelle erfasst werden, was das Suchen von Fehlern 
-    vereinfacht und man effizient und schnell auf Ausfälle regaieren kann. Damit kann der Produktionsfluss schneller wiederhergestellt werden.
+    die Fehlerquelle war. Aber auch im Falle, dass der Mikrocontroller nicht die Fehlerquelle ist, kann durch den Ausführungsbericht die Fehlerquelle erfasst werden, was das Suchen von Fehlern 
+    erleichtert und man effizient und schnell auf Ausfälle regaieren kann. Damit kann der Produktionsfluss schneller wiederhergestellt werden.
 \end{enumerate}
 
 \section{Validierung}
@@ -77,7 +119,7 @@ erfolgt über I2C.
 Als nächstes wird der Prozess mittels EPK modelliert. Die Modellierung ist unter \ref{fig:brick-house-epk-diagram} vorzufinden.
 
 Dieser Aufbau soll die Verwendung in der Industrie zeigen: 
-Eine schon vorhandene Anlage (Das System aus Arduino-Nano mit dem Sensor und Aktor) wird an das Prozessfrontend (ARIS) über ein Modul angebunden (ESP32), welches 
+Eine schon vorhandene Anlage (Das System aus Arduino-Uno mit dem Sensor und Aktor) wird an das Prozessfrontend (ARIS) über ein Modul angebunden (ESP32), welches 
 die Orchestrierung ermöglicht.
 
 \subsection{Modellierung eines Prozesses und Generieren von Firmwarecode}
@@ -97,7 +139,7 @@ Diese wird in C/C++ entwickelt und man erhält die folgende Projektstruktur:
 \subsection{Entwicklung anhand des Firwarecodeframeworks}
 
 Die Firmware ist in einem ESP-IDF Projekt, was in C/C++ geschrieben wird.
-Diese wird in ESP-IDF Komponenten aufgeteilt. Dabei ist jede einzelne Komponente 
+Diese wird in ESP-IDF Komponenten aufgeteilt. Dabei ist jede einzelne Komponente mit dem handler Suffix
 ein Prozessschritt.
 
 Neben der Firmware des ESP32 muss auch die Firmware der Uno's programmiert werden. Dies geschieht ebenfalls mit C++ über das 
@@ -108,6 +150,47 @@ Diese Trennung von Anlage und Orchestrierungsmodul ermöglicht ein modulares Sys
 einfachere Erweiterbarkeit von Funktionen ohne das Netzwerk- und Protkollcode sich mit dem Code zur Anlagensteuerung vermischt. Dies nennt man auch 
 Seperation of Concerns.
 
+Zur Kommunikation zwischen ESP32 und Arduino wurde I2C-Verwendet:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Graphics/esp32-arduino-i2c.png}
+    \caption{I2C-Kommunikation zwischen ESP32 und Arduino Unos}
+    \label{fig:i2c-esp32-arduino-uno}
+\end{figure}
+
+Die Werte in den Klammern bei den Arduino Uno sind die festgelegten I2C-Slave-Adressen, um Eindeutigkeit bei der Kommunikation zu haben.
+
+Das Kommanobyte wird dabei wie folgt definiert:
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Bytemuster} & \textbf{Bedeutung} \\
+\midrule
+0000 0000 & Überprüfe die Anwesenheit im Radius von 20cm eines Objektes \\
+\addlinespace
+0000 0001 & Überprüfe die Abwesenheit im Radius von 20cm eines Objektes \\
+\addlinespace
+0000 0011 & Platziere das Objekt mittels des Servo-Motors \\
+\addlinespace
+0000 0011 & Setze einen Alarm aus\\
+\bottomrule
+\end{tabularx}
+\caption{Definition des Kommanobytes}
+\label{tab:command-byte}
+\end{table}
+
 \subsection{Ausführung des Automationsprozesses}
 
-Dadurch, dass die Firmware entwickelt wurde, kann bei ARIS der Prozess gestartet werden. 
+Dadurch, dass die Firmware entwickelt wurde, kann bei ARIS der Prozess gestartet werden. Dieser hat schon beim Programmstart eine Hash-Map aller verfügbaren Resourcen 
+gemäß der Resource-Directory erstellt. Hierbei ist der Schlüssel, die ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID und der Schlüssel ist die URL
+zur Resource. Dies ist meist die IP-Adresse des Mikrocontrollers mit den ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID als Pfad. Dadurch, dass
+es eine lokale Kopie des Resource-Directory schon gibt, muss also kein CoAP-Aufruf an das Resource Direcory gemacht werden, was die Ausführung des Prozesses wesentlich 
+beschleunigt. Die Rückverfolgung ist sehr schnell, da es versucht mit der Ausführung des ESP auf der Hardware mitzukommen. Da diese aber sehr schnell ist, ist es meist 
+ein schnelles Herunterschnellen der Animation. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es durch Netzwerke etwas Latenz und auch werden 
+lokale IP-Adressen der Hardware auf dem Resource-Directory hinterlegt. Dadurch muss sich der Rechner mit der ARIS Instanz im selben Netzwerk befinden, wie die Hardware.
+Jedoch könnte man hier durch Tunneling arbeiten können, wo alle Geräte sich in einem virtuellen Netzwerk befinden. Auch die Entscheidungsfindung läuft passend. Bei dem XOR 
+zur Überprüfung des Aufbaus des Geschosses werden die passenden Pfade verwendet (Geschoss nicht eingebaut Pfad, bei fehlendem Geschoss und Aufbau des Daches bei aufgebautem Geschoss).
+Es wird also prozessgetreu ausgeführt. Der Kritikpunkt ist aktuell das Echtzeitverhalten und die Einschränkung des Netzwerkes.
