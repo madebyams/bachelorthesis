@@ -73,7 +73,7 @@ Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückg
     \item $T = \{bool, int\}$ sei die Menge der Rückgabetypen
     \item $X_S = \{(i,t)\; | i \in \mathbb{N} \land t \in T\}$ sei die Menge der SingleExecutables 
     \item {
-        $X_G = \{(i, g)\; | i \in \mathbb{N} \land g \in \text{List}(X_S \cup X_G)\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
+        $X_G = \{(i, g)\; | i \in \mathbb{N} \land g \in \text{List}(\text{List}(X_S \cup X_G))\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
         des Verknüpfungsoperator beschreiben und $i$ die ID des Splitoperators ist.
     }
     \item $X = X_S \cup X_G$ sei die Menge der Executables
