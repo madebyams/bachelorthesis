@@ -194,3 +194,43 @@ lokale IP-Adressen der Hardware auf dem Resource-Directory hinterlegt. Dadurch m
 Jedoch könnte man hier durch Tunneling arbeiten können, wo alle Geräte sich in einem virtuellen Netzwerk befinden. Auch die Entscheidungsfindung läuft passend. Bei dem XOR 
 zur Überprüfung des Aufbaus des Geschosses werden die passenden Pfade verwendet (Geschoss nicht eingebaut Pfad, bei fehlendem Geschoss und Aufbau des Daches bei aufgebautem Geschoss).
 Es wird also prozessgetreu ausgeführt. Der Kritikpunkt ist aktuell das Echtzeitverhalten und die Einschränkung des Netzwerkes.
+
+Es wurden mehrere Szenarien ausprobiert: \"Geschoss nicht eingebaut\", \"Geschoss eingebaut\" und \"Geschoss und Dach eingebaut\". Jedes Szenario wurde fünfmal durchlaufen, um konsistente Ergebnisse 
+zu erhalten. Es wurden die entsprechenden Pfade genommen. Am Ende konnte man den Ausführungsbericht als CSV-Datei exportieren. Dieser wurde in das Process-Mining einer ARIS-Cloudinstanz eingespeist und man erhält 
+Daten wie Aktivitäten pro Durchlauf, Durchlaufanzahl, Aktivitäten pro Tag sowie eine durchschnittliche Durchlaufzeit. Bildschrirmfotos der Process-Mining Sichten sind unter \ref{fig:process-mining-overview} und 
+\ref{fig:process-mining-overview-2} zu finden.
+
+Aus \ref{fig:process-mining-overview} ist zu erkennen, dass bei diesem Versuchsaufbau man beim Versuchsaufbau eine durchschnittliche Durchlaufzeit von 38.67 Sekunden erhält. 
+
+\begin{table}[htbp]
+  \centering
+  \caption{Aus dem Ereignisprotokoll extrahierte Aktivitätsfolgen je Prozessvariante}
+  \label{tab:eventlog-varianten}
+  \begin{tabular}{llrr}
+    \toprule
+    Case ID & Aktivität & Bearbeitungszeit [s] & Vorkommen \\
+    \midrule
+    \multirow{4}{*}{0 (Ohne Geschoss \& Ohne Dach)}
+      & Start              & 0 & 5 \\
+      & Baue Geschoss      & 1 & 5 \\
+      & Setze Alarm aus    & 0 & 5 \\
+      & Ende               & 0 & 5 \\
+    \addlinespace
+    \multirow{5}{*}{1 (Mit Geschoss \& Ohne Dach)}
+      & Start              & 0 & 5 \\
+      & Baue Geschoss      & 1 & 5 \\
+      & Baue Dach ein      & 1 & 5 \\
+      & Alarm aussetzen    & 0 & 5 \\
+      & Ende               & 0 & 5 \\
+    \addlinespace
+    \multirow{5}{*}{2 (Mit Geschoss \& Mit Dach)}
+      & Start                & 0 & 5 \\
+      & Baue Geschoss        & 1 & 5 \\
+      & Baue Dach ein        & 1 & 5 \\
+      & Fahre zur Endstation & 0 & 5 \\
+      & Ende                 & 0 & 5 \\
+    \midrule
+    \multicolumn{2}{l}{Summe} & & 70 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
