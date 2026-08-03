@@ -43,35 +43,29 @@ Auch wurde Scala als Sprache für den Compiler gewählt, da es Pattern-Matching 
 Entwicklung eines Compilers stark vereinfacht.
 
 Das UML-Diagramm des EPK-Compiler ist unter \ref{fig:epk-compiler-uml} zu finden.
-Der eigentliche EPK-Compiler ist \texttt{ExecutionQueueBuilder}. Dieser Funktioniert so, dass der aktuelle Kompilierzustand sich in \texttt{ExecutionQueueBuilderContext}
-befindet. Dieser besteht aus einem Flag \texttt{started}, um zu wissen ob das Startereignis schon verarbeitet wurde, der zu füllenden ExecutionQueue und einem \texttt{Process}
-Objekt. Zur Buchführung von Verknüpfungsoperatoren enthält der \texttt{ExecutionQueueBuilderContext} einen Stapel \texttt{groupDeque}, um die aktuell geöffnete Verknüpfung sich zu merken
-und die Hash-Map \texttt{groupIndexMap}, um zu wissen welcher Pfad im aktuellen Verknüpfungsoperator verarbeitet wird. Dazu kommen noch eine \texttt{AAutomationEventBuffer} Referenz, welche einem
-\texttt{SingleExecutable} durchgegeben wird, um dessen Ausführung zu dokumentieren und die aktuell ausgeführte \texttt{SingleExecutable} an den Client zur Animation in Echtzeit zu übertragen. Dazu 
-beinhaltet es eine verkettete Liste \texttt{SingleExecutables}, welche zur Codegenerierung verwendet wird.
+Der Prozess wird an den Compiler übergeben. Beim Aufruf der \texttt{compile} Methode, wird der Prozess durch Tiefensuche durchlaufen. Dabei wird dann mittels Pattern-Matching 
+für die jeweilige Knotenart, die passende Übersetzung verwendet gemäß \ref{translation-function}. Am Ende erhält man die \texttt{ExecutionQueue}, welche ausgeführt werden kann.
+Diese wird in eine \texttt{ExecutionQueueBuilderContext} Instanz hinterlegt, um diese für die Ausführung oder Codegenerierung bereit zu halten.
 
-Die Kompilierung findet wie folgt statt: Es wird durch den Prozessgraphen $G_P$ mittels Tiefensuche traversiert (durch \texttt{Utils.traverse}) und abhängig vom Knoten wird der passende \texttt{Handler} aus der 
-\texttt{HandlerFactory} angefragt, um den Knoten zu verarbeiten. Sowohl \texttt{TaskHandler} als auch die einzelnen  \texttt{EventHandler} verarbeiten den Knoten zu einem \texttt{SingleExecutable} Objekt, welches
-in der \texttt{ExeuctionQueue} des \texttt{ExecutionQueueBuilderContext} hinterlegt wird. \texttt{SplitOperatorHandler} und \texttt{JoinOperatorHandler} verarbeiten die Verknüpfungsoperatoren und verarbeiten die darin 
-gekapselte Struktur zu einer \texttt{ExecutableGroup}. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{Graphics/EPK-Compiler-UML.png}
+    \caption{UML Diagramm des EPK-Compilers}
+    \label{fig:epk-compiler-uml}
+\end{figure}
 
 \subsection{Ausführung des Ausführungsmodells}
 
-Die Ausführung der \texttt{ExecutionQueue} wird mit einer \texttt{while} Schleife realisiert mit der Bedigung, dass die FIFO-Warteschlange nicht leer ist. 
-Inital wird die erste \texttt{Executable} der \texttt{ExecutionQueue} entnommen und der Status der letzten Ausführung wird als erfolgreich markiert,
-um die Ausführung zu starten. Der Rückgabetyp des \texttt{Executable} wird sich gemerkt, das \texttt{Executable} Objekt wird ausgeführt und der initiale 
-Ausgabewert wird mit dem des durchgeführten \texttt{Executables} überschrieben. Der Ausführungsstatus wird durch Evaluation des Rückgabewertes (beim Rückgabetyp \text{int},
-ob eine 0 zurückgegeben wurde; beim Rückgabetyp \texttt{bool}, ob \texttt{true} zurückgegeben wurde). Ist die \texttt{ExecutionQueue} noch gefüllt und der Rückgabewert indiziert
-eine erfolgreiche Ausführung so wird die Schleife nochmal durchlaufen. Bei leerer \texttt{ExecutionQueue} oder einer vorherigen fehlerhaften Ausführung wird die Schleife und somit auch
-die Ausführung der gesamten \texttt{ExecutionQueue} gestoppt.
+Die Ausführung des Ausführungsmodells ist mit der \texttt{ExecutionQueueRunner} Klasse realisiert. Diese enthält den \texttt{AutomationEventBuffer} um Live-Streaming zu ARIS 
+und Logging zu ermöglichen. Darüber hinaus enthält die Klasse die CoAP-Verbindung, um die Befehle an die Hardware zu übermitteln. Die \texttt{ExecutionQueue} wird durch eine 
+\texttt{forEach} Schleife bis zum Ende iteriert.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Ausführung-der-ExecutionQueue.png}
-    \caption{Flussdiagram zur Ausführung der ExecutionQueue}
-    \label{fig:flowchar-execution-queue}
+    \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{Graphics/ExecutionQueueRunner-UML.png}
+    \caption{UML Diagramm des ExecutionQueueRunner}
+    \label{fig:execution-queue-runner-uml}
 \end{figure}
-
 
 \subsection{IOT-Schnittstelle}
 \label{iot-interface-impl}
@@ -79,7 +73,7 @@ die Ausführung der gesamten \texttt{ExecutionQueue} gestoppt.
 Die IoT-Schnittstelle sendet die Befehle einer \texttt{SingleExecutable} zum IoT-System. Das IoT-System besteht dabei aus 
 Microkontrollern. In dieser Arbeit Microkontroller der Reihe ESP32. Die Schnittstelle wird mit dem CoAP Protkoll realisiert.
 Dabei wird die Realisierung eines Prozesses durch einen CoAP PUT-Endpoint realisiert. Anhand der Schnittstellendefinition 
-aus \ref{coap-interface} entspricht der Pfadname eines Endpunktes den ersten 16 Zeichen eines SHA256-Hexstrings. 
+aus \ref{coap-interface} entspricht der Pfadname eines Endpunktes den ersten 15 Zeichen eines SHA256-Hexstrings. 
 
 Alle CoAP-Endpunkte, welche die Funktionalität des SingleExecutables zur Verfügung stellen werden beim Start des Servers aus
 einem Resource-Directory abgefragt, welches die CoAP-URL's enthält. Das Ergebnis wird in einer Hash-Map hinterlegt, wo der gekürzte
@@ -97,7 +91,7 @@ genommen, der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die 
 
 Der SHA256-Hexstring aus \ref{iot-interface-impl} wird für jeden Knoten $(i, t) \in X_S$ erzeugt. Dafür 
 wird $sha256(i)$ berechnet. Diese Prüfsumme wird in Java als Hexstring hinterlegt. Aus diesem Hexstring wird 
-ein Substring aus den ersten 16-Zeichen entnommen. Dieser Substring ist die URI des Endpoints. Es wird so 
+ein Substring aus den ersten 15-Zeichen entnommen. Dieser Substring ist die URI des Endpoints. Es wird so 
 vorgegangen, da die ID in ARIS Zeichen enthält, welche für URIs nicht kompatibel sind. Zur Generierung des 
 SHA256-Hexstrings wird Apache Commons verwendet, da Hashing mit mit Java-Boardmitteln Boilerplate-Code einführt, 
 was die Lesbarkeit und Wartbarkeit des Codes negativ beeinflusst. 
@@ -110,8 +104,7 @@ was die Lesbarkeit und Wartbarkeit des Codes negativ beeinflusst.
 \end{figure}
 
 \subsubsection{Aufsetzen des Resource Directory Servers}
-
-Bei dem Resource-Directory handelt es sich um \texttt{cf-rd}. Einer Resource-Directory Implementierung vom Eclipse Californium 
+Für das Resource Directory wird  \texttt{cf-rd} verwendet. Dies ist eine Resource-Directory Implementierung vom Eclipse Californium 
 Projekt. Dieses wurde in ein Docker-Image überführt, sodass die Einrichtung effizient durchgeführt werden kann und auch 
 Konfigurationsänderungen schneller umgesetzt werden können. Dieses Docker-Image wurde auf einer AWS-EC2 Instanz ausgeführt.
 
@@ -142,7 +135,7 @@ werden.
 
 Aus \ref{fig:epk-compiler-uml} ist zu entnehmen, dass ein \texttt{ExecutionQueueBuilderContext} eine verkettete Liste an SingleExecutables enthält.
 Diese Liste wird zu einem dynamischen Array von Codegenerierungselementen gemäß \ref{code-generation-model} überführt. In Java wird das 
-Codegenerierungsmodell mit der Klasse \texttt{} implementiert. Dieses dynamische Array wird anhand des JSON-Formats serialisiert, sodass man ein 
+Codegenerierungsmodell mit der Klasse \texttt{ExecutionNodeDTO} implementiert. Dieses dynamische Array wird anhand des JSON-Formats serialisiert, sodass man ein 
 JSON-Dokument der folgenden Form erhält: 
 
 Sei $(i, n, t) \in C$:
@@ -221,7 +214,7 @@ definiert werden, weshalb die Schnittstelle dieser Arbeit sich von \texttt{ISimu
 
 \subsection{Bereitstellung von Ausführungsstatistiken für ARIS Process Mining}
 
-Zur Bereitstellung der Ausführungsstatistik wird der \texttt{AAutomationBuffer} im CSV-Format serialisiert. Dem
+Zur Bereitstellung der Ausführungsstatistik wird der \texttt{AAutomationEventBuffer} im CSV-Format serialisiert. Dem
 Nutzer wird dabei die Möglichkeit gegeben einen Speicherort für die CSV-Datei anzugeben. Anhand des CSV-Strings wird
 eine CSV-Datei am Speicherort, welcher vom Nutzer angegeben wurde, abgespeichert.
 

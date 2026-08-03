@@ -1,279 +1,43 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Seite-1" id="zN1a3fCKxmVpftKh_kKV">
-    <mxGraphModel dx="3407" dy="1880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1278" dy="705" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class ExecutionBuilderContext {\n    +boolean started\n    +ExecutionQueue executionQueue\n    +Deque~ExecutableGroup~ groupDeque\n    +Map~String, Integer~ groupIndexMap\n    +Process processModel\n    +StepBuffer stepBuffer\n    +AutomationEventBuffer automationEventBuffer\n    +List~SingleExecutable~ singleExecutables\n    +ExecutionBuilderContext(Process processModel, StepBuffer stepBuffer, AutomationEventBuffer automationEventBuffer)\n  }&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-1">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
+        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class Compiler {\n    -mutable.Set~SingleExecutable~ singleExecutables\n    -Process process\n    +compile() java.util.List~Executable~\n    +getSingleExecutables() java.util.Set~SingleExecutable~\n    -compile(Node node) ExecutionQueue\n    -toSingleExecutable(Node node) SingleExecutable\n    -getSuccessor(Process process, Node node) List~Node~\n  }\n\n&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="jKyuzhXO4ndokv2EQ51v-24">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
             <mxGeometry as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;ExecutionBuilderContext&lt;/font&gt;&lt;/b&gt;" mermaidId="n:ExecutionBuilderContext" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;ExecutionBuilderContext&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-2">
-          <mxCell parent="e6u123NMEqomjqMWpamq-1" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="284" width="977" x="50" y="30" as="geometry" />
+        <UserObject label="&lt;b&gt;Compiler&lt;/b&gt;" mermaidId="n:Compiler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Compiler&lt;/b&gt;" id="jKyuzhXO4ndokv2EQ51v-47">
+          <mxCell parent="jKyuzhXO4ndokv2EQ51v-24" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="260" width="461" x="30" y="30" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-3" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+boolean started" vertex="1">
-          <mxGeometry height="24" width="977" y="60" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-48" parent="jKyuzhXO4ndokv2EQ51v-47" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-mutable.Set&lt;SingleExecutable&gt; singleExecutables" vertex="1">
+          <mxGeometry height="24" width="461" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-4" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ExecutionQueue executionQueue" vertex="1">
-          <mxGeometry height="24" width="977" y="84" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-49" parent="jKyuzhXO4ndokv2EQ51v-47" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-Process process" vertex="1">
+          <mxGeometry height="24" width="461" y="84" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-5" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Deque&lt;ExecutableGroup&gt; groupDeque" vertex="1">
-          <mxGeometry height="24" width="977" y="108" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-50" parent="jKyuzhXO4ndokv2EQ51v-47" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="461" y="108" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-6" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Map&lt;String, Integer&gt; groupIndexMap" vertex="1">
-          <mxGeometry height="24" width="977" y="132" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-51" parent="jKyuzhXO4ndokv2EQ51v-47" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+compile() java.util.List&lt;Executable&gt;" vertex="1">
+          <mxGeometry height="24" width="461" y="128" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-7" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Process processModel" vertex="1">
-          <mxGeometry height="24" width="977" y="156" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-52" parent="jKyuzhXO4ndokv2EQ51v-47" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+getSingleExecutables() java.util.Set&lt;SingleExecutable&gt;" vertex="1">
+          <mxGeometry height="24" width="461" y="152" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-9" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+AutomationEventBuffer automationEventBuffer" vertex="1">
-          <mxGeometry height="24" width="977" y="180" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-53" parent="jKyuzhXO4ndokv2EQ51v-47" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-compile(Node node) ExecutionQueue" vertex="1">
+          <mxGeometry height="24" width="461" y="176" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-10" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+List&lt;SingleExecutable&gt; singleExecutables" vertex="1">
-          <mxGeometry height="24" width="977" y="204" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-54" parent="jKyuzhXO4ndokv2EQ51v-47" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-toSingleExecutable(Node node) SingleExecutable" vertex="1">
+          <mxGeometry height="24" width="461" y="200" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-11" parent="e6u123NMEqomjqMWpamq-2" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="977" y="228" as="geometry" />
+        <mxCell id="jKyuzhXO4ndokv2EQ51v-55" parent="jKyuzhXO4ndokv2EQ51v-47" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-getSuccessor(Process process, Node node) List&lt;Node&gt;" vertex="1">
+          <mxGeometry height="24" width="461" y="224" as="geometry" />
         </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-12" parent="e6u123NMEqomjqMWpamq-2" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ExecutionBuilderContext(Process processModel, AutomationEventBuffer automationEventBuffer)" vertex="1">
-          <mxGeometry height="24" width="977" y="248" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class Utils {\n    +traverse(Node currentNode, Process process, Consumer~Node~ nodeConsumer) void\n  }\n  class Node {\n    &lt;&lt;interface&gt;&gt;\n    +getId() String\n  }\n  class Process {\n    &lt;&lt;interface&gt;&gt;\n    +getAdjacentNodeOf(String id) List~String~\n    +getNode(String id) Node\n  }\n  class Consumer {\n    &lt;&lt;interface&gt;&gt;\n    +accept(Node t) void\n  }\n  Utils ..&gt; Node : uses\n  Utils ..&gt; Process : uses\n  Utils ..&gt; Consumer : uses&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-31">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Utils&lt;/font&gt;&lt;/b&gt;" mermaidId="n:Utils" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Utils&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-32">
-          <mxCell parent="e6u123NMEqomjqMWpamq-31" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="116" width="650" x="1120" y="68" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-33" parent="e6u123NMEqomjqMWpamq-32" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="650" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-34" parent="e6u123NMEqomjqMWpamq-32" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+traverse(Node currentNode, Process process, Consumer&lt;Node&gt; nodeConsumer) void" vertex="1">
-          <mxGeometry height="24" width="650" y="80" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-48" edge="1" parent="1" source="e6u123NMEqomjqMWpamq-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.124;entryY=0.002;entryDx=0;entryDy=0;endArrow=diamondThin;endFill=1;strokeWidth=3;entryPerimeter=0;" target="e6u123NMEqomjqMWpamq-51">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="470" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-49" edge="1" parent="1" source="e6u123NMEqomjqMWpamq-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.928;entryY=0.007;entryDx=0;entryDy=0;endArrow=diamondThin;endFill=1;strokeWidth=3;entryPerimeter=0;" target="e6u123NMEqomjqMWpamq-51">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1242.75" y="470" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n    class ExecutionQueueBuilder {\n        -ExecutionBuilderContext context\n        +build(Process process, StepBuffer stepBuffer, AutomationEventBuffer automationEventBuffer) ExecutionQueue\n        +getContext() ExecutionBuilderContext\n    }\n    class ExecutionBuilderContext {\n        &lt;&lt;create&gt;&gt;\n        +ExecutionBuilderContext(Process process, StepBuffer stepBuffer, AutomationEventBuffer automationEventBuffer)\n    }\n    class Utils {\n        &lt;&lt;static&gt;&gt;\n        +traverse(Node startNode, Process process, Consumer action)\n    }\n    class HandlerFactory {\n        &lt;&lt;static&gt;&gt;\n        +getHandler(Class nodeClass) Handler\n    }\n    class Handler {\n        &lt;&lt;interface&gt;&gt;\n        +handle(Node node, ExecutionBuilderContext context)\n    }\n\n    ExecutionQueueBuilder --&gt; ExecutionBuilderContext : creates\n    ExecutionQueueBuilder ..&gt; Utils : uses\n    ExecutionQueueBuilder ..&gt; HandlerFactory : uses\n    HandlerFactory ..&gt; Handler : returns&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-50">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry height="956" width="1936" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;ExecutionQueueBuilder&lt;/font&gt;&lt;/b&gt;" mermaidId="n:ExecutionQueueBuilder" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;ExecutionQueueBuilder&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-51">
-          <mxCell parent="e6u123NMEqomjqMWpamq-50" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="164" width="909" x="398" y="480" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-52" parent="e6u123NMEqomjqMWpamq-51" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-ExecutionBuilderContext context" vertex="1">
-          <mxGeometry height="24" width="909" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-53" parent="e6u123NMEqomjqMWpamq-51" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="909" y="84" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-54" parent="e6u123NMEqomjqMWpamq-51" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+build(Process process, StepBuffer stepBuffer, AutomationEventBuffer automationEventBuffer) ExecutionQueue" vertex="1">
-          <mxGeometry height="24" width="909" y="104" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-55" parent="e6u123NMEqomjqMWpamq-51" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+getContext() ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="909" y="128" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-72" edge="1" parent="e6u123NMEqomjqMWpamq-50" source="e6u123NMEqomjqMWpamq-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=diamondThin;endFill=1;strokeWidth=3;" target="e6u123NMEqomjqMWpamq-51">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <UserObject label="&lt;font style=&quot;font-size: 18px;&quot;&gt;«static»&lt;br&gt;&lt;b style=&quot;&quot;&gt;HandlerFactory&lt;/b&gt;&lt;/font&gt;" mermaidId="n:HandlerFactory" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="«static»&lt;br&gt;&lt;b&gt;HandlerFactory&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-62">
-          <mxCell parent="e6u123NMEqomjqMWpamq-50" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="140" width="351" x="677" y="710" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-63" parent="e6u123NMEqomjqMWpamq-62" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="351" y="84" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-64" parent="e6u123NMEqomjqMWpamq-62" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+getHandler(Class nodeClass) Handler" vertex="1">
-          <mxGeometry height="24" width="351" y="104" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-73" edge="1" parent="e6u123NMEqomjqMWpamq-50" source="e6u123NMEqomjqMWpamq-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=diamondThin;endFill=1;strokeWidth=3;" target="e6u123NMEqomjqMWpamq-62">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <UserObject label="&lt;font style=&quot;font-size: 18px;&quot;&gt;«interface»&lt;br&gt;&lt;b style=&quot;&quot;&gt;Handler&lt;/b&gt;&lt;/font&gt;" mermaidId="n:Handler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="«interface»&lt;br&gt;&lt;b&gt;Handler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-65">
-          <mxCell parent="e6u123NMEqomjqMWpamq-50" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="140" width="457" x="624" y="930" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-66" parent="e6u123NMEqomjqMWpamq-65" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="457" y="84" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-67" parent="e6u123NMEqomjqMWpamq-65" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+handle(Node node, ExecutionBuilderContext context)" vertex="1">
-          <mxGeometry height="24" width="457" y="104" as="geometry" />
-        </mxCell>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;SplitOperatorHandler&lt;/font&gt;&lt;/b&gt;" mermaidId="n:SplitOperatorHandler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;SplitOperatorHandler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-191">
-          <mxCell parent="e6u123NMEqomjqMWpamq-50" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="116" width="736" x="1180" y="820" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-192" parent="e6u123NMEqomjqMWpamq-191" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="736" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-193" parent="e6u123NMEqomjqMWpamq-191" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+handle(SplitOperator node, ExecutionBuilderContext context) ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="736" y="80" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidId="e:Handler-&gt;SplitOperatorHandler#0" mermaidBaseStyle="curved=1;dashed=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="e6u123NMEqomjqMWpamq-207">
-          <mxCell edge="1" parent="e6u123NMEqomjqMWpamq-50" source="e6u123NMEqomjqMWpamq-65" style="curved=1;dashed=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.25;fixDash=1;rounded=0;exitDx=0;exitDy=0;">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-              <mxPoint x="2478" y="575" as="sourcePoint" />
-              <mxPoint x="1180" y="940" as="targetPoint" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class Handler {\n    &lt;&lt;interface&gt;&gt;\n    +handle(T node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  class TaskHandler {\n    +handle(Task node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  class Task {\n    +getId() String\n  }\n  class ExecutionBuilderContext {\n    +ExecutionQueue executionQueue\n    +Deque groupDeque\n    +Map groupIndexMap\n    +List singleExecutables\n    +StepBuffer stepBuffer\n    +AutomationEventBuffer automationEventBuffer\n  }\n  class SingleExecutable {\n    &lt;&lt;constructor&gt;&gt;\n    +SingleExecutable(String id, Class type, StepBuffer sb, AutomationEventBuffer ab)\n  }\n  class ExecutionQueue {\n    +getQueue() List\n  }\n\n  Handler &lt;|.. TaskHandler : implements\n  TaskHandler ..&gt; Task : uses\n  TaskHandler ..&gt; ExecutionBuilderContext : uses\n  TaskHandler ..&gt; SingleExecutable : creates\n  ExecutionBuilderContext --&gt; ExecutionQueue : contains\n  ExecutionQueue --&gt; SingleExecutable : manages&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-74">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;TaskHandler&lt;/font&gt;&lt;/b&gt;" mermaidId="n:TaskHandler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;TaskHandler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-78">
-          <mxCell parent="e6u123NMEqomjqMWpamq-74" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="116" width="635" x="42" y="1200" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-79" parent="e6u123NMEqomjqMWpamq-78" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="635" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-80" parent="e6u123NMEqomjqMWpamq-78" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+handle(Task node, ExecutionBuilderContext context) ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="635" y="80" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-104" edge="1" parent="1" source="e6u123NMEqomjqMWpamq-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;endArrow=block;endFill=0;strokeWidth=1;dashed=1;" target="e6u123NMEqomjqMWpamq-65">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class Handler {\n    &lt;&lt;interface&gt;&gt;\n  }\n  class EventHandler {\n    &lt;&lt;abstract&gt;&gt;\n    #postHandle(Event node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  Handler &lt;|.. EventHandler : implements\n  EventHandler ..&gt; Event : uses\n  EventHandler ..&gt; ExecutionBuilderContext : uses\n  EventHandler ..&gt; ExecutionQueue : uses\n  EventHandler ..&gt; SingleExecutable : creates&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-105">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-124" edge="1" parent="e6u123NMEqomjqMWpamq-105" source="e6u123NMEqomjqMWpamq-108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;endArrow=block;endFill=0;">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="890.6666666666665" y="1070" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <UserObject label="&lt;font style=&quot;font-size: 18px;&quot;&gt;«abstract»&lt;br&gt;&lt;b style=&quot;&quot;&gt;EventHandler&lt;/b&gt;&lt;/font&gt;" mermaidId="n:EventHandler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="«abstract»&lt;br&gt;&lt;b&gt;EventHandler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-108">
-          <mxCell parent="e6u123NMEqomjqMWpamq-105" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="140" width="682" x="720" y="1200" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-109" parent="e6u123NMEqomjqMWpamq-108" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="682" y="84" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-110" parent="e6u123NMEqomjqMWpamq-108" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#postHandle(Event node, ExecutionBuilderContext context) ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="682" y="104" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class EventHandler {\n    &lt;&lt;abstract&gt;&gt;\n    #postHandle(node, context) ExecutionBuilderContext\n  }\n  class StartEventHandler {\n    +handle(StartEvent node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  EventHandler &lt;|-- StartEventHandler : extends\n  StartEventHandler ..&gt; StartEvent : uses\n  StartEventHandler ..&gt; ExecutionBuilderContext : uses&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-125">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-139" edge="1" parent="e6u123NMEqomjqMWpamq-125" source="e6u123NMEqomjqMWpamq-129" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;endArrow=block;endFill=0;dashed=1;">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="720" y="1340" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;StartEventHandler&lt;/font&gt;&lt;/b&gt;" mermaidId="n:StartEventHandler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;StartEventHandler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-129">
-          <mxCell parent="e6u123NMEqomjqMWpamq-125" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="116" width="703" x="140" y="1380" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-130" parent="e6u123NMEqomjqMWpamq-129" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="703" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-131" parent="e6u123NMEqomjqMWpamq-129" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+handle(StartEvent node, ExecutionBuilderContext context) ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="703" y="80" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class EventHandler {\n    &lt;&lt;abstract&gt;&gt;\n    #postHandle(node, context) ExecutionBuilderContext\n  }\n  class IntermediateEventHandler {\n    +handle(node: IntermediateEvent, context: ExecutionBuilderContext) ExecutionBuilderContext\n  }\n  EventHandler &lt;|-- IntermediateEventHandler : extends\n  IntermediateEventHandler ..&gt; IntermediateEvent : uses\n  IntermediateEventHandler ..&gt; ExecutionBuilderContext : uses&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-140">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;IntermediateEventHandler&lt;/font&gt;&lt;/b&gt;" mermaidId="n:IntermediateEventHandler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;IntermediateEventHandler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-144">
-          <mxCell parent="e6u123NMEqomjqMWpamq-140" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="116" width="803" x="659.5" y="1537" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-145" parent="e6u123NMEqomjqMWpamq-144" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="803" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-146" parent="e6u123NMEqomjqMWpamq-144" style="text;fontSize=18;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+handle(node: IntermediateEvent, context: ExecutionBuilderContext) ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="803" y="80" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidId="e:EventHandler-&gt;IntermediateEventHandler#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="extends" id="e6u123NMEqomjqMWpamq-151">
-          <mxCell edge="1" parent="1" source="e6u123NMEqomjqMWpamq-108" style="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;exitDx=0;exitDy=0;dashed=1;" target="e6u123NMEqomjqMWpamq-144">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-              <mxPoint x="1021.5" y="1470" as="sourcePoint" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class EventHandler {\n    &lt;&lt;abstract&gt;&gt;\n  }\n  class EndEventHandler {\n    +handle(EndEvent node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  EventHandler &lt;|-- EndEventHandler\n  EndEventHandler ..&gt; EndEvent : uses\n  EndEventHandler ..&gt; ExecutionBuilderContext : uses&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-154">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;EndEventHandler&lt;/font&gt;&lt;/b&gt;" mermaidId="n:EndEventHandler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;EndEventHandler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-157">
-          <mxCell parent="e6u123NMEqomjqMWpamq-154" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="116" width="691" x="1420" y="1390" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-158" parent="e6u123NMEqomjqMWpamq-157" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="691" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-159" parent="e6u123NMEqomjqMWpamq-157" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+handle(EndEvent node, ExecutionBuilderContext context) ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="691" y="80" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidId="e:EventHandler-&gt;EndEventHandler#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="e6u123NMEqomjqMWpamq-164">
-          <mxCell edge="1" parent="1" source="e6u123NMEqomjqMWpamq-108" style="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.5;entryY=0;rounded=0;exitDx=0;exitDy=0;dashed=1;" target="e6u123NMEqomjqMWpamq-157">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-              <mxPoint x="1925" y="1464" as="sourcePoint" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class Handler {\n    &lt;&lt;interface&gt;&gt;\n    +handle(T node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  class JoinOperatorHandler {\n    +handle(JoinOperator node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  class JoinOperator {\n    +getSourceSplitId() String\n    +getOperatorName() String\n  }\n  class ExecutionBuilderContext {\n    +Map groupIndexMap\n    +Deque groupDeque\n    +Queue executionQueue\n    +ProcessModel processModel\n  }\n  Handler &lt;|.. JoinOperatorHandler\n  JoinOperatorHandler ..&gt; JoinOperator : uses\n  JoinOperatorHandler ..&gt; ExecutionBuilderContext : uses&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-167">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;JoinOperatorHandler&lt;/font&gt;&lt;/b&gt;" mermaidId="n:JoinOperatorHandler" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;JoinOperatorHandler&lt;/b&gt;" id="e6u123NMEqomjqMWpamq-171">
-          <mxCell parent="e6u123NMEqomjqMWpamq-167" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
-            <mxGeometry height="116" width="731" x="1740" y="1204" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="e6u123NMEqomjqMWpamq-172" parent="e6u123NMEqomjqMWpamq-171" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
-          <mxGeometry height="20" width="731" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="e6u123NMEqomjqMWpamq-173" parent="e6u123NMEqomjqMWpamq-171" style="text;fontSize=17;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+handle(JoinOperator node, ExecutionBuilderContext context) ExecutionBuilderContext" vertex="1">
-          <mxGeometry height="24" width="731" y="80" as="geometry" />
-        </mxCell>
-        <UserObject label="" mermaidId="e:Handler-&gt;JoinOperatorHandler#0" mermaidBaseStyle="curved=1;dashed=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="e6u123NMEqomjqMWpamq-184">
-          <mxCell edge="1" parent="1" source="e6u123NMEqomjqMWpamq-67" style="dashed=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);entryX=0.5;entryY=0;fixDash=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" target="e6u123NMEqomjqMWpamq-171">
-            <mxGeometry relative="1" as="geometry">
-              <mxPoint x="1990" y="1070" as="sourcePoint" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;classDiagram\n  class Handler {\n    &lt;&lt;interface&gt;&gt;\n    +handle(T node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  class SplitOperatorHandler {\n    +handle(SplitOperator node, ExecutionBuilderContext context) ExecutionBuilderContext\n  }\n  class SplitOperator {\n    &lt;&lt;class&gt;&gt;\n  }\n  class ExecutionBuilderContext {\n    &lt;&lt;class&gt;&gt;\n    +processModel\n    +groupDeque\n    +groupIndexMap\n  }\n  class XORSplit {\n    &lt;&lt;class&gt;&gt;\n  }\n  class ORSplit {\n    &lt;&lt;class&gt;&gt;\n  }\n  class ANDSplit {\n    &lt;&lt;class&gt;&gt;\n  }\n\n  Handler &lt;|.. SplitOperatorHandler\n  SplitOperatorHandler ..&gt; SplitOperator : uses\n  SplitOperatorHandler ..&gt; ExecutionBuilderContext : uses\n  SplitOperator &lt;|-- XORSplit\n  SplitOperator &lt;|-- ORSplit\n  SplitOperator &lt;|-- ANDSplit&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="e6u123NMEqomjqMWpamq-187">
-          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
-          </mxCell>
-        </UserObject>
       </root>
     </mxGraphModel>
   </diagram>
