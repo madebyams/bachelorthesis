@@ -85,7 +85,7 @@ Die ExecutionQueue wird dargestellt als ein Element von $\text{List}(X_S \cup X_
 \label{code-generation-model}
 
 Sei $C = \{(i, n, t) | i \in \mathbb{N} \land n \in S \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
-den Rückgabetypen sowie die ersten 16 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+den Rückgabetypen sowie die ersten 15 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
 
 
 
@@ -130,7 +130,7 @@ Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST
 
 Die Antwort hat folgendes Schema:
 
-\begin{lstlisting}[caption={Schema der Antwort}, label=lst:health-answer]
+\begin{lstlisting}[caption={Schema der Antwort beim \texttt{/health} Endpunkt}, label=lst:health-answer]
 {
     "status": string,
     "temperature": float
@@ -148,7 +148,7 @@ genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload z
 Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
 ist hierbei wie folgt:
 
-\begin{lstlisting}[caption={Schema der Antwort}, label=lst:single-executable-answer]
+\begin{lstlisting}[caption={Schema der Antwort bei Prozessschrittendpunkten}, label=lst:single-executable-answer]
 {
     "result": uint8_t | bool, 
     "timeSpent": uint32_t
@@ -193,7 +193,7 @@ Bevor ein Prozess ausgeführt wird, muss dieser in das Ausführungsmodell übers
 Bei der Eingabesprache handelt es sich um EPK serialisiert im XML-Format. Die Ausgangssprache ist das Ausführungsmodell
 
 \subsection{Statische Semantik}
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \subfloat[Ein Beispielprozess modelliert mit EPK\label{fig:beisielprozess}]{
         \includegraphics[width=0.4\textwidth]{Graphics/Beispielprozess.png}
@@ -274,6 +274,7 @@ wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine Execut
 $$x_q = \gamma(e_S)$$
 
 \subsection{Übersetzung}
+\label{translation-function}
 Zur Kompilierung müssen die folgenden Übersetzungsregeln definiert werden:
 
 \begin{itemize}
