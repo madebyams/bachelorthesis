@@ -8,7 +8,7 @@ Anbei werden Arbeiten aufgelistet, die Ähnlichkeiten zu dieser Arbeit haben und
 
 Flowable ist eine "Workflow Management Platform und Java Geschäftsprozessengine", welche Notationen wie BPMN, CMMN und DMN 
 unterstützt und ausführt. \cite{doan_using_2022} Auch ist es möglich Flowable als Engine in eigenen Java-Projekten zu nutzen. \cite{flowable_ag_getting_nodate}
-Auch wird damit geworben, dass Flowable eine IoT-Anbindung anbietet. Auf diese wird in dessen Produktdokumentation nicht eingegangen. Somit ist 
+Außerdem wird damit geworben, dass Flowable eine IoT-Anbindung anbietet. Auf diese wird in dessen Produktdokumentation nicht eingegangen. Somit ist 
 die Anbindung von IoT Systemen bei der Flowable Prozessengine nicht nachweisbar. \cite{flowable_ag_digitize_nodate}
 
 \subsection{Camunda}
@@ -48,7 +48,8 @@ IoT-gekoppelten Prozessen. Dabei werden die Prozesse in BPMN notiert und mit der
 
 All diese Arbeiten haben die Modellierungssprache BPMN oder CMMN verwendet, jedoch wurden EPC's in diesem Kontext noch nicht beleuchtet. Und das ist der Beitrag dieser
 Arbeit. Dieser beinhaltet einen Compiler, welcher EPC-Modelle in ein ausführbares Format umwandelt und auf dieser Basis IoT-Geräte über das CoAP Protokoll ansteuert.
-Darüber hinaus wird auch der Rahmen für Firmware-Code damit generiert, sodass die Entwicklung von prozessorientierter Software erleichtert werden kann.
+Darüber hinaus wird auch der Rahmen für Firmware-Code damit generiert, sodass die Entwicklung von prozessorientierter Software erleichtert werden kann und es beinhaltet Live-Streaming
+der Ausführung.
 
 \section{Anforderungen}
 \label{requirements}
@@ -165,14 +166,14 @@ Definitions of Done:
 Abzuleitende Tasks:
 
 \begin{itemize}
-    \item Entwicklung einer modularen Hardwarearchitektur
-    \item Entscheidung eines Kommunikationsprotokolls zwischen Prozessgateway und Produktionshardware
-    \item Definition eines Datenformats für die Kommunikation zwischen Prozessgateway und Produktionshardware
+    \item Entwicklung einer modularen Hardwarearchitektur.
+    \item Entscheidung eines Kommunikationsprotokolls zwischen Prozessgateway und Produktionshardware.
+    \item Definition eines Datenformats für die Kommunikation zwischen Prozessgateway und Produktionshardware.
 \end{itemize}
 
 Definitions of Done:
 
 \begin{itemize}
-    \item Es ist möglich die Prozess Hardware einfach auszutauschen ohne das gesamte System zu beeinflussen
+    \item Es ist möglich die Prozess Hardware einfach auszutauschen ohne das gesamte System zu beeinflussen.
     \item Durch Ausführungsberichte ist es möglich die fehlerhafte Hardware schnell ausfindig zu machen.
 \end{itemize}

@@ -25,8 +25,8 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
 
     $\to$ Die Anbindung der Produktionsanlagen an die Prozessschicht wurde durch den ESP32-Mikrocontroller realisiert.
     Dieser kommuniziert mit der Execution-Engine über das CoAP-Protkoll. Eine Schablone für die Firmware kann durch die 
-    Codegenerierung aus der ExecutionQueue erzeugt werden, was die Anbindung noch weiter vereinfacht und die Einrichtung der
-    Kommunikationsebene auf der Firmwareseite wird durch die Generierung für den Entwickler abgenommen.
+    Codegenerierung aus der ExecutionQueue erzeugt werden, was die Anbindung noch weiter vereinfacht. Die generierte Firmwareschablone
+    vereinfacht die Anbindung sowie die Einrichtung der Kommunikationsebene auf der Seite des Mikrocontrollers.
 
     \item Ich als \textbf{Geschäftsleiter} möchte \textbf{meine Produktionsprozesse gemäß meiner Modellierung durchführen},
     sodass \textbf{die Produktionen selbst konsistent und messbar sind}.
@@ -36,12 +36,12 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
     \begin{itemize}
         \item Ein EPK-Modell lässt sich in das Ausführungsformat übersetzen.
         \item Das Ausführungsformat wird gemäß des EPK-Modells ausgeführt.
-        \item \item Am Ende einer Ausführung hat man Zugang zu einem Ausfürhungsbericht.
+        \item Am Ende einer Ausführung hat man Zugang zu einem Ausfürhungsbericht.
     \end{itemize}
 
     $\to$ Dadurch, dass der Firmwarecode sich an dem Prozessmodell orientiert und die Orchestrierung gemäß des Prozessgraphen 
     stattfindet, ist diese Anforderung erfüllt. Auch ist die Messbarkeit durch sowohl die Schnittstelle in \ref{coap-interface} 
-    als auch durch das Logging gegeben. Die Umsetzung in dieser Arbeit ist jedoch für eine eingeschränkte Version von EPK gerichtet.
+    als auch durch das Logging gegeben. Die Umsetzung in dieser Arbeit ist jedoch für eine eingeschränkte Version von EPK umgesetzt worden.
     Dieses kann man aber auch einbauen durch Tracking von Schleifen.
 
     \item Ich als \textbf{Controller} möchte \textbf{laufende Prozesse überwachen}, sodass \textbf{die Effizienz von Geschäftsprozessen 
@@ -50,7 +50,7 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
     $\to$ Definitions of Done:
 
     \begin{itemize}
-        \item Die Ausführung eines Prozessdurchlaufs lässt sich visuell mitverfolgen auf der Prozessschicht.
+        \item Die Ausführung eines Prozessdurchlaufs lässt sich auf der Prozesssicht visuell mitverfolgen.
     \end{itemize}
 
     $\to$ Die Implementierung des Live-Streamings während der Ausführung eines Prozesses erlaubt eine Überwachung der laufenden Prozesse, sodass 
@@ -75,20 +75,20 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
     $\to$ Definitions of Done:
 
     \begin{itemize}
-        \item Die Ausführung eines Prozessdurchlaufs lässt sich visuell mitverfolgen für den Kunden über eine eigene Sicht.
+        \item Die Ausführung eines Prozessdurchlaufs lässt sich für den Kunden über eine eigene Sicht visuell mitverfolgen.
         \item Es können Benachrichtigungen an den Kunden verschickt werden, wenn ein bestimmter Schritt ausgeführt wurde.
     \end{itemize}
 
-    $\to$ Dieser Punkt konnte nicht implementiert werden, jedoch kann man bei dem Client-Socket des Live-Streamings bei der Ausführung die Möglichkeit einbinden,
+    $\to$ Dieser Punkt konnte nicht implementiert werden, jedoch kann man bei dem Client-Socket des Live-Streamings der Ausführung die Möglichkeit einbinden,
     die Live-Daten an den Kunden zu übermitteln, sodass dieser auch über den akutellen Stand der Produktion informiert ist.
     
-    \item Ich als \textbf{Administrator} möchte \textbf{ein wartbares IoT-System haben}, sodass \textbf{im Falle eines Aufball schnell reagiert
-    werden kann, um den Produktionsfluss nicht zu stark beeinträchtigen}.
+    \item Ich als \textbf{Administrator} möchte \textbf{ein wartbares IoT-System haben}, sodass \textbf{im Falle eines Ausfalls schnell reagiert
+    werden kann, um den Produktionsfluss nicht stark zu beeinträchtigen}.
 
     $\to$ Definitions of Done:
 
     \begin{itemize}
-        \item Es ist möglich die Prozess Hardware einfach auszutauschen ohne das gesamte System zu beeinflussen
+        \item Es ist möglich die Prozess Hardware einfach auszutauschen ohne das gesamte System zu beeinflussen.
         \item Durch Ausführungsberichte ist es möglich die fehlerhafte Hardware schnell ausfindig zu machen.
     \end{itemize}
 
@@ -113,7 +113,7 @@ Der Hardwaremodellaufbau, der den Prozess ausführen soll besteht aus den folgen
 
 Der ESP32 dient zum Empfang und der Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit 
 2 Arduino-Uno, welche jeweils einen HC-SR04 Abstandssensor und einen MS-18 Servo-Motor haben. Der HC-SR04 Sensor ist zur Erkennung von Objekten (in diesem 
-Fall die Existennz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. Die Kommunikation zwischen dem ESP und den Arduino-Uno 
+Fall die Existenz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. Die Kommunikation zwischen dem ESP und den Arduino-Uno 
 erfolgt über I2C.
 
 Als nächstes wird der Prozess mittels EPK modelliert. Die Modellierung ist unter \ref{fig:brick-house-epk-diagram} vorzufinden.
@@ -138,7 +138,7 @@ Diese wird in C/C++ entwickelt und man erhält die folgende Projektstruktur:
 
 \subsection{Entwicklung anhand des Firwarecodeframeworks}
 
-Die Firmware ist in einem ESP-IDF Projekt, was in C/C++ geschrieben wird.
+Die Firmware ist in einem ESP-IDF Projekt, welches C/C++ verwendet.
 Diese wird in ESP-IDF Komponenten aufgeteilt. Dabei ist jede einzelne Komponente mit dem handler Suffix
 ein Prozessschritt.
 
@@ -150,7 +150,7 @@ Diese Trennung von Anlage und Orchestrierungsmodul ermöglicht ein modulares Sys
 einfachere Erweiterbarkeit von Funktionen ohne das Netzwerk- und Protkollcode sich mit dem Code zur Anlagensteuerung vermischt. Dies nennt man auch 
 Seperation of Concerns.
 
-Zur Kommunikation zwischen ESP32 und Arduino wurde I2C-Verwendet:
+Die I2C Kommunikation zwischen dem ESP32 und dem Arduino Uno ist wie folgt definiert:
 
 \begin{figure}[H]
     \centering
@@ -195,12 +195,12 @@ Jedoch könnte man hier durch Tunneling arbeiten können, wo alle Geräte sich i
 zur Überprüfung des Aufbaus des Geschosses werden die passenden Pfade verwendet (Geschoss nicht eingebaut Pfad, bei fehlendem Geschoss und Aufbau des Daches bei aufgebautem Geschoss).
 Es wird also prozessgetreu ausgeführt. Der Kritikpunkt ist aktuell das Echtzeitverhalten und die Einschränkung des Netzwerkes.
 
-Es wurden mehrere Szenarien ausprobiert: \"Geschoss nicht eingebaut\", \"Geschoss eingebaut\" und \"Geschoss und Dach eingebaut\". Jedes Szenario wurde fünfmal durchlaufen, um konsistente Ergebnisse 
+Es wurden mehrere Szenarien ausprobiert: ``Geschoss nicht eingebaut'', ``Geschoss eingebaut'' und ``Geschoss und Dach eingebaut''. Jedes Szenario wurde fünfmal durchlaufen, um konsistente Ergebnisse 
 zu erhalten. Es wurden die entsprechenden Pfade genommen. Am Ende konnte man den Ausführungsbericht als CSV-Datei exportieren. Dieser wurde in das Process-Mining einer ARIS-Cloudinstanz eingespeist und man erhält 
-Daten wie Aktivitäten pro Durchlauf, Durchlaufanzahl, Aktivitäten pro Tag sowie eine durchschnittliche Durchlaufzeit. Bildschrirmfotos der Process-Mining Sichten sind unter \ref{fig:process-mining-overview} und 
-\ref{fig:process-mining-overview-2} zu finden.
+Daten wie Aktivitäten pro Durchlauf, Durchlaufanzahl, Aktivitäten pro Tag sowie eine durchschnittliche Durchlaufzeit. Bildschrirmfotos der Process-Mining Sichten sind unter Abbildung \ref{fig:process-mining-overview} und 
+Abbildung \ref{fig:process-mining-overview-2} in der Anlage zu finden.
 
-Aus \ref{fig:process-mining-overview} ist zu erkennen, dass bei diesem Versuchsaufbau man beim Versuchsaufbau eine durchschnittliche Durchlaufzeit von 38.67 Sekunden erhält. 
+Aus Abbildung \ref{fig:process-mining-overview} aus der Anlage ist zu erkennen, dass bei diesem Versuchsaufbau eine durchschnittliche Durchlaufzeit von 38.67 Sekunden vorliegt.
 
 \begin{table}[htbp]
   \centering

@@ -22,11 +22,11 @@ Zurzeit laufen die TCP-Sockets zur Animation während der Ausführung ohne jegli
 führen, dass Daten abgelesen werden können zwischen dem ARIS-Server und Client. Hier kann durch Nutzung von TLS
 die Verbindung abgesichert werden.
 
-\subsection{Absicherung des Resource Directory Servers}
+\subsection{Absicherung des Resource Directory Servers und IoT-Hardware}
 
-Auch beim Resource Direcotry Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser 
+Auch beim Resource Directory Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser 
 ist kritischer, da dort die Zieladdressen der ESP32 liegen, welche angesteuert werden sollen. Hier kann man eine Absicherung 
-gewährleisten durch Nutzung von dTLS für den Resource Directory Server.
+gewährleisten durch Nutzung von dTLS für den Resource Directory Server. Dies gilt auch für den ESP32.
 
 \section{Kritische Bewertung der Architektur und Systemlimitationen}
 
@@ -53,11 +53,11 @@ Laufzeitausnahmen umgesetzt. Hier kann durch normale Ausnahmen eine bessere Fehl
 \subsection{Continous Integration und Continous Delivery}
 
 Die Nutzung von Continous Integration und Continous Delivery für ARIS ist durch deren Infrastruktur auf GitHub gegeben. Für die Firmware des ESP32 kann Continous-Integration 
-umgesetzt werden durch Testen und Bauen des Codes auf Plattformen wie GitHub mit Actions oder GitLab mit GitLab CI. 
+umgesetzt werden. Dies erfolgt durch Test und Bauen vom Firmwarecode auf CI/CD Plattformen wie GitHub-Actions oder GitLab-CI.
 
 \section{Ausblick}
 
-Neben der Umsetzung der Lösungen der kritischen Punkte, gibt es auch weitere mögliche Aussichten für das Resultat dieser Arbeit.
+Neben der Umsetzung der Lösungen der kritischen Punkte, gibt es die folgenden möglichen Aussichten für das Resultat dieser Arbeit:
 
 \subsection{Modularisierung durch Einführung von unterschiedlichen Notationsfrontends, Zielbackends und Eventloggingformaten}
 
@@ -79,4 +79,4 @@ sodass Software gemäß von Geschäftsprozessen entwickelt werden kann. Diese pr
 Lösungen wie Codegenerierung ist es umsetzbar. Kritisch kann es jedoch werden bei der Aufrüstung der industriellen Komponenten, da hier Anbindungen gemacht werden müssen zwischen der Anlage und dem Mikrocontroller, 
 für eine Verbindung zwischen ARIS und den Anlagen wie in \ref{reflection} angesprochen. Es ist also im Fazit umsetzbar softwareseitig, jedoch kann es auf der Hardwareseite zu Schwierigkeiten kommen. Sei es durch Inkompatibilität 
 oder einfach der fehlenden Möglichkeit der Anbindung an die Anlage. Es benötigt Anlagen mit Periphärien oder einer Schnittstelle, um einen Mikrocontroller zu integrieren. Hierbei kann man sich ein Beispiel an 
-Periphärien wie CAN aus der Automobilindsutrie nehmen, welche CAN zur Realisierung von OBD verwenden.
+Periphärien wie CAN aus der Automobilindsutrie nehmen, welche zur Realisierung von OBD verwendet wird.

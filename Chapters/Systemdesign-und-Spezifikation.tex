@@ -60,7 +60,7 @@ Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefen
 und in das Ausführungsmodell kompiliert wird. 
 
 \subsubsection{Ausführungsmodell}
-Für das Ausführungsmodell wird die Listendefinition gemäß \cite{smolka_programmierung_2012} verwendet.
+Für das Ausführungsmodell wird die Listendefinition gemäß Smolka \cite{smolka_programmierung_2012} verwendet.
 
 Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
 Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
@@ -124,7 +124,9 @@ Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlic
 Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher auf einem Mikrocontroller läuft:
 Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 
+
 \textbf{GET /health}
+
 
 Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgegeben werden kann.
 
@@ -139,7 +141,9 @@ Die Antwort hat folgendes Schema:
 
 Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
 
+
 \textbf{PUT /<$h$[0:15]>}
+
 
 Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
 kein Payload mitgegeben werden. Dies begründet auch die Entscheidung PUT zu verwenden. Normalerweise wird für eine Ausführung POST
@@ -192,6 +196,7 @@ Bevor ein Prozess ausgeführt wird, muss dieser in das Ausführungsmodell übers
 
 Bei der Eingabesprache handelt es sich um EPK serialisiert im XML-Format. Die Ausgangssprache ist das Ausführungsmodell
 
+
 \subsection{Statische Semantik}
 \begin{figure}[H]
     \centering
@@ -211,8 +216,8 @@ Bei der Eingabesprache handelt es sich um EPK serialisiert im XML-Format. Die Au
 
 Vor der Kompilierung findet eine Vorverarbeitung statt, wo die Abbildung $\tau$ gefüllt wird.
 
-Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren und wird danach kompiliert. Die Validierung kann man
-formal wie folgt modellieren:
+Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren. Nach dieser Validierung findet die Kompilierung statt. 
+Die Validierung kann man formal wie folgt modellieren:
 
 Gegeben sei ein Prozess $P$. $e_I \in E \setminus \{e_S, e_E\}$ beschreibt alle Zwischenereignisse von $P$. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G_P$ enthält. 
 Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge an Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
@@ -273,6 +278,8 @@ wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine Execut
 
 $$x_q = \gamma(e_S)$$
 
+erhält.
+
 \subsection{Übersetzung}
 \label{translation-function}
 Zur Kompilierung müssen die folgenden Übersetzungsregeln definiert werden:
@@ -281,7 +288,7 @@ Zur Kompilierung müssen die folgenden Übersetzungsregeln definiert werden:
     \item $\text{succ}(v): V \rightarrow \mathcal{P}(V) = \{w \mid \exists a \in A: (a,(v,w)) \in N\}$ \\
     \item $\text{succ}_{\text{List}}(v): V \rightarrow \text{List}(V) = [w_1, ..., w_k] \text{ mit } id(w_1) < ... < id(w_k), \{w_1, ..., w_k\} = \text{succ}(v)$ \\
     \item {
-        $\gamma: V \rightarrow \text{List}(\text{List}(X_S \cup X_G)) \\$
+        $\gamma: V \rightarrow \text{List}(X_S \cup X_G) \\$
         $$\footnotesize
         \gamma(v) = \left\{
         \begin{array}{@{}l@{}}
@@ -380,9 +387,10 @@ getroffen zum auszuführenden Pfad.
 \section{Animation der Automatisierung}
 \label{automation-animation}
 Nach Kompilierung des Prozessmodells in das Ausführungsmodell, kann dieses ausgeführt werden. Bevor die Ausführung durchgeführt wird,
-wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Der Server reagiert auf die Anfrage mit der Anfrage an das Betriebssystems für einen Port.
-Dieser Port wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
-Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt, was der Client verwenden kann um die aktiven EPK-Knoten zu animieren.
+wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
+gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
+Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
+animieren.
 
 \begin{figure}[H]
     \centering
@@ -411,7 +419,7 @@ Polling                                                      & bidirektionale Ve
 \label{tab:polling-vs-birectional}
 \end{table}
 
-Auf dieser Grundlage wurde entschieden mit bidirektionale Verbindungen statt Polling, für die Animation zu arbeiten.
+Auf dieser Grundlage wurde entschieden mit bidirektionalen Verbindungen statt Polling, für die Animation zu arbeiten.
 
 \section{Generierung des Firmwarequellcodes}
 

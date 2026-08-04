@@ -26,11 +26,11 @@ Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder BPMN modell
 \subsection{EPK}
 
 Leimeister definiert EPK (ereignisgesteuerte Prozesskette) als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen Ereignissen und
-Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren ``AND'', ``OR'' und ``XOR'' \cite{nuttgens_geschaftsprozesmodellierung_1998}
+Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren ``AND'', ``OR'' und ``XOR''. \cite{nuttgens_geschaftsprozesmodellierung_1998}
 Ein wesentliches Merkmal von EPK ist die Darstellung eines Prozesses in eine zeitlich-logische Abfolge von Funktionen und dem Einbau von Entscheidungslogik durch
-Ereignisse. \cite{nuttgens_geschaftsprozesmodellierung_1998}
+Ereignisse und Verknüpfungsoperatoren. \cite{nuttgens_geschaftsprozesmodellierung_1998}
 Prozessmodelle auf Basis von EPK sind für Stakeholder wie Projektpartner oder Kunden intuitiv verständlich, was von Vorteil ist. \cite{langner_ereignisgesteuerte_1997} 
-ARIS bietet EPK als Prozessnotation an und diese wird in der Regel auch verwendet. \cite{rump_geschaftsprozesmanagement_1999-1}
+ARIS bietet EPK als Prozessnotation an und diese wird in der Regel auch von ARIS verwendet. \cite{rump_geschaftsprozesmanagement_1999-1}
 
 \begin{figure}[H]
     \centering
@@ -60,7 +60,7 @@ Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph
     \item Funktionen und Ereignisse sind atomar, sodass eine Aufteilung innerhalb von Funktionen oder Ereignissen nicht möglich ist
     \item $id: V \rightarrow \mathbb{N}$ bildet einen Knoten auf dessen ID ab
     \item $\mathbb{S}$ beschreibt die Menge aller Strings
-    \item $\nu: V \rightarrow S$ ist eine Abbildung wo einem Knoten ein Name zugewiesen wird
+    \item $\nu: V \rightarrow \mathbb{S}$ ist eine Abbildung wo einem Knoten ein Name zugewiesen wird
     \item $\tau: O \rightarrow O$ ist eine Funktion, wo einem Split-Operator der dazugehörige Join-Operator und einem Join-Operator der dazugehörige Splitoperator ausgegeben wird
 \end{itemize}
 
@@ -120,7 +120,7 @@ Das ARIS-Toolset ist gemäß Scheer ein [...] Softwaresystem zur Analyse, Modell
 Navigation von Geschäftsprozessen. [...] Die Grundlage für das ARIS-Toolset wird von der 
 Repository-Struktur gelegt, welche sich aus dem Konzept des ARIS-Haus gebildet hat. \cite{scheer_aris_1994} \cite{rump_geschaftsprozesmanagement_1999-1}
 
-Nach Leimeister bietet ARIS also eine Umsetzung prozessorientierter Organisationsgestaltung [...] an. Der Anspruch liegt dabei auf der 
+Nach Leimeister bietet ARIS eine Umsetzung prozessorientierter Organisationsgestaltung [...] an. Der Anspruch liegt dabei auf der 
 Reduktion der Komplexität der Prozessmodellierung durch Spaltung der Unternehmensarchitektur durch die ARIS Methode in fünf 
 Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
 
@@ -176,8 +176,8 @@ Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programm
 
 In dieser Arbeit wird die ESP-IDF (Espressif IoT Development Framework) des Herstellers verwendet, welche Bibliotheken und Werkzeuge für die 
 Entwicklung des ESP32 bietet. \cite{hercog_design_2023} ESP-IDF baut die Firmware bestehend aus FreeRTOS und dem Nutzerquellcode als Haupttask. Neben der
-Ausführung von Tasks ist das Echtzeitbetriebssystem auch für die Behandlung von Events (in diesem Fall: Wi-Fi und CoAP Events beim CoAP-Server auf dem ESP32) zuständig ist \cite{zuiev_research_2024} und nebenläufige Prozesse 
-(in FreeRTOS: Tasks) verwalten muss. Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetriebssystemen im Vordergrund, was
+Ausführung von Tasks ist das Echtzeitbetriebssystem auch für die Behandlung von Events (in diesem Fall: Wi-Fi und CoAP Events beim CoAP-Server auf dem ESP32) zuständig \cite{zuiev_research_2024} sowie für die Verwaltung
+nebenläufiger Prozesse (in FreeRTOS: Tasks). Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetriebssystemen im Vordergrund, was
 durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024} 
 
 \section{IoT}
@@ -198,29 +198,29 @@ Zusammenfassend also:
     \item Digitale Leistungen
 \end{enumerate} \cite{meinhardt_iot_2021} \cite{fleisch_geschaftsmodelle_2015}
 
-Die Geräte, an welche Sensoren und Aktuatoren angeschlossen sind nennt man auch "constrained devices", welche durch ihre Konnektivität ein Netzwerk formen. Diese einzelnen Sensoren und Aktoren in
-diesem Netzwerk nennt man dann "constrained nodes". \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern \cite{shelby_constrained_2014} wie dem ESP32. Ein Protokoll, welches genutzt wird um mit Knoten 
+Die Geräte, an welche Sensoren und Aktuatoren angeschlossen sind nennt man auch ``constrained devices'', welche durch ihre Konnektivität ein Netzwerk formen. Diese einzelnen Sensoren und Aktoren in
+diesem Netzwerk nennt man dann ``constrained nodes''. \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern \cite{shelby_constrained_2014} wie dem ESP32. Ein Protokoll, welches genutzt wird um mit Knoten 
 in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014} \cite{shelby_constrained_2014}
 
 
 \subsection{CoAP}
 
 Gemäß RFC7252 ist CoAP (Constrained Application Protocol) [...] ein spezialisiertes Internettransferprotokoll, welches für eingeschränkte Knoten und Netzwerke genutzt wird.
-Diese Knoten haben meist einen 8-Bit Mikrocontroller mit kleinen ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
-welche eine hohe Paketfehlerrate und einen typischen Durchfluss von 10s bei kbit/s hat. Das Protokoll ist konzipiert für Maschine zu Maschine Anwendungen wie etwa
-Smart-Energie oder Bauautomatisierung. \cite{thaller_software-engineering_1997}\cite{wendzel_it-sicherheit_2018}
+Diese Knoten haben meist einen leistungsschwachen Mikrocontroller mit kleinen ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
+welche eine hohe Paketfehlerrate und einen typischen Durchfluss von 10s bei 1 kbit/s hat. Das Protokoll ist konzipiert für Maschine zu Maschine Anwendungen wie etwa
+Smart-Energy oder Bauautomatisierung. \cite{thaller_software-engineering_1997}\cite{wendzel_it-sicherheit_2018}
 CoAP baut dabei auf UDP auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Resourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
-Dies wird in RFC7252 auch Resource Discovery genannt und geschieht über das Constrained RESTful Environments Link Format, was in RFC6690 beschrieben wird. \cite{shelby_constrained_2014}
+Dies wird in RFC7252 auch Resource Discovery genannt. Das verwendete Datenformat zum Austausch ist das Constrained RESTful Environments Link Format, was in RFC 6690 beschrieben wird. \cite{shelby_constrained_2014}
 
 Die direkte Suche von Resourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also 
 effizienter zu gestalten gibt es sogenannte Resource Directories, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird entspricht auch RFC6690. \cite{amsuss_constrained_2022}
 
 Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichten Schicht und der Request-Response Schicht. Die Nachrichtenschicht ist dafür 
 zuständig, dass eine Nachricht zunächst per UDP übermittelt wird. Dabei gibt es folgende Typen von Nachrichten: Confirmable, Non-confirmable, Acknowledgement und Reset. Confirmable verlangt vom Kommunikationspartner eine
-Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Eine Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung separat (``Separate Response'') oder
-mit der Antwort zusammen (``Piggybacked Response'') übermittelt wird. Die Reset Nachricht teilt mit, dass die Nachricht zwar angekommen ist, diese aber aufgrund von fehlendem Kontext nicht verarbeitet werden kann. Solch eine Reset-Nachricht wird auch 
+Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Ein Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung separat (``Separate Response'') oder
+mit der Antwort zusammen (``Piggybacked Response'') übermittelt wird. Die Reset-Nachricht teilt mit, dass die Nachricht zwar angekommen ist, diese aber aufgrund von fehlendem Kontext nicht verarbeitet werden kann. Solch eine Reset-Nachricht wird auch 
 verwendet, um die Erreichbarkeit des Kommunikationspartners sicherzustellen.
-Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4-byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einem Statuscode
+Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4-byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einen Statuscode
 bei einer Antwort oder die Methode (GET, DELETE, PUT, POST) bei einer Anfrage und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haben kann. Dies verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
 um zur passenden Anfrage die passende Antwort zu übermitteln. Danach können weitere Optionen hinzugefügt werden, welche dann mit dem Payload-Marker (Ein Byte gefüllt mit Einsen) abgeschlossen werden. Nach dem Payload 
 Marker kann der Payload (also zu übermittelnde Daten) beigefügt werden. Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_constrained_2014}
@@ -235,7 +235,7 @@ serverseitigen Fehler.
 \subsection{MQTT}
 
 Wendzel definiert MQTT als ein Protokoll, was auch in resourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish Subscribe Architektur, wodurch
-Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, die die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
+Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, welche die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
 Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Vermittler zwischen dem Publisher und den Subscribern. Damit hier Nachrichten auch an die gewünschten Geräte versendet werden, werden 
 Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscriber'' \cite{brandes_mikrocontroller_2024}. Publisher und Subscriber haben keine Kenntnis voneinander und sind auf einer logischen Ebene entkoppelt. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008} 
 Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines Quality of Service (kurz: QoS) möglich.\cite{brandes_mikrocontroller_2024}
