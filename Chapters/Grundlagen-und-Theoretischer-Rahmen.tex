@@ -5,7 +5,7 @@ Es werden Begriffe definiert, um eine Grundlage für den Leser zu legen, um dies
 \section{Prozesse}
 
 Geschäftsprozesse (kurz: Prozesse) sind ``[...] zielgerichtete zeitlich-logische Folgen oder Vorgangsketten von Tätigkeiten [...], dessen Ziele aus der 
-Unternehmensstrategie abgeleitet sind.'' \cite{stahlknecht_einfuhrung_2005} Diese Abfolge muss durch ein Startereignis begonnen und mit einem Endereignis 
+Unternehmensstrategie abgeleitet sind.'' \cite{stahlknecht_einfuhrung_2005} Diese Abfolge muss durch ein Startereignis beginnen und mit einem Endereignis 
 abgeschlossen werden. \cite{leimeister_einfuhrung_2015} 
 
 \section{Prozessmodellierung}
@@ -13,7 +13,7 @@ abgeschlossen werden. \cite{leimeister_einfuhrung_2015}
 Bei der Prozessmodellierung werden Geschäftsprozesse in einem Unternehmen gemäß einer Notation dokumentiert, sodass Transparenz und Verständnis 
 bei Mitarbeitern und Fachexperten sichergestellt werden kann. Auf der Basis der modellierten Prozesse können dann Optimierungen durchgeführt werden. \cite{rump_geschaftsprozesmanagement_1999}
 
-Die Prozessmodellierung verfolgt nach Leimeister die folgenden Ziele: 
+Die Prozessmodellierung verfolgt nach Leimeister folgende Ziele: 
 
 \begin{itemize}
     \item ``Dokumentation von Sachverhalten sowie der erleichterten Kommunikation im Unternehmen [...]'' \cite{leimeister_einfuhrung_2015}
@@ -21,16 +21,15 @@ Die Prozessmodellierung verfolgt nach Leimeister die folgenden Ziele:
     \item Die Gestaltung von Prozessen ``um Abläufe und deren automatisierte Abarbeitung zu erklären[...]'' \cite{leimeister_einfuhrung_2015}
 \end{itemize}
 
-Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder BPMN modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
+Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder Business Process Model and Notation (kuzr: BPMN) modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
 
 \subsection{EPK}
 
-Leimeister definiert EPK (ereignisgesteuerte Prozesskette) als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen Ereignissen und
+Leimeister definiert EPK (ereignisgesteuerte Prozesskette) als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen, Ereignissen und
 Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren ``AND'', ``OR'' und ``XOR''. \cite{nuttgens_geschaftsprozesmodellierung_1998}
 Ein wesentliches Merkmal von EPK ist die Darstellung eines Prozesses in eine zeitlich-logische Abfolge von Funktionen und dem Einbau von Entscheidungslogik durch
 Ereignisse und Verknüpfungsoperatoren. \cite{nuttgens_geschaftsprozesmodellierung_1998}
 Prozessmodelle auf Basis von EPK sind für Stakeholder wie Projektpartner oder Kunden intuitiv verständlich, was von Vorteil ist. \cite{langner_ereignisgesteuerte_1997} 
-ARIS bietet EPK als Prozessnotation an und diese wird in der Regel auch von ARIS verwendet. \cite{rump_geschaftsprozesmanagement_1999-1}
 
 \begin{figure}[H]
     \centering
@@ -109,7 +108,7 @@ Neben dem Begriff Orchestrierung gibt es auch den Begriff Choreographie. Papazog
 business-process end points rather than a specific business process[...]'' \cite{papazoglou_service-oriented_2007}. Orchestrierung ist also somit auf einen Prozess bezogen, während Choreographie
 sich auf mehrere Prozesse ausdehnt.
 
-Aus dieser Definition und der Definition zur Automation lässt sich also sagen: Automation beschäftigt sich innerhalb eines Prozesses mit der Ausführung eines Schrittes, die Orchestrierung verantwortet
+Aus dieser Definition und der Definition zur Automation lässt sich also schlussfolgern: Automation beschäftigt sich innerhalb eines Prozesses mit der Ausführung eines Schrittes, die Orchestrierung verantwortet
 die Ausführung eines gesamten Prozesses, während die Choreographie sich über mehrere Prozesse hinweg bewegt.
 
 In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozesschritte gemäß der Modellierung. 
@@ -143,7 +142,8 @@ Seidlmeier wiederum definiert ARIS als Produktgruppe, welche auf die Optimierung
     \item ARIS Process Mining
 \end{itemize} \cite{seidlmeier_prozessmodellierung_2019} \cite{software_gmbh_aris_nodate}
 
-In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation zur Implementierung des Prototypen verwendet.
+In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation zur Implementierung des Prototypen verwendet. EPK ist Teil des ARIS-Konzepts und wird somit auch im ARIS-Toolset unterstützt. \cite{rump_geschaftsprozesmanagement_1999-1}
+
 
 \section{Eingebettete Systeme}
 
@@ -164,7 +164,7 @@ Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espr
 Anbindung, GPIO Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
 Neben den angegebenen Features, verfügt der ESP32 über Peripherien wie SPI, I2C, I2S, CAN, UART, etc. \cite{brandes_mikrocontroller_2024} 
 
-Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programmieren. Einige dieser Möglichkeiten sind:
+Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programmieren. Entwicklungsmöglichkeiten hierfür sind:
 
 \begin{itemize}
     \item Arduino-IDE (C/C++)
@@ -180,9 +180,9 @@ Ausführung von Tasks ist das Echtzeitbetriebssystem auch für die Behandlung vo
 nebenläufiger Prozesse (in FreeRTOS: Tasks). Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetriebssystemen im Vordergrund, was
 durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024} 
 
-\section{IoT}
+\section{Internet of Things}
 
-Es gibt keine eindeutige Definition für IoT. Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
+Es gibt keine eindeutige Definition für Internet of Things (kurz: IoT). Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
 eingebetteten Geräten, welche Kommunikationsdienste auf der Basis von Internetprotokollen anbieten. Diese Geräte werden gängig als ``Objekte''
 oder ``Smarte Objekte'' bezeichnet. Diese Objekte kommunizieren miteinander und brauchen keinen menschlichen Einfluss. \cite{balas_internet_2019}\cite{tschofenig_architectural_2015}\cite{wendzel_it-sicherheit_2018}
 
@@ -207,15 +207,15 @@ in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014}
 
 Gemäß RFC7252 ist CoAP (Constrained Application Protocol) [...] ein spezialisiertes Internettransferprotokoll, welches für eingeschränkte Knoten und Netzwerke genutzt wird.
 Diese Knoten haben meist einen leistungsschwachen Mikrocontroller mit kleinen ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
-welche eine hohe Paketfehlerrate und einen typischen Durchfluss von 10s bei 1 kbit/s hat. Das Protokoll ist konzipiert für Maschine zu Maschine Anwendungen wie etwa
+welche einen typischen Durchfluss von 10s bei 1 kbit/s hat. Das Protokoll ist konzipiert für Maschine zu Maschine Anwendungen wie etwa
 Smart-Energy oder Bauautomatisierung. \cite{thaller_software-engineering_1997}\cite{wendzel_it-sicherheit_2018}
 CoAP baut dabei auf UDP auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Resourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
 Dies wird in RFC7252 auch Resource Discovery genannt. Das verwendete Datenformat zum Austausch ist das Constrained RESTful Environments Link Format, was in RFC 6690 beschrieben wird. \cite{shelby_constrained_2014}
 
 Die direkte Suche von Resourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also 
-effizienter zu gestalten gibt es sogenannte Resource Directories, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird entspricht auch RFC6690. \cite{amsuss_constrained_2022}
+effizienter zu gestalten gibt es sogenannte Resource Directories, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird, entspricht auch RFC6690. \cite{amsuss_constrained_2022}
 
-Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichten Schicht und der Request-Response Schicht. Die Nachrichtenschicht ist dafür 
+Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichtenschicht und der Request-Response Schicht. Die Nachrichtenschicht ist dafür 
 zuständig, dass eine Nachricht zunächst per UDP übermittelt wird. Dabei gibt es folgende Typen von Nachrichten: Confirmable, Non-confirmable, Acknowledgement und Reset. Confirmable verlangt vom Kommunikationspartner eine
 Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Ein Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung separat (``Separate Response'') oder
 mit der Antwort zusammen (``Piggybacked Response'') übermittelt wird. Die Reset-Nachricht teilt mit, dass die Nachricht zwar angekommen ist, diese aber aufgrund von fehlendem Kontext nicht verarbeitet werden kann. Solch eine Reset-Nachricht wird auch 

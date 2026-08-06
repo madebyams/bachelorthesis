@@ -22,7 +22,7 @@ Wie anfangs schon beschrieben hat das System die folgenden Komponenten:
 \subsubsection{EPK-Compiler}
 \label{epk-compiler}
 
-Der EPK-Compiler ist dafür zuständig das Prozessmodell in ein Ausführungsmodell zu übersetzen.
+Der EPK-Compiler ist dafür zuständig, das Prozessmodell in ein Ausführungsmodell zu übersetzen.
 Dies geschieht durch Einlesen der Prozesssprache, welche dann in jedem Schritt das Ausführungsmodell Stück für Stück aufbaut.
 
 \subsubsection{Execution-Engine}
@@ -64,7 +64,7 @@ Für das Ausführungsmodell wird die Listendefinition gemäß Smolka \cite{smolk
 
 Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
 Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
-Modell wird dann von der Execution-Engine eingelesen, welche dann die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
+Modell wird dann von der Execution-Engine eingelesen, welche anschließend die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
 auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses modellieren. Formal kann es wie folgt definiert werden:
 
 Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückgabetypen. Dann gilt:
@@ -380,13 +380,15 @@ in
 end;
 \end{lstlisting}
 
+\newpage
+
 Bei einer SingleExecutable wird die Funktion passend zur Executable auf dem Mikrocontroller ausgeführt. Bei einer ExecutableGroup 
 werden die direkten Nachbarn der Pfade ausgeführt und es wird entsprechend der Logik des Verknüpfungsoperators eine Entscheidung 
 getroffen zum auszuführenden Pfad.
 
 \section{Animation der Automatisierung}
 \label{automation-animation}
-Nach Kompilierung des Prozessmodells in das Ausführungsmodell, kann dieses ausgeführt werden. Bevor die Ausführung durchgeführt wird,
+Nach Kompilierung des Prozessmodells in das Ausführungsmodell kann das Ausführungsmodell ausgeführt werden. Bevor die Ausführung durchgeführt wird,
 wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
 gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
 Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
