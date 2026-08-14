@@ -412,9 +412,9 @@ Dieses Verhalten ist sehr ähnlich zu WebSockets, wo zunächst eine WebSocket-Ve
 \toprule
 Polling                                                      & bidirektionale Verbindung \\
 \midrule
-- Mehrfacher Verbindungsaufbau für jeden Prozessschritt      & + ein Verbindungsaufbau gefolgt von kontinuierlichem Datenaustausch \\
-+ Geregelte Semantik durch HTTP-Methoden                     & - Semantik muss selbst definiert werden                          \\
-- Blockierendes Request Response bringt Latenz               & + Durch kontinuierlichen Datenaustausch niedrige Latenz \\
+- Mehrfacher Verbindungsaufbau für jeden Prozessschritt \cite{obonguko_websockets_2025}     & + ein Verbindungsaufbau gefolgt von kontinuierlichem Datenaustausch (Stream) \cite{eddy_transmission_2022} \\
++ Geregelte Semantik durch HTTP-Methoden \cite{fielding_http_2022}                     & - Semantik muss selbst definiert werden \cite{eddy_transmission_2022}                          \\
+- Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreite und Stauung im Netzwerk \cite{obonguko_websockets_2025}               & + Durch kontinuierlichen Datenaustausch niedrige Latenz \cite{loreto_known_2011} \\
 \bottomrule                         
 \end{tabularx}
 \caption{Gegenüberstellung}
