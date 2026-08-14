@@ -94,7 +94,7 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
 
     $\to$ Der generierte Code ist für ESP32-Mikrocontroller konzipiert. Im Falle eines Ausfalls kann durch das Live-Streaming und Logging erfasst werden, an welcher 
     Stufe der Ausfall stattfand. Durch einen Lookup in der Resource-Directory kann man dann den Mikrocontroller ermitteln, welcher für den Ausfall verantwortlich war. 
-    Die entsprechende Firmware kann auf einen neuen ESP32-Mikrocontroller geladen und mit dem kaputten Mikrocontroller ausgestauscht werden, falls der Mikrocontroller 
+    Die entsprechende Firmware kann auf einen neuen ESP32-Mikrocontroller geladen und mit dem defekten Mikrocontroller ausgestauscht werden, falls der Mikrocontroller 
     die Fehlerquelle war. Aber auch im Falle, dass der Mikrocontroller nicht die Fehlerquelle ist, kann durch den Ausführungsbericht die Fehlerquelle erfasst werden, was das Suchen von Fehlern 
     erleichtert und man effizient und schnell auf Ausfälle regaieren kann. Damit kann der Produktionsfluss schneller wiederhergestellt werden.
 \end{enumerate}
@@ -191,7 +191,7 @@ es eine lokale Kopie des Resource-Directory schon gibt, muss also kein CoAP-Aufr
 beschleunigt. Die Rückverfolgung ist sehr schnell, da es versucht mit der Ausführung des ESP auf der Hardware mitzukommen. Da diese aber sehr schnell ist, ist es meist 
 ein schnelles Herunterschnellen der Animation. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es durch Netzwerke etwas Latenz und auch werden 
 lokale IP-Adressen der Hardware auf dem Resource-Directory hinterlegt. Dadurch muss sich der Rechner mit der ARIS Instanz im selben Netzwerk befinden, wie die Hardware.
-Jedoch könnte man hier durch Tunneling arbeiten können, wo alle Geräte sich in einem virtuellen Netzwerk befinden. Auch die Entscheidungsfindung läuft passend. Bei dem XOR 
+Jedoch könnte man hier durch Tunneling arbeiten können, wo alle Geräte sich in einem virtuellen Netzwerk befinden \cite{penaflor_rey_designing_2022} \cite{dymora_performance_2014}. Auch die Entscheidungsfindung läuft passend. Bei dem XOR 
 zur Überprüfung des Aufbaus des Geschosses werden die passenden Pfade verwendet (Geschoss nicht eingebaut Pfad, bei fehlendem Geschoss und Aufbau des Daches bei aufgebautem Geschoss).
 Es wird also prozessgetreu ausgeführt. Der Kritikpunkt ist aktuell das Echtzeitverhalten und die Einschränkung des Netzwerkes.
 

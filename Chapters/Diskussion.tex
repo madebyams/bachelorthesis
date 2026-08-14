@@ -20,13 +20,13 @@ im Sicherheitsaspekt.
 
 Zurzeit laufen die TCP-Sockets zur Animation während der Ausführung ohne jegliche Absicherung. Dies kann dazu 
 führen, dass Daten abgelesen werden können zwischen dem ARIS-Server und Client. Hier kann durch Nutzung von TLS
-die Verbindung abgesichert werden.
+die Verbindung abgesichert werden. \cite{wendzel_it-sicherheit_2018}
 
 \subsection{Absicherung des Resource Directory Servers und IoT-Hardware}
 
 Auch beim Resource Directory Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser 
 ist kritischer, da dort die Zieladdressen der ESP32 liegen, welche angesteuert werden sollen. Hier kann man eine Absicherung 
-gewährleisten durch Nutzung von dTLS für den Resource Directory Server. Dies gilt auch für den ESP32.
+gewährleisten durch Nutzung von dTLS \cite{wendzel_it-sicherheit_2018} für den Resource Directory Server. Dies gilt auch für den ESP32.
 
 \section{Kritische Bewertung der Architektur und Systemlimitationen}
 
@@ -42,8 +42,8 @@ den Netzwerkgegebenheiten ist.
 \subsection{Bottleneck durch die JVM auf Server und Client}
 
 Neben der Netzwerklatenz kommt auch noch der Aspekt, dass die JVM durch ihre Garbage-Collection kein deterministisches Verhalten liefert und 
-es zu unbestimmten Zeiten zu Verlangsamungen kommen kann. Dies kann auch das angestrebte Echtzeitverhalten der Orchestierung beeinflussen. In solchen
-Fällen ist es hilfreich mit Sprachen wie C/C++ zu arbeiten, wo man durch eigene Speicherverwaltung eine stabile Performance gewährleisten kann.
+es zu unbestimmten Zeiten zu Verlangsamungen kommen kann. \cite{carpen-amarie_performance_2015} \cite{al-jaroodi_object-reuse_2005} Dies kann auch das angestrebte Echtzeitverhalten der Orchestierung beeinflussen. In solchen
+Fällen ist es hilfreich mit Sprachen wie C++ zu arbeiten, wo man durch eigene Speicherverwaltung eine stabile Performance gewährleisten kann. \cite{stroustrup_brief_2015} \cite{herter_timing-predictable_2014}
 
 \subsection{Fehlerbehandlung (synchron und asynchron)}
 
@@ -74,9 +74,9 @@ durch Open-Source Entwicklung voranzutreiben.
 
 \section{Fazit zur Praxistauglichkeit}
 
-Durch Execution-Engines wie Flowable und Camunda hat man schon gesehen, dass Prozesse automatisiert werden können. Jedoch tut diese Arbeit auch neben dieser Prozessautomatisierung, ein Rahmenwerk festlegen, 
-sodass Software gemäß von Geschäftsprozessen entwickelt werden kann. Diese prozessorientierte Softwareentwicklung kann in der Praxis sehr sinnvoll sein und durch Vereinfachung von Entwicklungsprozessen durch 
+Durch Execution-Engines wie Flowable (siehe Abschnitt \ref{flowable}) und Camunda (siehe Abschnitt \ref{camunda}) hat man schon gesehen, dass Prozesse automatisiert werden können. Jedoch tut diese Arbeit auch neben dieser Prozessautomatisierung, ein Rahmenwerk festlegen, 
+sodass Software gemäß von Geschäftsprozessen entwickelt werden kann. Diese prozessorientierte Softwareentwicklung kann in der Praxis sehr sinnvoll sein und durch Vereinfachung von Entwicklungsprozessen und 
 Lösungen wie Codegenerierung ist es umsetzbar. Kritisch kann es jedoch werden bei der Aufrüstung der industriellen Komponenten, da hier Anbindungen gemacht werden müssen zwischen der Anlage und dem Mikrocontroller, 
-für eine Verbindung zwischen ARIS und den Anlagen wie in \ref{reflection} angesprochen. Es ist also im Fazit umsetzbar softwareseitig, jedoch kann es auf der Hardwareseite zu Schwierigkeiten kommen. Sei es durch Inkompatibilität 
+für eine Verbindung zwischen ARIS und den Anlagen wie in Abschnitt \ref{reflection} angesprochen. Es ist also im Fazit umsetzbar softwareseitig, jedoch kann es auf der Hardwareseite zu Schwierigkeiten kommen. Sei es durch Inkompatibilität 
 oder einfach der fehlenden Möglichkeit der Anbindung an die Anlage. Es benötigt Anlagen mit Periphärien oder einer Schnittstelle, um einen Mikrocontroller zu integrieren. Hierbei kann man sich ein Beispiel an 
-Periphärien wie CAN aus der Automobilindsutrie nehmen, welche zur Realisierung von OBD verwendet wird.
+Periphärien wie CAN aus der Automobilindsutrie nehmen, welche zur Realisierung von OBD verwendet wird. \cite{noauthor_road_2024} \cite{hristu-varsakelis_vehicle_2005}
