@@ -1,6 +1,13 @@
 \chapter{Diskussion}
 
-Nach der Umsetzung und der Validierung werden einige Aspekte dieser Arbeit kritisch reflektiert.
+In diesem Kapitel findet eine kritische Reflektion des entworfenen Systems, sowie der Umsetzung statt. Die geschieht durch das Aufzeigen von Einschränkungen auf die man während 
+des Entwurfes sowie der Umsetzung traf.
+
+\section{Einschränkungen des Prozessmodells}
+
+Das Prozessmodell, welches in dem Kapitel \ref{grundlagen-und-theoreitscher-rahmen} und Kapitel \ref{systemdesign-und-spezifikation} definiert wurde, deckt zwar schon einen Großteil an EPK-Modellen ab.
+Jedoch gibt es in der Praxis auch Prozessmodelle mit Zyklen, welche durch die azyklische Eigenschaft des Modells in dieser Arbeit nicht abgedeckt wird. Dafür muss zu einen das Ausführungsmodell aus Abschnitt 
+\ref{ausfuehrungsmodell} um eine Schleifenstruktur erweitert werden und der Compiler (siehe Abschnitt \ref{epk-compiler}) muss den Zyklus in die Schleife entsprechend übersetzen.
 
 \section{Reflektion des Projekts im Hinblick auf Zielsetzung}
 \label{reflection}
