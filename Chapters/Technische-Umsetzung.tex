@@ -2,8 +2,13 @@
 \label{technische-umsetzung}
 
 In diesem Kapitel wird auf Basis des Entwurfes aus Kapitel \ref{systemdesign-und-spezifikation} das System bestehend aus Compiler, Prozess- und Ausführungsmodell umgesetzt. Auch wird die Orchestrierungsschicht sowie die Codegenerierung hier eingebaut, 
-welches die tatsächliche Ausführung des Ausführungsmodelles auf echter Hardware ermöglicht.
+welches die tatsächliche Ausführung des Ausführungsmodelles auf echter Hardware ermöglicht. Die Bestandteile werden dann in die Prozessverwaltungsplattform ARIS eingebettet. Zum Verständnis wird die Abbildung \ref{fig:systemarchitektur} hier eingefügt, sodass man anhand dieser Abbildung sich in der Umsetzung orientieren kann:
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Graphics/Systemarchitektur.pdf}
+    \caption{Systemarchitektur}
+\end{figure}
 
 Der Protoyp des Entwurfes aus Kapitel \ref{systemdesign-und-spezifikation} wurde in den Programmiersprachen Java, Scala, Python und C++ entwickelt. Scala wurde für den Compiler und die Execution-Engine verwendet, Java wurde für die Host-seitige 
 CoAP Verbindung zur Übermittlung von Befehlen und für die Nutzeroberfläche, während C++ für die Firmware auf dem ESP32 genutzt wurde und Python für die Codegenerierung. Als EPK-Schicht wurde eine modifizierte 
@@ -23,6 +28,8 @@ Die Klasse \texttt{Process} beschreibt das Prozessmodell $P$ und der Graph $G_P$
 Zu Kompilierungszwecken werden das Start- und Endereignis in der Klasse als Attribute hinterlegt. Die Knotenmenge $V$ wird durch die Klasse 
 \texttt{Node} realisiert. Dabei wird die Teilmengenbeziehung von $E$, $O$ und $F$ durch Vererbung in Java umgesetzt. Das 
 UML-Diagramm der Prozessmodellimplementierung ist unter Abbildung \ref{fig:prozess-uml} im Anhang zu finden.
+
+\newpage
 
 \textbf{Ausführungsmodell}
 
