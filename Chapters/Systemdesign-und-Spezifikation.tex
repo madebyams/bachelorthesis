@@ -12,32 +12,13 @@ Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware
     \label{fig:systemarchitektur}
 \end{figure}
 
-Diese Arbeit setzt ein System bestehend aus einem \textbf{EPK-Compiler} für modellierte EPK-Prozesse in ARIS, welche ein definiertes \textbf{Ausführungsmodell} liefert,
-einer \textbf{Execution-Engine} mit \textbf{Live-Animationsanbindung zu ARIS} und einem \textbf{Codegenerator}, um die Entwicklung der Firmware 
-basierend auf dem Ausführungsmodell zu realisieren.
+Um das in Kapitel \ref{motivation-und-zielsetzung} gesetzte Ziel der Prozessausführung zu ermöglichen, muss zunächst 
+ein \textbf{Prozessmodell} definiert werden, welches vom \textbf{EPK-Compiler} übersetzt wird. Das \textbf{Ausführungsmodell} ist das
+Resultat des Compiler und muss ebenfalls definiert werden. Sind beide Definitionen vorhanden, so kann die eigentliche Kompilierung formal 
+beschrieben werden. Aus diesen Bestandteilen kann dann die Ausführung sowie die Codegenerierung abgeleitet werden. 
 
-\section{Architektur und Prinzipien}
-
-Dieses System besteht aus vielen Komponenten, welche sich in ARIS und der ESP-IDF bewegen.
-
-\subsection{Komponenten und Verantwortlichkeiten}
-
-Wie anfangs schon beschrieben hat das System die folgenden Komponenten:
-
-\subsubsection{Execution-Engine}
-
-Die Execution-Engine nimmt ein Ausführungsmodell an und führt dieses schrittweise auf dem IoT-System aus.
-
-\subsubsection{Code-Generator}
-
-Der Code-Generator nimmt ein Ausführungsmodell und generiert Codedateien für das Ziel IoT-System gemäß der einzelnen 
-Befehlsschritte.
-
-\subsection{Datenmodelle}
-
-Für die einzelnen Komponenten werden die folgenden Datenmodelle definiert:
-
-\subsubsection{Prozessmodell}
+\section{Prozessmodell}
+\label{prozessmodell}
 
 Gegeben sei ein Prozess $P$. Dieser wird durch ein Prozessmodell dargestellt.
 
@@ -58,7 +39,7 @@ dargestellt werden.
 Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefensuche traversiert
 und in das Ausführungsmodell kompiliert wird. 
 
-\subsubsection{Ausführungsmodell}
+\section{Ausführungsmodell}
 \label{ausfuehrungsmodell}
 
 Für das Ausführungsmodell wird die Listendefinition gemäß Smolka \cite{smolka_programmierung_2012} verwendet.
@@ -82,113 +63,6 @@ Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückg
 
 Die ExecutionQueue wird dargestellt als ein Element von $\text{List}(X_S \cup X_G)$.
 
-\subsubsection{Codegenerierungsmodell}
-\label{code-generation-model}
-
-Sei $C = \{(i, n, t) | i \in \mathbb{N} \land n \in S \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
-den Rückgabetypen sowie die ersten 15 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
-
-
-
-\subsection{Schnittstellen}
-
-In dieser Arbeit wird CoAP als Kommunikationsprotokoll zwischen der Execution-Engine und dem IoT-System verwendet.
-
-\subsubsection{Gegenüberstellung von MQTT und CoAP}
-
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
-\toprule
-\textbf{MQTT} & \textbf{CoAP} \\
-\midrule
-$-$ Nutzt Publish-Subscribe Pattern, wodurch Warte-Mechanismus für den Erhalt des Rückgabewerts eingebaut werden muss \cite{al-fuqaha_internet_2015} & $+$ Nutzt Request-Response Pattern, sodass man eine Antwort nach Ausführung eines Schrittes erhält \cite{al-fuqaha_internet_2015} \\
-\addlinespace
-$-$ MQTT basiert auf TCP. Dieses bringt beim Verbindungsaufbau mit dem Drei-Wege-Handshake Latenz ein. \cite{kurose_computernetzwerke_2014} & $+$ UDP benötigt keinen Drei-Wege-Handshake und baut die Verbindung schneller auf \cite{kurose_computernetzwerke_2014} \\
-\addlinespace
-$-$ Die Header-Größe bei MQTT beträgt 2 Byte \cite{noauthor_information_2016}. Addiert mit der Header-Größe von 20 Bytes bei TCP hat der Gesamtheader eine Größe von 22 Bytes. Dies kann für Constrained-Network von Nachteil sein, da das Paket größer ist. & $+$ CoAP hat hingegen eine Header-Größe von 4 Bytes. Jedoch bringt UDP eine Header-Größe von 8 Bytes, wodurch der Header-Overhead sich auf 12 Bytes beläuft \\
-\addlinespace
-$-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zuweisung erfolgt durch Tokens, die im Request-/Response-Paket enthalten sind \cite{10.1109/COMST.2015.2444095} \\
-\bottomrule
-\end{tabularx}
-\caption{Gegenüberstellung von MQTT und CoAP hinsichtlich der Prozessschritt-Ausführung}
-\label{tab:mqtt-coap}
-\end{table}
-
-Auf dieser Grundlage wurde entschieden CoAP als Kommunikationsprotokoll zwischen der Orchestrierungsschicht und dem IoT-System zu verwenden.
-
-
-\subsubsection{Definition der CoAP Schnittstelle}
-\label{coap-interface}
-
-Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlich zu REST Endpunkte, für verschiedene Resourcen. 
-Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher auf einem Mikrocontroller läuft:
-Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
-
-
-\textbf{GET /health}
-
-
-Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgegeben werden kann.
-
-Die Antwort hat folgendes Schema:
-
-\begin{lstlisting}[caption={Schema der Antwort beim \texttt{/health} Endpunkt}, label=lst:health-answer]
-{
-    "status": string,
-    "temperature": float
-}
-\end{lstlisting}
-
-Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
-
-
-\textbf{PUT /<$h$[0:15]>}
-
-
-Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
-kein Payload mitgegeben werden. Dies begründet auch die Entscheidung PUT zu verwenden. Normalerweise wird für eine Ausführung POST
-genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload zwingend benötigt wird, erschien PUT sinnvoller.
-
-Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
-ist hierbei wie folgt:
-
-\begin{lstlisting}[caption={Schema der Antwort bei Prozessschrittendpunkten}, label=lst:single-executable-answer]
-{
-    "result": uint8_t | bool, 
-    "timeSpent": uint32_t
-}
-\end{lstlisting}
-
-\subsubsection{Schnittstelle des Automationsservers}
-\label{automation-server-interface}
-
-Der Automationsserver bietet eine Schnittstelle an, welche die Automation von Prozessen steuert.
-
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
-\toprule
-Name                        &   Parameter                                                           & Funktion \\
-\midrule
-getSessionID                &   keine Parameter                                                     & -         \\
-initSimulation              &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells und Aufbau des Ausführungsmodell  \\
-terminateCache              &   keine Parameter                                                     & Wird nicht verwendet, da Caching nicht benötigt wird           \\ 
-runSimulation               &   keine Parameter                                                     & Ausführung des Ausführungsmodell und Livestreaming über Socket \\
-stopSimulation              &   keine Parameter                                                     & Stoppen der Ausführung und des Livestreaming  \\
-getNextStepGroup            &   Parameter                                                           & Vorheriger Endpunkt um den nächsten Prozessschritt zu bekommen  \\
-getAvailableStatistics      &   Sprache                                                             & Abfragen des Statistikkatalogs (Verfügbare Statistiken)  \\
-getVersion                  &   keine Parameter                                                     & Serverversion  \\
-generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodells und Serialisierung des Ausführungsmodells in JSON, um Codegenerierung auf dem Client zu starten  \\
-exportDetailedStatistics    &   keine Parameter                                                     & Serialisierung der Ausführungsstatistik in das CSV-Tabellenformat  \\
-initStreamConnection        &   keine Parameter                                                     & Erstellen eines Serversockets, um das Live-Streaming der Ausführung für die Animation zu ermöglichen\\
-closeStreamConnection       &   keine Parameter                                                     & Schließen der erstellten Socketverbindung \\
-\bottomrule
-\end{tabularx}
-\caption{Übersicht der Simulationsschnittstelle}
-\label{tab:simulation-interface}
-\end{table}
-
 \section{EPK-Compiler}
 \label{epk-compiler}
 
@@ -197,23 +71,8 @@ Dies geschieht durch Einlesen der Prozesssprache, welche dann in jedem Schritt d
 
 \subsection{Eingabe- und Ausgabesprache}
 
-Bei der Eingabesprache handelt es sich um EPK serialisiert im XML-Format. Die Ausgangssprache ist das Ausführungsmodell
-
-
-\subsection{Statische Semantik}
-\begin{figure}[H]
-    \centering
-    \subfloat[Ein Beispielprozess modelliert mit EPK\label{fig:beisielprozess}]{
-        \includegraphics[width=0.4\textwidth]{Graphics/Beispielprozess.png}
-    }
-
-    \hfill
-
-    \subfloat[Beispielprozess aus \ref{fig:beisielprozess} als gerichteter, azyklischer Graph\label{fig:beisielprozess-graph}]{
-        \includegraphics[width=0.4\textwidth]{Graphics/BeispielprozessGraph.pdf}
-    }
-\caption{Ein Prozess in zwei Darstellungen}
-\end{figure}
+Bei der Eingabesprache handelt es sich um einen Prozess, der gemäß der Definition des Abschnitts \ref{prozessmodell} modelliert wurde. 
+Der Compiler übersetzt diese als ein Ausführungsmodell, das der Definition aus Abschnitt \ref{ausfuehrungsmodell} entspricht.
 
 \subsection{Statische Analyse und Vorverarbeitung der Konnektoren}
 
@@ -315,9 +174,33 @@ Zur Kompilierung müssen die folgenden Übersetzungsregeln definiert werden:
 
 Am Ende erhält man eine Liste der Form $[(0, bool), \dots, (n, bool)]$
 
-\section{Ausführung des Ausführungsmodells}
 
-Die Ausführung kann mit folgendem Standard-ML von \cite{smolka_programmierung_2012} beschrieben werden:
+\section{Codegenerierung}
+\label{code-generation-model}
+
+Bei der Codegenerierung wird ein Ausführungsmodell betrachtet und es werden Codedateien für das Ziel IoT-System gemäß der einzelnen 
+Befehlsschritte (Executables) generiert. Diese Executables sind jedoch zunächst für die Ausführung vorgesehen und müssen dementsprechend
+in ein Modell umgewandelt werden, welches die Generierung von Quellcode ermöglicht.
+
+\subsection{Codegenerierungsmodell}
+
+Sei $C = \{(i, n, t) | i \in \mathbb{N} \land n \in S \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
+den Rückgabetypen sowie die ersten 15 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+
+\subsection{Generierung des Firmwarequellcodes}
+
+Bei der Generierung des Firmwarequellcodes wird rekursiv durch das Ausführungsmodell traversiert, um alle SingleExecutables $x_S$ in die entsprechenden
+Codeelemente $c \in C$ umzuwandeln.
+
+
+\section{Execution-Engine}
+
+Durch den EPK-Compiler erhält man nun das Ausführungsmodell. Dieses kann von der Execution-Engine entgegengenommen und zur Orchestrierung verwendet
+werden, sodass eine Ausführung des Prozesses ermöglicht wird. Im folgenden wird die Bezeichnung \textit{ExecutionQueue} verwendet, um auf das 
+Ausfürhungsmodell zu verweisen.
+
+Die Ausführung einer ExecutionQueue kann mithilfe des folgenden Standard-ML \cite{smolka_programmierung_2012} Quellcodes 
+beschrieben werden:
 
 \begin{lstlisting}
 datatype returnType = Boolean | Int;
@@ -389,23 +272,12 @@ Bei einer SingleExecutable wird die Funktion passend zur Executable auf dem Mikr
 werden die direkten Nachbarn der Pfade ausgeführt und es wird entsprechend der Logik des Verknüpfungsoperators eine Entscheidung 
 getroffen zum auszuführenden Pfad.
 
-\section{Animation der Automatisierung}
+\section{Live-Streaming der Ausführung}
 \label{automation-animation}
-Nach Kompilierung des Prozessmodells in das Ausführungsmodell kann das Ausführungsmodell ausgeführt werden. Bevor die Ausführung durchgeführt wird,
-wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
-gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
-Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
-animieren.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{Graphics/Live-Streaming.pdf}
-    \caption{Diagram, welches Livestreaming zur Animation darstellt}
-    \label{fig:live-streaming}
-\end{figure}
-
-
-Dieses Verhalten ist sehr ähnlich zu WebSockets, wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
+Eines der Anforderungen aus Kapitel \ref{analyse-und-konzeption} war das Live-Streaming der Prozessausführung. Hierbei gibt es zwei Möglichkeiten, um dieses
+Live-Streaming realisieren: Polling über HTTP oder ein kontinuerlicher Informationsaustausch über eine bidirektionale TCP-Verbindung. Diese beiden Optionen werden
+im folgenden gegenübergestellt.
 
 \subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
 
@@ -426,7 +298,121 @@ Polling                                                      & bidirektionale Ve
 
 Auf dieser Grundlage wurde entschieden mit bidirektionalen Verbindungen statt Polling, für die Animation zu arbeiten.
 
-\section{Generierung des Firmwarequellcodes}
+Vor der Ausführung, wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
+gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
+Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
+animieren.
 
-Bei der Generierung des Firmwarequellcodes wird rekursiv durch das Ausführungsmodell gegangen, um alle SingleExecutables $x_S$ in die entsprechenden
-C++-Codeblöcke umzuwandeln.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Graphics/Live-Streaming.pdf}
+    \caption{Diagram, welches Livestreaming zur Animation darstellt}
+    \label{fig:live-streaming}
+\end{figure}
+
+
+Dieses Verhalten ist sehr ähnlich zu WebSockets, wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
+
+\section{Schnittstellen}
+
+Es müssen zwei Schnittstellen für diese Arbeit definiert werden. Die erste Schnittstelle stellt dem Nutzer die Funktionalitäten des Compilers und der Execution-Engine zur Verfügung.
+Die zweite Schnittstelle definiert die Kommunikation der Orchestrierungsschicht der Prozessverwaltungsplattform mit IoT-Geräten.
+
+\subsection{Schnittstelle für Compiler und Execution-Engine}
+\label{automation-server-interface}
+
+Der Automationsserver bietet eine Schnittstelle an, welche die Automation von Prozessen steuert.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+Name                        &   Parameter                                                           & Funktion \\
+\midrule
+getSessionID                &   keine Parameter                                                     & -         \\
+initSimulation              &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells und Aufbau des Ausführungsmodell  \\
+terminateCache              &   keine Parameter                                                     & Wird nicht verwendet, da Caching nicht benötigt wird           \\ 
+runSimulation               &   keine Parameter                                                     & Ausführung des Ausführungsmodell und Livestreaming über Socket \\
+stopSimulation              &   keine Parameter                                                     & Stoppen der Ausführung und des Livestreaming  \\
+getNextStepGroup            &   Parameter                                                           & Vorheriger Endpunkt um den nächsten Prozessschritt zu bekommen  \\
+getAvailableStatistics      &   Sprache                                                             & Abfragen des Statistikkatalogs (Verfügbare Statistiken)  \\
+getVersion                  &   keine Parameter                                                     & Serverversion  \\
+generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodells und Serialisierung des Ausführungsmodells in JSON, um Codegenerierung auf dem Client zu starten  \\
+exportDetailedStatistics    &   keine Parameter                                                     & Serialisierung der Ausführungsstatistik in das CSV-Tabellenformat  \\
+initStreamConnection        &   keine Parameter                                                     & Erstellen eines Serversockets, um das Live-Streaming der Ausführung für die Animation zu ermöglichen\\
+closeStreamConnection       &   keine Parameter                                                     & Schließen der erstellten Socketverbindung \\
+\bottomrule
+\end{tabularx}
+\caption{Übersicht der Simulationsschnittstelle}
+\label{tab:simulation-interface}
+\end{table}
+
+\subsection{Schnittstelle zwischen Prozessverwaltungsplattform und IoT-Geräten}
+
+Bevor die Schnittstelle zwischen diesen beiden Parteien muss das Protokoll festgelegt werden, welches zur Kommunikation genutzt wird. Im IoT-Kontext hat man hierbei die 
+folgenden zwei Optionen: CoAP und MQTT. \cite{wendzel_it-sicherheit_2018} Diese werden im folgenden gegenübergestellt.
+
+\subsubsection{Gegenüberstellung von MQTT und CoAP}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{MQTT} & \textbf{CoAP} \\
+\midrule
+$-$ Nutzt Publish-Subscribe Pattern, wodurch Warte-Mechanismus für den Erhalt des Rückgabewerts eingebaut werden muss \cite{al-fuqaha_internet_2015} & $+$ Nutzt Request-Response Pattern, sodass man eine Antwort nach Ausführung eines Schrittes erhält \cite{al-fuqaha_internet_2015} \\
+\addlinespace
+$-$ MQTT basiert auf TCP. Dieses bringt beim Verbindungsaufbau mit dem Drei-Wege-Handshake Latenz ein. \cite{kurose_computernetzwerke_2014} & $+$ UDP benötigt keinen Drei-Wege-Handshake und baut die Verbindung schneller auf \cite{kurose_computernetzwerke_2014} \\
+\addlinespace
+$-$ Die Header-Größe bei MQTT beträgt 2 Byte \cite{noauthor_information_2016}. Addiert mit der Header-Größe von 20 Bytes bei TCP hat der Gesamtheader eine Größe von 22 Bytes. Dies kann für Constrained-Network von Nachteil sein, da das Paket größer ist. & $+$ CoAP hat hingegen eine Header-Größe von 4 Bytes. Jedoch bringt UDP eine Header-Größe von 8 Bytes, wodurch der Header-Overhead sich auf 12 Bytes beläuft \\
+\addlinespace
+$-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zuweisung erfolgt durch Tokens, die im Request-/Response-Paket enthalten sind \cite{10.1109/COMST.2015.2444095} \\
+\bottomrule
+\end{tabularx}
+\caption{Gegenüberstellung von MQTT und CoAP hinsichtlich der Prozessschritt-Ausführung}
+\label{tab:mqtt-coap}
+\end{table}
+
+Auf dieser Grundlage wurde entschieden CoAP als Kommunikationsprotokoll zwischen der Orchestrierungsschicht und dem IoT-System zu verwenden.
+
+\subsubsection{Definition der CoAP Schnittstelle}
+\label{coap-interface}
+
+Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlich zu REST Endpunkte, für verschiedene Resourcen. 
+Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher auf einem Mikrocontroller läuft:
+Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
+
+
+\textbf{GET /health}
+
+
+Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgegeben werden kann.
+
+Die Antwort hat folgendes Schema:
+
+\begin{lstlisting}[caption={Schema der Antwort beim \texttt{/health} Endpunkt}, label=lst:health-answer]
+{
+    "status": string,
+    "temperature": float
+}
+\end{lstlisting}
+
+Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
+
+
+\textbf{PUT /<$h$[0:15]>}
+
+
+Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
+kein Payload mitgegeben werden. Dies begründet auch die Entscheidung PUT zu verwenden. Normalerweise wird für eine Ausführung POST
+genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload zwingend benötigt wird, erschien PUT sinnvoller.
+
+Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
+ist hierbei wie folgt:
+
+\begin{lstlisting}[caption={Schema der Antwort bei Prozessschrittendpunkten}, label=lst:single-executable-answer]
+{
+    "result": uint8_t | bool, 
+    "timeSpent": uint32_t
+}
+\end{lstlisting}
