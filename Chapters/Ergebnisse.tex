@@ -187,6 +187,8 @@ Das Kommanobyte wird dabei wie folgt definiert:
 \label{tab:command-byte}
 \end{table}
 
+\newpage
+
 \subsection{Ausführung des Automationsprozesses}
 
 Dadurch, dass die Firmware entwickelt wurde, kann bei ARIS der Prozess gestartet werden. Dieser hat schon beim Programmstart eine Hash-Map aller verfügbaren Resourcen 
@@ -304,3 +306,9 @@ Laufzeitausnahmen umgesetzt. Hier kann durch normale Ausnahmen eine bessere Fehl
 
 Die Nutzung von Continous Integration und Continous Delivery für ARIS ist durch deren Infrastruktur auf GitHub gegeben. Für die Firmware des ESP32 kann Continous-Integration 
 umgesetzt werden. Dies erfolgt durch Test und Bauen vom Firmwarecode auf CI/CD Plattformen wie GitHub-Actions oder GitLab-CI.
+
+\section{Zusammenfassung}
+
+In diesem Kapitel wurde das konzeptionierte System, sowie dessen technische Umsetzung entgegen der in Kapitel \ref{analyse-und-konzeption} aufgeführten Anforderungen überprüft. Dabei
+wurde ein Großteil der Anforderungen erfüllt. Die fehlenden Komponenten sowie weitere Aspekte, welche während der Konzeption und Implementierung aufkamen wurden anschließend beleuchtet und
+diskutiert. Die Ziele und Anforderungen wurden zwar großflächig erreicht, jedoch kann man in den Bereichen Sicherheit und Leistung noch einige Verbesserungen durchführen.

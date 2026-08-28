@@ -14,30 +14,13 @@ Der Protoyp des Entwurfes aus Kapitel \ref{systemdesign-und-spezifikation} wurde
 CoAP Verbindung zur Übermittlung von Befehlen und für die Nutzeroberfläche, während C++ für die Firmware auf dem ESP32 genutzt wurde und Python für die Codegenerierung. Als EPK-Schicht wurde eine modifizierte 
 Version der ARIS Produktgruppe genutzt. 
 
-\section{Eigenentwickelte Automationsschnitstelle}
 
-Die Automationsschnitstelle besteht aus dem EPK-Compiler, der Exeuction-Engine sowie der IoT-Schnittstelle.
-Als Eingabe bekommt die Schnittstelle das EPK-Prozessmodell als XML-Datei, welche dann vom EPK-Compiler kompiliert und von 
-der Exeuction-Engine ausgeführt wird. Die Engine verschickt die Befehle an den Mikrocontroller über die IoT-Schnittstelle.
-
-Zur Realisierung der Automationsschnitstelle wurden die folgenden Klassen implementiert:
-
-\textbf{Prozessmodell}
+\section{Prozessmodell}
 
 Die Klasse \texttt{Process} beschreibt das Prozessmodell $P$ und der Graph $G_P$ wird durch eine Adjazenzliste realisiert. 
 Zu Kompilierungszwecken werden das Start- und Endereignis in der Klasse als Attribute hinterlegt. Die Knotenmenge $V$ wird durch die Klasse 
 \texttt{Node} realisiert. Dabei wird die Teilmengenbeziehung von $E$, $O$ und $F$ durch Vererbung in Java umgesetzt. Das 
 UML-Diagramm der Prozessmodellimplementierung ist unter Abbildung \ref{fig:prozess-uml} im Anhang zu finden.
-
-\newpage
-
-\textbf{Ausführungsmodell}
-
-Die Klasse \texttt{ExeuctionQueue} implementiert das Ausführungsmodell, welche eine ExecutionQueue aus $\text{List}(X_S \cup X_G)$ darstellt. Analog zu dem Modell gibt es 
-die Klassen \texttt{SingleExecutable} und \texttt{ExeuctionGroup}. Zur Kommunikation mit dem IoT-System gibt es die Klassen \texttt{MCUResponseResult} mit dessen Implementierungen, 
-\texttt{MCUResponse} sowie \texttt{MCUConnection} mit der Implementierung \texttt{CoAPMCUConnection}, die eine Kommunikation über CoAP bereitstellt, um die Befehle über CoAP zu verschicken.
-Die Datenstruktur, welche die \texttt{SingleExecutable} Instanzen enthält wird mit der Java Listenimplementierung \texttt{List<Exeuctable>} realisiert.
-Das entsprechende UML-Diagramm ist unter Abbildung \ref{fig:executable-uml} im Anhang zu finden.
 
 \subsection{Konstruktion des Prozessmodells}
 
@@ -49,7 +32,15 @@ Die einzelnen \texttt{*Extractor} Klassen erfüllen die Funktion, aus dem XML-Do
 und zu einem \texttt{Process} (siehe Abbildung \ref{fig:prozess-uml} in der Anlage) konstruiert. Nach der Konstruktion des \texttt{Process} Objekts wird die Vorverarbeitung durchgeführt, um $\tau$ zu
 realisieren mittels \texttt{OperatorPreprocessor}.
 
-\subsection{EPK-Compiler}
+\section{Ausführungsmodell}
+
+Die Klasse \texttt{ExeuctionQueue} implementiert das Ausführungsmodell, welche eine ExecutionQueue aus $\text{List}(X_S \cup X_G)$ darstellt. Analog zu dem Modell gibt es 
+die Klassen \texttt{SingleExecutable} und \texttt{ExeuctionGroup}. Zur Kommunikation mit dem IoT-System gibt es die Klassen \texttt{MCUResponseResult} mit dessen Implementierungen, 
+\texttt{MCUResponse} sowie \texttt{MCUConnection} mit der Implementierung \texttt{CoAPMCUConnection}, die eine Kommunikation über CoAP bereitstellt, um die Befehle über CoAP zu verschicken.
+Die Datenstruktur, welche die \texttt{SingleExecutable} Instanzen enthält wird mit der Java Listenimplementierung \texttt{List<Exeuctable>} realisiert.
+Das entsprechende UML-Diagramm ist unter Abbildung \ref{fig:executable-uml} im Anhang zu finden.
+
+\section{EPK-Compiler}
 Der EPK-Compiler wurde in Scala geschrieben, um eine Interoperabilität mit dem ARIS Rich Client in Java zu gewährleisten. 
 Auch wurde Scala als Sprache für den Compiler gewählt, da es Pattern-Matching und algorithmische Datentypen bietet, welche die 
 Entwicklung eines Compilers stark vereinfacht \cite{zhang_pattern_2018} \cite{odersky_overview_2004}.
@@ -66,9 +57,9 @@ Diese wird in eine \texttt{ExecutionQueueBuilderContext} Instanz hinterlegt, um 
     \label{fig:epk-compiler-uml}
 \end{figure}
 
-\subsection{Ausführung des Ausführungsmodells}
+\section{Execution-Engine}
 
-Die Ausführung des Ausführungsmodells ist mit der \texttt{ExecutionQueueRunner} Klasse realisiert. Diese enthält den \texttt{AAutomationEventBuffer} um Live-Streaming zu ARIS 
+Die Execution-Engine ist mit der \texttt{ExecutionQueueRunner} Klasse realisiert. Diese enthält den \texttt{AAutomationEventBuffer} um Live-Streaming zu ARIS 
 und Logging zu ermöglichen. Darüber hinaus enthält die Klasse die CoAP-Verbindung, um die Befehle an die Hardware zu übermitteln. Die \texttt{ExecutionQueue} wird durch eine 
 \texttt{forEach} Schleife bis zum Ende iteriert.
 
@@ -79,7 +70,7 @@ und Logging zu ermöglichen. Darüber hinaus enthält die Klasse die CoAP-Verbin
     \label{fig:execution-queue-runner-uml}
 \end{figure}
 
-\subsection{IOT-Schnittstelle}
+\section{IOT-Schnittstelle}
 \label{iot-interface-impl}
 
 Die IoT-Schnittstelle sendet die Befehle einer \texttt{SingleExecutable} zum IoT-System. Das IoT-System besteht dabei aus 
@@ -99,7 +90,7 @@ genommen, der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die 
     \label{fig:coap-single-executable-execution}
 \end{figure}
 
-\subsubsection{Pfadgenerierung durch SHA256}
+\subsection{Pfadgenerierung durch SHA256}
 
 Der SHA256-Hexstring aus \ref{iot-interface-impl} wird für jeden Knoten $(i, t) \in X_S$ erzeugt. Dafür 
 wird $sha256(i)$ berechnet. Diese Prüfsumme wird in Java als Hexstring hinterlegt. Aus diesem Hexstring wird 
@@ -115,7 +106,7 @@ was die Lesbarkeit und Wartbarkeit des Codes negativ beeinflusst.
     \label{fig:coap-path-generation}
 \end{figure}
 
-\subsubsection{Aufsetzen des Resource Directory Servers}
+\subsection{Aufsetzen des Resource Directory Servers}
 Für das Resource Directory wird  \texttt{cf-rd} verwendet. Dies ist eine Resource-Directory Implementierung vom Eclipse Californium 
 Projekt. Dieses wurde in ein Docker-Image überführt, sodass die Einrichtung effizient durchgeführt werden kann und auch 
 Konfigurationsänderungen schneller umgesetzt werden können. Dieses Docker-Image wurde auf einer AWS-EC2 Instanz ausgeführt.
@@ -142,6 +133,8 @@ werden.
     \caption{Klassen innerhalb eines generierten ESP-IDF Projekts}
     \label{fig:idf-project-classes}
 \end{figure}
+
+\newpage
 
 \subsection{Übersetzung des Ausführungsmodells in C++}
 
@@ -173,7 +166,7 @@ einer \texttt{coap}-Komponente sowie die generierten Handler als eigene ESP-IDF 
     \centering
     \includegraphics[width=0.8\textwidth]{Graphics/Codegen-Diagram.pdf}
     \caption{Einfache Darstellung der Codegenerierung}
-    \label{fig:idf-project-classes}
+    \label{fig:codegen-diagram}
 \end{figure}
 
 
@@ -267,3 +260,10 @@ Auf dem Server wird bei der Verbindungsanfrage ein \texttt{java.net.ServerSocket
 nach erfolgreicher Instanziierung des ServerSockets an den Client als Antwort zur Verbindungsanfrage übermittelt wird. Dazu wird ein neuer Thread erstellt, welcher auf eine 
 Client Verbindung wartet. Beim Starten der Simulation wird überprüft, ob eine Client-Socket Verbindung besteht. Ist das der Fall, so wird die Client Referenz an den 
 \texttt{AAutomationEventBuffer} übergeben, sodass während der Ausführung die ID der aktuell ausgeführten \texttt{SingleExecutable} übertragen wird.
+
+\section{Zusammenfassung}
+
+In diesem Kapitel wurden die in Kapitel \ref{systemdesign-und-spezifikation} definierten Komponenten technisch umgesetzt. Hier ging man dabei gemäß der Reihenfolge der Definitionen vor,
+sodass man am Ende ein System bestehend aus Prozess-, Ausführungs- und Codegenerierungsmodell hatte mit entsprechendem Compiler und Codegenerierungstool. Daraus ableitend wurde dann die Execution-Engine
+sowie ein Firmwareframework entwickelt. Dieses gesamte System wurde dann in die Prozessverwaltungsplattform ARIS eingebettet, sodass eine Nutzerschnittstelle gegeben war. Außerdem wurde noch die nötige 
+IoT-Infrastruktur in Form eines CoAP-Resource-Directory Servers aufgesetzt.

@@ -350,12 +350,12 @@ closeStreamConnection       &   keine Parameter                                 
 \label{tab:simulation-interface}
 \end{table}
 
+\newpage
+
 \subsection{Schnittstelle zwischen Prozessverwaltungsplattform und IoT-Geräten}
 
 Bevor die Schnittstelle zwischen diesen beiden Parteien muss das Protokoll festgelegt werden, welches zur Kommunikation genutzt wird. Im IoT-Kontext hat man hierbei die 
 folgenden zwei Optionen: CoAP und MQTT. \cite{wendzel_it-sicherheit_2018} Diese werden im folgenden gegenübergestellt.
-
-\subsubsection{Gegenüberstellung von MQTT und CoAP}
 
 \begin{table}[H]
 \centering
@@ -419,3 +419,13 @@ ist hierbei wie folgt:
     "timeSpent": uint32_t
 }
 \end{lstlisting}
+
+\section{Zusammenfassung}
+
+Die nötigen Modelle und Schnittstellen, um eine Auführung und Codegenerierung zu realisieren, sind nun definiert. Als erstes kam das Prozessmodell,
+welches ein 3-Tupel aus Startereignis, Endereignis und dem Prozessgraphen ist. Darauffolgend wurde das Ausführungsmodell definiert, welches aus einzelnen Ausführungsschritten
+und Ausführungsgruppen besteht. Dabei modellieren die Ausführungsgruppen die Kontrollstrukturen des Prozessmodells. Mit diesen zwei Modellen sind Ein- und Ausgabesprache gegeben,
+um den Compiler zu definieren. Dabei findet die Validierung auf Basis eines Kellerautomaten statt und die Übersetzung erfolgt durch eine Funktion, welches von 
+Prozessdomäne auf die Ausführungsdomäne abbildet. Darauf aufbauend wurde die Codegenerierung behandelt. Dafür wurde zunächst das entsprechende Codegenerierungsmodell definiert, auf welches das Ausführungsmodell überführt wird und die Überführung vom Ausführungsmodell Zum
+Codegenerierungsmodell wurde beschrieben. Als nächstes wurde das Ausführungs und Animationsverhalten der Execution-Engine festgelgt. Schließlich wurden die Schnittstellen definiert,
+um die Kommunikation zwischen Nutzer, Prozessverwaltungsplattform und IoT-Geräten festzulegen.
