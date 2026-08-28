@@ -1,4 +1,9 @@
 \chapter{Systemdesign und Spezifikation}
+\label{systemdesign-und-spezifikation}
+
+In diesem Kapitel wird ein System entworfen, das ein Prozessmodell annimmt und dieses in ein Ausführungsmodell übersetzt. Dafür werden das Prozessmodell, das Ausführungsmodell sowie das theoretische Vorgehen 
+des Compilers in Form eines Kellerautomaten und einer Übersetzungsfunktion definiert. Auch wird die Ausführung des Ausführungsmodells hier formal beschrieben sowie die Übersetzung dieses Modelles in ein Codegenerirungsmodell.
+Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware an die Orchestrierungsschicht zu erleichtern. Die Entwurfsentscheidungen basieren dabei auf Grundlagen aus dem Kapitel \ref{grundlagen-und-theoreitscher-rahmen}.
 
 \begin{figure}[H]
     \centering
@@ -18,12 +23,6 @@ Dieses System besteht aus vielen Komponenten, welche sich in ARIS und der ESP-ID
 \subsection{Komponenten und Verantwortlichkeiten}
 
 Wie anfangs schon beschrieben hat das System die folgenden Komponenten:
-
-\subsubsection{EPK-Compiler}
-\label{epk-compiler}
-
-Der EPK-Compiler ist dafür zuständig, das Prozessmodell in ein Ausführungsmodell zu übersetzen.
-Dies geschieht durch Einlesen der Prozesssprache, welche dann in jedem Schritt das Ausführungsmodell Stück für Stück aufbaut.
 
 \subsubsection{Execution-Engine}
 
@@ -60,6 +59,8 @@ Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefen
 und in das Ausführungsmodell kompiliert wird. 
 
 \subsubsection{Ausführungsmodell}
+\label{ausfuehrungsmodell}
+
 Für das Ausführungsmodell wird die Listendefinition gemäß Smolka \cite{smolka_programmierung_2012} verwendet.
 
 Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
@@ -189,8 +190,10 @@ closeStreamConnection       &   keine Parameter                                 
 \end{table}
 
 \section{EPK-Compiler}
+\label{epk-compiler}
 
-Bevor ein Prozess ausgeführt wird, muss dieser in das Ausführungsmodell übersetzt werden. Diese Aufgabe wird von dem EPK-Compiler übernommen.
+Der EPK-Compiler ist dafür zuständig, das Prozessmodell in ein Ausführungsmodell zu übersetzen.
+Dies geschieht durch Einlesen der Prozesssprache, welche dann in jedem Schritt das Ausführungsmodell Stück für Stück aufbaut.
 
 \subsection{Eingabe- und Ausgabesprache}
 
