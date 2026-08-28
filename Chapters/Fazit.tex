@@ -1,0 +1,31 @@
+\chapter{Fazit}
+
+Das Ziel der Lückenschließung und der Erstellung eines gemeinsamen mentalen Modells gemäß Kapitel \ref{motivation-und-zielsetzung} ist zum Großteil erfüllt. Es wurde aus einem 
+Prozessmodell, welches den Soll-Zustand eines Prozesses aufzeigt ein ausführbarer Ablaufplan in Form eines Ausführungsmodells erzeugt. Dieses kann zur Entwicklung von Firmare und 
+der daraufhin folgenden Orchestrierung von IoT-Geräten mit der programmierten Firmware verwendet werden. 
+
+\section{Ausblick}
+
+Neben der Umsetzung der Lösungen der kritischen Punkte, gibt es die folgenden möglichen Aussichten für das Resultat dieser Arbeit:
+
+\subsection{Modularisierung durch Einführung von unterschiedlichen Notationsfrontends, Zielbackends und Eventloggingformaten}
+
+Aktuell unterstützt der Protoyp die EPK-Notation, läuft auf ARIS und generiert Code für den ESP32. Jedoch können auch Frontends für andere Notationen 
+wie BPMN oder BPMN-2.0 entwickelt werden und auch kann man für unterschiedliche Prozessverwaltungsplattformen das passende Backend entwickeln.
+Neben diesen zwei Aspekten kann auch die Codegenerierung für weitere Mikrocontroller wie Arduino oder STM32 ausgeweitet werden. Auch kann das Logging der 
+Ausführung in anderen Formaten umgesetzt werden, sodass weitere Auswertung auf Basis dieser Daten durchgeführt werden können.
+
+\subsection{Open-Sourcing des Ausführungsmodells, Codegeneration, Event-Logging und Live-Monitoring}
+
+Der Eigenanteil dieser Arbeit ist der Compiler, das Ausführungsmodell sowie die Codegenerierung und das Live-Monitoring. Dadurch, dass es sehr viel Potenzial gibt das ganze weiter 
+auszubauen ist es sinnvoll, diese Anteile (mit Ausnahme der ARIS-Komponenten) der Öffentlichkeit zugänglich zu machen, um die Automatisierung und Orchestierung von industriellen Geschäftsprozessen 
+durch Open-Source Entwicklung voranzutreiben.
+
+\section{Praxistauglichkeit}
+
+Durch Execution-Engines wie Flowable (siehe Abschnitt \ref{flowable}) und Camunda (siehe Abschnitt \ref{camunda}) hat man schon gesehen, dass Prozesse automatisiert werden können. Jedoch tut diese Arbeit auch neben dieser Prozessautomatisierung, ein Rahmenwerk festlegen, 
+sodass Software gemäß von Geschäftsprozessen entwickelt werden kann. Diese prozessorientierte Softwareentwicklung kann in der Praxis sehr sinnvoll sein und durch Vereinfachung von Entwicklungsprozessen und 
+Lösungen wie Codegenerierung ist es umsetzbar. Kritisch kann es jedoch werden bei der Aufrüstung der industriellen Komponenten, da hier Anbindungen gemacht werden müssen zwischen der Anlage und dem Mikrocontroller, 
+für eine Verbindung zwischen ARIS und den Anlagen wie in Abschnitt \ref{reflection} angesprochen. Es ist also im Fazit umsetzbar softwareseitig, jedoch kann es auf der Hardwareseite zu Schwierigkeiten kommen. Sei es durch Inkompatibilität 
+oder einfach der fehlenden Möglichkeit der Anbindung an die Anlage. Es benötigt Anlagen mit Periphärien oder einer Schnittstelle, um einen Mikrocontroller zu integrieren. Hierbei kann man sich ein Beispiel an 
+Periphärien wie CAN aus der Automobilindsutrie nehmen, welche zur Realisierung von OBD verwendet wird. \cite{noauthor_road_2024} \cite{hristu-varsakelis_vehicle_2005}
