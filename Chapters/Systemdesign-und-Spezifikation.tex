@@ -283,13 +283,15 @@ im folgenden gegenübergestellt.
 
 \begin{table}[H]
 \centering
-\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X }
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
 \toprule
-Polling                                                      & bidirektionale Verbindung \\
+Polling & bidirektionale Verbindung \\
 \midrule
-- Mehrfacher Verbindungsaufbau für jeden Prozessschritt \cite{obonguko_websockets_2025}     & + ein Verbindungsaufbau gefolgt von kontinuierlichem Datenaustausch (Stream) \cite{eddy_transmission_2022} \\
-+ Geregelte Semantik durch HTTP-Methoden \cite{fielding_http_2022}                     & - Semantik muss selbst definiert werden \cite{eddy_transmission_2022}                          \\
-- Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreite und Stauung im Netzwerk \cite{obonguko_websockets_2025}               & + Durch kontinuierlichen Datenaustausch niedrige Latenz \cite{loreto_known_2011} \\
+$-$ Mehrfacher Verbindungsaufbau für jeden Prozessschritt \cite{obonguko_websockets_2025}  & $+$ ein Verbindungsaufbau gefolgt von kontinuierlichem Datenaustausch (Stream) \cite{eddy_transmission_2022} \\
+\addlinespace
+$+$ Geregelte Semantik durch HTTP-Methoden \cite{fielding_http_2022} & $-$ Semantik muss selbst definiert werden \cite{eddy_transmission_2022} \\
+\addlinespace
+$-$ Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreite und Stauung im Netzwerk \cite{obonguko_websockets_2025} & $+$ Durch kontinuierlichen Datenaustausch niedrige Latenz \cite{loreto_known_2011} \\
 \bottomrule                         
 \end{tabularx}
 \caption{Gegenüberstellung}
