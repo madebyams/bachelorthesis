@@ -4,6 +4,8 @@ In diesem Kapitel wird sowohl das Systemdesign aus Kapitel \ref{systemdesign-und
 die definierten Anforderungen aus Kapitel \ref{analyse-und-konzeption} überprüft. Auch wird ein Versuchsaufbau durchgeführt, um die Funktionstüchtigkeit 
 des Prototypes zu testen. Hierbei wird der Prozess des Aufbaus eines Bauklötchenhauses modelliert und in ein ESP-IDF Projekt durch die implementierte Codegenerierung überführt. 
 Mit diesem ESP-IDF Projekt wird dann die Firmware eines ESP32 programmiert, welcher zwei Anlagen steuert. Die Anlagen werden dabei durch zwei Arduino-Uno modelliert.
+Am Ende des Kapitels findet eine kritische Reflektion des entworfenen Systems, sowie der Umsetzung statt. Die geschieht durch das Aufzeigen von Einschränkungen auf die man während 
+des Entwurfes sowie der Umsetzung traf.
 
 \section{Evaluationsmethodik und Kriterien}
 
@@ -237,3 +239,68 @@ Aus Abbildung \ref{fig:process-mining-overview} aus der Anlage ist zu erkennen, 
     \bottomrule
   \end{tabular}
 \end{table}
+
+\section{Diskussion}
+
+Nach der Validierung und den daraus resultierenden Ergebnissen kann man deuten, dass das Ziel der Ausführung eines Prozesses 
+erfolgreich abgeschlossen wurde. Nichtsdestotrotz gibt es einige Hürden und auch Aspekte, welche noch keine vollständige Erfüllung 
+der anfangs in Kapitel \ref{motivation-und-zielsetzung} erwähnten Ziele aufzeigt. Diese werden im folgenden beschrieben.
+
+\subsection{Einschränkungen des Prozessmodells}
+
+Das Prozessmodell, welches in dem Kapitel \ref{grundlagen-und-theoreitscher-rahmen} und Kapitel \ref{systemdesign-und-spezifikation} definiert wurde, deckt zwar schon einen Großteil an EPK-Modellen ab.
+Jedoch gibt es in der Praxis auch Prozessmodelle mit Zyklen, welche durch die azyklische Eigenschaft des Modells in dieser Arbeit nicht abgedeckt wird. Dafür muss zu einen das Ausführungsmodell aus Abschnitt 
+\ref{ausfuehrungsmodell} um eine Schleifenstruktur erweitert werden und der Compiler (siehe Abschnitt \ref{epk-compiler}) muss den Zyklus in die Schleife entsprechend übersetzen.
+
+\section{Reflektion des Projekts im Hinblick auf Zielsetzung}
+\label{reflection}
+
+Die Grundvoraussetzung, dass ein in EPK modellierter Prozess auf einem IoT-System ausgeführt und orchestiert werden kann ist mit 
+dieser Arbeit belegt worden. Dieses Ziel wurde also erreicht. Ein kritischer Punkt, der nun reinkommt ist, 
+dass nun Personal für diese Features geschult werden muss bzw. die Systeme, welche dieses Feature nutzen möchten dementsprechende Updates 
+durchführen müssen. Auch kommt noch die Umrüstung der Industrieanlagen dazu, wo jede Anlage mit einem ESP32 verbunden werden muss, um eine 
+Anbindung und Steuerung über bspw. ARIS zu gewährleisten.
+
+\section{Gefahren für die Gültigkeit}
+
+Auch wenn der Protoyp gemäß der Zielsetzung funktioniert, gibt es einige Risiken zu beachten. Besonders
+im Sicherheitsaspekt.
+
+\subsection{Absicherung des Animationssockets}
+
+Zurzeit laufen die TCP-Sockets zur Animation während der Ausführung ohne jegliche Absicherung. Dies kann dazu 
+führen, dass Daten abgelesen werden können zwischen dem ARIS-Server und Client. Hier kann durch Nutzung von TLS
+die Verbindung abgesichert werden. \cite{wendzel_it-sicherheit_2018}
+
+\subsection{Absicherung des Resource Directory Servers und IoT-Hardware}
+
+Auch beim Resource Directory Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser 
+ist kritischer, da dort die Zieladdressen der ESP32 liegen, welche angesteuert werden sollen. Hier kann man eine Absicherung 
+gewährleisten durch Nutzung von dTLS \cite{wendzel_it-sicherheit_2018} für den Resource Directory Server. Dies gilt auch für den ESP32.
+
+\section{Kritische Bewertung der Architektur und Systemlimitationen}
+
+Die Arbeit wurde mit der Software ARIS umgesetzt, welche modifiziert wurde. Auch gab es hier einige kritische Punkte, während 
+der Umsetzung welches diskutiert werden sollten.
+
+\subsection{Latenz durch Netzwerkkommunikation}
+
+Das Ziel der Arbeit war, dass Prozesse in Echtzeit von ARIS angesteuert werden. Durch Nutzung von CoAP auf Basis von UDP kann man 
+einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch wird es immer eine Latenz geben, welche abhängig von 
+den Netzwerkgegebenheiten ist.
+
+\subsection{Bottleneck durch die JVM auf Server und Client}
+
+Neben der Netzwerklatenz kommt auch noch der Aspekt, dass die JVM durch ihre Garbage-Collection kein deterministisches Verhalten liefert und 
+es zu unbestimmten Zeiten zu Verlangsamungen kommen kann. \cite{carpen-amarie_performance_2015} \cite{al-jaroodi_object-reuse_2005} Dies kann auch das angestrebte Echtzeitverhalten der Orchestierung beeinflussen. In solchen
+Fällen ist es hilfreich mit Sprachen wie C++ zu arbeiten, wo man durch eigene Speicherverwaltung eine stabile Performance gewährleisten kann. \cite{stroustrup_brief_2015} \cite{herter_timing-predictable_2014}
+
+\subsection{Fehlerbehandlung (synchron und asynchron)}
+
+Aktuell ist die Fehlerbehandlung auf dem ESP32 durch ein passendes Request-Response Muster gewährleistet. Auf ARIS hingegen ist die Fehlerbehandlung mit
+Laufzeitausnahmen umgesetzt. Hier kann durch normale Ausnahmen eine bessere Fehlerbehandlung umgesetzt werden, sodass es nicht zu einem hängendem Programm kommt.
+
+\subsection{Continous Integration und Continous Delivery}
+
+Die Nutzung von Continous Integration und Continous Delivery für ARIS ist durch deren Infrastruktur auf GitHub gegeben. Für die Firmware des ESP32 kann Continous-Integration 
+umgesetzt werden. Dies erfolgt durch Test und Bauen vom Firmwarecode auf CI/CD Plattformen wie GitHub-Actions oder GitLab-CI.
