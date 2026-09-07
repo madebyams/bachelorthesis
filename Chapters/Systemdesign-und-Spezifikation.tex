@@ -318,7 +318,7 @@ animieren.
 \end{figure}
 
 
-Dieses Verhalten ist sehr ähnlich zu WebSockets, wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
+Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
 
 \section{Schnittstellen}
 
@@ -359,7 +359,7 @@ closeStreamConnection       &   keine Parameter                                 
 \subsection{Schnittstelle zwischen Prozessverwaltungsplattform und IoT-Geräten}
 
 Bevor die Schnittstelle zwischen diesen beiden Parteien muss das Protokoll festgelegt werden, welches zur Kommunikation genutzt wird. Im IoT-Kontext hat man hierbei die 
-folgenden zwei Optionen: CoAP und MQTT. \cite{wendzel_it-sicherheit_2018} Diese werden im folgenden gegenübergestellt.
+folgenden zwei Optionen: CoAP (siehe Abschnitt \ref{coap-definition}) und MQTT, welches in Abschnitt \ref{mqtt-definition} definiert wurde. \cite{wendzel_it-sicherheit_2018} Diese werden im folgenden gegenübergestellt.
 
 \begin{table}[H]
 \centering
@@ -403,6 +403,8 @@ Die Antwort hat folgendes Schema:
     "temperature": float
 }
 \end{lstlisting}
+
+\newpage
 
 Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
 
