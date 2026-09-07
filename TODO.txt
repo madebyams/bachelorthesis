@@ -1,0 +1,23 @@
+- Kapitel 2 wäre dann Motivation und Zielsetzung.
+Motivation: Saubere Darlegung der Problemstellung. Danach, warum geht man das Problem an? Welche Benefits verspricht man sich von einer Lösung...
+- Zielsetzung ist im Dokument nicht ausreichend. Hier im Idealfall gegliedert  die Übergeordneten Ziele beschreiben und Bezug auf die Probleme nehmen. 2-3 sind ein gutes Maß. Diese dann Untergliedern mit Arbeitszielen der Thesis. Was gemacht wird, um das Übergeordnete Ziel zu erreichen. 
+Danach weiterer Aufbau der Arbeit: In Kapitel 3... Kapitel 4 beschäftigt sich mit... usw.
+
+Kapitel 2 ist extrem wichtig für eine gute Arbeit.
+
+- Verwandte Arbeiten:
+Bei 3.1 ist der Satz nicht vorteilhaft formuliert. Lieber etwas in Richtung: Nutzt folgende Arbeiten oder Technologien oder Services oder... als Grundlage, als Werkzeuge oder so. Man muss besser einordnen können, was diese Dinge für die Arbeit bedeuten. Aktuell könnte man falsche Schlüsse bzgl. der Abgrenzung ihrer Arbeit dazu ziehen.
+Ggf. könnte man diese Dinge auch in das Grundlagen Kapitel stecken und ihre Arbeit dagegen abgrenzen
+
+- 3.2 ist zu knapp formuliert. Die User Stories kann man so schreiben, aber der einleitende Satz ist zu kurz und man weiß am Ende nicht, was man nun mit den Stories anfangen soll. Hier eine bessere Eingliederung der Stories in die Arbeit oder den Entwicklungsprozess oder ... Auch wäre ein Bezug zu den Zielen und Problemen sehr schön, um den Gesamtkontext zu berücksichtigen.
+
+- Das Ausführungsmodell kann eigentlich auch raus oder in den Anhang. Das ist ja quasi Quellcode.
+Beschreiben Sie, was in den ganzen formalen Beschreibungen passiert. Nicht was jede Zeile tut, sondern was ingesamt passiert.
+Die Formatierung der Grafiken und Bilder ist noch etwas wüst. Das sollte sich später sauberer in den Text gliedern und muss  auch gedruckt lesbar sein.
+
+ZIELE MIT DR.WAGNER Besprechen
+
+=========
+
+
+Kapitel 7 sollte zunächst einen ordentlich Schluss bringen. Reflexion der Problemstellung, Ziele und was erreicht wurde. Hier könnte dann auch die Diskussion aus dem vorigen Kapitel kurz aufgegriffen werden. Danach kurz anschließende Arbeiten, die das positive Ergebnisse noch weiter bringen könnten :)

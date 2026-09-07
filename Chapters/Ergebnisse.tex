@@ -107,7 +107,7 @@ dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story
 \section{Validierung}
 
 Zur Validierung der Implementierung wird ein demonstrativer Produktionsprozess verwendet. Hierbei wird ein Haus aus Bauklötzen konstruiert. 
-Der Hardwaremodellaufbau, der den Prozess ausführen soll besteht aus den folgenden Komponenten:
+Der Schaltplan des Hardwaremodellaufbau, der den Prozess ausführen soll wird in Abbildung \ref{fig:brick-house-diagram} beschrieben.
 
 \begin{figure}[H]
     \centering
@@ -116,7 +116,7 @@ Der Hardwaremodellaufbau, der den Prozess ausführen soll besteht aus den folgen
     \label{fig:brick-house-diagram}
 \end{figure}
 
-Der ESP32 dient zum Empfang und der Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit 
+Beim Modellaufbau dient der ESP32 zum Empfang und der Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit 
 2 Arduino-Uno, welche jeweils einen HC-SR04 Abstandssensor und einen MS-18 Servo-Motor haben. Der HC-SR04 Sensor ist zur Erkennung von Objekten (in diesem 
 Fall die Existenz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. Die Kommunikation zwischen dem ESP und den Arduino-Uno 
 erfolgt über I2C.
@@ -169,7 +169,7 @@ die Orchestrierung ermöglicht. Die Abbildungen \ref{fig:versuchsaufbau-1} bis \
 Mit ARIS wurde der Prozess modelliert. Das EPK-Modell ist unter Abbildung \ref{fig:brick-house-epk-diagram} zu erkennen.
 
 Durch die Codegenerierung erhält man ein ESP-IDF Projekt zur Entwicklung der prozessorientierten Firmware. 
-Diese wird in C/C++ entwickelt und man erhält die folgende Projektstruktur:
+Diese wird in C/C++ entwickelt. Die Projektstruktur eines generierten Projektes wird in Abbildung \ref{fig:firmware-code-project-structure} gezeigt.
 
 \begin{figure}[H]
     \centering
@@ -177,6 +177,8 @@ Diese wird in C/C++ entwickelt und man erhält die folgende Projektstruktur:
     \caption{Ordnerstruktur des Firmwareprojekts}
     \label{fig:firmware-code-project-structure}
 \end{figure}
+
+\newpage
 
 \subsection{Entwicklung anhand des Firwarecodeframeworks}
 
@@ -192,7 +194,7 @@ Diese Trennung von Anlage und Orchestrierungsmodul ermöglicht ein modulares Sys
 einfachere Erweiterbarkeit von Funktionen ohne das Netzwerk- und Protkollcode sich mit dem Code zur Anlagensteuerung vermischt. Dies nennt man auch 
 Seperation of Concerns.
 
-Die I2C Kommunikation zwischen dem ESP32 und dem Arduino Uno ist wie folgt definiert:
+Die I2C Kommunikation zwischen dem ESP32 und dem Arduino Uno werden gemäß der Abbildung \ref{fig:i2c-esp32-arduino-uno} durchgeführt.
 
 \begin{figure}[H]
     \centering

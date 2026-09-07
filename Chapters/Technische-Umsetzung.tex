@@ -2,7 +2,7 @@
 \label{technische-umsetzung}
 
 In diesem Kapitel wird auf Basis des Entwurfes aus Kapitel \ref{systemdesign-und-spezifikation} das System bestehend aus Compiler, Prozess- und Ausführungsmodell umgesetzt. Auch wird die Orchestrierungsschicht sowie die Codegenerierung hier eingebaut, 
-welches die tatsächliche Ausführung des Ausführungsmodelles auf echter Hardware ermöglicht. Die Bestandteile werden dann in die Prozessverwaltungsplattform ARIS eingebettet. Zum Verständnis wird die Abbildung \ref{fig:systemarchitektur} hier eingefügt, sodass man anhand dieser Abbildung sich in der Umsetzung orientieren kann:
+welches die tatsächliche Ausführung des Ausführungsmodelles auf echter Hardware ermöglicht. Die Bestandteile werden dann in die Prozessverwaltungsplattform ARIS eingebettet. Zum Verständnis wird nochmals die Abbildung \ref{fig:systemarchitektur} hier eingefügt, sodass man anhand dieser Abbildung sich in der Umsetzung orientieren kann:
 
 \begin{figure}[H]
     \centering
@@ -81,7 +81,7 @@ aus \ref{coap-interface} entspricht der Pfadname eines Endpunktes den ersten 15 
 Alle CoAP-Endpunkte, welche die Funktionalität des SingleExecutables zur Verfügung stellen werden beim Start des Servers aus
 einem Resource-Directory abgefragt, welches die CoAP-URL's enthält. Das Ergebnis wird in einer Hash-Map hinterlegt, wo der gekürzte
 SHA256-Hexstring der Schlüssel die CoAP-URL der Wert ist. Bei der Ausführung eines \texttt{SingleExecutable} wird durch die ID des \texttt{SingleExecutable}
-genommen, der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die CoAP-Anfrage wird an direkt an den ESP32 verschickt.
+genommen, der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die CoAP-Anfrage wird an direkt an den ESP32 verschickt. Die beschriebene Ausführung und Kommunikation zwischen den einzelnen Akteueren wird auch in der Abbildung \ref{fig:coap-single-executable-execution} aufgezeigt.
 
 \begin{figure}[H]
     \centering
@@ -92,12 +92,12 @@ genommen, der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die 
 
 \subsection{Pfadgenerierung durch SHA256}
 
-Der SHA256-Hexstring aus \ref{iot-interface-impl} wird für jeden Knoten $(i, t) \in X_S$ erzeugt. Dafür 
+Der SHA256-Hexstring aus dem Abschnitt \ref{iot-interface-impl} wird für jeden Knoten $(i, t) \in X_S$ erzeugt. Dafür 
 wird $sha256(i)$ berechnet. Diese Prüfsumme wird in Java als Hexstring hinterlegt. Aus diesem Hexstring wird 
 ein Substring aus den ersten 15-Zeichen entnommen. Dieser Substring ist die URI des Endpoints. Es wird so 
 vorgegangen, da die ID in ARIS Zeichen enthält, welche für URIs nicht kompatibel sind. Zur Generierung des 
 SHA256-Hexstrings wird Apache Commons verwendet, da Hashing mit mit Java-Boardmitteln Boilerplate-Code einführt, 
-was die Lesbarkeit und Wartbarkeit des Codes negativ beeinflusst. 
+was die Lesbarkeit und Wartbarkeit des Codes negativ beeinflusst. Vereinfacht wird das ganze in der Abbildung \ref{fig:coap-path-generation} dargestellt.
 
 \begin{figure}[H]
     \centering
@@ -124,8 +124,8 @@ Dann werden alle Handler initalisiert und beim Resource-Directory registriert.
 \subsection{Integration in ESP-IDF}
 
 Für den Firmwarecode wurde ESP-IDF als Basis genommen. Aspekte wie der Aufbau einer WLAN-Verbindung, die Initialisierung eines CoAP-Servers 
-sowie Einrichtungscode eines CoAP-Endpoint Handlers sind schon eingebaut. Nach der Codegenerierung muss nur noch die Ausführungslogik implementiert
-werden.
+sowie Einrichtungscode eines CoAP-Endpoint Handlers sind schon eingebaut. Die dafür implementierten Klassen sind als UML-Diagramme in der Abbildung \ref{fig:idf-project-classes} zu sehen. Nach der Codegenerierung muss nur noch die Ausführungslogik implementiert
+werden. 
 
 \begin{figure}[H]
     \centering
@@ -182,7 +182,7 @@ Optimierungszwecken des Prozesses oder auch zur Nachverfolgungen von Durchläufe
 \section{Integration in ARIS}
 
 In dieser Arbeit wurde die ARIS Version 10 verwendet. Hierbei handelt es sich um ein verteiltes System aus Servern, welche unterschiedliche 
-Funktionen anboten und zwei Arten von Clients: einem webbasierten Client und einem Rich-Client, welcher in Java entwickelt wurde. Sowohl der Web-Client als auch der 
+Funktionen anboten und zwei Arten von Clients: einem webbasierten Client und einem Rich-Client, welcher in Java entwickelt wurde. Die Beziehung zwischen den einzelnen Softwarekomponenten wird in Abbildung \ref{fig:aris-system-diagram} aufgezeigt. Sowohl der Web-Client als auch der 
 Java-Client boten die Simulation von modellierten Prozessen an, jedoch bot der Rich-Client noch die Möglichkeit die einzelnen Prozessschritte zu animieren. Dabei
 sind alle Prozessschritte ausgegraut und der aktive Prozessschritt leuchtet in der respektiven Farbe auf. Unter dem verteilten System aus Servern gibt es auch einen 
 Server, welcher für die Simulation zuständig war. Da Live-Monitoring auch eine der Systemanforderungen war, wurde für die Entwicklung des Prototypen der Rich-Client sowie 
@@ -198,7 +198,7 @@ der Simulationsserver als Basis genommen.
 \subsection{Ersetzen der Simulationsschnittstelle}
 
 Die Logik der Simulation in ARIS wird durch den Simulationsserver realisiert. Dort wird die Simulation mittels einer Simulationsengine durchgeführt. Diese Simulationsengine
-baut intern ein Prozessmodell auf und führt auf Basis dieses Prozessmodells die Simulation durch. Die Schnittstelle auf dem Simulationsserver,
+baut intern ein Prozessmodell auf und führt auf Basis dieses Prozessmodells die Simulation durch. Dies entspricht dem Ist-Zustand aus Abbildung \ref{fig:aris-ist-zustand}. Die Schnittstelle auf dem Simulationsserver,
 welcher die Interaktion mit der Simulationsengine anbot ist die Schnittstelle \texttt{ISimulation}. Den Schnittstellenvertrag, welchen \texttt{ISimulation} aufsetzt ist
 ähnlich zu dem der definierten Automationsschnitstelle. \ref{automation-server-interface} Es wurden jedoch nicht alle Methoden der Schnittstelle benötigt und neue Methoden mussten 
 definiert werden, weshalb die Schnittstelle dieser Arbeit sich von \texttt{ISimulation} in ARIS unterscheidet.
@@ -216,6 +216,8 @@ definiert werden, weshalb die Schnittstelle dieser Arbeit sich von \texttt{ISimu
     \caption{Soll-Zustand bei ARIS}
     \label{fig:aris-soll-zustand}
 \end{figure}
+
+Durch die Definition der neuen Schnittstelle kann der Soll-Zustand aus Abbildung \ref{fig:aris-soll-zustand} erreicht werden.
 
 \subsection{Bereitstellung von Ausführungsstatistiken für ARIS Process Mining}
 
@@ -245,7 +247,7 @@ auch kumulative Statistikdaten gesammelt basierend auf der ausgeführten Simulat
 benötigt, die in der Echtzeitausführung nicht geliefert werden können. Es musste also eine neue Methode zum Aufleuchten eines Prozessschrittes implementiert
 werden. Aus der gegebenen Methode konnte die eigentliche Animationsmethode extrahiert werden. Zum Aufleuchten des Prozessschrittes musste dabei die ID des 
 Prozessschrittes (also $id(v)$) übergeben werden. Somit wird bei der Ausführung nach erfolgreichem Verbindungsaufbau via TCP ein seperater Thread gestartet, 
-welcher die aktuell ausgeführte Executable-ID vom Server erhält und diese ID an die Animationsmethode übergibt.
+welcher die aktuell ausgeführte Executable-ID vom Server erhält und diese ID an die Animationsmethode übergibt. Die Abbildung \ref{fig:detailed-animation-diagram} zeigt das beschriebene Verhalten der Animation.
 
 \begin{figure}[H]
     \centering

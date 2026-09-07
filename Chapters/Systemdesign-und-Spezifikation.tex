@@ -3,7 +3,7 @@
 
 In diesem Kapitel wird ein System entworfen, das ein Prozessmodell annimmt und dieses in ein Ausführungsmodell übersetzt. Dafür werden das Prozessmodell, das Ausführungsmodell sowie das theoretische Vorgehen 
 des Compilers in Form eines Kellerautomaten und einer Übersetzungsfunktion definiert. Auch wird die Ausführung des Ausführungsmodells hier formal beschrieben sowie die Übersetzung dieses Modelles in ein Codegenerirungsmodell.
-Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware an die Orchestrierungsschicht zu erleichtern. Die Entwurfsentscheidungen basieren dabei auf Grundlagen aus dem Kapitel \ref{grundlagen-und-theoreitscher-rahmen}.
+Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware an die Orchestrierungsschicht zu erleichtern. Dieser Ablauf wird in Abbildung \ref{fig:systemarchitektur} grafisch aufgezeigt. Die Entwurfsentscheidungen basieren dabei auf Grundlagen aus dem Kapitel \ref{grundlagen-und-theoreitscher-rahmen}.
 
 \begin{figure}[H]
     \centering
@@ -127,6 +127,10 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
     \delta(q_1, \epsilon, \#) = \{(q_2, \epsilon)\} \\
     A_P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, Q_F)
 \end{align}
+
+\newpage
+
+Diese formale Definition des Kellerautomaten, lässt sich auch in eine grafische Repräsentation überführen (siehe Abbildung \ref{fig:kellerautomat}).
 
 \begin{figure}[H]
     \centering
@@ -302,7 +306,7 @@ $-$ Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreit
 Auf dieser Grundlage wurde entschieden mit bidirektionalen Verbindungen statt Polling, für die Animation zu arbeiten.
 
 Vor der Ausführung, wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
-gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Über diese
+gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Die Abbildung \ref{fig:live-streaming} zeigt auch grafisch den Kontrollfluss auf. Über diese
 Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
 animieren.
 

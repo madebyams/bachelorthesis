@@ -27,10 +27,18 @@ Zur Ausführbarkeit eines Prozessmodelles werden in dieser Arbeit die folgenden 
 \begin{enumerate}
     \item Definition der Ausführbarkeit eines Prozessmodells
     \item Erfassung der Gegebenheiten
-    \item Systemaufbau und Überprüfung
+    \item Überführung vom Prozessmodell zur Ausführung auf eingebetteten Systemen
 \end{enumerate}
 
 \subsection{Definition der Ausführbarkeit eines Prozessmodells}
 
-Zur Erfüllung dieses Zieles wird der Begriff eines Prozesses und eines Prozessmodells zunächst definiert. Sowohl die Begriffe 
-als auch die darunterliegenden mathematischen Modelle. 
+Der Begriff eines Prozesses muss zunächst definiert werden, sodass man auf dieser Basis ein mathematisches Modell eines Prozesses aufsetzen kann. Aus diesem mathematischen Modell wird die Ausführung abgeleitet durch ein Ausführungsmodell, was auf dem Prozessmodell basiert.
+
+\subsection{Erfassung der Gegebenheiten}
+
+Arbeiten, welche ein ähnliches Ziel verfolgten werden betrachtet. Dabei wird auf das Vorgehen dieser eingegangen: es wird geschaut, was verwendet werden 
+kann und was neu hinzugefügt werden muss. 
+
+\subsection{Überführung vom Prozessmodell zur Ausführung auf eingebetteten Systemen}
+
+Anhand der Definition des Prozessmodells und des daraus resultierenden Ausführungsmodells, wird zunächst die Validierung als auch die Übersetzung vom ersten Modell in das zweite mathematisch definiert. Darauf aufbauend wird ein System bestehend aus einem Compiler für die Übersetzung der Modelle sowie einer ExecutionEngine zur Ausführung implementiert.
