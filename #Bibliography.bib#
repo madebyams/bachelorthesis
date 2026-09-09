@@ -1073,3 +1073,40 @@ Version Number: 1.0},
 	year = {2015},
 	pages = {20--29},
 }
+
+@article{stroustrup_brief_2015,
+	title = {A brief introduction to {C}++'s model for type-and resource-safety},
+	author = {Stroustrup, Bjarne and Sutter, Herb and Dos, Gabriel},
+	month = oct,
+	year = {2015},
+}
+
+@phdthesis{herter_timing-predictable_2014,
+	type = {{PhD} {Thesis}},
+	title = {Timing-predictable memory allocation in hard real-time systems},
+	author = {Herter, Jörg},
+	month = jan,
+	year = {2014},
+}
+
+@incollection{hristu-varsakelis_vehicle_2005,
+	address = {Boston, MA},
+	title = {Vehicle {Applications} of {Controller} {Area} {Network}},
+	isbn = {978-0-8176-3239-7 978-0-8176-4404-8},
+	url = {http://link.springer.com/10.1007/0-8176-4404-0_32},
+	doi = {10.1007/0-8176-4404-0_32},
+	language = {en},
+	urldate = {2026-08-14},
+	booktitle = {Handbook of {Networked} and {Embedded} {Control} {Systems}},
+	publisher = {Birkhäuser Boston},
+	author = {Johansson, Karl Henrik and Törngren, Martin and Nielsen, Lars},
+	editor = {Hristu-Varsakelis, Dimitrios and Levine, William S.},
+	year = {2005},
+	pages = {741--765},
+}
+
+@misc{noauthor_road_2024,
+	title = {Road vehicles — {Controller} area network ({CAN})},
+	year = {2024},
+}
+

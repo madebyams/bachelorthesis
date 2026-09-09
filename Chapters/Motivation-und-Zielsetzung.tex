@@ -22,23 +22,24 @@ sondern das Prozessdiagramm selbsterklärend. Das Live-Streaming der Ausführung
 
 \section{Zielsetzung}
 
-Zur Ausführbarkeit eines Prozessmodelles werden in dieser Arbeit die folgenden Übergeordneten Ziele gesetzt:
+In der heutigen Zeit steht die Digitalisierung von Produktionsprozessen mit Industrie 4.0 im Vordergrund. Jedoch gibt es hierbei Herausforderungen im der Interoperabilität durch Fragmentierte Daten und Systeme\cite{huebner_semantic_2026}, Prozesscompliance durch Abweichungen des modellierten Prozesses \cite{van_der_aalst_replaying_2012} sowie Transparenz des Produktionsprozesses für Stakeholder \cite{jawad_adoption_2022}.
+
+Aus dieser Ausgangsposition können folgende Ziele ausgearbeitet:
 
 \begin{enumerate}
-    \item Definition der Ausführbarkeit eines Prozessmodells
-    \item Erfassung der Gegebenheiten
-    \item Überführung vom Prozessmodell zur Ausführung auf eingebetteten Systemen
+    \item Fabriken können heterogene Systeme einheitlich anbinden und ansteuern 
+    \item Produktionen laufen prozesseinhaltend
+    \item Der Produktionsprozess wird für alle Stakeholder transparent aufbereitet
 \end{enumerate}
 
-\subsection{Definition der Ausführbarkeit eines Prozessmodells}
+\subsection{Fabriken können heterogene Systeme einheitlich anbinden und ansteuern}
 
-Der Begriff eines Prozesses muss zunächst definiert werden, sodass man auf dieser Basis ein mathematisches Modell eines Prozesses aufsetzen kann. Aus diesem mathematischen Modell wird die Ausführung abgeleitet durch ein Ausführungsmodell, was auf dem Prozessmodell basiert.
+In den meisten Fällen, hat man in einer Produktionsstätte ein Produktionssystem bestehend aus unterschiedlichen Maschinen. Diese haben dann eigene Schnittstellen, welche auch propriertär sein können, was zu Datensilos führen kann. Diese Arbeit soll durch Nutzung von offenen Kommunikation- und Schnittstellenstandards die Anbindung von heterogenen Systemen sowie die Ansteuerung erleichtern. Dies ist durch Schaffung einer einheitlichen Plattform möglich, welche die Übersetzung auf die unterschiedlichen Systeme übernimmt.
 
-\subsection{Erfassung der Gegebenheiten}
+\subsection{Produktionen laufen prozesseinhaltend}
 
-Arbeiten, welche ein ähnliches Ziel verfolgten werden betrachtet. Dabei wird auf das Vorgehen dieser eingegangen: es wird geschaut, was verwendet werden 
-kann und was neu hinzugefügt werden muss. 
+In der Praxis laufen Prozesse nicht immer gemäß der Modellierung. Hierbei können die Gründe unterschiedlichster Art sein: menschlich, durch Verschleiß sowie Zustände der Umgebung. Durch das Nutzen des Prozessmodells als Basis für die automatische Prozessausführung wird sichergestellt, dass Produktionen prozessnäher funktionieren.
 
-\subsection{Überführung vom Prozessmodell zur Ausführung auf eingebetteten Systemen}
+\subsection{Der Produktionsprozess wird für alle Stakeholder transparent aufbereitet}
 
-Anhand der Definition des Prozessmodells und des daraus resultierenden Ausführungsmodells, wird zunächst die Validierung als auch die Übersetzung vom ersten Modell in das zweite mathematisch definiert. Darauf aufbauend wird ein System bestehend aus einem Compiler für die Übersetzung der Modelle sowie einer ExecutionEngine zur Ausführung implementiert.
+Die Produktion findet in der Fabrikhalle statt. Hierbei können nicht alle Stakeholder einen Einblick haben. Dies wird aktuell ermöglicht durch Daten aus bspw. ERP Systemen. Hier wäre es also wichtig näher am Prozessgeschehen zu sein. Am besten in Echtzeit.

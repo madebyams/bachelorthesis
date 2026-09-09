@@ -1,4 +1,6 @@
+
 \chapter{Ergebnisse}
+\label{ergebnisse}
 
 In diesem Kapitel wird sowohl das Systemdesign aus Kapitel \ref{systemdesign-und-spezifikation} sowie die Implementierung aus Kapitel \ref{technische-umsetzung} gegen 
 die definierten Anforderungen aus Kapitel \ref{analyse-und-konzeption} überprüft. Auch wird ein Versuchsaufbau durchgeführt, um die Funktionstüchtigkeit 
@@ -230,6 +232,7 @@ Das Kommanobyte wird dabei wie folgt definiert:
 \newpage
 
 \subsection{Ausführung des Automationsprozesses}
+\label{ausfuehrung-des-automationsprozesses}
 
 Dadurch, dass die Firmware entwickelt wurde, kann bei ARIS der Prozess gestartet werden. Dieser hat schon beim Programmstart eine Hash-Map aller verfügbaren Resourcen 
 gemäß der Resource-Directory erstellt. Hierbei ist der Schlüssel, die ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID und der Schlüssel ist die URL
@@ -284,8 +287,7 @@ Aus Abbildung \ref{fig:process-mining-overview} aus der Anlage ist zu erkennen, 
 
 \section{Diskussion}
 
-Nach der Validierung und den daraus resultierenden Ergebnissen kann man deuten, dass das Ziel der Ausführung eines Prozesses 
-erfolgreich abgeschlossen wurde. Nichtsdestotrotz gibt es einige Hürden und auch Aspekte, welche noch keine vollständige Erfüllung 
+Nach der Validierung und den daraus resultierenden Ergebnissen kann man deuten, dass die Ziele größtenteils erreicht wurden. Nichtsdestotrotz gibt es einige Hürden und auch Aspekte, welche noch keine vollständige Erfüllung 
 der anfangs in Kapitel \ref{motivation-und-zielsetzung} erwähnten Ziele aufzeigt. Diese werden im folgenden beschrieben.
 
 \subsection{Einschränkungen des Prozessmodells}
@@ -297,11 +299,14 @@ Jedoch gibt es in der Praxis auch Prozessmodelle mit Zyklen, welche durch die az
 \section{Reflektion des Projekts im Hinblick auf Zielsetzung}
 \label{reflection}
 
-Die Grundvoraussetzung, dass ein in EPK modellierter Prozess auf einem IoT-System ausgeführt und orchestiert werden kann ist mit 
-dieser Arbeit belegt worden. Dieses Ziel wurde also erreicht. Ein kritischer Punkt, der nun reinkommt ist, 
-dass nun Personal für diese Features geschult werden muss bzw. die Systeme, welche dieses Feature nutzen möchten dementsprechende Updates 
-durchführen müssen. Auch kommt noch die Umrüstung der Industrieanlagen dazu, wo jede Anlage mit einem ESP32 verbunden werden muss, um eine 
-Anbindung und Steuerung über bspw. ARIS zu gewährleisten.
+
+Durch die Codegenerierung wurde das Ziel der einheitlichen Anbindung und Ansteuerung von heterogenen Systemen (siehe Kapitel \ref{motivation-und-zielsetzung}) erreicht, da man Anlagen nun mit einem ESP32 verbinden und somit eine direkte Anbindung an die Prozessverwaltungsplattform und somit auch an die Orchestrierungsschicht hat. Ein kritischer Punkt in dieser Hinsicht ist jedoch, dass Personal für diese Features geschult werden muss bzw. die Systeme, welche dieses Feature nutzen möchten dementsprechende Updates 
+durchführen müssen. Auch kommt noch die Umrüstung der Industrieanlagen dazu, wo die Anlagen auch über eine Schnittstelle verfügen müssen, um mit dem ESP32 verbunden zu werden. Da wäre es am Besten auf andere Mikrocontroller zu schauen, welche zu den Umständen und verfügbaren Schnittstellen der entsprechenden Anlage passen. Dabei muss diese Alternative aber auch eine Möglichkeit besitzen sich mit dem Internet zu verbinden, um mit der Orchestrierungsschicht der Prozessplattform zu kommunizieren.
+
+Die Orchestrierungsschicht der Prozessverwaltungsplattform ARIS erfüllt das Ziel der Prozesseinhaltung einer Produktion (siehe Kapitel \ref{motivation-und-zielsetzung}). Durch das schrittweise Durchlaufen und Versenden der Befehle gemäß des Prozessmodells wird dies sichergestellt.
+Hierbei sollte aber darauf geachtet werden, dass eine stabile Netzwerkverbindung besteht, um Latenzen zu verringern und somit ein flüssiges Produktionsgeschehen zu ermöglichen.
+
+Durch die Live-Animation der Ausführung sowie dem Ausführungsbericht (Event-Log) wurde das Ziel der transparenten Aufbereitung des Produktionsprozesses (siehe Kapitel \ref{motivation-und-zielsetzung}) erreicht. Während der Ausführungsbericht hierbei eine Übersicht der abgeschlossenen Prozesse bietet, hat die Live-Animation der Ausführung eine Schwäche. Wie in Abschnitt \ref{ausfuehrung-des-automationsprozesses} beschrieben wurde, schnellt die Ausführung herunter. Dies kommt dadurch, dass die Ausführung meist schneller ist als die Erfassung der Produktionsplattform. Dies kann mit Performanceunterschieden der Programmiersprachen begründet werden, was in Abschnitt \ref{jvm-bottleneck} näher erläutert wird.
 
 \section{Gefahren für die Gültigkeit}
 
@@ -332,6 +337,7 @@ einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch
 den Netzwerkgegebenheiten ist.
 
 \subsection{Bottleneck durch die JVM auf Server und Client}
+\label{jvm-bottleneck}
 
 Neben der Netzwerklatenz kommt auch noch der Aspekt, dass die JVM durch ihre Garbage-Collection kein deterministisches Verhalten liefert und 
 es zu unbestimmten Zeiten zu Verlangsamungen kommen kann. \cite{carpen-amarie_performance_2015} \cite{al-jaroodi_object-reuse_2005} Dies kann auch das angestrebte Echtzeitverhalten der Orchestierung beeinflussen. In solchen
