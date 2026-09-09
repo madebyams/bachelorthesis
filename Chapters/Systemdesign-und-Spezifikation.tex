@@ -373,7 +373,7 @@ $-$ MQTT basiert auf TCP. Dieses bringt beim Verbindungsaufbau mit dem Drei-Wege
 \addlinespace
 $-$ Die Header-Größe bei MQTT beträgt 2 Byte \cite{noauthor_information_2016}. Addiert mit der Header-Größe von 20 Bytes bei TCP hat der Gesamtheader eine Größe von 22 Bytes. Dies kann für Constrained-Network von Nachteil sein, da das Paket größer ist. & $+$ CoAP hat hingegen eine Header-Größe von 4 Bytes. Jedoch bringt UDP eine Header-Größe von 8 Bytes, wodurch der Header-Overhead sich auf 12 Bytes beläuft \\
 \addlinespace
-$-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zuweisung erfolgt durch Tokens, die im Request-/Response-Paket enthalten sind \cite{10.1109/COMST.2015.2444095} \\
+$-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zuweisung erfolgt durch Tokens, die im Request-/Response-Paket enthalten sind \cite{al-fuqaha_internet_2015} \\
 \bottomrule
 \end{tabularx}
 \caption{Gegenüberstellung von MQTT und CoAP hinsichtlich der Prozessschritt-Ausführung}

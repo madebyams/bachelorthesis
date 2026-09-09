@@ -1,10 +1,15 @@
 \chapter{Grundlagen und Theoretischer Rahmen}
 \label{grundlagen-und-theoreitscher-rahmen}
 
-In diesem Kapitel werden Begriffe aus der Prozessmodellierung, Theoretischen- und Technischen Informatik definiert. Diese legen die Grundlagen für das Ausführungsmodell sowie für den dafür benötigten Compiler
-und der Orchestrierungsschicht, um die Prozesse später automatisieren zu können.
+In diesem Kapitel werden Begriffe und Konzepte aus der Prozessmodellierung, Theoretischen- und Technischen Informatik sowie aus dem Bereich der Rechnernetze definiert. Der Prozessmodellierungsaspekt (Abschnitt \ref{prozesse-definition} bis Abschnitt \ref{epk-definition}) findet dabei Verwendung in dem Entwurf des Prozessmodells sowie dem daraus folgenden Ausführungsmodell in Kapitel \ref{systemdesign-und-spezifikation}. Außerdem werden die Prozessautomatisierungsaspekte (siehe Abschnitt \ref{process-automation-definition} und Abschnitt \ref{orchestration-definition}) bei der Analyse (siehe Kapitel \ref{analyse-und-konzeption}) sowie im Systemdesign (siehe Kapitel \ref{systemdesign-und-spezifikation}) verwendet und sind Hauptbestandteil dieser Arbeit. 
+Der Begriff des Kellerautomaten (Abschnitt \ref{kellerautomat-definition}) aus der theoretischen Informatik dient als eine der Grundlagen für den EPK-Compiler in Kapitel \ref{systemdesign-und-spezifikation}.
+Konzepte aus dem Bereich Internet of Things (Abschnitt \ref{internet-of-things-definition} bis Abschnitt \ref{mqtt-definition}) finden sowohl in der Protokollwahl bei dem Systemdesign (siehe Kapitel \ref{systemdesign-und-spezifikation}) als auch in der technischen Umsetzung in Kapitel \ref{technische-umsetzung} ihre Verwendung. 
+Ebenfalls werden Aspekte der technischen Informatik (Abschnitt \ref{embedded-systems-definition} bis Abschnitt \ref{esp32-definition}) definiert, die bei der technischen Umsetzung in Kapitel \ref{technische-umsetzung} benötigt werden.
+Auch ist eine Definition der zu modifizierenden Prozessverwaltungsplattform (siehe Abschnitt \ref{aris-definition}) gegeben, da diese in der technischen Umsetzung ebenfalls eine wichtige Rolle spielt.
+Die Begriffe der Rechnernetze (Abschnitt \ref{sockets-definition} und \ref{websocket-definition}) finden Verwendung im Kommunikationsaspekt der einzelnen Systemkomponenten aus Kapitel \ref{systemdesign-und-spezifikation} und in der technischen Umsetzung (siehe Kapitel \ref{technische-umsetzung}).
 
 \section{Prozesse}
+\label{prozesse-definition}
 
 Geschäftsprozesse (kurz: Prozesse) sind ``[...] zielgerichtete zeitlich-logische Folgen oder Vorgangsketten von Tätigkeiten [...], dessen Ziele aus der 
 Unternehmensstrategie abgeleitet sind.'' \cite{stahlknecht_einfuhrung_2005} Diese Abfolge muss durch ein Startereignis beginnen und mit einem Endereignis 
@@ -26,6 +31,7 @@ Die Prozessmodellierung verfolgt nach Leimeister folgende Ziele:
 Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder Business Process Model and Notation (kuzr: BPMN) modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
 
 \subsection{EPK}
+\label{epk-definition}
 
 Leimeister definiert EPK (ereignisgesteuerte Prozesskette) als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen, Ereignissen und
 Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren ``AND'', ``OR'' und ``XOR''. \cite{nuttgens_geschaftsprozesmodellierung_1998}
@@ -46,7 +52,7 @@ eine Tätigkeit oder eine Aufgabe eines Geschäftsprozesses (bspw. ``Prüfe den 
 interpretieren. Ereignisse und Funktionen können durch Kanten verbunden und in eine logische Reihenfolge gebracht werden. Dadurch wird der
 Ablauf eines Prozesses und auch der Datenfluss beschrieben. \cite{gadatsch_grundkurs_2008} 
 
-Diese Arbeit verwendet für die EPK-Syntax eine Kombination aus den Definitionen von Rump \cite{rump_geschaftsprozesmanagement_1999-1} und Langner, Schneider, Wehler\cite{langner_ereignisgesteuerte_1997}:
+Diese Arbeit verwendet für die EPK-Syntax eine Kombination aus den Definitionen von Rump \cite{rump_geschaftsprozesmanagement_1999} und Langner, Schneider, Wehler\cite{langner_ereignisgesteuerte_1997}:
 
 Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph $G_P$, welchen man als Tupel $G_P = (V, A, N)$ definiert. Es gilt:
 
@@ -56,7 +62,7 @@ Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph
     \item $N$ eine Relation, wo einer Kante aus $A$ ein Tupel aus $V \times V$ zugeordnet wird  von $G_P$,
     \item $E \subset V$ die Menge der Ereignisse,
     \item $F \subset V$ die Menge der Funktionen und
-    \item $O \subset V$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} lässt sich 
+    \item $O \subset V$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999} lässt sich 
     $O$ in paarweise disjunkte Teilmengen $O_{OR} = (S_{OR} \cup J_{OR}), O_{XOR} = (S_{XOR} \cup J_{XOR})$ und $O_{AND} = (S_{AND} \cup J_{AND})$ aufteilen, sodass $O = O_{OR} \cup O_{XOR} \cup O_{AND}$.
     \item Funktionen und Ereignisse sind atomar, sodass eine Aufteilung innerhalb von Funktionen oder Ereignissen nicht möglich ist
     \item $id: V \rightarrow \mathbb{N}$ bildet einen Knoten auf dessen ID ab
@@ -65,12 +71,13 @@ Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph
     \item $\tau: O \rightarrow O$ ist eine Funktion, wo einem Split-Operator der dazugehörige Join-Operator und einem Join-Operator der dazugehörige Splitoperator ausgegeben wird
 \end{itemize}
 
-In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999-1} werden Prozesswegweiser entnommen. Damit sind $E, F$ und $O$ paarweise disjunkt und für $K$ aus \cite{rump_geschaftsprozesmanagement_1999-1} gilt:
+In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999} werden Prozesswegweiser entnommen. Damit sind $E, F$ und $O$ paarweise disjunkt und für $K$ aus \cite{rump_geschaftsprozesmanagement_1999} gilt:
     
 $$K = V = E \cup F \cup O$$
 
 
 \section{Kellerautomat}
+\label{kellerautomat-definition}
 
 Bei einem Kellerautomaten handelt es sich um ein Berechnungsmodell, was einem nicht-deterministischem Automaten mit $\epsilon$ Kanten ähnelt. 
 Der Unterschied zwischen einem $\epsilon$-NEA und einem Kellerautomaten liegt darin, dass der Kellerautomat über einen Kellerspeicher verfügt, um Symbole 
@@ -89,6 +96,7 @@ aller akzeptierten Zustände. Ein Kellerautomat akzeptiert ein Wort, wenn entwed
 Kellerspeicher leer ist. In dieser Arbeit wird bei einem Endzustand akzeptiert.\cite{hopcroft_einfuhrung_nodate} 
 
 \section{Prozessautomatisierung}
+\label{process-automation-definition}
 
 Gemäß Heinrich und Lutz J. versteht man unter Automatisierung
 den Vorgang [...] von Arbeitsgängen [...], die ohne unmittelbare menschliche 
@@ -97,9 +105,10 @@ Tätigkeiten ausgeführt werden. \cite{heinrich_wirtschaftsinformatik-lexikon_19
 Dumas et al. definieren die Prozessautomatisierung als "die Konfiguration oder Implementierung eines IT-Systems [...], um den zukünftigen Prozess
 zu unterstützen." \cite{dumas_grundlagen_2021}
 
-Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern.
+Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern (siehe Abschnitt \ref{esp32-definition}).
 
 \section{Orchestrierung}
+\label{orchestration-definition}
 
 Unter Geschäftsprozessorchestrierung (kurz: Orchestrierung) versteht man die koordinierte Ausführung von Geschäftsprozessen. \cite{kampik_agent-based_2019}
 Seidlmeier definiert die Steuerung eines Prozesses von einer organisatorischen Einheit als Orchestrierung. \cite{seidlmeier_prozessmodellierung_2019}
@@ -116,10 +125,11 @@ die Ausführung eines gesamten Prozesses, während die Choreographie sich über 
 In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozesschritte gemäß der Modellierung. 
 
 \section{ARIS-Toolset}
+\label{aris-definition}
 
 Das ARIS-Toolset ist gemäß Scheer ein [...] Softwaresystem zur Analyse, Modellierung und
 Navigation von Geschäftsprozessen. [...] Die Grundlage für das ARIS-Toolset wird von der 
-Repository-Struktur gelegt, welche sich aus dem Konzept des ARIS-Haus gebildet hat. \cite{scheer_aris_1994} \cite{rump_geschaftsprozesmanagement_1999-1}
+Repository-Struktur gelegt, welche sich aus dem Konzept des ARIS-Haus gebildet hat. \cite{scheer_aris_1994} \cite{rump_geschaftsprozesmanagement_1999}
 
 Nach Leimeister bietet ARIS eine Umsetzung prozessorientierter Organisationsgestaltung [...] an. Der Anspruch liegt dabei auf der 
 Reduktion der Komplexität der Prozessmodellierung durch Spaltung der Unternehmensarchitektur durch die ARIS Methode in fünf 
@@ -131,7 +141,7 @@ Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
     \item Datensicht (``[...]Betriebswirtschaftlich relevante Funktionsobjekte[...]'')\cite{leimeister_einfuhrung_2015}
     \item Leistungssicht (``[...] Sach- oder Dienstleistungen als Ergebnisse von Prozessen[...]'')\cite{leimeister_einfuhrung_2015}
     \item Steuerungs-/und Prozesssicht (``[...] Zusammenhänge der zuvor genannten Beschreibungssichten in zeitlich-sachlogischen Beziehungen [...]'') \cite{leimeister_einfuhrung_2015}
-\end{itemize} \cite{rump_geschaftsprozesmanagement_1999-1}
+\end{itemize} \cite{rump_geschaftsprozesmanagement_1999}
 
 Seidlmeier wiederum definiert ARIS als Produktgruppe, welche auf die Optimierung von Unternehmensprozessen zielt. Einige der Produkte in der Gruppe: \cite{seidlmeier_prozessmodellierung_2019}
 
@@ -144,10 +154,11 @@ Seidlmeier wiederum definiert ARIS als Produktgruppe, welche auf die Optimierung
     \item ARIS Process Mining
 \end{itemize} \cite{seidlmeier_prozessmodellierung_2019} \cite{software_gmbh_aris_nodate}
 
-In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation zur Implementierung des Prototypen verwendet. EPK ist Teil des ARIS-Konzepts und wird somit auch im ARIS-Toolset unterstützt. \cite{rump_geschaftsprozesmanagement_1999-1}
+In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation zur Implementierung des Prototypen verwendet. EPK ist Teil des ARIS-Konzepts und wird somit auch im ARIS-Toolset unterstützt. \cite{rump_geschaftsprozesmanagement_1999}
 
 
 \section{Eingebettete Systeme}
+\label{embedded-systems-definition}
 
 Nach Hünning und Thaller ist ein eingebettetes System "[...] ein durch Software kontrollierter Computer oder 
 Mikroprozessor, der Teil eines größeren Systems ist, dessen primäre Funktion nicht rechenorientiert ist." \cite{huning_eingebettete_2019} \cite{thaller_software-engineering_1997}
@@ -161,6 +172,7 @@ Prozessoren, welche dabei in eingebetteten Systemen verwendet werden sind Mikrop
 Herstellers Espressif Systems (Shanghai, China) verwendet.
 
 \subsection{ESP32}
+\label{esp32-definition}
 
 Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte WLAN und Bluetooth
 Anbindung, GPIO Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
@@ -183,6 +195,7 @@ nebenläufiger Prozesse (in FreeRTOS: Tasks). Im Vergleich zu gewöhnlichen Betr
 durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024} 
 
 \section{Internet of Things}
+\label{internet-of-things-definition}
 
 Es gibt keine eindeutige Definition für Internet of Things (kurz: IoT). Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
 eingebetteten Geräten, welche Kommunikationsdienste auf der Basis von Internetprotokollen anbieten. Diese Geräte werden gängig als ``Objekte''
@@ -245,6 +258,7 @@ Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscribe
 Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines Quality of Service (kurz: QoS) möglich.\cite{brandes_mikrocontroller_2024}
 
 \section{Sockets}
+\label{sockets-definition}
 
 Unter einem Socket versteht man eine "Verallgemeinerung des Mechanismus für den Dateizugriff unter UNIX, das einen Endpunkt für die Kommunikation bereitstellt.
 [...] Der wesentliche Unterschied zwischen Datei- und Socket-Deskriptoren besteht darin, dass das Betriebssystem einen Datei-Deskriptor an eine bestimmte Datei
