@@ -1,4 +1,3 @@
-
 \chapter{Ergebnisse}
 \label{ergebnisse}
 
@@ -17,7 +16,7 @@ aufgesetzt durch User-Stories, dessen Akzeptanzkriterien durch eine Definition o
 \subsection{Erfüllung der Geschäftsanforderungen}
 \label{requirements-check}
 
-Die Geschäftsanforderungen können aus \ref{requirements} entnommen werden. Um die Abgeschlossenheit 
+Die Geschäftsanforderungen können aus Kapitel \ref{requirements} entnommen werden. Um die Abgeschlossenheit 
 dieser User-Stories zu evaluieren muss man die Definition of Done der User-Story betrachten.
 
 \begin{enumerate}
@@ -300,13 +299,13 @@ Jedoch gibt es in der Praxis auch Prozessmodelle mit Zyklen, welche durch die az
 \label{reflection}
 
 
-Durch die Codegenerierung wurde das Ziel der einheitlichen Anbindung und Ansteuerung von heterogenen Systemen (siehe Kapitel \ref{motivation-und-zielsetzung}) erreicht, da man Anlagen nun mit einem ESP32 verbinden und somit eine direkte Anbindung an die Prozessverwaltungsplattform und somit auch an die Orchestrierungsschicht hat. Ein kritischer Punkt in dieser Hinsicht ist jedoch, dass Personal für diese Features geschult werden muss bzw. die Systeme, welche dieses Feature nutzen möchten dementsprechende Updates 
+Durch die Codegenerierung wurde das Ziel der einheitlichen Anbindung und Ansteuerung von heterogenen Systemen (siehe Kapitel \ref{motivation-und-zielsetzung}) praktisch demonstriert, da man Anlagen nun mit einem ESP32 verbinden und somit eine direkte Anbindung an die Prozessverwaltungsplattform und somit auch an die Orchestrierungsschicht hat. Ein kritischer Punkt in dieser Hinsicht ist jedoch, dass Personal für diese Features geschult werden muss bzw. die Systeme, welche dieses Feature nutzen möchten dementsprechende Updates 
 durchführen müssen. Auch kommt noch die Umrüstung der Industrieanlagen dazu, wo die Anlagen auch über eine Schnittstelle verfügen müssen, um mit dem ESP32 verbunden zu werden. Da wäre es am Besten auf andere Mikrocontroller zu schauen, welche zu den Umständen und verfügbaren Schnittstellen der entsprechenden Anlage passen. Dabei muss diese Alternative aber auch eine Möglichkeit besitzen sich mit dem Internet zu verbinden, um mit der Orchestrierungsschicht der Prozessplattform zu kommunizieren.
 
 Die Orchestrierungsschicht der Prozessverwaltungsplattform ARIS erfüllt das Ziel der Prozesseinhaltung einer Produktion (siehe Kapitel \ref{motivation-und-zielsetzung}). Durch das schrittweise Durchlaufen und Versenden der Befehle gemäß des Prozessmodells wird dies sichergestellt.
 Hierbei sollte aber darauf geachtet werden, dass eine stabile Netzwerkverbindung besteht, um Latenzen zu verringern und somit ein flüssiges Produktionsgeschehen zu ermöglichen.
 
-Durch die Live-Animation der Ausführung sowie dem Ausführungsbericht (Event-Log) wurde das Ziel der transparenten Aufbereitung des Produktionsprozesses (siehe Kapitel \ref{motivation-und-zielsetzung}) erreicht. Während der Ausführungsbericht hierbei eine Übersicht der abgeschlossenen Prozesse bietet, hat die Live-Animation der Ausführung eine Schwäche. Wie in Abschnitt \ref{ausfuehrung-des-automationsprozesses} beschrieben wurde, schnellt die Ausführung herunter. Dies kommt dadurch, dass die Ausführung meist schneller ist als die Erfassung der Produktionsplattform. Dies kann mit Performanceunterschieden der Programmiersprachen begründet werden, was in Abschnitt \ref{jvm-bottleneck} näher erläutert wird.
+Durch die Live-Animation der Ausführung sowie dem Ausführungsbericht (Event-Log) wurde das Ziel der transparenten Aufbereitung des Produktionsprozesses (siehe Kapitel \ref{motivation-und-zielsetzung}) zu einem Großteil abgedeckt. Während der Ausführungsbericht hierbei eine Übersicht der abgeschlossenen Prozesse bietet, hat die Live-Animation der Ausführung eine Schwäche. Wie in Abschnitt \ref{ausfuehrung-des-automationsprozesses} beschrieben wurde, schnellt die Ausführung herunter. Dies kommt dadurch, dass die Ausführung meist schneller ist als die Erfassung der Produktionsplattform. Dies kann mit Performanceunterschieden der Programmiersprachen begründet werden, was in Abschnitt \ref{jvm-bottleneck} näher erläutert wird.
 
 \section{Gefahren für die Gültigkeit}
 
@@ -352,6 +351,10 @@ Laufzeitausnahmen umgesetzt. Hier kann durch normale Ausnahmen eine bessere Fehl
 
 Die Nutzung von Continous Integration und Continous Delivery für ARIS ist durch deren Infrastruktur auf GitHub gegeben. Für die Firmware des ESP32 kann Continous-Integration 
 umgesetzt werden. Dies erfolgt durch Test und Bauen vom Firmwarecode auf CI/CD Plattformen wie GitHub-Actions oder GitLab-CI.
+
+\subsection{Erhöhtes Kollisionsrisiko durch verkürzten Hashwert des Prozessschrittes}
+
+In Abschnitt \ref{codegeneration-model} wird zur einheitlichen Zuweisung von Prozessschritten ein verkürzter SHA256-String verwendet. Dies hat zwar den Vorteil, dass die URI eines Prozessschrittes nicht allzu lang werden und für ID's kein erheblicher Speicherverbrauch vorliegt, jedoch erhöht sich damit das Kollisionsrisiko. 
 
 \section{Zusammenfassung}
 
