@@ -12,7 +12,7 @@ Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware
     \label{fig:systemarchitektur}
 \end{figure}
 
-Damit gemäß dem Ziel, dass Produktionen prozesseinhaltend laufen (siehe Kapitel \ref{motivation-und-zielsetzung}), muss zunächst 
+\noindent Damit gemäß dem Ziel, dass Produktionen prozesseinhaltend laufen (siehe Kapitel \ref{motivation-und-zielsetzung}), muss zunächst 
 ein \textbf{Prozessmodell} definiert werden, welches vom \textbf{EPK-Compiler} übersetzt wird. Das \textbf{Ausführungsmodell} ist das
 Resultat des Compiler und muss ebenfalls definiert werden. Sind beide Definitionen vorhanden, so kann die eigentliche Kompilierung formal 
 beschrieben werden. Aus diesen Bestandteilen kann dann die Ausführung sowie die Codegenerierung abgeleitet werden. Visuell kann das 
@@ -23,7 +23,7 @@ Gesamtsystem mit der Abbildung \ref{fig:systemarchitektur} beschreiben werden.
 
 Gegeben sei ein Prozess $P$. Dieser wird durch ein Prozessmodell dargestellt.
 
-Das Prozessmodell enthält 
+\noindent Das Prozessmodell enthält 
 
 \begin{itemize}
     \item das Startereignis $e_S \in E$,
@@ -31,13 +31,13 @@ Das Prozessmodell enthält
     \item den Prozessgraphen $G_P$ dargestellt als dessen Adjazenzliste
 \end{itemize}
 
-Es kann auch als ein 3-Tupel 
+\noindent Es kann auch als ein 3-Tupel 
 
 $$P = (G_P, e_S, e_E)$$
 
-dargestellt werden.
+\noindent dargestellt werden.
 
-Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefensuche traversiert
+\noindent Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefensuche traversiert
 und in das Ausführungsmodell kompiliert wird. 
 
 \section{Ausführungsmodell}
@@ -45,12 +45,12 @@ und in das Ausführungsmodell kompiliert wird.
 
 Für das Ausführungsmodell wird die Listendefinition gemäß Smolka \cite{smolka_programmierung_2012} verwendet.
 
-Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
+\noindent Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
 Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
 Modell wird dann von der Execution-Engine eingelesen, welche anschließend die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
 auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses modellieren. Formal kann es wie folgt definiert werden:
 
-Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückgabetypen. Dann gilt:
+\noindent Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückgabetypen. Dann gilt:
 
 \begin{enumerate}
     \item $T = \{bool, int\}$ sei die Menge der Rückgabetypen
@@ -62,7 +62,7 @@ Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückg
     \item $X = X_S \cup X_G$ sei die Menge der Executables
 \end{enumerate}
 
-Die ExecutionQueue wird dargestellt als ein Element von $\text{List}(X_S \cup X_G)$.
+\noindent Die ExecutionQueue wird dargestellt als ein Element von $\text{List}(X_S \cup X_G)$. Daraus folgt, dass ExecutableGroups auch ExecutionQueues enthalten, um die einzelnen Pfade zu modellieren.
 
 \section{EPK-Compiler}
 \label{epk-compiler}
@@ -79,10 +79,10 @@ Der Compiler übersetzt diese als ein Ausführungsmodell, das der Definition aus
 
 Vor der Kompilierung findet eine Vorverarbeitung statt, wo die Abbildung $\tau$ gefüllt wird.
 
-Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren. Nach dieser Validierung findet die Kompilierung statt. 
+\noindent Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren. Nach dieser Validierung findet die Kompilierung statt. 
 Die Validierung kann man formal wie folgt modellieren:
 
-Gegeben sei ein Prozess $P$. $e_I \in E \setminus \{e_S, e_E\}$ beschreibt alle Zwischenereignisse von $P$. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G_P$ enthält. 
+\noindent Gegeben sei ein Prozess $P$. $e_I \in E \setminus \{e_S, e_E\}$ beschreibt alle Zwischenereignisse von $P$. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G_P$ enthält. 
 Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge an Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
 
 \begin{align}
@@ -93,7 +93,7 @@ Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Da
     W := e_I \; B
 \end{align}
 
-Ein Wort auf $L$ beschreibt einen Pfad der Tiefensuche.
+\noindent Ein Wort auf $L$ beschreibt einen Pfad der Tiefensuche.
 Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruieren: \cite{hopcroft_einfuhrung_nodate}
 
 \begin{align}
@@ -130,22 +130,62 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 
 \newpage
 
-Diese formale Definition des Kellerautomaten, lässt sich auch in eine grafische Repräsentation überführen (siehe Abbildung \ref{fig:kellerautomat}).
+\noindent Diese formale Definition des Kellerautomaten, lässt sich auch in eine grafische Repräsentation überführen (siehe Abbildung \ref{fig:kellerautomat}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Graphics/Kellerautomat.pdf}
+    \includegraphics[width=0.8\textwidth]{Graphics/Kellerautomat.pdf}
     \caption{Kellerautomat der Grammatik}
     \label{fig:kellerautomat}
 \end{figure}
 
+\noindent Dieser Kellerautomat hat dabei die folgenden Übergänge:
 
-Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem Endzustand. Wie vorhin schon erwähnt 
-wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$:
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{0.85}
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+ID & Zustand & Übergang \\
+\midrule
+0 & $q_0$ & $ \epsilon, \# \mapsto S $ \\
+1 & $q_1$ & $ \epsilon, S \mapsto e_S\; B\; e_E $\\
+2 & $q_1$ & $ \epsilon, B \mapsto f $ \\
+3 & $q_1$ & $ \epsilon, B \mapsto f\; e_I\; B $ \\
+4 & $q_1$ & $ \epsilon, B \mapsto f\; U $\\
+5 & $q_1$ & $ \epsilon, U \mapsto S_{XOR} \; W\; J_{XOR} $\\
+6 & $q_1$ & $ \epsilon, U \mapsto S_{OR}\; W\; J_{OR} $ \\
+7 & $q_1$ & $ \epsilon, U \mapsto S_{AND}\; W\; J_{AND} $\\
+8 & $q_1$ & $ \epsilon, U \mapsto S_{XOR}\; W\; J_{XOR}\; e_I\; B $\\
+9 & $q_1$ & $ \epsilon, U \mapsto S_{OR}\ W\ J_{OR}\ e_I \ B $\\
+10 & $q_1$ & $ \epsilon, U \mapsto S_{AND}\ W\ J_{AND}\ e_I \ B $\\
+11 & $q_1$ & $ \epsilon, W \mapsto e_I\ B $\\
+12 & $q_1$ & $ e_S, e_S \mapsto \epsilon $\\
+13 & $q_1$ & $ e_E, e_E \mapsto \epsilon $\\
+14 & $q_1$ & $ e_I, e_I \mapsto \epsilon $\\
+15 & $q_1$ & $ f, f \mapsto \epsilon $\\
+16 & $q_1$ & $ J_{XOR}, J_{XOR} \mapsto \epsilon $\\
+17 & $q_1$ & $ S_{XOR}, S_{XOR} \mapsto \epsilon $\\
+18 & $q_1$ & $ S_{OR}, S_{OR} \mapsto \epsilon $\\
+19 & $q_1$ & $ J_{OR}, J_{OR} \mapsto \epsilon $\\
+20 & $q_1$ & $ S_{AND}, S_{AND} \mapsto \epsilon $\\
+21 & $q_1$ & $ J_{AND}, J_{AND} \mapsto \epsilon $\\
+22 & $q_2$ & $ \epsilon, \# \mapsto \epsilon $ \\
+\bottomrule
+\end{tabularx}
+\normalsize
+\renewcommand{\arraystretch}{1}
+\caption{Übersicht der Übergänge des Kellerautomaten aus Abbildung \ref{fig:kellerautomat}}
+\label{tab:kellerautomat-uebergaenge}
+\end{table}
+
+\noindent Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem Endzustand. Wie vorhin schon erwähnt 
+wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$ erhält:
 
 $$x_q = \gamma(e_S)$$
 
-erhält.
 
 \subsection{Übersetzung}
 \label{translation-function}
@@ -205,7 +245,7 @@ Durch den EPK-Compiler erhält man nun das Ausführungsmodell. Dieses kann von d
 werden, sodass eine Ausführung des Prozesses ermöglicht wird. Im folgenden wird die Bezeichnung \textit{ExecutionQueue} verwendet, um auf das 
 Ausfürhungsmodell zu verweisen.
 
-Die Ausführung einer ExecutionQueue kann mithilfe des folgenden Standard-ML \cite{smolka_programmierung_2012} Quellcodes 
+\noindent Die Ausführung einer ExecutionQueue kann mithilfe des folgenden Standard-ML \cite{smolka_programmierung_2012} Quellcodes 
 beschrieben werden:
 
 \begin{lstlisting}
@@ -272,11 +312,16 @@ in
 end;
 \end{lstlisting}
 
-\newpage
+\noindent Zur Ausführung wird die ExecutableQueue in eine \texttt{run} Funktion als Parameter übergeben. Dort wird dann jedes einzelne Element schrittweise abgearbeitet. Dabei ist das Verhalten für jede Art von Executable anders:
 
-Bei einer SingleExecutable wird die Funktion passend zur Executable auf dem Mikrocontroller ausgeführt. Bei einer ExecutableGroup 
-werden die direkten Nachbarn der Pfade ausgeführt und es wird entsprechend der Logik des Verknüpfungsoperators eine Entscheidung 
-getroffen zum auszuführenden Pfad.
+\begin{itemize}
+\item Bei einer SingleExecutable wird die Funktion passend zur Executable auf dem Mikrocontroller ausgeführt.
+
+\item Bei einer ExecutableGroup 
+werden die direkten Nachbarn der Pfade ausgeführt. Dies geschieht in der \texttt{validate} Funktion. Anschließend wird entsprechend der Logik des Verknüpfungsoperators eine Entscheidung zum auszuführenden Pfad getroffen. Da der Pfad einer ExecutableGroup auch wiederum eine ExecutionQueue ist, wird hier genauso vorgegangen wie bei der ExecutionQueue des Gesamtprozesses. 
+\end{itemize}
+
+
 
 \section{Live-Streaming der Ausführung}
 \label{automation-animation}
@@ -306,7 +351,7 @@ $-$ Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreit
 
 Auf dieser Grundlage wurde entschieden mit bidirektionalen Verbindungen statt Polling, für die Animation zu arbeiten.
 
-Vor der Ausführung, wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
+\noindent Vor der Ausführung, wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
 gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Die Abbildung \ref{fig:live-streaming} zeigt auch grafisch den Kontrollfluss auf. Über diese
 Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
 animieren.
@@ -319,7 +364,7 @@ animieren.
 \end{figure}
 
 
-Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
+\noindent Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
 
 \section{Schnittstellen}
 
@@ -333,7 +378,9 @@ Der Automationsserver bietet eine Schnittstelle an, welche die Automation von Pr
 
 \begin{table}[H]
 \centering
-\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\footnotesize
+\renewcommand{\arraystretch}{0.85}
+\begin{tabularx}{\textwidth}{l >{\hsize=0.65\hsize\raggedright\arraybackslash}X >{\hsize=1.35\hsize\raggedright\arraybackslash}X}
 \toprule
 Name                        &   Parameter                                                           & Funktion \\
 \midrule
@@ -351,6 +398,8 @@ initStreamConnection        &   keine Parameter                                 
 closeStreamConnection       &   keine Parameter                                                     & Schließen der erstellten Socketverbindung \\
 \bottomrule
 \end{tabularx}
+\normalsize
+\renewcommand{\arraystretch}{1}
 \caption{Übersicht der Simulationsschnittstelle}
 \label{tab:simulation-interface}
 \end{table}
@@ -381,7 +430,7 @@ $-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zu
 \label{tab:mqtt-coap}
 \end{table}
 
-Auf dieser Grundlage wurde entschieden CoAP als Kommunikationsprotokoll zwischen der Orchestrierungsschicht und dem IoT-System zu verwenden.
+\noindent Auf dieser Grundlage wurde entschieden CoAP als Kommunikationsprotokoll zwischen der Orchestrierungsschicht und dem IoT-System zu verwenden.
 
 \subsubsection{Definition der CoAP Schnittstelle}
 \label{coap-interface}
@@ -391,12 +440,12 @@ Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher 
 Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 
 
-\textbf{GET /health}
+\noindent \textbf{GET /health}
 
 
-Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgegeben werden kann.
+\noindent Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgegeben werden kann.
 
-Die Antwort hat folgendes Schema:
+\noindent Die Antwort hat folgendes Schema:
 
 \begin{lstlisting}[caption={Schema der Antwort beim \texttt{/health} Endpunkt}, label=lst:health-answer]
 {
@@ -407,17 +456,17 @@ Die Antwort hat folgendes Schema:
 
 \newpage
 
-Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
+\noindent Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
 
 
-\textbf{PUT /<$h$[0:15]>}
+\noindent \textbf{PUT /<$h$[0:15]>}
 
 
-Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
+\noindent Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
 kein Payload mitgegeben werden. Dies begründet auch die Entscheidung PUT zu verwenden. Normalerweise wird für eine Ausführung POST
 genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload zwingend benötigt wird, erschien PUT sinnvoller.
 
-Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
+\noindent Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
 ist hierbei wie folgt:
 
 \begin{lstlisting}[caption={Schema der Antwort bei Prozessschrittendpunkten}, label=lst:single-executable-answer]

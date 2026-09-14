@@ -6,11 +6,11 @@ welches die tatsächliche Ausführung des Ausführungsmodelles auf echter Hardwa
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Graphics/Systemarchitektur.pdf}
+    \includegraphics[width=1.2\textwidth]{Graphics/Systemarchitektur.pdf}
     \caption{Systemarchitektur}
 \end{figure}
 
-Der Protoyp des Entwurfes aus Kapitel \ref{systemdesign-und-spezifikation} wurde in den Programmiersprachen Java, Scala, Python und C++ entwickelt. Scala wurde für den Compiler und die Execution-Engine verwendet, Java wurde für die Host-seitige 
+\noindent Der Protoyp des Entwurfes aus Kapitel \ref{systemdesign-und-spezifikation} wurde in den Programmiersprachen Java, Scala, Python und C++ entwickelt. Scala wurde für den Compiler und die Execution-Engine verwendet, Java wurde für die Host-seitige 
 CoAP Verbindung zur Übermittlung von Befehlen und für die Nutzeroberfläche, während C++ für die Firmware auf dem ESP32 genutzt wurde und Python für die Codegenerierung. Als EPK-Schicht wurde eine modifizierte 
 Version der ARIS Produktgruppe genutzt. 
 
@@ -27,7 +27,7 @@ UML-Diagramm der Prozessmodellimplementierung ist unter Abbildung \ref{fig:proze
 Das Prozessmodell ist in XML serialisiert und muss dementsprechend deserialisiert werden. Bei dieser Deserialisierung findet
 auch die Konstruktion der \texttt{Process} Klasse statt.
 
-Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als UML-Diagramm unter \ref{fig:process-builder-uml} aufgeführt.
+\noindent Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als UML-Diagramm unter \ref{fig:process-builder-uml} aufgeführt.
 Die einzelnen \texttt{*Extractor} Klassen erfüllen die Funktion, aus dem XML-Dokument die Elemente zu extrahieren. Diese Elemente werden in \texttt{ProcessExtractor} gesammelt
 und zu einem \texttt{Process} (siehe Abbildung \ref{fig:prozess-uml} in der Anlage) konstruiert. Nach der Konstruktion des \texttt{Process} Objekts wird die Vorverarbeitung durchgeführt, um $\tau$ zu
 realisieren mittels \texttt{OperatorPreprocessor}.
@@ -45,7 +45,7 @@ Der EPK-Compiler wurde in Scala geschrieben, um eine Interoperabilität mit dem 
 Auch wurde Scala als Sprache für den Compiler gewählt, da es Pattern-Matching und algorithmische Datentypen bietet, welche die 
 Entwicklung eines Compilers stark vereinfacht \cite{zhang_pattern_2018} \cite{odersky_overview_2004}.
 
-Das UML-Diagramm des EPK-Compiler ist unter \ref{fig:epk-compiler-uml} zu finden.
+\noindent Das UML-Diagramm des EPK-Compiler ist unter \ref{fig:epk-compiler-uml} zu finden.
 Der Prozess wird an den Compiler übergeben. Beim Aufruf der \texttt{compile} Methode, wird der Prozess durch Tiefensuche durchlaufen. Dabei wird dann mittels Pattern-Matching 
 für die jeweilige Knotenart, die passende Übersetzung verwendet gemäß \ref{translation-function}. Am Ende erhält man die \texttt{ExecutionQueue}, welche ausgeführt werden kann.
 Diese wird in eine \texttt{ExecutionQueueBuilderContext} Instanz hinterlegt, um diese für die Ausführung oder Codegenerierung bereit zu halten.
@@ -78,7 +78,7 @@ Microkontrollern. In dieser Arbeit wird ein Microkontroller der Reihe ESP32 verw
 Dabei wird die Realisierung eines Prozesses durch einen CoAP PUT-Endpoint realisiert. Anhand der Schnittstellendefinition 
 aus \ref{coap-interface} entspricht der Pfadname eines Endpunktes den ersten 15 Zeichen eines SHA256-Hexstrings. 
 
-Alle CoAP-Endpunkte, welche die Funktionalität des SingleExecutables zur Verfügung stellen werden beim Start des Servers aus
+\noindent Alle CoAP-Endpunkte, welche die Funktionalität des SingleExecutables zur Verfügung stellen werden beim Start des Servers aus
 einem Resource-Directory abgefragt, welches die CoAP-URL's enthält. Das Ergebnis wird in einer Hash-Map hinterlegt, wo der gekürzte
 SHA256-Hexstring der Schlüssel die CoAP-URL der Wert ist. Bei der Ausführung eines \texttt{SingleExecutable} wird durch die ID des \texttt{SingleExecutable}
 genommen, der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die CoAP-Anfrage wird an direkt an den ESP32 verschickt. Die beschriebene Ausführung und Kommunikation zwischen den einzelnen Akteueren wird auch in der Abbildung \ref{fig:coap-single-executable-execution} aufgezeigt.
@@ -124,15 +124,8 @@ Dann werden alle Handler initalisiert und beim Resource-Directory registriert.
 \subsection{Integration in ESP-IDF}
 
 Für den Firmwarecode wurde ESP-IDF als Basis genommen. Aspekte wie der Aufbau einer WLAN-Verbindung, die Initialisierung eines CoAP-Servers 
-sowie Einrichtungscode eines CoAP-Endpoint Handlers sind schon eingebaut. Die dafür implementierten Klassen sind als UML-Diagramme in der Abbildung \ref{fig:idf-project-classes} zu sehen. Nach der Codegenerierung muss nur noch die Ausführungslogik implementiert
-werden. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/Firmware-UML.pdf}
-    \caption{Klassen innerhalb eines generierten ESP-IDF Projekts}
-    \label{fig:idf-project-classes}
-\end{figure}
+sowie Einrichtungscode eines CoAP-Endpoint Handlers sind schon eingebaut. Die dafür implementierten Klassen sind als UML-Diagramme in der Abbildung \ref{fig:idf-project-classes} zu sehen. 
+Nach der Codegenerierung muss nur noch die Ausführungslogik implementiert werden. 
 
 \newpage
 
@@ -143,7 +136,7 @@ Diese Liste wird zu einem dynamischen Array von Codegenerierungselementen gemä�
 Codegenerierungsmodell mit der Klasse \texttt{ExecutionNodeDTO} implementiert. Dieses dynamische Array wird anhand des JSON-Formats serialisiert, sodass man ein 
 JSON-Dokument der folgenden Form erhält: 
 
-Sei $(i, n, t) \in C$:
+\noindent Sei $(i, n, t) \in C$:
 
 \begin{lstlisting}
 \[
@@ -157,7 +150,7 @@ Sei $(i, n, t) \in C$:
 \]
 \end{lstlisting}
 
-Danach wird ein Python-Skript ausgeführt, welches dieses JSON-Dokument einliest. Es iteriert durch das Array und für jedes Codeelement wird eine 
+\noindent Danach wird ein Python-Skript ausgeführt, welches dieses JSON-Dokument einliest. Es iteriert durch das Array und für jedes Codeelement wird eine 
 Handlerklasse gebaut. Dabei werden Jinja2-Template Dateien mit den Werten des Codeelements gefüllt. Diese Template-Dateien enthalten eine abstrahierte Version 
 der Header- und Sourcedatei einer Handlerklasse. Am Ende erhält man ein ESP-IDF Projekt, bestehend aus einer \texttt{main}-Komponente, einer \texttt{wifi}-Komponente,
 einer \texttt{coap}-Komponente sowie die generierten Handler als eigene ESP-IDF Komponenten.
@@ -217,7 +210,7 @@ definiert werden, weshalb die Schnittstelle dieser Arbeit sich von \texttt{ISimu
     \label{fig:aris-soll-zustand}
 \end{figure}
 
-Durch die Definition der neuen Schnittstelle kann der Soll-Zustand aus Abbildung \ref{fig:aris-soll-zustand} erreicht werden.
+\noindent Durch die Definition der neuen Schnittstelle kann der Soll-Zustand aus Abbildung \ref{fig:aris-soll-zustand} erreicht werden.
 
 \subsection{Bereitstellung von Ausführungsstatistiken für ARIS Process Mining}
 

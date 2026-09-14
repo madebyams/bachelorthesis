@@ -3,11 +3,10 @@
 
 In diesem Kapitel wird das Vorgehen konzipiert durch die Definition der Anforderungen in Form von User-Stories. Aus diesen User-Stories werden dann die Aufgaben zur Realisierung dieser Anforderungen sowie die Akzeptanzkriterien abgeleitet.
 
-Während die übergeordneten Ziele (heterogene Systemanbindung und -ansteuerung, Prozesseinhaltung und Stakeholdertransparenz) sich auf diese Arbeit fokussieren, werden die Anforderungen an ein Endprodukt gestellt, welches aus dieser Arbeit entsteht und diese übergeordnet Ziele in der Praxis umsetzt: Die Prozessverwaltungsplattform, welches die Orchestrierung übernimmt sowie dem Compiler, welches die Ausführung und 
+\noindent Während die übergeordneten Ziele (heterogene Systemanbindung und -ansteuerung, Prozesseinhaltung und Stakeholdertransparenz) sich auf diese Arbeit fokussieren, werden die Anforderungen an ein Endprodukt gestellt, welches aus dieser Arbeit entsteht und diese übergeordnet Ziele in der Praxis umsetzt: Die Prozessverwaltungsplattform, welches die Orchestrierung übernimmt sowie dem Compiler, welches die Ausführung und 
 Codegenerierung ermöglicht.
 
-Diese Anforderungen werden nach dem Verfahren nach C
-ohn \cite{cohn_user_2004} definiert.
+\noindent Diese Anforderungen werden nach dem Verfahren nach Cohn \cite{cohn_user_2004} definiert.
 \label{requirements}
 
 \begin{enumerate}[label=\Alph*)]
@@ -30,19 +29,19 @@ ohn \cite{cohn_user_2004} definiert.
     werden kann, um den Produktionsfluss nicht zu stark beeinträchtigen}.
 \end{enumerate}
 
-Aus diesen User-Stories lassen sich die einzelnen Aufgaben (Tasks) und Akzeptanzkriterien (Defintion of Done) für die Umsetzung herleiten.
+\noindent Aus diesen User-Stories lassen sich die einzelnen Aufgaben (Tasks) und Akzeptanzkriterien (Defintion of Done) für die Umsetzung herleiten.
 
 
-\textbf{Ich als Softwareentwickler möchte Produktionsanlagen einfach an die Prozessschicht anbinden, sodass neue Anlagen integriert werden können.}
+\noindent \textbf{Ich als Softwareentwickler möchte Produktionsanlagen einfach an die Prozessschicht anbinden, sodass neue Anlagen integriert werden können.}
 
-Abzuleitende Tasks:
+\textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung einer SDK zur Kommunikation mit der Prozessschicht auf Ebene der Anlage.
     \item Entwicklung eines Werkzeuges zur Überführung des Prozessmodells in Firmwarecode.
 \end{itemize}
 
-Definitions of Done:
+\textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
     \item Man kann aus einem EPK-Prozessmodell eine Schablone erstellen zur Entwicklung von Firmwarecode.
@@ -50,9 +49,9 @@ Definitions of Done:
 \end{itemize}
 
 
-\textbf{Ich als Geschäftsleiter möchte meine Produktionsprozesse gemäß meiner Modellierung durchführen, sodass die Produktionen selbst konsistent und messbar sind.}
+\noindent \textbf{Ich als Geschäftsleiter möchte meine Produktionsprozesse gemäß meiner Modellierung durchführen, sodass die Produktionen selbst konsistent und messbar sind.}
 
-Abzuleitende Tasks:
+\textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung eines Compilers zur Übersetzung des EPK-Modells in eine ausführbare Form
@@ -60,7 +59,7 @@ Abzuleitende Tasks:
     \item Einbau von Logging zur Zeitmessung bei der Ausführung
 \end{itemize}
 
-Definitions of Done:
+\textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
     \item Ein EPK-Modell lässt sich in das Ausführungsformat übersetzen.
@@ -68,30 +67,30 @@ Definitions of Done:
     \item Am Ende einer Ausführung hat man Zugang zu einem Ausfürhungsbericht.
 \end{itemize}
 
-\textbf{Ich als Controller möchte laufende Prozesse überwachen, sodass die Effizienz von Geschäftsprozessen gemessen und optimiert werden kann.}
+\noindent \textbf{Ich als Controller möchte laufende Prozesse überwachen, sodass die Effizienz von Geschäftsprozessen gemessen und optimiert werden kann.}
 
-Abzuleitende Tasks:
+\textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung von Live-Monitoring bei einem laufenden Prozess 
 \end{itemize}
 
-Definitions of Done:
+\textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
     \item Die Ausführung eines Prozessdurchlaufs lässt sich visuell mitverfolgen auf der Prozessschicht.
 \end{itemize}
 
 
-\textbf{Ich als Analyst möchte einen Verlauf vergangener Prozesse einsehen, sodass Schwachstellen und Engpässe ermittelt werden können.}
+\noindent \textbf{Ich als Analyst möchte einen Verlauf vergangener Prozesse einsehen, sodass Schwachstellen und Engpässe ermittelt werden können.}
 
-Abzuleitende Tasks:
+\textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung von Event-Logging, sodass einzelne Ausführungsschritte aufgezeichnet werden.
 \end{itemize}
 
-Defintions of Done:
+\textbf{\textit{Defintions of Done}}:
 
 \begin{itemize}
     \item Nach einer Ausführung ist es möglich einen Ausführungsbericht zu generieren.
@@ -99,15 +98,15 @@ Defintions of Done:
 \end{itemize}
 
 
-\textbf{Ich als Kunde möchte über den aktuellen Stand meines Produktes informiert werden, sodass ich die nächsten Schritte mit dem Produkt planen kann.}
+\noindent \textbf{Ich als Kunde möchte über den aktuellen Stand meines Produktes informiert werden, sodass ich die nächsten Schritte mit dem Produkt planen kann.}
 
-Abzuleitende Tasks:
+\textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung von Live-Monitoring bei einem laufenden Prozess 
 \end{itemize}
 
-Definitions of Done:
+\textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
     \item Die Ausführung eines Prozessdurchlaufs lässt sich visuell mitverfolgen für den Kunden über eine eigene Sicht.
@@ -115,9 +114,9 @@ Definitions of Done:
 \end{itemize}
 
 
-\textbf{Ich als Administrator möchte ein wartbares IoT-System haben, sodass im Falle eines Notfalls schnell reagiert werden kann, um den Produktionsfluss nicht zu stark beeinträchtigen.}
+\noindent \textbf{Ich als Administrator möchte ein wartbares IoT-System haben, sodass im Falle eines Notfalls schnell reagiert werden kann, um den Produktionsfluss nicht zu stark beeinträchtigen.}
 
-Abzuleitende Tasks:
+\textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung einer modularen Hardwarearchitektur.
@@ -125,7 +124,7 @@ Abzuleitende Tasks:
     \item Definition eines Datenformats für die Kommunikation zwischen Prozessgateway und Produktionshardware.
 \end{itemize}
 
-Definitions of Done:
+\textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
     \item Es ist möglich die Prozess Hardware einfach auszutauschen ohne das gesamte System zu beeinflussen.

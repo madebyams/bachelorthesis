@@ -1,8 +1,15 @@
 \chapter{Einleitung}
 \label{einleitung}
 
-Im industriellen Umfeld werden Prozesse komplexer: Sie beinhalten Sensoren und Aktoren. Hinzu kommen die Abhängigkeiten von anderen Prozessschritten oder Zuständen und 
-eine Zunahme von Komponenten und Anlagen im Bereich der Industrie 4.0. Für diese muss auch die Interoperabilität gewährleistet sein. Um diese Prozesse übersichtlich zu machen und
+Im industriellen Umfeld werden Prozesse komplexer. Diese beinhalten die folgenden Aspekte:
+
+\begin{itemize}
+  \item Der Einsatz von Sensoren und Aktoren.
+  \item Die Abhängigkeiten zwischen dem aktuellen Produktionsprozess und anderen Prozessschritten oder Zuständen.
+  \item Zunahme von Komponenten und Anlagen im Bereich der Industrie 4.0 mit der Anforderung von Interoperabilität   
+\end{itemize}
+      
+Um diese Prozesse übersichtlich zu machen und
 auch zu optimieren, nutzt man in der Wirtschaftsinformatik die Prozessmodellierung. 
 Diese geben allen Stakeholdern eine Leitlinie und es gewährleistet die Einhaltung von 
 Standard und Konsistenz bei der Produktion. Jedoch ist es meist so, dass Modell und Praxis nicht 
@@ -10,10 +17,10 @@ immer miteinander übereinstimmen. Es kommt zu Engpässen oder anderweitigen Uns
 den Prozessverlauf beeinflussen. Meist werden Prozesse durch Daten in ERP-, CRM-Systemen 
 oder auch Simulationen optimiert. Jedoch sind es die Aspekte der Ausführung, welche in der Industrie signifikante Unterschiede mit sich bringen.
 Das Problem ist also eine Lücke zwischen Modell und Ausführung. Diese Arbeit versucht diese Lücke durch Übersetzung des Modells in ein Ausführungsmodell zur 
-Orchestrierung von IoT-Geräten zu schließen.
+Orchestrierung\footnote{siehe Abschnitt \ref{orchestration-definition}} von IoT-Geräten zu schließen.
 
 \section{Vorgehen und Aufbau der Arbeit}
 
-Kapitel \ref{grundlagen-und-theoreitscher-rahmen} legt zunächst die theoretischen Grundlagen zur Lösung des Problems. Im Kapitel \ref{analyse-und-konzeption} werden verwandte Arbeiten betrachtet, welche ein ähnliches Problem lösen und es wird ermittelt, welche Anteile dieser Arbeiten verwendet und welche Anteile neu beigetragen werden. Darauf aufbauend werden dann Anforderungen an die Lösungen gesetzt, um neben der Zielsetzung auch konkrete Punkte zur Überprüfung der Lösung zu haben. Basierend auf den Grundlagen von Kapitel \ref{grundlagen-und-theoreitscher-rahmen} sowie den Anforderungen aus Kapitel \ref{analyse-und-konzeption} wird in Kapitel \ref{systemdesign-und-spezifikation} das System zur Kompilierung und Ausführung von Prozessen formal entworfen. Darauf aufbauend findet in Kapitel \ref{technische-umsetzung} eine technische Umsetzung statt, welche das formal 
+Zu allererst wird in Kapitel \ref{motivation-und-zielsetzung} die Motivation dieser Arbeit erläutert. Aus dieser werden dann die übergeordneten Ziele herausgearbeitet. Kapitel \ref{grundlagen-und-theoreitscher-rahmen} legt zunächst die theoretischen Grundlagen zur Lösung des Problems. Im Kapitel \ref{analyse-und-konzeption} werden verwandte Arbeiten betrachtet, welche ein ähnliches Problem lösen und es wird ermittelt, welche Anteile dieser Arbeiten verwendet und welche Anteile neu beigetragen werden. Darauf aufbauend werden dann Anforderungen an die Lösungen gesetzt, um neben der Zielsetzung auch konkrete Punkte zur Überprüfung der Lösung zu haben. Basierend auf den Grundlagen von Kapitel \ref{grundlagen-und-theoreitscher-rahmen} sowie den Anforderungen aus Kapitel \ref{analyse-und-konzeption} wird in Kapitel \ref{systemdesign-und-spezifikation} das System zur Kompilierung und Ausführung von Prozessen formal entworfen. Darauf aufbauend findet in Kapitel \ref{technische-umsetzung} eine technische Umsetzung statt, welche das formal 
 definierte System in der Praxis umsetzt. Gefolgt davon kommt in Kapitel \ref{ergebnisse} eine Prüfung entgegen der Anforderungen in Kapitel \ref{analyse-und-konzeption} sowie eine Validierung durch die Anwendung des Prototyps 
 der technischen Umsetzung in einem Beispielszenario.Folglich findet eine Diskussion bezüglich der Zielsetzung und der Umsetzung statt. Anschließend wird in  Kapitel \ref{fazit}, ein Fazit gezogen gefolgt von einem zukünftigen Ausblick des Resultats der Arbeit, sowie einer Bewertung Praxistauglichkeit dieser Arbeit.
