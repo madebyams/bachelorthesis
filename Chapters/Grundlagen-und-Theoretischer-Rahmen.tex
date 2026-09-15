@@ -1,7 +1,7 @@
 \chapter{Grundlagen und Theoretischer Rahmen}
 \label{grundlagen-und-theoreitscher-rahmen}
 
-In diesem Kapitel werden Begriffe und Konzepte aus der Prozessmodellierung, Theoretischen- und Technischen Informatik sowie aus dem Bereich der Rechnernetze definiert. Der Prozessmodellierungsaspekt (Abschnitt \ref{prozesse-definition} bis Abschnitt \ref{epk-definition}) findet dabei Verwendung in dem Entwurf des Prozessmodells sowie dem daraus folgenden Ausführungsmodell in Kapitel \ref{systemdesign-und-spezifikation}. Außerdem werden die Prozessautomatisierungsaspekte (siehe Abschnitt \ref{process-automation-definition} und Abschnitt \ref{orchestration-definition}) bei der Analyse (siehe Kapitel \ref{analyse-und-konzeption}) sowie im Systemdesign (siehe Kapitel \ref{systemdesign-und-spezifikation}) verwendet und sind Hauptbestandteil dieser Arbeit. 
+In diesem Kapitel werden Begriffe und Konzepte aus der Prozessmodellierung, der theoretischen und technischen Informatik sowie aus dem Bereich der Rechnernetze definiert. Der Prozessmodellierungsaspekt (Abschnitt \ref{prozesse-definition} bis Abschnitt \ref{epk-definition}) findet dabei Verwendung in dem Entwurf des Prozessmodells sowie dem daraus folgenden Ausführungsmodell in Kapitel \ref{systemdesign-und-spezifikation}. Außerdem werden die Prozessautomatisierungsaspekte (siehe Abschnitt \ref{process-automation-definition} und Abschnitt \ref{orchestration-definition}) bei der Analyse (siehe Kapitel \ref{analyse-und-konzeption}) sowie im Systemdesign (siehe Kapitel \ref{systemdesign-und-spezifikation}) verwendet und sind Hauptbestandteil dieser Arbeit. 
 Der Begriff des Kellerautomaten (Abschnitt \ref{kellerautomat-definition}) aus der theoretischen Informatik dient als eine der Grundlagen für den EPK-Compiler in Kapitel \ref{systemdesign-und-spezifikation}.
 Konzepte aus dem Bereich Internet of Things (Abschnitt \ref{internet-of-things-definition} bis Abschnitt \ref{mqtt-definition}) finden sowohl in der Protokollwahl bei dem Systemdesign (siehe Kapitel \ref{systemdesign-und-spezifikation}) als auch in der technischen Umsetzung in Kapitel \ref{technische-umsetzung} ihre Verwendung. 
 Ebenfalls werden Aspekte der technischen Informatik (Abschnitt \ref{embedded-systems-definition} bis Abschnitt \ref{esp32-definition}) definiert, die bei der technischen Umsetzung in Kapitel \ref{technische-umsetzung} benötigt werden.
@@ -29,7 +29,7 @@ bei Mitarbeitern und Fachexperten sichergestellt werden kann. Auf der Basis der 
 \end{itemize}
 
 
-\noindent Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder Business Process Model and Notation (kuzr: BPMN) modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
+\noindent Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder Business Process Model and Notation (kurz: BPMN) modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
 
 \subsection{EPK}
 \label{epk-definition}
@@ -40,13 +40,13 @@ Ein wesentliches Merkmal von EPK ist die Darstellung eines Prozesses in eine zei
 Ereignisse und Verknüpfungsoperatoren. \cite{nuttgens_geschaftsprozesmodellierung_1998}
 Prozessmodelle auf Basis von EPK sind für Stakeholder wie Projektpartner oder Kunden intuitiv verständlich, was von Vorteil ist. \cite{langner_ereignisgesteuerte_1997} 
 
-\noindent Die Abbildung \ref{fig:beispiel_epk} (siehe Anlage) ist ein Beispiel Diagramm in der EPK Notation. Es modelliert den Geschäftsprozess einer Kundenbestellung. Ereignisse beschreiben Zustände eines Prozesses (bspw. ``Bestellung erhalten'' oder ``Produkt nicht verfügbar''), welcher den Verlauf eines Prozesses beeinflusst.\cite{gadatsch_grundkurs_2008}
-Vergleichbar sind Ereignisse mit logischen Aussagen, dessen Ergebnisse wahr oder falsch sind. Somit kann man diese als boole'schen Aussagen interpretieren. Funktionen (oder auch Aktivitäten) hingegen beschreiben 
+\noindent Die Abbildung \ref{fig:beispiel_epk} (siehe Anlage) ist ein Beispieldiagramm in der EPK-Notation. Es modelliert den Geschäftsprozess einer Kundenbestellung. Ereignisse beschreiben Zustände eines Prozesses (bspw. ``Bestellung erhalten'' oder ``Produkt nicht verfügbar''), welcher den Verlauf eines Prozesses beeinflusst. \cite{gadatsch_grundkurs_2008}
+Vergleichbar sind Ereignisse mit logischen Aussagen, deren Ergebnisse wahr oder falsch sind. Somit kann man diese als boolesche Aussagen interpretieren. Funktionen (oder auch Aktivitäten) hingegen beschreiben 
 eine Tätigkeit oder eine Aufgabe eines Geschäftsprozesses (bspw. ``Prüfe den Produktbestand'' oder ``Erstelle Rechnung'') und überführen einen Eingangszustand in einen Ausgangszustand \cite{gadatsch_grundkurs_2008}. Dies kann man mit Anweisungen im Programmcode 
 interpretieren. Ereignisse und Funktionen können durch Kanten verbunden und in eine logische Reihenfolge gebracht werden. Dadurch wird der
 Ablauf eines Prozesses und auch der Datenfluss beschrieben. \cite{gadatsch_grundkurs_2008} 
 
-\noindent Diese Arbeit verwendet für die EPK-Syntax eine Kombination aus den Definitionen von Rump \cite{rump_geschaftsprozesmanagement_1999} und Langner, Schneider, Wehler\cite{langner_ereignisgesteuerte_1997}. In dieser Arbeit werden jedoch azyklische Prozesse betrachtet:
+\noindent Diese Arbeit verwendet für die EPK-Syntax eine Kombination aus den Definitionen von Rump \cite{rump_geschaftsprozesmanagement_1999} und Langner, Schneider und Wehler \cite{langner_ereignisgesteuerte_1997}. In dieser Arbeit werden jedoch azyklische Prozesse betrachtet:
 
 \noindent Gegeben sei ein gerichteter, zusammenhängender, einfacher und azyklischer Graph $G_P$, welchen man als Tupel $G_P = (V, A, N)$ definiert. \\
 Es gilt:
@@ -54,7 +54,7 @@ Es gilt:
 \begin{itemize}
     \item $V$ beschreibt die Knotenmenge von $G_P$,
     \item $A$ die Kantenmenge von $G_P$,
-    \item $N$ eine Relation, wo einer Kante aus $A$ ein Tupel aus $V \times V$ zugeordnet wird  von $G_P$,
+    \item $N$ eine Relation von $G_P$, bei der einer Kante aus $A$ ein Tupel aus $V \times V$ zugeordnet wird,
     \item $E \subset V$ die Menge der Ereignisse,
     \item $F \subset V$ die Menge der Funktionen und
     \item $O \subset V$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999} lässt sich 
@@ -62,11 +62,11 @@ Es gilt:
     \item Funktionen und Ereignisse sind atomar, sodass eine Aufteilung innerhalb von Funktionen oder Ereignissen nicht möglich ist
     \item $id: V \rightarrow \mathbb{N}$ bildet einen Knoten auf dessen ID ab
     \item $\mathbb{S}$ beschreibt die Menge aller Strings
-    \item $\nu: V \rightarrow \mathbb{S}$ ist eine Abbildung wo einem Knoten ein Name zugewiesen wird
-    \item $\tau: O \rightarrow O$ ist eine Funktion, wo einem Split-Operator der dazugehörige Join-Operator und einem Join-Operator der dazugehörige Splitoperator ausgegeben wird
+    \item $\nu: V \rightarrow \mathbb{S}$ ist eine Abbildung, bei der einem Knoten ein Name zugewiesen wird
+    \item $\tau: O \rightarrow O$ ist eine Funktion, bei der einem Split-Operator der dazugehörige Join-Operator und einem Join-Operator der dazugehörige Split-Operator ausgegeben wird
 \end{itemize}
 
-\noindent In Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999} werden Prozesswegweiser entnommen. Damit sind $E, F$ und $O$ paarweise disjunkt und für $K$ aus \cite{rump_geschaftsprozesmanagement_1999} gilt:
+\noindent Im Kontrast zu Rump \cite{rump_geschaftsprozesmanagement_1999} werden Prozesswegweiser entnommen. Damit sind $E, F$ und $O$ paarweise disjunkt und für $K$ aus \cite{rump_geschaftsprozesmanagement_1999} gilt:
     
 $$K = V = E \cup F \cup O$$
 
@@ -74,7 +74,7 @@ $$K = V = E \cup F \cup O$$
 \section{Kellerautomat}
 \label{kellerautomat-definition}
 
-Bei einem Kellerautomaten handelt es sich um ein Berechnungsmodell, was einem nicht-deterministischem Automaten mit $\epsilon$ Kanten ähnelt. 
+Bei einem Kellerautomaten handelt es sich um ein Berechnungsmodell, was einem nicht-deterministischen Automaten mit $\epsilon$-Kanten ähnelt.
 Der Unterschied zwischen einem $\epsilon$-NEA und einem Kellerautomaten liegt darin, dass der Kellerautomat über einen Kellerspeicher verfügt, um Symbole 
 aus einem Kelleralphabet zu hinterlegen. Kellerautomaten werden verwendet, um kontextfreie Sprachen zu evaluieren. \cite{hopcroft_einfuhrung_nodate}
 
@@ -97,8 +97,8 @@ Gemäß Heinrich und Lutz J. versteht man unter Automatisierung
 den Vorgang [...] von Arbeitsgängen [...], die ohne unmittelbare menschliche 
 Tätigkeiten ausgeführt werden. \cite{heinrich_wirtschaftsinformatik-lexikon_1989}
 
-\noindent Dumas et al. definieren die Prozessautomatisierung als "die Konfiguration oder Implementierung eines IT-Systems [...], um den zukünftigen Prozess
-zu unterstützen." \cite{dumas_grundlagen_2021}
+\noindent Dumas et al. definieren die Prozessautomatisierung als ``die Konfiguration oder Implementierung eines IT-Systems [...], um den zukünftigen Prozess
+zu unterstützen.'' \cite{dumas_grundlagen_2021}
 
 \noindent Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern (siehe Abschnitt \ref{esp32-definition}).
 
@@ -168,20 +168,20 @@ Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
 Nach Hünning und Thaller ist ein eingebettetes System "[...] ein durch Software kontrollierter Computer oder 
 Mikroprozessor, der Teil eines größeren Systems ist, dessen primäre Funktion nicht rechenorientiert ist." \cite{huning_eingebettete_2019} \cite{thaller_software-engineering_1997}
 
-\noindent Barr und Massa definieren ein eingebettetes System als eine Kombination aus Computer Hardware und Software mit zusätzlichen mechanischen und elektronischen Bauteilen, 
+\noindent Barr und Massa definieren ein eingebettetes System als eine Kombination aus Computer-Hardware und Software mit zusätzlichen mechanischen und elektronischen Bauteilen,
 um eine spezifische Funktion zu erfüllen. [...] Der Kontrast dazu ist der PC, bei welchem der Hersteller nicht weiß, wofür dieser verwendet wird. [...] ``Eingebettete 
 Systeme sind oft eine Komponente in einem größeren System. Beispielsweise enthalten moderne Autos und LKW's viele eingebettete Systeme. Ein eingebettetes System ist 
 für das ABS zuständig, ein anderes überwacht und steuert die Emissionen des Fahrzeugs, während ein drittes die Informationen dem Nutzer am Cockpit anzeigt.'' \cite{barr_programming_2006}
 
-\noindent Prozessoren, welche dabei in eingebetteten Systemen verwendet werden sind Mikroprozessoren, Mikrocontroller und DSP-Chips.\cite{barr_programming_2006} \cite{marwedel_eingebettete_2008} In dieser Arbeit wird ein Mikrocontroller des
+\noindent Prozessoren, welche dabei in eingebetteten Systemen verwendet werden, sind Mikroprozessoren, Mikrocontroller und DSP-Chips. \cite{barr_programming_2006} \cite{marwedel_eingebettete_2008} In dieser Arbeit wird ein Mikrocontroller des
 Herstellers Espressif Systems verwendet.
 
 \subsection{ESP32}
 \label{esp32-definition}
 
-Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte WLAN und Bluetooth
-Anbindung, GPIO Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
-Neben den angegebenen Features, verfügt der ESP32 über Peripherien wie SPI, I2C, I2S, CAN, UART, etc. \cite{brandes_mikrocontroller_2024} 
+Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte WLAN- und Bluetooth-
+Anbindung, GPIO-Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
+Neben den angegebenen Features verfügt der ESP32 über Peripherien wie SPI, I2C, I2S, CAN, UART, etc. \cite{brandes_mikrocontroller_2024}
 
 \noindent Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programmieren. Entwicklungsmöglichkeiten hierfür sind:
 
@@ -195,19 +195,19 @@ Neben den angegebenen Features, verfügt der ESP32 über Peripherien wie SPI, I2
 
 \noindent In dieser Arbeit wird die ESP-IDF (Espressif IoT Development Framework) des Herstellers verwendet, welche Bibliotheken und Werkzeuge für die 
 Entwicklung des ESP32 bietet. \cite{hercog_design_2023} ESP-IDF baut die Firmware bestehend aus FreeRTOS und dem Nutzerquellcode als Haupttask. Neben der
-Ausführung von Tasks ist das Echtzeitbetriebssystem auch für die Behandlung von Events (in diesem Fall: Wi-Fi und CoAP Events beim CoAP-Server auf dem ESP32) zuständig \cite{zuiev_research_2024} sowie für die Verwaltung
-nebenläufiger Prozesse (in FreeRTOS: Tasks). Im Vergleich zu gewöhnlichen Betriebssystemen steht der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetriebssystemen im Vordergrund, was
-durch entsprechendes Scheduling von Tasks geschieht.\cite{filiz_freertos_2016} \cite{gay_freertos_2024} 
+Ausführung von Tasks ist das Echtzeitbetriebssystem auch für die Behandlung von Events (in diesem Fall: Wi-Fi und CoAP-Events beim CoAP-Server auf dem ESP32) zuständig \cite{zuiev_research_2024} sowie für die Verwaltung
+nebenläufiger Prozesse (in FreeRTOS: Tasks). Im Vergleich zu gewöhnlichen Betriebssystemen stehen der Determinismus und die Verlässlichkeit \cite{stallings_operating_2018} bei Echtzeitbetriebssystemen im Vordergrund, was
+durch entsprechendes Scheduling von Tasks geschieht. \cite{filiz_freertos_2016} \cite{gay_freertos_2024}
 
 \section{Internet of Things}
 \label{internet-of-things-definition}
 
 Es gibt keine eindeutige Definition für Internet of Things (kurz: IoT). Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
 eingebetteten Geräten, welche Kommunikationsdienste auf der Basis von Internetprotokollen anbieten. Diese Geräte werden gängig als ``Objekte''
-oder ``Smarte Objekte'' bezeichnet. Diese Objekte kommunizieren miteinander und brauchen keinen menschlichen Einfluss. \cite{balas_internet_2019}\cite{tschofenig_architectural_2015}\cite{wendzel_it-sicherheit_2018}
+oder ``Smarte Objekte'' bezeichnet. Diese Objekte kommunizieren miteinander und brauchen keinen menschlichen Einfluss. \cite{balas_internet_2019} \cite{tschofenig_architectural_2015} \cite{wendzel_it-sicherheit_2018}
 
-\noindent Den Nutzen von IoT kann man dabei durch die Wertschöpfungsebenen der IoT nach Fleisch beschreiben: man hat ein physisches Produkt (erste Ebene). Dieser ist nun mit Sensoren sowie Aktoren ausgestattet (zweite Ebene) und 
-hat eine Verbindung zum Internet (dritte Ebene). Zu Analysezwecken stehen diese Daten nun zur Verfügung (vierte Ebene) aus denen man weitere Dienste für Kunden anbieten kann. (fünfte Ebene) \cite{meinhardt_iot_2021}
+\noindent Den Nutzen von IoT kann man dabei durch die Wertschöpfungsebenen der IoT nach Fleisch beschreiben: man hat ein physisches Produkt (erste Ebene). Dieses ist nun mit Sensoren sowie Aktoren ausgestattet (zweite Ebene) und
+hat eine Verbindung zum Internet (dritte Ebene). Zu Analysezwecken stehen diese Daten nun zur Verfügung (vierte Ebene), aus denen man weitere Dienste für Kunden anbieten kann (fünfte Ebene). \cite{meinhardt_iot_2021}
 Zusammenfassend also:
 
 \begin{enumerate}
@@ -218,7 +218,7 @@ Zusammenfassend also:
     \item Digitale Leistungen
 \end{enumerate} \cite{meinhardt_iot_2021} \cite{fleisch_geschaftsmodelle_2015}
 
-\noindent Die Geräte, an welche Sensoren und Aktuatoren angeschlossen sind nennt man auch ``constrained devices'', welche durch ihre Konnektivität ein Netzwerk formen. Diese einzelnen Sensoren und Aktoren in
+\noindent Die Geräte, an welche Sensoren und Aktoren angeschlossen sind, nennt man auch ``constrained devices'', welche durch ihre Konnektivität ein Netzwerk formen. Diese einzelnen Sensoren und Aktoren in
 diesem Netzwerk nennt man dann ``constrained nodes''. \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern \cite{shelby_constrained_2014} wie dem ESP32. Ein Protokoll, welches genutzt wird um mit Knoten 
 in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014} \cite{shelby_constrained_2014}
 
@@ -227,14 +227,14 @@ in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014}
 \label{coap-definition}
 
 Gemäß RFC7252 ist CoAP (Constrained Application Protocol) [...] ein spezialisiertes Internettransferprotokoll, welches für eingeschränkte Knoten und Netzwerke genutzt wird.
-Diese Knoten haben meist einen leistungsschwachen Mikrocontroller mit kleinen ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
-welche einen typischen Durchfluss von 10s bei 1 kbit/s hat. Das Protokoll ist konzipiert für Maschine zu Maschine Anwendungen wie etwa
+Diese Knoten haben meist einen leistungsschwachen Mikrocontroller mit kleinem ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
+welche einen typischen Durchfluss von 10s bei 1 kbit/s hat. Das Protokoll ist konzipiert für Maschine-zu-Maschine-Anwendungen wie etwa
 Smart-Energy oder Bauautomatisierung. \cite{thaller_software-engineering_1997}\cite{wendzel_it-sicherheit_2018}
-CoAP baut dabei auf UDP auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Resourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
+CoAP baut dabei auf UDP auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Ressourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
 Dies wird in RFC7252 auch Resource Discovery genannt. Das verwendete Datenformat zum Austausch ist das Constrained RESTful Environments Link Format, was in RFC 6690 beschrieben wird. \cite{shelby_constrained_2014}
 
-\noindent Die direkte Suche von Resourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also 
-effizienter zu gestalten gibt es sogenannte Resource Directories, welche Buch führen über Resourcen auf anderen Servern. Das Format, was dabei genutzt wird, entspricht auch RFC6690. \cite{amsuss_constrained_2022}
+\noindent Die direkte Suche von Ressourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also
+effizienter zu gestalten, gibt es sogenannte Resource Directories, welche Buch führen über Ressourcen auf anderen Servern. Das Format, was dabei genutzt wird, entspricht auch RFC6690. \cite{amsuss_constrained_2022}
 
 \noindent Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichtenschicht und der Request-Response Schicht. Diese Schichtentrennung zeigt die Abbildung \ref{fig:coap-layers} nochmals auf.
 
@@ -264,11 +264,11 @@ Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_c
     \label{fig:coap-paket}
 \end{figure}
 
-\noindent Im Vergleich zu HTTP, wo die Anfrage mit der stehenden Verbindung der Anfrage beantwortet werden, setzt CoAP das Request/Response Pattern durch Nachrichten um, wo die Anfrage und die Antwort seperate asynchrone UDP-Nachrichten sind, dessen 
+\noindent Im Vergleich zu HTTP, bei dem die Anfrage mit der bestehenden Verbindung beantwortet wird, setzt CoAP das Request/Response Pattern durch Nachrichten um, bei dem die Anfrage und die Antwort separate asynchrone UDP-Nachrichten sind, deren
 Zugehörigkeiten durch Tokens geregelt werden. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
 ``stop-and-wait retransmission'' bei confirmable Nachrichten verwendet. \cite{shelby_constrained_2014} Das bedeutet, dass man beim Absenden für jeden gesendeten Frame auf eine Acknowledge Nachricht wartet, um weiterzusenden. Erhält man diese
 Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response Schicht realisiert ein REST-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
-entwickeln und nicht streng resourcenorientert wie bei REST.\cite{burke_restful_2013} Dabei werden Resourcen und Dienste ähnlich zu REST mit URIs realisiert und auch sind die Status-Codes angelehnt an HTTP mit 2.xx für eine erfolgreiche Übertragung, 4.xx für clientseitigen und 5.xx für 
+entwickeln und nicht streng ressourcenorientiert wie bei REST. \cite{burke_restful_2013} Dabei werden Ressourcen und Dienste ähnlich zu REST mit URIs realisiert und auch sind die Status-Codes angelehnt an HTTP mit 2.xx für eine erfolgreiche Übertragung, 4.xx für clientseitigen und 5.xx für 
 serverseitigen Fehler.
 
 \subsection{MQTT}
@@ -296,7 +296,7 @@ Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung s
 Unter einem Socket versteht man eine "Verallgemeinerung des Mechanismus für den Dateizugriff unter UNIX, das einen Endpunkt für die Kommunikation bereitstellt.
 [...] Der wesentliche Unterschied zwischen Datei- und Socket-Deskriptoren besteht darin, dass das Betriebssystem einen Datei-Deskriptor an eine bestimmte Datei
 oder ein bestimmtes Gerät bindet,[...], aber es kann Sockets erstellen, ohne sie an bestimmte Zieladressen binden zu müssen. Die Applikation kann jedes Mal, wenn sie das 
-Socket nutzt [...], eine Zieladresse angeben[...] (z.B. wenn eine TCP-Verbindung aufgebaut wird)"\cite{comer_tcpip_2003} Nach Inden bieten Sockets dabei eine streambasierte 
+Socket nutzt [...], eine Zieladresse angeben[...] (z.B. wenn eine TCP-Verbindung aufgebaut wird)" \cite{comer_tcpip_2003} Nach Inden bieten Sockets dabei eine streambasierte
 Kommunikationsmöglichkeit, um Daten bidirektional zu übertragen. \cite{inden_weg_2020}
 
 \section{WebSockets}

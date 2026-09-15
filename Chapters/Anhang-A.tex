@@ -1,7 +1,7 @@
 \begin{sidewaysfigure}[H]
     \centering
     \includegraphics[height=0.8\textwidth]{Graphics/Beispiel_EPK.png}
-    \caption{EPK Modell des Geschäftsprozesses einer Kundenbestellung}
+    \caption{EPK-Modell des Geschäftsprozesses einer Kundenbestellung}
     \label{fig:beispiel_epk}
 \end{sidewaysfigure}
 
@@ -9,48 +9,73 @@
 \begin{sidewaysfigure}[H]
     \centering
     \includegraphics[width=\textwidth]{Graphics/Prozess-UML.pdf}
-    \caption{UML Diagramm der Prozessmodellimplementierung}
+    \caption{UML-Diagramm der Prozessmodellimplementierung}
     \label{fig:prozess-uml}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
     \centering
     \includegraphics[width=\textwidth]{Graphics/Ausführungsmodell-UML.pdf}
-    \caption{UML Diagramm des Ausführungsmodellimplementierung}
+    \caption{UML-Diagramm der Ausführungsmodellimplementierung}
     \label{fig:executable-uml}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
     \centering
     \includegraphics[width=\textwidth]{Graphics/Process-Builder-UML.pdf}
-    \caption{UML Diagramm des Prozessmodellkonstruktionsklassen}
+    \caption{UML-Diagramm der Prozessmodellkonstruktionsklassen}
     \label{fig:process-builder-uml}
 \end{sidewaysfigure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Graphics/Bauklötzchenhaus-EPK.png}
-    \caption{EPK-Diagramm des Bauklötzchenhaus}
+    \caption{EPK-Diagramm des Bauklötzchenhauses}
     \label{fig:brick-house-epk-diagram}
 \end{figure}
 
 \begin{sidewaysfigure}[H]
     \centering
     \includegraphics[width=\linewidth]{Graphics/Process-Mining-Overview.png}
-    \caption{Process overview Ansicht beim ARIS Process-Mining}
+    \caption{Process-Overview-Ansicht beim ARIS Process-Mining}
     \label{fig:process-mining-overview}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
     \centering
     \includegraphics[width=\linewidth]{Graphics/Process-Mining-Overview-2.png}
-    \caption{Process explorer Ansicht beim ARIS Process-Mining}
+    \caption{Process-Explorer-Ansicht beim ARIS Process-Mining}
     \label{fig:process-mining-overview-2}
 \end{sidewaysfigure}
 
 \begin{sidewaysfigure}[H]
     \centering
     \includegraphics[width=\textwidth]{Graphics/Firmware-UML.pdf}
-    \caption{Klassen innerhalb eines generierten ESP-IDF Projekts}
+    \caption{Klassen innerhalb eines generierten ESP-IDF-Projekts}
     \label{fig:idf-project-classes}
 \end{sidewaysfigure}
+
+\begin{landscape}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{2.2}
+    \caption{Vergleich mit verwandten Arbeiten}
+    \label{tab:related-work-comparison}
+    \Large
+    \begin{tabularx}{\linewidth}{@{}XXXXX@{}}
+        \toprule
+        \textbf{Arbeit} & \textbf{Notation} & \textbf{Zielhardware} & \textbf{Protokoll/Ausführung} & \textbf{Automatisierungsgrad} \\
+        \midrule
+        Domingos \& Martins & BPMN & IoT-Hardware (generisch) & Callas-Laufzeitumgebung & Manuelle Aussortierung \\
+        \addlinespace[1em]
+        Schärfl & S-BPM $\rightarrow$ SFC & Speicherprogrammierbare Steuerung & IEC 61131-3 & Modellbasiert, kein Laufzeitbezug \\
+        \addlinespace[1em]
+        Kampik & BPMN & Mock-Up & O-MI, O-DF (Java/Node.js) & Simuliert, keine echte Hardware \\
+        \addlinespace[1em]
+        Valderas & BPMN & Raspberry Pi & Camunda Execution Engine & Vollautomatisiert, echte Hardware \\
+        \midrule
+        \textbf{Diese Arbeit} & \textbf{EPK} & \textbf{ESP32} & \textbf{CoAP, eigene Execution-Engine} & \textbf{Vollautomatisiert, echte Hardware} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+\end{landscape}

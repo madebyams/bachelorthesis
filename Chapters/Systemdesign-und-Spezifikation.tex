@@ -2,7 +2,7 @@
 \label{systemdesign-und-spezifikation}
 
 In diesem Kapitel wird ein System entworfen, das ein Prozessmodell annimmt und dieses in ein Ausführungsmodell übersetzt. Dafür werden das Prozessmodell, das Ausführungsmodell sowie das theoretische Vorgehen 
-des Compilers in Form eines Kellerautomaten und einer Übersetzungsfunktion definiert. Auch wird die Ausführung des Ausführungsmodells hier formal beschrieben sowie die Übersetzung dieses Modelles in ein Codegenerirungsmodell.
+des Compilers in Form eines Kellerautomaten und einer Übersetzungsfunktion definiert. Auch wird die Ausführung des Ausführungsmodells hier formal beschrieben sowie die Übersetzung dieses Modells in ein Codegenerierungsmodell.
 Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware an die Orchestrierungsschicht zu erleichtern. Dieser Ablauf wird in Abbildung \ref{fig:systemarchitektur} grafisch aufgezeigt. Die Entwurfsentscheidungen basieren dabei auf Grundlagen aus dem Kapitel \ref{grundlagen-und-theoreitscher-rahmen}.
 
 \begin{figure}[H]
@@ -14,9 +14,9 @@ Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware
 
 \noindent Damit gemäß dem Ziel, dass Produktionen prozesseinhaltend laufen (siehe Kapitel \ref{motivation-und-zielsetzung}), muss zunächst 
 ein \textbf{Prozessmodell} definiert werden, welches vom \textbf{EPK-Compiler} übersetzt wird. Das \textbf{Ausführungsmodell} ist das
-Resultat des Compiler und muss ebenfalls definiert werden. Sind beide Definitionen vorhanden, so kann die eigentliche Kompilierung formal 
-beschrieben werden. Aus diesen Bestandteilen kann dann die Ausführung sowie die Codegenerierung abgeleitet werden. Visuell kann das 
-Gesamtsystem mit der Abbildung \ref{fig:systemarchitektur} beschreiben werden.
+Resultat des Compilers und muss ebenfalls definiert werden. Sind beide Definitionen vorhanden, so kann die eigentliche Kompilierung formal 
+beschrieben werden. Aus diesen Bestandteilen kann dann die Ausführung sowie die Codegenerierung abgeleitet werden. Visuell kann das
+Gesamtsystem mit der Abbildung \ref{fig:systemarchitektur} beschrieben werden.
 
 \section{Prozessmodell}
 \label{prozessmodell}
@@ -37,7 +37,7 @@ $$P = (G_P, e_S, e_E)$$
 
 \noindent dargestellt werden.
 
-\noindent Dieses stellt den Prozess als Graphen nach Langner et.al dar, welcher mit Tiefensuche traversiert
+\noindent Dieses stellt den Prozess als Graphen nach Langner et al. dar, welcher mit Tiefensuche traversiert
 und in das Ausführungsmodell kompiliert wird. 
 
 \section{Ausführungsmodell}
@@ -57,7 +57,7 @@ auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses m
     \item $X_S = \{(i,t)\; | i \in \mathbb{N} \land t \in T\}$ sei die Menge der SingleExecutables 
     \item {
         $X_G = \{(i, g)\; | i \in \mathbb{N} \land g \in \text{List}(\text{List}(X_S \cup X_G))\}$ sei die Menge der ExecutableGroups, wobei $g$ die möglichen Pfade 
-        des Verknüpfungsoperator beschreiben und $i$ die ID des Splitoperators ist.
+        des Verknüpfungsoperators beschreibt und $i$ die ID des Split-Operators ist.
     }
     \item $X = X_S \cup X_G$ sei die Menge der Executables
 \end{enumerate}
@@ -77,7 +77,7 @@ Der Compiler übersetzt diese als ein Ausführungsmodell, das der Definition aus
 
 \subsection{Statische Analyse und Vorverarbeitung der Konnektoren}
 
-Vor der Kompilierung findet eine Vorverarbeitung statt, wo die Abbildung $\tau$ gefüllt wird.
+Vor der Kompilierung findet eine Vorverarbeitung statt, bei der die Abbildung $\tau$ gefüllt wird.
 
 \noindent Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren. Nach dieser Validierung findet die Kompilierung statt. 
 Die Validierung kann man formal wie folgt modellieren:
@@ -223,7 +223,7 @@ Am Ende erhält man eine Liste der Form $[(0, bool), \dots, (n, bool)]$
 \section{Codegenerierung}
 \label{code-generation-model}
 
-Bei der Codegenerierung wird ein Ausführungsmodell betrachtet und es werden Codedateien für das Ziel IoT-System gemäß der einzelnen 
+Bei der Codegenerierung wird ein Ausführungsmodell betrachtet und es werden Codedateien für das Ziel-IoT-System gemäß der einzelnen
 Befehlsschritte (Executables) generiert. Diese Executables sind jedoch zunächst für die Ausführung vorgesehen und müssen dementsprechend
 in ein Modell umgewandelt werden, welches die Generierung von Quellcode ermöglicht.
 
@@ -231,7 +231,7 @@ in ein Modell umgewandelt werden, welches die Generierung von Quellcode ermögli
 \label{codegeneration-model}
 
 Sei $C = \{(i, n, t) | i \in \mathbb{N} \land n \in S \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
-den Rückgabetypen sowie die ersten 15 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+den Rückgabetyp sowie die ersten 15 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
 
 \subsection{Generierung des Firmwarequellcodes}
 
@@ -242,10 +242,10 @@ Codeelemente $c \in C$ umzuwandeln.
 \section{Execution-Engine}
 
 Durch den EPK-Compiler erhält man nun das Ausführungsmodell. Dieses kann von der Execution-Engine entgegengenommen und zur Orchestrierung verwendet
-werden, sodass eine Ausführung des Prozesses ermöglicht wird. Im folgenden wird die Bezeichnung \textit{ExecutionQueue} verwendet, um auf das 
-Ausfürhungsmodell zu verweisen.
+werden, sodass eine Ausführung des Prozesses ermöglicht wird. Im Folgenden wird die Bezeichnung \textit{ExecutionQueue} verwendet, um auf das
+Ausführungsmodell zu verweisen.
 
-\noindent Die Ausführung einer ExecutionQueue kann mithilfe des folgenden Standard-ML \cite{smolka_programmierung_2012} Quellcodes 
+\noindent Die Ausführung einer ExecutionQueue kann mithilfe des folgenden Standard-ML-Quellcodes \cite{smolka_programmierung_2012}
 beschrieben werden:
 
 \begin{lstlisting}
@@ -312,13 +312,13 @@ in
 end;
 \end{lstlisting}
 
-\noindent Zur Ausführung wird die ExecutableQueue in eine \texttt{run} Funktion als Parameter übergeben. Dort wird dann jedes einzelne Element schrittweise abgearbeitet. Dabei ist das Verhalten für jede Art von Executable anders:
+\noindent Zur Ausführung wird die ExecutionQueue in eine \texttt{run}-Funktion als Parameter übergeben. Dort wird dann jedes einzelne Element schrittweise abgearbeitet. Dabei ist das Verhalten für jede Art von Executable anders:
 
 \begin{itemize}
 \item Bei einer SingleExecutable wird die Funktion passend zur Executable auf dem Mikrocontroller ausgeführt.
 
 \item Bei einer ExecutableGroup 
-werden die direkten Nachbarn der Pfade ausgeführt. Dies geschieht in der \texttt{validate} Funktion. Anschließend wird entsprechend der Logik des Verknüpfungsoperators eine Entscheidung zum auszuführenden Pfad getroffen. Da der Pfad einer ExecutableGroup auch wiederum eine ExecutionQueue ist, wird hier genauso vorgegangen wie bei der ExecutionQueue des Gesamtprozesses. 
+werden die direkten Nachbarn der Pfade ausgeführt. Dies geschieht in der \texttt{validate}-Funktion. Anschließend wird entsprechend der Logik des Verknüpfungsoperators eine Entscheidung zum auszuführenden Pfad getroffen. Da der Pfad einer ExecutableGroup auch wiederum eine ExecutionQueue ist, wird hier genauso vorgegangen wie bei der ExecutionQueue des Gesamtprozesses. 
 \end{itemize}
 
 
@@ -326,9 +326,9 @@ werden die direkten Nachbarn der Pfade ausgeführt. Dies geschieht in der \textt
 \section{Live-Streaming der Ausführung}
 \label{automation-animation}
 
-Eines der Anforderungen aus Kapitel \ref{analyse-und-konzeption} war das Live-Streaming der Prozessausführung. Hierbei gibt es zwei Möglichkeiten, um dieses
-Live-Streaming realisieren: Polling über HTTP oder ein kontinuerlicher Informationsaustausch über eine bidirektionale TCP-Verbindung. Diese beiden Optionen werden
-im folgenden gegenübergestellt.
+Eine der Anforderungen aus Kapitel \ref{analyse-und-konzeption} war das Live-Streaming der Prozessausführung. Hierbei gibt es zwei Möglichkeiten, um dieses
+Live-Streaming zu realisieren: Polling über HTTP oder ein kontinuierlicher Informationsaustausch über eine bidirektionale TCP-Verbindung. Diese beiden Optionen werden
+im Folgenden gegenübergestellt.
 
 \subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
 
@@ -349,9 +349,9 @@ $-$ Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreit
 \label{tab:polling-vs-birectional}
 \end{table}
 
-Auf dieser Grundlage wurde entschieden mit bidirektionalen Verbindungen statt Polling, für die Animation zu arbeiten.
+Auf dieser Grundlage wurde entschieden, mit bidirektionalen Verbindungen statt Polling für die Animation zu arbeiten.
 
-\noindent Vor der Ausführung, wird eine Anfrage gestellt, um eine Live-Streaming Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
+\noindent Vor der Ausführung wird eine Anfrage gestellt, um eine Live-Streaming-Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
 gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Die Abbildung \ref{fig:live-streaming} zeigt auch grafisch den Kontrollfluss auf. Über diese
 Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
 animieren.
@@ -364,7 +364,7 @@ animieren.
 \end{figure}
 
 
-\noindent Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), wo zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
+\noindent Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), bei denen zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
 
 \section{Schnittstellen}
 
@@ -409,7 +409,7 @@ closeStreamConnection       &   keine Parameter                                 
 \subsection{Schnittstelle zwischen Prozessverwaltungsplattform und IoT-Geräten}
 
 Bevor die Schnittstelle zwischen diesen beiden Parteien muss das Protokoll festgelegt werden, welches zur Kommunikation genutzt wird. Im IoT-Kontext hat man hierbei die 
-folgenden zwei Optionen: CoAP (siehe Abschnitt \ref{coap-definition}) und MQTT, welches in Abschnitt \ref{mqtt-definition} definiert wurde. \cite{wendzel_it-sicherheit_2018} Diese werden im folgenden gegenübergestellt.
+folgenden zwei Optionen: CoAP (siehe Abschnitt \ref{coap-definition}) und MQTT, welches in Abschnitt \ref{mqtt-definition} definiert wurde. \cite{wendzel_it-sicherheit_2018} Diese werden im Folgenden gegenübergestellt.
 
 \begin{table}[H]
 \centering
@@ -430,12 +430,12 @@ $-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zu
 \label{tab:mqtt-coap}
 \end{table}
 
-\noindent Auf dieser Grundlage wurde entschieden CoAP als Kommunikationsprotokoll zwischen der Orchestrierungsschicht und dem IoT-System zu verwenden.
+\noindent Auf dieser Grundlage wurde entschieden, CoAP als Kommunikationsprotokoll zwischen der Orchestrierungsschicht und dem IoT-System zu verwenden.
 
-\subsubsection{Definition der CoAP Schnittstelle}
+\subsubsection{Definition der CoAP-Schnittstelle}
 \label{coap-interface}
 
-Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlich zu REST Endpunkte, für verschiedene Resourcen. 
+Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlich zu REST Endpunkte für verschiedene Ressourcen.
 Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher auf einem Mikrocontroller läuft:
 Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 
@@ -456,14 +456,14 @@ Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 
 \newpage
 
-\noindent Sei $h$ die SHA-256 Prüfsumme der Single-Executable ID
+\noindent Sei $h$ die SHA-256-Prüfsumme der Single-Executable-ID.
 
 
 \noindent \textbf{PUT /<$h$[0:15]>}
 
 
 \noindent Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
-kein Payload mitgegeben werden. Dies begründet auch die Entscheidung PUT zu verwenden. Normalerweise wird für eine Ausführung POST
+kein Payload mitgegeben werden. Dies begründet auch die Entscheidung, PUT zu verwenden. Normalerweise wird für eine Ausführung POST
 genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload zwingend benötigt wird, erschien PUT sinnvoller.
 
 \noindent Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
@@ -478,10 +478,10 @@ ist hierbei wie folgt:
 
 \section{Zusammenfassung}
 
-Die nötigen Modelle und Schnittstellen, um eine Auführung und Codegenerierung zu realisieren, sind nun definiert. Als erstes kam das Prozessmodell,
+Die nötigen Modelle und Schnittstellen, um eine Ausführung und Codegenerierung zu realisieren, sind nun definiert. Als erstes kam das Prozessmodell,
 welches ein 3-Tupel aus Startereignis, Endereignis und dem Prozessgraphen ist. Darauffolgend wurde das Ausführungsmodell definiert, welches aus einzelnen Ausführungsschritten
 und Ausführungsgruppen besteht. Dabei modellieren die Ausführungsgruppen die Kontrollstrukturen des Prozessmodells. Mit diesen zwei Modellen sind Ein- und Ausgabesprache gegeben,
-um den Compiler zu definieren. Dabei findet die Validierung auf Basis eines Kellerautomaten statt und die Übersetzung erfolgt durch eine Funktion, welches von 
-Prozessdomäne auf die Ausführungsdomäne abbildet. Darauf aufbauend wurde die Codegenerierung behandelt. Dafür wurde zunächst das entsprechende Codegenerierungsmodell definiert, auf welches das Ausführungsmodell überführt wird und die Überführung vom Ausführungsmodell Zum
-Codegenerierungsmodell wurde beschrieben. Als nächstes wurde das Ausführungs und Animationsverhalten der Execution-Engine festgelgt. Schließlich wurden die Schnittstellen definiert,
+um den Compiler zu definieren. Dabei findet die Validierung auf Basis eines Kellerautomaten statt und die Übersetzung erfolgt durch eine Funktion, welche von
+der Prozessdomäne auf die Ausführungsdomäne abbildet. Darauf aufbauend wurde die Codegenerierung behandelt. Dafür wurde zunächst das entsprechende Codegenerierungsmodell definiert, auf welches das Ausführungsmodell überführt wird und die Überführung vom Ausführungsmodell zum
+Codegenerierungsmodell wurde beschrieben. Als nächstes wurde das Ausführungs- und Animationsverhalten der Execution-Engine festgelegt. Schließlich wurden die Schnittstellen definiert,
 um die Kommunikation zwischen Nutzer, Prozessverwaltungsplattform und IoT-Geräten festzulegen.
