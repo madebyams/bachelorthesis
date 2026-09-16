@@ -308,7 +308,7 @@ in
     if truePathsAmount = executedHeadsAmount then
         List.concat truePaths
     else
-        raise Fail "OR needs at least one true path"
+        raise Fail "AND needs both paths to be true"
 end;
 \end{lstlisting}
 
