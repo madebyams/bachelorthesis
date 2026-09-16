@@ -191,26 +191,12 @@ der Simulationsserver als Basis genommen.
 \subsection{Ersetzen der Simulationsschnittstelle}
 
 Die Logik der Simulation in ARIS wird durch den Simulationsserver realisiert. Dort wird die Simulation mittels einer Simulationsengine durchgeführt. Diese Simulationsengine
-baut intern ein Prozessmodell auf und führt auf Basis dieses Prozessmodells die Simulation durch. Dies entspricht dem Ist-Zustand aus Abbildung \ref{fig:aris-ist-zustand}. Die Schnittstelle auf dem Simulationsserver,
+baut intern ein Prozessmodell auf und führt auf Basis dieses Prozessmodells die Simulation durch. Dies entspricht dem Ist-Zustand aus Abbildung \ref{fig:aris-ist-zustand} (siehe Anhang). Die Schnittstelle auf dem Simulationsserver,
 welche die Interaktion mit der Simulationsengine anbot, ist die Schnittstelle \texttt{ISimulation}. Der Schnittstellenvertrag, welchen \texttt{ISimulation} aufsetzt, ist
 ähnlich zu dem der definierten Automationsschnittstelle (siehe \ref{automation-server-interface}). Es wurden jedoch nicht alle Methoden der Schnittstelle benötigt und neue Methoden mussten
 definiert werden, weshalb die Schnittstelle dieser Arbeit sich von \texttt{ISimulation} in ARIS unterscheidet.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/ARIS-Ist-Zustand.pdf}
-    \caption{Ist-Zustand bei ARIS}
-    \label{fig:aris-ist-zustand}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Graphics/ARIS-Soll-Zustand.pdf}
-    \caption{Soll-Zustand bei ARIS}
-    \label{fig:aris-soll-zustand}
-\end{figure}
-
-\noindent Durch die Definition der neuen Schnittstelle kann der Soll-Zustand aus Abbildung \ref{fig:aris-soll-zustand} erreicht werden.
+\noindent Durch die Definition der neuen Schnittstelle kann der Soll-Zustand aus Abbildung \ref{fig:aris-soll-zustand} erreicht werden (siehe Anhang).
 
 \subsection{Bereitstellung von Ausführungsstatistiken für ARIS Process Mining}
 
