@@ -1,0 +1,108 @@
+RUN 1:
+=======
+2026-09-17T21:14:19.426+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => /health: 48
+2026-09-17T21:14:19.458+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => coap://172.20.10.2/96f129c5058b291: 24
+2026-09-17T21:14:19.486+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => /health: 20
+2026-09-17T21:14:21.971+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => coap://172.20.10.2/92469ed891f4154: 2484
+2026-09-17T21:14:22.049+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => /health: 37
+2026-09-17T21:14:22.094+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => coap://172.20.10.2/086db8609db525b: 45
+2026-09-17T21:14:22.158+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => /health: 51
+2026-09-17T21:14:22.204+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => coap://172.20.10.2/cdbb6fbe1fed3d8: 45
+2026-09-17T21:14:22.250+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => /health: 34
+2026-09-17T21:14:22.286+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => coap://172.20.10.2/344c177baa717e1: 35
+2026-09-17T21:14:22.317+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => /health: 30
+2026-09-17T21:14:22.348+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => coap://172.20.10.2/970c9ab49ff6ee4: 30
+2026-09-17T21:14:22.396+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => /health: 48
+2026-09-17T21:14:22.428+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => coap://172.20.10.2/4bbe6d0d05f73e8: 31
+2026-09-17T21:14:22.458+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => /health: 29
+2026-09-17T21:14:22.492+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => coap://172.20.10.2/4143c8730bed1b1: 33
+2026-09-17T21:14:22.522+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => /health: 26
+2026-09-17T21:14:22.573+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => coap://172.20.10.2/19fd95860a9f06f: 25
+
+RUN 2:
+=======
+2026-09-17T21:15:29.363+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => /health: 20
+2026-09-17T21:15:29.386+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => coap://172.20.10.2/96f129c5058b291: 20
+2026-09-17T21:15:29.435+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => /health: 46
+2026-09-17T21:15:29.451+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => coap://172.20.10.2/92469ed891f4154: 15
+2026-09-17T21:15:29.470+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => /health: 17
+2026-09-17T21:15:29.487+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => coap://172.20.10.2/086db8609db525b: 16
+2026-09-17T21:15:29.505+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => /health: 17
+2026-09-17T21:15:29.525+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => coap://172.20.10.2/cdbb6fbe1fed3d8: 19
+2026-09-17T21:15:29.555+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => /health: 29
+2026-09-17T21:15:29.576+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => coap://172.20.10.2/344c177baa717e1: 21
+2026-09-17T21:15:29.607+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => /health: 30
+2026-09-17T21:15:29.634+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => coap://172.20.10.2/970c9ab49ff6ee4: 26
+2026-09-17T21:15:29.664+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => /health: 29
+2026-09-17T21:15:29.698+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => coap://172.20.10.2/4bbe6d0d05f73e8: 34
+2026-09-17T21:15:29.772+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => /health: 74
+2026-09-17T21:15:29.824+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => coap://172.20.10.2/4143c8730bed1b1: 51
+2026-09-17T21:15:29.846+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => /health: 20
+2026-09-17T21:15:29.872+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => coap://172.20.10.2/19fd95860a9f06f: 26
+
+RUN 3:
+=======
+2026-09-17T21:16:42.127+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => /health: 22
+2026-09-17T21:16:42.142+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => coap://172.20.10.2/96f129c5058b291: 14
+2026-09-17T21:16:42.159+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => /health: 15
+2026-09-17T21:16:42.179+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => coap://172.20.10.2/92469ed891f4154: 19
+2026-09-17T21:16:42.200+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => /health: 20
+2026-09-17T21:16:42.219+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => coap://172.20.10.2/086db8609db525b: 18
+2026-09-17T21:16:42.239+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => /health: 18
+2026-09-17T21:16:42.260+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => coap://172.20.10.2/cdbb6fbe1fed3d8: 21
+2026-09-17T21:16:42.279+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => /health: 18
+2026-09-17T21:16:42.295+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => coap://172.20.10.2/344c177baa717e1: 15
+2026-09-17T21:16:42.318+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => /health: 22
+2026-09-17T21:16:42.335+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => coap://172.20.10.2/970c9ab49ff6ee4: 17
+2026-09-17T21:16:42.355+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => /health: 19
+2026-09-17T21:16:42.375+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => coap://172.20.10.2/4bbe6d0d05f73e8: 19
+2026-09-17T21:16:42.409+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => /health: 33
+2026-09-17T21:16:42.426+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => coap://172.20.10.2/4143c8730bed1b1: 17
+2026-09-17T21:16:42.446+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => /health: 16
+2026-09-17T21:16:42.469+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => coap://172.20.10.2/19fd95860a9f06f: 22
+
+
+RUN 4:
+=======
+2026-09-17T21:17:16.589+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => /health: 21
+2026-09-17T21:17:16.614+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => coap://172.20.10.2/96f129c5058b291: 24
+2026-09-17T21:17:16.629+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => /health: 13
+2026-09-17T21:17:16.651+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => coap://172.20.10.2/92469ed891f4154: 22
+2026-09-17T21:17:16.674+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => /health: 22
+2026-09-17T21:17:16.699+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => coap://172.20.10.2/086db8609db525b: 25
+2026-09-17T21:17:16.716+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => /health: 17
+2026-09-17T21:17:16.732+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => coap://172.20.10.2/cdbb6fbe1fed3d8: 16
+2026-09-17T21:17:16.755+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => /health: 22
+2026-09-17T21:17:16.777+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => coap://172.20.10.2/344c177baa717e1: 21
+2026-09-17T21:17:16.797+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => /health: 19
+2026-09-17T21:17:16.819+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => coap://172.20.10.2/970c9ab49ff6ee4: 22
+2026-09-17T21:17:16.848+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => /health: 29
+2026-09-17T21:17:16.868+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => coap://172.20.10.2/4bbe6d0d05f73e8: 19
+2026-09-17T21:17:16.888+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => /health: 19
+2026-09-17T21:17:16.959+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => coap://172.20.10.2/4143c8730bed1b1: 70
+2026-09-17T21:17:16.984+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => /health: 23
+2026-09-17T21:17:17.004+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => coap://172.20.10.2/19fd95860a9f06f: 19
+
+
+RUN 5:
+======
+2026-09-17T21:17:56.678+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => /health: 23
+2026-09-17T21:17:56.712+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c)) Network duration => coap://172.20.10.2/96f129c5058b291: 32
+2026-09-17T21:17:56.745+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => /health: 31
+2026-09-17T21:17:56.784+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c)) Network duration => coap://172.20.10.2/92469ed891f4154: 38
+2026-09-17T21:17:56.805+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => /health: 19
+2026-09-17T21:17:56.829+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c)) Network duration => coap://172.20.10.2/086db8609db525b: 24
+2026-09-17T21:17:56.860+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => /health: 31
+2026-09-17T21:17:56.880+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c)) Network duration => coap://172.20.10.2/cdbb6fbe1fed3d8: 20
+2026-09-17T21:17:56.913+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => /health: 33
+2026-09-17T21:17:56.959+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c)) Network duration => coap://172.20.10.2/344c177baa717e1: 46
+2026-09-17T21:17:57.001+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => /health: 40
+2026-09-17T21:17:57.043+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c)) Network duration => coap://172.20.10.2/970c9ab49ff6ee4: 42
+2026-09-17T21:17:57.062+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => /health: 19
+2026-09-17T21:17:57.098+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c)) Network duration => coap://172.20.10.2/4bbe6d0d05f73e8: 35
+2026-09-17T21:17:57.122+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => /health: 23
+2026-09-17T21:17:57.159+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c)) Network duration => coap://172.20.10.2/4143c8730bed1b1: 36
+2026-09-17T21:17:57.185+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => /health: 24
+2026-09-17T21:17:57.208+02:00  INFO 51964 --- [simulation] [AutomationRun-2] c.a.s.c.a.e.mcu.CoAPMCUConnection        : (SingleExecutable: (-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c)) Network duration => coap://172.20.10.2/19fd95860a9f06f: 22
+
+

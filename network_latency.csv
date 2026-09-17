@@ -1,0 +1,91 @@
+run,timestamp,executable_id,executable_name,request_type,target,duration_ms
+1,2026-09-17T21:14:19.426+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,health_check,/health,48
+1,2026-09-17T21:14:19.458+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,coap_request,coap://172.20.10.2/96f129c5058b291,24
+1,2026-09-17T21:14:19.486+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,health_check,/health,20
+1,2026-09-17T21:14:21.971+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,coap_request,coap://172.20.10.2/92469ed891f4154,2484
+1,2026-09-17T21:14:22.049+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,health_check,/health,37
+1,2026-09-17T21:14:22.094+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,coap_request,coap://172.20.10.2/086db8609db525b,45
+1,2026-09-17T21:14:22.158+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,health_check,/health,51
+1,2026-09-17T21:14:22.204+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,coap_request,coap://172.20.10.2/cdbb6fbe1fed3d8,45
+1,2026-09-17T21:14:22.250+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,health_check,/health,34
+1,2026-09-17T21:14:22.286+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,coap_request,coap://172.20.10.2/344c177baa717e1,35
+1,2026-09-17T21:14:22.317+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,health_check,/health,30
+1,2026-09-17T21:14:22.348+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,coap_request,coap://172.20.10.2/970c9ab49ff6ee4,30
+1,2026-09-17T21:14:22.396+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,health_check,/health,48
+1,2026-09-17T21:14:22.428+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,coap_request,coap://172.20.10.2/4bbe6d0d05f73e8,31
+1,2026-09-17T21:14:22.458+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,health_check,/health,29
+1,2026-09-17T21:14:22.492+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,coap_request,coap://172.20.10.2/4143c8730bed1b1,33
+1,2026-09-17T21:14:22.522+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,health_check,/health,26
+1,2026-09-17T21:14:22.573+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,coap_request,coap://172.20.10.2/19fd95860a9f06f,25
+2,2026-09-17T21:15:29.363+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,health_check,/health,20
+2,2026-09-17T21:15:29.386+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,coap_request,coap://172.20.10.2/96f129c5058b291,20
+2,2026-09-17T21:15:29.435+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,health_check,/health,46
+2,2026-09-17T21:15:29.451+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,coap_request,coap://172.20.10.2/92469ed891f4154,15
+2,2026-09-17T21:15:29.470+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,health_check,/health,17
+2,2026-09-17T21:15:29.487+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,coap_request,coap://172.20.10.2/086db8609db525b,16
+2,2026-09-17T21:15:29.505+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,health_check,/health,17
+2,2026-09-17T21:15:29.525+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,coap_request,coap://172.20.10.2/cdbb6fbe1fed3d8,19
+2,2026-09-17T21:15:29.555+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,health_check,/health,29
+2,2026-09-17T21:15:29.576+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,coap_request,coap://172.20.10.2/344c177baa717e1,21
+2,2026-09-17T21:15:29.607+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,health_check,/health,30
+2,2026-09-17T21:15:29.634+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,coap_request,coap://172.20.10.2/970c9ab49ff6ee4,26
+2,2026-09-17T21:15:29.664+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,health_check,/health,29
+2,2026-09-17T21:15:29.698+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,coap_request,coap://172.20.10.2/4bbe6d0d05f73e8,34
+2,2026-09-17T21:15:29.772+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,health_check,/health,74
+2,2026-09-17T21:15:29.824+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,coap_request,coap://172.20.10.2/4143c8730bed1b1,51
+2,2026-09-17T21:15:29.846+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,health_check,/health,20
+2,2026-09-17T21:15:29.872+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,coap_request,coap://172.20.10.2/19fd95860a9f06f,26
+3,2026-09-17T21:16:42.127+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,health_check,/health,22
+3,2026-09-17T21:16:42.142+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,coap_request,coap://172.20.10.2/96f129c5058b291,14
+3,2026-09-17T21:16:42.159+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,health_check,/health,15
+3,2026-09-17T21:16:42.179+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,coap_request,coap://172.20.10.2/92469ed891f4154,19
+3,2026-09-17T21:16:42.200+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,health_check,/health,20
+3,2026-09-17T21:16:42.219+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,coap_request,coap://172.20.10.2/086db8609db525b,18
+3,2026-09-17T21:16:42.239+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,health_check,/health,18
+3,2026-09-17T21:16:42.260+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,coap_request,coap://172.20.10.2/cdbb6fbe1fed3d8,21
+3,2026-09-17T21:16:42.279+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,health_check,/health,18
+3,2026-09-17T21:16:42.295+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,coap_request,coap://172.20.10.2/344c177baa717e1,15
+3,2026-09-17T21:16:42.318+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,health_check,/health,22
+3,2026-09-17T21:16:42.335+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,coap_request,coap://172.20.10.2/970c9ab49ff6ee4,17
+3,2026-09-17T21:16:42.355+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,health_check,/health,19
+3,2026-09-17T21:16:42.375+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,coap_request,coap://172.20.10.2/4bbe6d0d05f73e8,19
+3,2026-09-17T21:16:42.409+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,health_check,/health,33
+3,2026-09-17T21:16:42.426+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,coap_request,coap://172.20.10.2/4143c8730bed1b1,17
+3,2026-09-17T21:16:42.446+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,health_check,/health,16
+3,2026-09-17T21:16:42.469+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,coap_request,coap://172.20.10.2/19fd95860a9f06f,22
+4,2026-09-17T21:17:16.589+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,health_check,/health,21
+4,2026-09-17T21:17:16.614+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,coap_request,coap://172.20.10.2/96f129c5058b291,24
+4,2026-09-17T21:17:16.629+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,health_check,/health,13
+4,2026-09-17T21:17:16.651+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,coap_request,coap://172.20.10.2/92469ed891f4154,22
+4,2026-09-17T21:17:16.674+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,health_check,/health,22
+4,2026-09-17T21:17:16.699+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,coap_request,coap://172.20.10.2/086db8609db525b,25
+4,2026-09-17T21:17:16.716+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,health_check,/health,17
+4,2026-09-17T21:17:16.732+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,coap_request,coap://172.20.10.2/cdbb6fbe1fed3d8,16
+4,2026-09-17T21:17:16.755+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,health_check,/health,22
+4,2026-09-17T21:17:16.777+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,coap_request,coap://172.20.10.2/344c177baa717e1,21
+4,2026-09-17T21:17:16.797+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,health_check,/health,19
+4,2026-09-17T21:17:16.819+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,coap_request,coap://172.20.10.2/970c9ab49ff6ee4,22
+4,2026-09-17T21:17:16.848+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,health_check,/health,29
+4,2026-09-17T21:17:16.868+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,coap_request,coap://172.20.10.2/4bbe6d0d05f73e8,19
+4,2026-09-17T21:17:16.888+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,health_check,/health,19
+4,2026-09-17T21:17:16.959+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,coap_request,coap://172.20.10.2/4143c8730bed1b1,70
+4,2026-09-17T21:17:16.984+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,health_check,/health,23
+4,2026-09-17T21:17:17.004+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,coap_request,coap://172.20.10.2/19fd95860a9f06f,19
+5,2026-09-17T21:17:56.678+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,health_check,/health,23
+5,2026-09-17T21:17:56.712+02:00,-77RhFmtaUCO:u:L+5#aelzEZspR:x:L+33+c,Start,coap_request,coap://172.20.10.2/96f129c5058b291,32
+5,2026-09-17T21:17:56.745+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,health_check,/health,31
+5,2026-09-17T21:17:56.784+02:00,-77RhFmtaUCO:u:L+-2s5zVm1AGpv:x:L+33+c,Baue Geschoss,coap_request,coap://172.20.10.2/92469ed891f4154,38
+5,2026-09-17T21:17:56.805+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,health_check,/health,19
+5,2026-09-17T21:17:56.829+02:00,-77RhFmtaUCO:u:L+8klmxlq9fW:x:L+33+c,Geschoss eingebaut,coap_request,coap://172.20.10.2/086db8609db525b,24
+5,2026-09-17T21:17:56.860+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,health_check,/health,31
+5,2026-09-17T21:17:56.880+02:00,-77RhFmtaUCO:u:L+-15z54qzKCKY:x:L+33+c,Geschoss nicht eingebaut,coap_request,coap://172.20.10.2/cdbb6fbe1fed3d8,20
+5,2026-09-17T21:17:56.913+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,health_check,/health,33
+5,2026-09-17T21:17:56.959+02:00,-77RhFmtaUCO:u:L+4yjrbgzct63:x:L+33+c,Baue Dach ein,coap_request,coap://172.20.10.2/344c177baa717e1,46
+5,2026-09-17T21:17:57.001+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,health_check,/health,40
+5,2026-09-17T21:17:57.043+02:00,-77RhFmtaUCO:u:L+36VBEXUh3ew:x:L+33+c,Dach nicht eingebaut,coap_request,coap://172.20.10.2/970c9ab49ff6ee4,42
+5,2026-09-17T21:17:57.062+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,health_check,/health,19
+5,2026-09-17T21:17:57.098+02:00,-77RhFmtaUCO:u:L+2mneuLgbWPA:x:L+33+c,Dach eingebaut,coap_request,coap://172.20.10.2/4bbe6d0d05f73e8,35
+5,2026-09-17T21:17:57.122+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,health_check,/health,23
+5,2026-09-17T21:17:57.159+02:00,-77RhFmtaUCO:u:L+-3krIG7diCK:x:L+33+c,Alarm aussetzen,coap_request,coap://172.20.10.2/4143c8730bed1b1,36
+5,2026-09-17T21:17:57.185+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,health_check,/health,24
+5,2026-09-17T21:17:57.208+02:00,-77RhFmtaUCO:u:L+45AScIIAgue:x:L+33+c,Ende,coap_request,coap://172.20.10.2/19fd95860a9f06f,22

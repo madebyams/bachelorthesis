@@ -231,11 +231,11 @@ gemäß der Resource-Directory erstellt. Hierbei ist der Schlüssel die ersten 1
 zur Ressource. Dies ist meist die IP-Adresse des Mikrocontrollers mit den ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID als Pfad. Dadurch, dass
 es eine lokale Kopie des Resource-Directory schon gibt, muss also kein CoAP-Aufruf an das Resource Directory gemacht werden, was die Ausführung des Prozesses wesentlich
 beschleunigt. Die Rückverfolgung ist sehr schnell, da sie versucht, mit der Ausführung des ESP auf der Hardware mitzukommen. Da diese aber sehr schnell ist, ist es oft
-ein schnelles Herunterschnellen der Animation. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es durch Netzwerke etwas Latenz und auch werden
+ein schnelles Herunterschnellen der Animation. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es durch Netzwerke Latenz. Dies ist anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen, wobei der erste Prozessschritt mit 2484 Millisekunden die meiste Zeit bei der Übertragung benötigte. Die Vermutung liegt dabei nahe, dass die Initalisierung von Strukturen für die I2C Kommunikation zwischen dem ESP32 und den Modellanlagen ein Grund sein könnte. Auch werden
 lokale IP-Adressen der Hardware auf dem Resource-Directory hinterlegt. Dadurch muss sich der Rechner mit der ARIS-Instanz im selben Netzwerk befinden wie die Hardware.
 Jedoch könnte man hier durch Tunneling arbeiten, wo alle Geräte sich in einem virtuellen Netzwerk befinden \cite{penaflor_rey_designing_2022} \cite{dymora_performance_2014}. Auch die Entscheidungsfindung läuft passend. Bei dem XOR
 zur Überprüfung des Aufbaus des Geschosses werden die passenden Pfade verwendet (der ``Geschoss nicht eingebaut''-Pfad bei fehlendem Geschoss und der Aufbau des Daches bei aufgebautem Geschoss).
-Es wird also prozessgetreu ausgeführt. Der Kritikpunkt ist aktuell das Echtzeitverhalten und die Einschränkung des Netzwerkes.
+Es wird also prozessgetreu ausgeführt. Der Kritikpunkt ist aktuell das Echtzeitverhalten und die Einschränkung des Netzwerkes, was anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen ist.
 
 \noindent Es wurden mehrere Szenarien ausprobiert: ``Geschoss nicht eingebaut'', ``Geschoss eingebaut'' und ``Geschoss und Dach eingebaut''. Jedes Szenario wurde fünfmal durchlaufen, um konsistente Ergebnisse
 zu erhalten. Es wurden die entsprechenden Pfade genommen. Am Ende konnte man den Ausführungsbericht als CSV-Datei exportieren. Dieser wurde in das Process-Mining einer ARIS-Cloudinstanz eingespeist und man erhält
@@ -325,8 +325,7 @@ der Umsetzung einige kritische Punkte, welche diskutiert werden sollten.
 \subsection{Latenz durch Netzwerkkommunikation}
 
 Das Ziel der Arbeit war, dass Prozesse in Echtzeit von ARIS angesteuert werden. Durch Nutzung von CoAP auf Basis von UDP kann man 
-einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch wird es immer eine Latenz geben, welche abhängig von 
-den Netzwerkgegebenheiten ist.
+einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch wird es immer eine Latenz geben, welche abhängig von den Netzwerkgegebenheiten ist.
 
 \subsection{Bottleneck durch die JVM auf Server und Client}
 \label{jvm-bottleneck}

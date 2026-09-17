@@ -56,13 +56,13 @@
 \end{sidewaysfigure}
 
 \begin{landscape}
-\begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{2.2}
-    \caption{Vergleich mit verwandten Arbeiten}
+    \captionof{table}{Vergleich mit verwandten Arbeiten}
     \label{tab:related-work-comparison}
-    \Large
-    \begin{tabularx}{\linewidth}{@{}XXXXX@{}}
+    \large
+    \setlength{\tabcolsep}{8pt}
+    \begin{tabularx}{\linewidth}{@{}*{5}{>{\raggedright\arraybackslash}X}@{}}
         \toprule
         \textbf{Arbeit} & \textbf{Notation} & \textbf{Zielhardware} & \textbf{Protokoll/Ausführung} & \textbf{Automatisierungsgrad} \\
         \midrule
@@ -77,7 +77,6 @@
         \textbf{Diese Arbeit} & \textbf{EPK} & \textbf{ESP32} & \textbf{CoAP, eigene Execution-Engine} & \textbf{Vollautomatisiert, echte Hardware} \\
         \bottomrule
     \end{tabularx}
-\end{table}
 \end{landscape}
 
 
@@ -101,3 +100,109 @@
     \caption{Ordnerstruktur des Firmwareprojekts}
     \label{fig:firmware-code-project-structure}
 \end{figure}
+
+\begin{tabularx}{\textwidth}{|c|l|X|l|r|}
+\caption{Latenzmessung der CoAP-Anfragen im Netzwerk je Durchlauf}
+\label{tab:latenzmessung}\\
+\hline
+\textbf{Lauf} & \textbf{Zeitstempel} & \textbf{Executable-Name} & \textbf{Anfrage-Typ} & \textbf{Dauer (ms)} \\
+\hline
+\endfirsthead
+\caption[]{Latenzmessung der CoAP-Anfragen im Netzwerk je Durchlauf (Fortsetzung)}\\
+\hline
+\textbf{Lauf} & \textbf{Zeitstempel} & \textbf{Executable-Name} & \textbf{Anfrage-Typ} & \textbf{Dauer (ms)} \\
+\hline
+\endhead
+\hline
+\endfoot
+1 & 17.09.2026 (21:14:19:426) & Start & Health Check & 48 \\
+1 & 17.09.2026 (21:14:19:458) & Start & CoAP-Anfrage & 24 \\
+1 & 17.09.2026 (21:14:19:486) & Baue Geschoss & Health Check & 20 \\
+1 & 17.09.2026 (21:14:21:971) & Baue Geschoss & CoAP-Anfrage & 2484 \\
+1 & 17.09.2026 (21:14:22:049) & Geschoss eingebaut & Health Check & 37 \\
+1 & 17.09.2026 (21:14:22:094) & Geschoss eingebaut & CoAP-Anfrage & 45 \\
+1 & 17.09.2026 (21:14:22:158) & Geschoss nicht eingebaut & Health Check & 51 \\
+1 & 17.09.2026 (21:14:22:204) & Geschoss nicht eingebaut & CoAP-Anfrage & 45 \\
+1 & 17.09.2026 (21:14:22:250) & Baue Dach ein & Health Check & 34 \\
+1 & 17.09.2026 (21:14:22:286) & Baue Dach ein & CoAP-Anfrage & 35 \\
+1 & 17.09.2026 (21:14:22:317) & Dach nicht eingebaut & Health Check & 30 \\
+1 & 17.09.2026 (21:14:22:348) & Dach nicht eingebaut & CoAP-Anfrage & 30 \\
+1 & 17.09.2026 (21:14:22:396) & Dach eingebaut & Health Check & 48 \\
+1 & 17.09.2026 (21:14:22:428) & Dach eingebaut & CoAP-Anfrage & 31 \\
+1 & 17.09.2026 (21:14:22:458) & Alarm aussetzen & Health Check & 29 \\
+1 & 17.09.2026 (21:14:22:492) & Alarm aussetzen & CoAP-Anfrage & 33 \\
+1 & 17.09.2026 (21:14:22:522) & Ende & Health Check & 26 \\
+1 & 17.09.2026 (21:14:22:573) & Ende & CoAP-Anfrage & 25 \\
+2 & 17.09.2026 (21:15:29:363) & Start & Health Check & 20 \\
+2 & 17.09.2026 (21:15:29:386) & Start & CoAP-Anfrage & 20 \\
+2 & 17.09.2026 (21:15:29:435) & Baue Geschoss & Health Check & 46 \\
+2 & 17.09.2026 (21:15:29:451) & Baue Geschoss & CoAP-Anfrage & 15 \\
+2 & 17.09.2026 (21:15:29:470) & Geschoss eingebaut & Health Check & 17 \\
+2 & 17.09.2026 (21:15:29:487) & Geschoss eingebaut & CoAP-Anfrage & 16 \\
+2 & 17.09.2026 (21:15:29:505) & Geschoss nicht eingebaut & Health Check & 17 \\
+2 & 17.09.2026 (21:15:29:525) & Geschoss nicht eingebaut & CoAP-Anfrage & 19 \\
+2 & 17.09.2026 (21:15:29:555) & Baue Dach ein & Health Check & 29 \\
+2 & 17.09.2026 (21:15:29:576) & Baue Dach ein & CoAP-Anfrage & 21 \\
+2 & 17.09.2026 (21:15:29:607) & Dach nicht eingebaut & Health Check & 30 \\
+2 & 17.09.2026 (21:15:29:634) & Dach nicht eingebaut & CoAP-Anfrage & 26 \\
+2 & 17.09.2026 (21:15:29:664) & Dach eingebaut & Health Check & 29 \\
+2 & 17.09.2026 (21:15:29:698) & Dach eingebaut & CoAP-Anfrage & 34 \\
+2 & 17.09.2026 (21:15:29:772) & Alarm aussetzen & Health Check & 74 \\
+2 & 17.09.2026 (21:15:29:824) & Alarm aussetzen & CoAP-Anfrage & 51 \\
+2 & 17.09.2026 (21:15:29:846) & Ende & Health Check & 20 \\
+2 & 17.09.2026 (21:15:29:872) & Ende & CoAP-Anfrage & 26 \\
+3 & 17.09.2026 (21:16:42:127) & Start & Health Check & 22 \\
+3 & 17.09.2026 (21:16:42:142) & Start & CoAP-Anfrage & 14 \\
+3 & 17.09.2026 (21:16:42:159) & Baue Geschoss & Health Check & 15 \\
+3 & 17.09.2026 (21:16:42:179) & Baue Geschoss & CoAP-Anfrage & 19 \\
+3 & 17.09.2026 (21:16:42:200) & Geschoss eingebaut & Health Check & 20 \\
+3 & 17.09.2026 (21:16:42:219) & Geschoss eingebaut & CoAP-Anfrage & 18 \\
+3 & 17.09.2026 (21:16:42:239) & Geschoss nicht eingebaut & Health Check & 18 \\
+3 & 17.09.2026 (21:16:42:260) & Geschoss nicht eingebaut & CoAP-Anfrage & 21 \\
+3 & 17.09.2026 (21:16:42:279) & Baue Dach ein & Health Check & 18 \\
+3 & 17.09.2026 (21:16:42:295) & Baue Dach ein & CoAP-Anfrage & 15 \\
+3 & 17.09.2026 (21:16:42:318) & Dach nicht eingebaut & Health Check & 22 \\
+3 & 17.09.2026 (21:16:42:335) & Dach nicht eingebaut & CoAP-Anfrage & 17 \\
+3 & 17.09.2026 (21:16:42:355) & Dach eingebaut & Health Check & 19 \\
+3 & 17.09.2026 (21:16:42:375) & Dach eingebaut & CoAP-Anfrage & 19 \\
+3 & 17.09.2026 (21:16:42:409) & Alarm aussetzen & Health Check & 33 \\
+3 & 17.09.2026 (21:16:42:426) & Alarm aussetzen & CoAP-Anfrage & 17 \\
+3 & 17.09.2026 (21:16:42:446) & Ende & Health Check & 16 \\
+3 & 17.09.2026 (21:16:42:469) & Ende & CoAP-Anfrage & 22 \\
+4 & 17.09.2026 (21:17:16:589) & Start & Health Check & 21 \\
+4 & 17.09.2026 (21:17:16:614) & Start & CoAP-Anfrage & 24 \\
+4 & 17.09.2026 (21:17:16:629) & Baue Geschoss & Health Check & 13 \\
+4 & 17.09.2026 (21:17:16:651) & Baue Geschoss & CoAP-Anfrage & 22 \\
+4 & 17.09.2026 (21:17:16:674) & Geschoss eingebaut & Health Check & 22 \\
+4 & 17.09.2026 (21:17:16:699) & Geschoss eingebaut & CoAP-Anfrage & 25 \\
+4 & 17.09.2026 (21:17:16:716) & Geschoss nicht eingebaut & Health Check & 17 \\
+4 & 17.09.2026 (21:17:16:732) & Geschoss nicht eingebaut & CoAP-Anfrage & 16 \\
+4 & 17.09.2026 (21:17:16:755) & Baue Dach ein & Health Check & 22 \\
+4 & 17.09.2026 (21:17:16:777) & Baue Dach ein & CoAP-Anfrage & 21 \\
+4 & 17.09.2026 (21:17:16:797) & Dach nicht eingebaut & Health Check & 19 \\
+4 & 17.09.2026 (21:17:16:819) & Dach nicht eingebaut & CoAP-Anfrage & 22 \\
+4 & 17.09.2026 (21:17:16:848) & Dach eingebaut & Health Check & 29 \\
+4 & 17.09.2026 (21:17:16:868) & Dach eingebaut & CoAP-Anfrage & 19 \\
+4 & 17.09.2026 (21:17:16:888) & Alarm aussetzen & Health Check & 19 \\
+4 & 17.09.2026 (21:17:16:959) & Alarm aussetzen & CoAP-Anfrage & 70 \\
+4 & 17.09.2026 (21:17:16:984) & Ende & Health Check & 23 \\
+4 & 17.09.2026 (21:17:17:004) & Ende & CoAP-Anfrage & 19 \\
+5 & 17.09.2026 (21:17:56:678) & Start & Health Check & 23 \\
+5 & 17.09.2026 (21:17:56:712) & Start & CoAP-Anfrage & 32 \\
+5 & 17.09.2026 (21:17:56:745) & Baue Geschoss & Health Check & 31 \\
+5 & 17.09.2026 (21:17:56:784) & Baue Geschoss & CoAP-Anfrage & 38 \\
+5 & 17.09.2026 (21:17:56:805) & Geschoss eingebaut & Health Check & 19 \\
+5 & 17.09.2026 (21:17:56:829) & Geschoss eingebaut & CoAP-Anfrage & 24 \\
+5 & 17.09.2026 (21:17:56:860) & Geschoss nicht eingebaut & Health Check & 31 \\
+5 & 17.09.2026 (21:17:56:880) & Geschoss nicht eingebaut & CoAP-Anfrage & 20 \\
+5 & 17.09.2026 (21:17:56:913) & Baue Dach ein & Health Check & 33 \\
+5 & 17.09.2026 (21:17:56:959) & Baue Dach ein & CoAP-Anfrage & 46 \\
+5 & 17.09.2026 (21:17:57:001) & Dach nicht eingebaut & Health Check & 40 \\
+5 & 17.09.2026 (21:17:57:043) & Dach nicht eingebaut & CoAP-Anfrage & 42 \\
+5 & 17.09.2026 (21:17:57:062) & Dach eingebaut & Health Check & 19 \\
+5 & 17.09.2026 (21:17:57:098) & Dach eingebaut & CoAP-Anfrage & 35 \\
+5 & 17.09.2026 (21:17:57:122) & Alarm aussetzen & Health Check & 23 \\
+5 & 17.09.2026 (21:17:57:159) & Alarm aussetzen & CoAP-Anfrage & 36 \\
+5 & 17.09.2026 (21:17:57:185) & Ende & Health Check & 24 \\
+5 & 17.09.2026 (21:17:57:208) & Ende & CoAP-Anfrage & 22 \\
+\end{tabularx}
