@@ -27,7 +27,7 @@ UML-Diagramm der Prozessmodellimplementierung ist unter Abbildung \ref{fig:proze
 Das Prozessmodell ist in XML serialisiert und muss dementsprechend deserialisiert werden. Bei dieser Deserialisierung findet
 auch die Konstruktion der \texttt{Process}-Klasse statt.
 
-\noindent Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als UML-Diagramm unter \ref{fig:process-builder-uml} aufgeführt.
+\noindent Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als UML-Diagramm unter Abbildung \ref{fig:process-builder-uml} im Anhang aufgeführt.
 Die einzelnen \texttt{*Extractor}-Klassen erfüllen die Funktion, aus dem XML-Dokument die Elemente zu extrahieren. Diese Elemente werden in \texttt{ProcessExtractor} gesammelt
 und zu einem \texttt{Process} (siehe Abbildung \ref{fig:prozess-uml} in der Anlage) konstruiert. Nach der Konstruktion des \texttt{Process}-Objekts wird die Vorverarbeitung durchgeführt, um $\tau$ zu
 realisieren mittels \texttt{OperatorPreprocessor}.
@@ -45,7 +45,7 @@ Der EPK-Compiler wurde in Scala geschrieben, um eine Interoperabilität mit dem 
 Auch wurde Scala als Sprache für den Compiler gewählt, da es Pattern-Matching und algorithmische Datentypen bietet, welche die
 Entwicklung eines Compilers stark vereinfachen \cite{zhang_pattern_2018} \cite{odersky_overview_2004}.
 
-\noindent Das UML-Diagramm des EPK-Compilers ist unter \ref{fig:epk-compiler-uml} zu finden.
+\noindent Das UML-Diagramm des EPK-Compilers ist unter Abbildung \ref{fig:epk-compiler-uml} zu finden.
 Der Prozess wird an den Compiler übergeben. Beim Aufruf der \texttt{compile}-Methode wird der Prozess durch Tiefensuche durchlaufen. Dabei wird dann mittels Pattern-Matching
 für die jeweilige Knotenart die passende Übersetzung verwendet gemäß \ref{translation-function}. Am Ende erhält man die \texttt{ExecutionQueue}, welche ausgeführt werden kann.
 Diese wird in eine \texttt{ExecutionQueueBuilderContext}-Instanz hinterlegt, um diese für die Ausführung oder Codegenerierung bereit zu halten.
@@ -59,11 +59,11 @@ Diese wird in eine \texttt{ExecutionQueueBuilderContext}-Instanz hinterlegt, um 
 
 \section{Execution-Engine}
 
-Die Execution-Engine ist mit der \texttt{ExecutionQueueRunner}-Klasse realisiert. Diese enthält den \texttt{AAutomationEventBuffer}, um Live-Streaming zu ARIS
+Die Execution-Engine ist mit der \texttt{ExecutionQueueRunner}-Klasse realisiert. Das entsprechende UML-Diagramm ist unter Abbildung \ref{fig:execution-queue-runner-uml} zu finden. Diese enthält den \texttt{AAutomationEventBuffer}, um Live-Streaming zu ARIS
 und Logging zu ermöglichen. Darüber hinaus enthält die Klasse die CoAP-Verbindung, um die Befehle an die Hardware zu übermitteln. Die \texttt{ExecutionQueue} wird durch eine
 \texttt{forEach}-Schleife bis zum Ende iteriert.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{Graphics/ExecutionQueueRunner-UML.pdf}
     \caption{UML Diagramm des ExecutionQueueRunner}
@@ -76,7 +76,7 @@ und Logging zu ermöglichen. Darüber hinaus enthält die Klasse die CoAP-Verbin
 Die IoT-Schnittstelle sendet die Befehle einer \texttt{SingleExecutable} zum IoT-System. Das IoT-System besteht dabei aus
 Mikrocontrollern. In dieser Arbeit wird ein Mikrocontroller der Reihe ESP32 verwendet. Die Schnittstelle wird mit dem CoAP-Protokoll realisiert.
 Dabei wird die Realisierung eines Prozesses durch einen CoAP-PUT-Endpoint realisiert. Anhand der Schnittstellendefinition 
-aus \ref{coap-interface} entspricht der Pfadname eines Endpunktes den ersten 15 Zeichen eines SHA256-Hexstrings. 
+aus Abschnitt \ref{coap-interface} entspricht der Pfadname eines Endpunktes den ersten 15 Zeichen eines SHA256-Hexstrings. 
 
 \noindent Alle CoAP-Endpunkte, welche die Funktionalität des SingleExecutables zur Verfügung stellen, werden beim Start des Servers aus
 einem Resource-Directory abgefragt, welches die CoAP-URLs enthält. Das Ergebnis wird in einer Hash-Map hinterlegt, bei der der gekürzte
@@ -124,14 +124,14 @@ Dann werden alle Handler initialisiert und beim Resource-Directory registriert.
 \subsection{Integration in ESP-IDF}
 
 Für den Firmwarecode wurde ESP-IDF als Basis genommen. Aspekte wie der Aufbau einer WLAN-Verbindung, die Initialisierung eines CoAP-Servers 
-sowie Einrichtungscode eines CoAP-Endpoint-Handlers sind schon eingebaut. Die dafür implementierten Klassen sind als UML-Diagramme in der Abbildung \ref{fig:idf-project-classes} zu sehen. 
+sowie Einrichtungscode eines CoAP-Endpoint-Handlers sind schon eingebaut. Die dafür implementierten Klassen sind als UML-Diagramme in der Abbildung \ref{fig:idf-project-classes} im Anhang zu sehen. 
 Nach der Codegenerierung muss nur noch die Ausführungslogik implementiert werden. 
 
 \newpage
 
 \subsection{Übersetzung des Ausführungsmodells in C++}
 
-Aus \ref{fig:epk-compiler-uml} ist zu entnehmen, dass ein \texttt{ExecutionQueueBuilderContext} eine verkettete Liste an SingleExecutables enthält.
+Aus der Abbildung \ref{fig:epk-compiler-uml} ist zu entnehmen, dass ein \texttt{ExecutionQueueBuilderContext} eine verkettete Liste an SingleExecutables enthält.
 Diese Liste wird zu einem dynamischen Array von Codegenerierungselementen gemäß \ref{code-generation-model} überführt. In Java wird das 
 Codegenerierungsmodell mit der Klasse \texttt{ExecutionNodeDTO} implementiert. Dieses dynamische Array wird anhand des JSON-Formats serialisiert, sodass man ein 
 JSON-Dokument der folgenden Form erhält: 
@@ -166,7 +166,7 @@ einer \texttt{coap}-Komponente sowie den generierten Handlern als eigene ESP-IDF
 
 \section{Ausgabe von Ausführungsstatistiken}
 
-Bei der Kompilierung des EPK-Modells in eine \texttt{ExecutionQueue} wird gemäß \ref{fig:epk-compiler-uml} jeder \texttt{SingleExecutable} 
+Bei der Kompilierung des EPK-Modells in eine \texttt{ExecutionQueue} wird gemäß der Abbildung \ref{fig:epk-compiler-uml} jeder \texttt{SingleExecutable} 
 eine Referenz zu einem \texttt{AAutomationEventBuffer} zugewiesen. Bei der Ausführung eines \texttt{SingleExecutable} wird die Methode
 \texttt{add} der \texttt{AAutomationEventBuffer}-Referenz aufgerufen, sodass die Ausführung mitsamt Executable-ID, Rückgabewert,
 Verarbeitungszeit auf dem ESP32 sowie Start- und Endzeitpunkt hinterlegt wird und an den Client live übermittelt wird. Dieser Puffer kann später serialisiert werden und zu
