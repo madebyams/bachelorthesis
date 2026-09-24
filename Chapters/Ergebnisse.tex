@@ -66,7 +66,7 @@ dieser User-Stories zu evaluieren, muss man die Definition of Done der User-Stor
     \item Ich als \textbf{Analyst} möchte \textbf{einen Verlauf vergangener Prozesse einsehen}, sodass \textbf{Schwachstellen und Engpässe
     ermittelt werden können}.
 
-    $\to$ Defintions of Done:
+    $\to$ Definitions of Done:
 
     \begin{itemize}
         \item Nach einer Ausführung ist es möglich einen Ausführungsbericht zu generieren.
@@ -121,7 +121,7 @@ Der Schaltplan des Hardwaremodellaufbaus, der den Prozess ausführen soll, wird 
 \noindent Beim Modellaufbau dient der ESP32 zum Empfang und der Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit
 2 Arduino-Unos, welche jeweils einen HC-SR04-Abstandssensor und einen MS-18-Servomotor haben. Der HC-SR04-Sensor ist zur Erkennung von Objekten (in diesem
 Fall die Existenz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. Die Kommunikation zwischen dem ESP und den Arduino-Unos
-erfolgt über I2C.
+erfolgt über \ac{I2C}.
 
 \noindent Als Nächstes wird der Prozess mittels EPK modelliert. Die Modellierung ist unter Abbildung \ref{fig:brick-house-epk-diagram} vorzufinden.
 
@@ -189,16 +189,16 @@ zu testen.
 einfachere Erweiterbarkeit von Funktionen, ohne dass der Netzwerk- und Protokollcode sich mit dem Code zur Anlagensteuerung vermischt. Dies nennt man auch
 Separation of Concerns.
 
-\noindent Die I2C-Kommunikation zwischen dem ESP32 und dem Arduino-Uno wird gemäß der Abbildung \ref{fig:i2c-esp32-arduino-uno} durchgeführt.
+\noindent Die \ac{I2C}-Kommunikation zwischen dem ESP32 und dem Arduino-Uno wird gemäß der Abbildung \ref{fig:i2c-esp32-arduino-uno} durchgeführt.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{Graphics/esp32-arduino-i2c.pdf}
-    \caption{I2C-Kommunikation zwischen ESP32 und Arduino-Unos}
+    \caption{I\textsuperscript{2}C-Kommunikation zwischen ESP32 und Arduino-Unos}
     \label{fig:i2c-esp32-arduino-uno}
 \end{figure}
 
-\noindent Die Werte in den Klammern bei den Arduino-Unos sind die festgelegten I2C-Slave-Adressen, um Eindeutigkeit bei der Kommunikation zu haben.
+\noindent Die Werte in den Klammern bei den Arduino-Unos sind die festgelegten \ac{I2C}-Slave-Adressen, um Eindeutigkeit bei der Kommunikation zu haben.
 
 \noindent Das Kommandobyte wird dabei wie folgt definiert:
 
@@ -231,41 +231,44 @@ gemäß der Resource-Directory erstellt. Hierbei ist der Schlüssel die ersten 1
 zur Ressource. Dies ist meist die IP-Adresse des Mikrocontrollers mit den ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID als Pfad. Dadurch, dass
 es eine lokale Kopie des Resource-Directory schon gibt, muss also kein CoAP-Aufruf an das Resource Directory gemacht werden, was die Ausführung des Prozesses wesentlich
 beschleunigt. Die Rückverfolgung ist sehr schnell, da sie versucht, mit der Ausführung des ESP auf der Hardware mitzukommen. Da diese aber sehr schnell ist, ist es oft
-ein schnelles Herunterschnellen der Animation. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es auch eine Latenz durch das Netzwerk. Dies ist anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen, wobei der erste Prozessschritt mit 2484 Millisekunden die meiste Zeit bei der Übertragung benötigte. Die Vermutung liegt dabei nahe, dass die Initalisierung von Strukturen für die I2C Kommunikation zwischen dem ESP32 und den Modellanlagen ein Grund sein könnte. Auch werden
+ein schnelles Herunterschnellen der Animation. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es auch eine Latenz durch das Netzwerk. Dies ist anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen, wobei die erste Funktion (``Baue Geschoss'') mit 2484 Millisekunden die meiste Zeit bei der Übertragung benötigte. Die Vermutung liegt dabei nahe, dass die Initialisierung von Strukturen für die \ac{I2C} Kommunikation zwischen dem ESP32 und den Modellanlagen ein Grund sein könnte. Auch werden
 lokale IP-Adressen der Hardware auf dem Resource-Directory hinterlegt. Dadurch muss sich der Rechner mit der ARIS-Instanz im selben Netzwerk befinden wie die Hardware.
 Jedoch könnte man hier durch Tunneling arbeiten, wo alle Geräte sich in einem virtuellen Netzwerk befinden \cite{penaflor_rey_designing_2022} \cite{dymora_performance_2014}. Auch die Entscheidungsfindung läuft passend. Bei dem XOR
 zur Überprüfung des Aufbaus des Geschosses werden die passenden Pfade verwendet (der ``Geschoss nicht eingebaut''-Pfad bei fehlendem Geschoss und der Aufbau des Daches bei aufgebautem Geschoss).
-Es wird also prozessgetreu ausgeführt. Der Kritikpunkt ist aktuell das Echtzeitverhalten und die Einschränkung des Netzwerkes, was anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen ist.
+Es wird also prozessgetreu ausgeführt.
 
 \noindent Es wurden mehrere Szenarien ausprobiert: ``Geschoss nicht eingebaut'', ``Geschoss eingebaut'' und ``Geschoss und Dach eingebaut''. Jedes Szenario wurde fünfmal durchlaufen, um konsistente Ergebnisse
-zu erhalten. Es wurden die entsprechenden Pfade genommen. Am Ende konnte man den Ausführungsbericht als CSV-Datei exportieren. Dieser wurde in das Process-Mining einer ARIS-Cloudinstanz eingespeist und man erhält
+zu erhalten (siehe Tabelle \ref{tab:eventlog-varianten}). Es wurden die entsprechenden Pfade genommen. Am Ende konnte man den Ausführungsbericht als CSV-Datei exportieren. Dieser wurde in das Process-Mining einer ARIS-Cloudinstanz eingespeist und man erhält
 Daten wie Aktivitäten pro Durchlauf, Durchlaufanzahl, Aktivitäten pro Tag sowie eine durchschnittliche Durchlaufzeit. Bildschirmfotos der Process-Mining-Sichten sind unter Abbildung \ref{fig:process-mining-overview} und
 Abbildung \ref{fig:process-mining-overview-2} in der Anlage zu finden.
 
-\noindent Aus Abbildung \ref{fig:process-mining-overview} aus der Anlage ist zu erkennen, dass bei diesem Versuchsaufbau eine durchschnittliche Durchlaufzeit von 38,67 Sekunden vorliegt. Darin enthalten sind die Übertragung der Nachricht über CoAP, sowie die Ausführung des Befehls und die Rückmeldung des ESP32. Die Zeit, welche zur Animation benötigt wurde, ist hier nicht angegeben.
+\noindent Aus Abbildung \ref{fig:process-mining-overview} (siehe Anlage) ist zu erkennen, dass bei diesem Versuchsaufbau eine durchschnittliche Durchlaufzeit von 38,67 Sekunden vorliegt. 
+Diese Durchlaufzeit wird von ARIS Process Mining berechnet. Welche Zeitanteile genau darin sind, lässt sich von außen nicht nachvollziehen. Die reinen Kommunikationszeiten liegen gemäß 
+Tabelle \ref{tab:latenzmessung} (siehe Anlage) deutlich darunter.
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \caption{Aus dem Ereignisprotokoll extrahierte Aktivitätsfolgen je Prozessvariante}
   \label{tab:eventlog-varianten}
-  \begin{tabular}{llrr}
+  \small
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}X r r}
     \toprule
     Case ID & Aktivität & Bearbeitungszeit [s] & Vorkommen \\
     \midrule
-    \multirow{4}{*}{0 (Ohne Geschoss \& Ohne Dach)}
+    \multirow{4}{=}{0 (Ohne Geschoss \& Ohne Dach)}
       & Start              & 0 & 5 \\
       & Baue Geschoss      & 1 & 5 \\
-      & Setze Alarm aus    & 0 & 5 \\
+      & Setze Alarm aus (fehlendes Geschoss)    & 0 & 5 \\
       & Ende               & 0 & 5 \\
     \addlinespace
-    \multirow{5}{*}{1 (Mit Geschoss \& Ohne Dach)}
+    \multirow{5}{=}{1 (Mit Geschoss \& Ohne Dach)}
       & Start              & 0 & 5 \\
       & Baue Geschoss      & 1 & 5 \\
       & Baue Dach ein      & 1 & 5 \\
-      & Alarm aussetzen    & 0 & 5 \\
+      & Alarm aussetzen (fehlendes Dach)    & 0 & 5 \\
       & Ende               & 0 & 5 \\
     \addlinespace
-    \multirow{5}{*}{2 (Mit Geschoss \& Mit Dach)}
+    \multirow{5}{=}{2 (Mit Geschoss \& Mit Dach)}
       & Start                & 0 & 5 \\
       & Baue Geschoss        & 1 & 5 \\
       & Baue Dach ein        & 1 & 5 \\
@@ -274,7 +277,7 @@ Abbildung \ref{fig:process-mining-overview-2} in der Anlage zu finden.
     \midrule
     \multicolumn{2}{l}{Summe} & & 70 \\
     \bottomrule
-  \end{tabular}
+  \end{tabularx}
 \end{table}
 
 
@@ -301,21 +304,21 @@ Hierbei sollte aber darauf geachtet werden, dass eine stabile Netzwerkverbindung
 
 \noindent Durch die Live-Animation der Ausführung sowie dem Ausführungsbericht (Event-Log) wurde das Ziel der transparenten Aufbereitung des Produktionsprozesses (siehe Kapitel \ref{motivation-und-zielsetzung}) zu einem Großteil abgedeckt. Während der Ausführungsbericht hierbei eine Übersicht der abgeschlossenen Prozesse bietet, hat die Live-Animation der Ausführung eine Schwäche. Wie in Abschnitt \ref{ausfuehrung-des-automationsprozesses} beschrieben wurde, schnellt die Ausführung herunter. Dies kommt daher, dass die Ausführung meist schneller ist als die Erfassung der Produktionsplattform. Dies kann mit Performanceunterschieden der Programmiersprachen begründet werden, was in Abschnitt \ref{jvm-bottleneck} näher erläutert wird.
 
-\section{Gefahren für die Gültigkeit}
+\section{Sicherheitsrisiken}
 
 Auch wenn der Prototyp gemäß der Zielsetzung funktioniert, gibt es einige Risiken zu beachten, insbesondere im Sicherheitsaspekt.
 
 \subsection{Absicherung des Animationssockets}
 
 Zurzeit laufen die TCP-Sockets zur Animation während der Ausführung ohne jegliche Absicherung. Dies kann dazu 
-führen, dass Daten abgelesen werden können zwischen dem ARIS-Server und Client. Hier kann durch Nutzung von TLS
+führen, dass Daten abgelesen werden können zwischen dem ARIS-Server und Client. Hier kann durch Nutzung von \ac{TLS}
 die Verbindung abgesichert werden. \cite{wendzel_it-sicherheit_2018}
 
 \subsection{Absicherung des Resource-Directory-Servers und IoT-Hardware}
 
 Auch beim Resource-Directory-Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser
 ist kritischer, da dort die Zieladressen der ESP32 liegen, welche angesteuert werden sollen. Hier kann man eine Absicherung
-gewährleisten durch Nutzung von dTLS \cite{wendzel_it-sicherheit_2018} für den Resource-Directory-Server. Dies gilt auch für den ESP32.
+gewährleisten durch Nutzung von \ac{DTLS} \cite{wendzel_it-sicherheit_2018} für den Resource-Directory-Server. Dies gilt auch für den ESP32.
 
 \section{Kritische Bewertung der Architektur und Systemlimitationen}
 
@@ -325,12 +328,14 @@ der Umsetzung einige kritische Punkte, welche diskutiert werden sollten.
 \subsection{Latenz durch Netzwerkkommunikation}
 
 Das Ziel der Arbeit war, dass Prozesse in Echtzeit von ARIS angesteuert werden. Durch Nutzung von CoAP auf Basis von UDP kann man 
-einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch wird es immer eine Latenz geben, welche abhängig von den Netzwerkgegebenheiten ist. Dies ist auch anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen.
+einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch wird es immer eine Latenz geben, welche abhängig von den Netzwerkgegebenheiten ist. Dies ist auch anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen. 
+Diese zeigt eine zweite Messung des Versuchsaufbaus. Dabei wurde das Szenario mit vorhandenem Geschoss und Dach fünfmal ausgeführt. Dabei ist auch zu erkennen, dass dieser sich vom Szenario aus Tabelle \ref{tab:eventlog-varianten} unterscheidet,
+da es zu Inkonsistenzen der Sensoren von der Anlage kam.
 
 \subsection{Bottleneck durch die JVM auf Server und Client}
 \label{jvm-bottleneck}
 
-Neben der Netzwerklatenz kommt auch noch der Aspekt, dass die JVM durch ihre Garbage-Collection kein deterministisches Verhalten liefert und 
+Neben der Netzwerklatenz kommt auch noch der Aspekt, dass die \ac{JVM} durch ihre Garbage-Collection kein deterministisches Verhalten liefert und 
 es zu unbestimmten Zeiten zu Verlangsamungen kommen kann. \cite{carpen-amarie_performance_2015} \cite{al-jaroodi_object-reuse_2005} Dies kann auch das angestrebte Echtzeitverhalten der Orchestrierung beeinflussen. In solchen
 Fällen ist es hilfreich, mit Sprachen wie C++ zu arbeiten, bei denen man durch eigene Speicherverwaltung eine stabile Performance gewährleisten kann. \cite{stroustrup_brief_2015} \cite{herter_timing-predictable_2014}
 
@@ -342,7 +347,7 @@ Laufzeitausnahmen umgesetzt. Hier kann durch normale Ausnahmen eine bessere Fehl
 \subsection{Continuous Integration und Continuous Delivery}
 
 Die Nutzung von Continuous Integration und Continuous Delivery für ARIS ist durch dessen Infrastruktur auf GitHub gegeben. Für die Firmware des ESP32 kann Continuous Integration
-umgesetzt werden. Dies erfolgt durch Test und Bauen vom Firmwarecode auf CI/CD-Plattformen wie GitHub-Actions oder GitLab-CI.
+umgesetzt werden. Dies erfolgt durch Test und Bauen vom Firmwarecode auf \ac{CICD}-Plattformen wie GitHub-Actions oder GitLab-CI.
 
 \subsection{Erhöhtes Kollisionsrisiko durch verkürzten Hashwert des Prozessschrittes}
 
@@ -350,6 +355,6 @@ In Abschnitt \ref{codegeneration-model} wird zur einheitlichen Zuweisung von Pro
 
 \section{Zusammenfassung}
 
-In diesem Kapitel wurde das konzeptionierte System, sowie dessen technische Umsetzung entgegen der in Kapitel \ref{analyse-und-konzeption} aufgeführten Anforderungen überprüft. Dabei
+In diesem Kapitel wurde das konzeptionierte System, sowie dessen technische Umsetzung gegen die in Kapitel \ref{analyse-und-konzeption} aufgeführten Anforderungen überprüft. Dabei
 wurde ein Großteil der Anforderungen erfüllt. Die fehlenden Komponenten sowie weitere Aspekte, welche während der Konzeption und Implementierung aufkamen, wurden anschließend beleuchtet und
 diskutiert. Die Ziele und Anforderungen wurden zwar großflächig erreicht, jedoch kann man in den Bereichen Sicherheit und Leistung noch einige Verbesserungen durchführen.

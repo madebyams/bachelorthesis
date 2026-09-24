@@ -96,12 +96,21 @@
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=0.75\textwidth]{Graphics/AAutomationDispatcher-UML.pdf}
+    \caption{UML-Diagramm der AAutomationDispatcher-Klasse}
+    \label{fig:aautomation-dispatcher-uml}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
     \includegraphics[width=0.75\textwidth]{Graphics/Baukloetzchen-Ordner-Struktur.png}
     \caption{Ordnerstruktur des Firmwareprojekts}
     \label{fig:firmware-code-project-structure}
 \end{figure}
 
-\begin{tabularx}{\textwidth}{|c|l|X|l|r|}
+{\small
+\begin{longtable}{|c|l|>{\raggedright\arraybackslash}p{4.2cm}|l|r|}
 \caption{Latenzmessung der CoAP-Anfragen im Netzwerk je Durchlauf}
 \label{tab:latenzmessung}\\
 \hline
@@ -205,4 +214,5 @@
 5 & 17.09.2026 (21:17:57:159) & Alarm aussetzen & CoAP-Anfrage & 36 \\
 5 & 17.09.2026 (21:17:57:185) & Ende & Health Check & 24 \\
 5 & 17.09.2026 (21:17:57:208) & Ende & CoAP-Anfrage & 22 \\
-\end{tabularx}
+\end{longtable}
+}

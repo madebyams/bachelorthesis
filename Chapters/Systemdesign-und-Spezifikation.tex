@@ -12,7 +12,7 @@ Dieses Codegenerierungsmodell wird dann verwendet, um die Anbindung der Hardware
     \label{fig:systemarchitektur}
 \end{figure}
 
-\noindent Damit gemäß dem Ziel, dass Produktionen prozesseinhaltend laufen (siehe Kapitel \ref{motivation-und-zielsetzung}), muss zunächst 
+\noindent Um das Ziel prozesseinhaltender Produktionen (siehe Kapitel \ref{motivation-und-zielsetzung}) zu erreichen, muss zunächst 
 ein \textbf{Prozessmodell} definiert werden, welches vom \textbf{EPK-Compiler} übersetzt wird. Das \textbf{Ausführungsmodell} ist das
 Resultat des Compilers und muss ebenfalls definiert werden. Sind beide Definitionen vorhanden, so kann die eigentliche Kompilierung formal 
 beschrieben werden. Aus diesen Bestandteilen kann dann die Ausführung sowie die Codegenerierung abgeleitet werden. Visuell kann das
@@ -231,7 +231,7 @@ in ein Modell umgewandelt werden, welches die Generierung von Quellcode ermögli
 \label{codegeneration-model}
 
 Sei $C = \{(i, n, t) | i \in \mathbb{N} \land n \in S \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
-den Rückgabetyp sowie die ersten 15 Bytes einer SHA256-Prüfsumme einer ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+den Rückgabetyp sowie die ersten 15 Zeichen des Hexstrings einer \ac{SHA256}-Prüfsumme der ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
 
 \subsection{Generierung des Firmwarequellcodes}
 
@@ -327,7 +327,7 @@ werden die direkten Nachbarn der Pfade ausgeführt. Dies geschieht in der \textt
 \label{automation-animation}
 
 Eine der Anforderungen aus Kapitel \ref{analyse-und-konzeption} war das Live-Streaming der Prozessausführung. Hierbei gibt es zwei Möglichkeiten, um dieses
-Live-Streaming zu realisieren: Polling über HTTP oder ein kontinuierlicher Informationsaustausch über eine bidirektionale TCP-Verbindung. Diese beiden Optionen werden
+Live-Streaming zu realisieren: Polling über \ac{HTTP} oder ein kontinuierlicher Informationsaustausch über eine bidirektionale TCP-Verbindung. Diese beiden Optionen werden
 im Folgenden gegenübergestellt.
 
 \subsection{Gegenüberstellung von Polling und bidirektionaler Verbindung}
@@ -345,7 +345,7 @@ $+$ Geregelte Semantik durch HTTP-Methoden \cite{fielding_http_2022} & $-$ Seman
 $-$ Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreite und Stauung im Netzwerk \cite{obonguko_websockets_2025} & $+$ Durch kontinuierlichen Datenaustausch niedrige Latenz \cite{loreto_known_2011} \\
 \bottomrule                         
 \end{tabularx}
-\caption{Gegenüberstellung}
+\caption{Gegenüberstellung von Polling und bidirektionaler Verbindung}
 \label{tab:polling-vs-birectional}
 \end{table}
 
@@ -359,12 +359,12 @@ animieren.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Graphics/Live-Streaming.pdf}
-    \caption{Diagram, welches Livestreaming zur Animation darstellt}
+    \caption{Diagramm, welches Livestreaming zur Animation darstellt}
     \label{fig:live-streaming}
 \end{figure}
 
 
-\noindent Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), bei denen zunächst eine WebSocket-Verbindungsanfrage per HTTP verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
+\noindent Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), bei denen zunächst eine WebSocket-Verbindungsanfrage per \ac{HTTP} verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
 
 \section{Schnittstellen}
 
@@ -376,6 +376,9 @@ Die zweite Schnittstelle definiert die Kommunikation der Orchestrierungsschicht 
 
 Der Automationsserver bietet eine Schnittstelle an, welche die Automation von Prozessen steuert.
 
+% First use of JSON/CSV is inside the table below: set the acronym anchors here,
+% because acronym labels inside a float before \caption trigger a nag error.
+\acused{JSON}\acused{CSV}\phantomsection\label{acro:JSON}\label{acro:CSV}%
 \begin{table}[H]
 \centering
 \footnotesize
@@ -392,8 +395,8 @@ stopSimulation              &   keine Parameter                                 
 getNextStepGroup            &   Parameter                                                           & Vorheriger Endpunkt um den nächsten Prozessschritt zu bekommen  \\
 getAvailableStatistics      &   Sprache                                                             & Abfragen des Statistikkatalogs (Verfügbare Statistiken)  \\
 getVersion                  &   keine Parameter                                                     & Serverversion  \\
-generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodells und Serialisierung des Ausführungsmodells in JSON, um Codegenerierung auf dem Client zu starten  \\
-exportDetailedStatistics    &   keine Parameter                                                     & Serialisierung der Ausführungsstatistik in das CSV-Tabellenformat  \\
+generateCode                &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells, Aufbau des Ausführungsmodells und Serialisierung des Ausführungsmodells in \acl{JSON} (\acs{JSON}), um Codegenerierung auf dem Client zu starten  \\
+exportDetailedStatistics    &   keine Parameter                                                     & Serialisierung der Ausführungsstatistik in das \acs{CSV}-Tabellenformat (\acl{CSV})  \\
 initStreamConnection        &   keine Parameter                                                     & Erstellen eines Serversockets, um das Live-Streaming der Ausführung für die Animation zu ermöglichen\\
 closeStreamConnection       &   keine Parameter                                                     & Schließen der erstellten Socketverbindung \\
 \bottomrule
@@ -435,7 +438,7 @@ $-$ Zuweisung von Anfrage und Antwort muss manuell implementiert werden & $+$ Zu
 \subsubsection{Definition der CoAP-Schnittstelle}
 \label{coap-interface}
 
-Jeder Mikrocontroller im IoT-System hat eine eigene IP-Adresse. CoAP hat ähnlich zu REST Endpunkte für verschiedene Ressourcen.
+Jeder Mikrocontroller im IoT-System hat eine eigene \ac{IP}-Adresse. CoAP hat ähnlich zu \ac{REST} Endpunkte für verschiedene Ressourcen.
 Daraus resultieren die folgenden CoAP-Endpunkte für jeden CoAP-Server, welcher auf einem Mikrocontroller läuft:
 Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 
@@ -443,7 +446,7 @@ Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 \noindent \textbf{GET /health}
 
 
-\noindent Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in REST gibt es keinen Payload, welcher mitgegeben werden kann.
+\noindent Gibt den Status und Temperatur eines Mikrocontrollers aus. Analog zu GET in \ac{REST} gibt es keinen Payload, welcher mitgegeben werden kann.
 
 \noindent Die Antwort hat folgendes Schema:
 

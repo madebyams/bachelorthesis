@@ -29,12 +29,12 @@ bei Mitarbeitern und Fachexperten sichergestellt werden kann. Auf der Basis der 
 \end{itemize}
 
 
-\noindent Prozesse können dabei mit unterschiedlichen Notationen wie EPK oder Business Process Model and Notation (kurz: BPMN) modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
+\noindent Prozesse können dabei mit unterschiedlichen Notationen wie \ac{EPK} oder \ac{BPMN} modelliert werden. \cite{leimeister_einfuhrung_2015} In dieser Arbeit wird EPK verwendet.
 
 \subsection{EPK}
 \label{epk-definition}
 
-Leimeister definiert EPK (Ereignisgesteuerte Prozesskette) als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen, Ereignissen und
+Leimeister definiert \ac{EPK} als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen, Ereignissen und
 Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren ``AND'', ``OR'' und ``XOR''. \cite{nuttgens_geschaftsprozesmodellierung_1998}
 Ein wesentliches Merkmal von EPK ist die Darstellung eines Prozesses in eine zeitlich-logische Abfolge von Funktionen und dem Einbau von Entscheidungslogik durch
 Ereignisse und Verknüpfungsoperatoren. \cite{nuttgens_geschaftsprozesmodellierung_1998}
@@ -60,7 +60,7 @@ Es gilt:
     \item $O \subset V$ die Menge der Verknüpfungsoperatoren. Analog zu Rump \cite{rump_geschaftsprozesmanagement_1999} lässt sich 
     $O$ in paarweise disjunkte Teilmengen $O_{OR} = (S_{OR} \cup J_{OR}), O_{XOR} = (S_{XOR} \cup J_{XOR})$ und $O_{AND} = (S_{AND} \cup J_{AND})$ aufteilen, sodass $O = O_{OR} \cup O_{XOR} \cup O_{AND}$.
     \item Funktionen und Ereignisse sind atomar, sodass eine Aufteilung innerhalb von Funktionen oder Ereignissen nicht möglich ist
-    \item $id: V \rightarrow \mathbb{N}$ bildet einen Knoten auf dessen ID ab
+    \item $id: V \rightarrow \mathbb{N}$ bildet einen Knoten auf dessen \ac{ID} ab
     \item $\mathbb{S}$ beschreibt die Menge aller Strings
     \item $\nu: V \rightarrow \mathbb{S}$ ist eine Abbildung, bei der einem Knoten ein Name zugewiesen wird
     \item $\tau: O \rightarrow O$ ist eine Funktion, bei der einem Split-Operator der dazugehörige Join-Operator und einem Join-Operator der dazugehörige Split-Operator ausgegeben wird
@@ -74,8 +74,8 @@ $$K = V = E \cup F \cup O$$
 \section{Kellerautomat}
 \label{kellerautomat-definition}
 
-Bei einem Kellerautomaten handelt es sich um ein Berechnungsmodell, was einem nicht-deterministischen Automaten mit $\epsilon$-Kanten ähnelt.
-Der Unterschied zwischen einem $\epsilon$-NEA und einem Kellerautomaten liegt darin, dass der Kellerautomat über einen Kellerspeicher verfügt, um Symbole 
+Bei einem Kellerautomaten handelt es sich um ein Berechnungsmodell, das einem nichtdeterministischen endlichen Automaten (\acs{NEA}) mit $\epsilon$-Kanten ähnelt. \acused{NEA}
+Der Unterschied zwischen einem \acs{NEA} mit $\epsilon$-Kanten und einem Kellerautomaten liegt darin, dass der Kellerautomat über einen Kellerspeicher verfügt, um Symbole 
 aus einem Kelleralphabet zu hinterlegen. Kellerautomaten werden verwendet, um kontextfreie Sprachen zu evaluieren. \cite{hopcroft_einfuhrung_nodate}
 
 \noindent Formal wird ein Kellerautomat $A_K$ als folgendes Tupel definiert:
@@ -93,11 +93,11 @@ Kellerspeicher leer ist. In dieser Arbeit wird bei einem Endzustand akzeptiert.\
 \section{Prozessautomatisierung}
 \label{process-automation-definition}
 
-Gemäß Heinrich und Lutz J. versteht man unter Automatisierung
+Gemäß Heinrich und Roithmayr versteht man unter Automatisierung
 den Vorgang [...] von Arbeitsgängen [...], die ohne unmittelbare menschliche 
 Tätigkeiten ausgeführt werden. \cite{heinrich_wirtschaftsinformatik-lexikon_1989}
 
-\noindent Dumas et al. definieren die Prozessautomatisierung als ``die Konfiguration oder Implementierung eines IT-Systems [...], um den zukünftigen Prozess
+\noindent Dumas et al. definieren die Prozessautomatisierung als ``die Konfiguration oder Implementierung eines \acs{IT}-Systems [...], um den zukünftigen Prozess
 zu unterstützen.'' \cite{dumas_grundlagen_2021}
 
 \noindent Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern (siehe Abschnitt \ref{esp32-definition}).
@@ -117,7 +117,7 @@ sich auf mehrere Prozesse ausdehnt.
 \noindent Aus dieser Definition und der Definition zur Automation lässt sich also schlussfolgern: Automation beschäftigt sich innerhalb eines Prozesses mit der Ausführung eines Schrittes, die Orchestrierung verantwortet
 die Ausführung eines gesamten Prozesses, während die Choreographie sich über mehrere Prozesse hinweg bewegt.
 
-\noindent In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozesschritte gemäß der Modellierung. 
+\noindent In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozessschritte gemäß der Modellierung. 
 
 \section{ARIS-Toolset}
 \label{aris-definition}
@@ -127,8 +127,8 @@ Navigation von Geschäftsprozessen. [...] Die Grundlage für das ARIS-Toolset wi
 Repository-Struktur gelegt, welche sich aus dem Konzept des ARIS-Haus gebildet hat. \cite{scheer_aris_1994} \cite{rump_geschaftsprozesmanagement_1999}
 
 \noindent Nach Leimeister bietet ARIS eine Umsetzung prozessorientierter Organisationsgestaltung [...] an. Der Anspruch liegt dabei auf der 
-Reduktion der Komplexität der Prozessmodellierung durch Spaltung der Unternehmensarchitektur durch die ARIS Methode in fünf 
-Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
+Reduktion der Komplexität der Prozessmodellierung durch Spaltung der Unternehmensarchitektur in fünf 
+Beschreibungssichten durch die \ac{ARIS}: \cite{leimeister_einfuhrung_2015}
 
 \begin{itemize}
     \item Organisationssicht (``[...]Organisationseinheiten der Aufbauorganisation des Unternehmens'')\cite{leimeister_einfuhrung_2015}
@@ -165,29 +165,29 @@ Beschreibungssichten: \cite{leimeister_einfuhrung_2015}
 \section{Eingebettete Systeme}
 \label{embedded-systems-definition}
 
-Nach Hünning und Thaller ist ein eingebettetes System "[...] ein durch Software kontrollierter Computer oder 
+Nach Hüning und Thaller ist ein eingebettetes System "[...] ein durch Software kontrollierter Computer oder 
 Mikroprozessor, der Teil eines größeren Systems ist, dessen primäre Funktion nicht rechenorientiert ist." \cite{huning_eingebettete_2019} \cite{thaller_software-engineering_1997}
 
 \noindent Barr und Massa definieren ein eingebettetes System als eine Kombination aus Computer-Hardware und Software mit zusätzlichen mechanischen und elektronischen Bauteilen,
 um eine spezifische Funktion zu erfüllen. [...] Der Kontrast dazu ist der PC, bei welchem der Hersteller nicht weiß, wofür dieser verwendet wird. [...] ``Eingebettete 
 Systeme sind oft eine Komponente in einem größeren System. Beispielsweise enthalten moderne Autos und LKW's viele eingebettete Systeme. Ein eingebettetes System ist 
-für das ABS zuständig, ein anderes überwacht und steuert die Emissionen des Fahrzeugs, während ein drittes die Informationen dem Nutzer am Cockpit anzeigt.'' \cite{barr_programming_2006}
+für das \acs{ABS} zuständig, ein anderes überwacht und steuert die Emissionen des Fahrzeugs, während ein drittes die Informationen dem Nutzer am Cockpit anzeigt.'' \cite{barr_programming_2006}
 
-\noindent Prozessoren, welche dabei in eingebetteten Systemen verwendet werden, sind Mikroprozessoren, Mikrocontroller und DSP-Chips. \cite{barr_programming_2006} \cite{marwedel_eingebettete_2008} In dieser Arbeit wird ein Mikrocontroller des
+\noindent Prozessoren, welche dabei in eingebetteten Systemen verwendet werden, sind Mikroprozessoren, Mikrocontroller und \ac{DSP}-Chips. \cite{barr_programming_2006} \cite{marwedel_eingebettete_2008} In dieser Arbeit wird ein Mikrocontroller des
 Herstellers Espressif Systems verwendet.
 
 \subsection{ESP32}
 \label{esp32-definition}
 
-Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte WLAN- und Bluetooth-
-Anbindung, GPIO-Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
-Neben den angegebenen Features verfügt der ESP32 über Peripherien wie SPI, I2C, I2S, CAN, UART, etc. \cite{brandes_mikrocontroller_2024}
+Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte \ac{WLAN}- und Bluetooth-
+Anbindung, \ac{GPIO}-Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
+Neben den angegebenen Features verfügt der ESP32 über Peripherien wie \ac{SPI}, \ac{I2C}, \ac{I2S}, \ac{CAN}, \ac{UART}, etc. \cite{brandes_mikrocontroller_2024}
 
 \noindent Den ESP32 kann man mit verschiedenen Programmiersprachen und Werkzeugen programmieren. Entwicklungsmöglichkeiten hierfür sind:
 
 \begin{itemize}
-    \item Arduino-IDE (C/C++)
-    \item ESP-IDF (C/C++)
+    \item Arduino-\ac{IDE} (C/C++)
+    \item \ac{ESP-IDF} (C/C++)
     \item Eclipse mit Konfigurationen zur Entwicklung von ESP32-Firmware 
     \item Micropython mit der uPyCraft-IDE 
     \item Lua mit dem NodeMCU Betriebssystem für den ESP32
@@ -202,7 +202,7 @@ durch entsprechendes Scheduling von Tasks geschieht. \cite{filiz_freertos_2016} 
 \section{Internet of Things}
 \label{internet-of-things-definition}
 
-Es gibt keine eindeutige Definition für Internet of Things (kurz: IoT). Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
+Es gibt keine eindeutige Definition für \ac{IoT}. Das Internet Architecture Board definiert es beispielsweise [...] als eine Menge an zahlreichen
 eingebetteten Geräten, welche Kommunikationsdienste auf der Basis von Internetprotokollen anbieten. Diese Geräte werden gängig als ``Objekte''
 oder ``Smarte Objekte'' bezeichnet. Diese Objekte kommunizieren miteinander und brauchen keinen menschlichen Einfluss. \cite{balas_internet_2019} \cite{tschofenig_architectural_2015} \cite{wendzel_it-sicherheit_2018}
 
@@ -226,12 +226,12 @@ in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014}
 \subsection{CoAP}
 \label{coap-definition}
 
-Gemäß RFC7252 ist CoAP (Constrained Application Protocol) [...] ein spezialisiertes Internettransferprotokoll, welches für eingeschränkte Knoten und Netzwerke genutzt wird.
-Diese Knoten haben meist einen leistungsschwachen Mikrocontroller mit kleinem ROM und RAM. Eingeschränkte Netzwerke sind beispielsweise IPv6 über Low-Power WPAN,
-welche einen typischen Durchfluss von 10s bei 1 kbit/s hat. Das Protokoll ist konzipiert für Maschine-zu-Maschine-Anwendungen wie etwa
+Gemäß RFC7252 ist \ac{CoAP} [...] ein spezialisiertes Internettransferprotokoll, welches für eingeschränkte Knoten und Netzwerke genutzt wird.
+Diese Knoten haben meist einen leistungsschwachen Mikrocontroller mit kleinem \ac{ROM} und \ac{RAM}. Eingeschränkte Netzwerke sind beispielsweise \ac{IPv6} über Low-Power \ac{WPAN},
+welche einen typischen Durchfluss von einigen 10 kbit/s hat. Das Protokoll ist konzipiert für Maschine-zu-Maschine-Anwendungen wie etwa
 Smart-Energy oder Bauautomatisierung. \cite{thaller_software-engineering_1997}\cite{wendzel_it-sicherheit_2018}
-CoAP baut dabei auf UDP auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Ressourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
-Dies wird in RFC7252 auch Resource Discovery genannt. Das verwendete Datenformat zum Austausch ist das Constrained RESTful Environments Link Format, was in RFC 6690 beschrieben wird. \cite{shelby_constrained_2014}
+CoAP baut dabei auf das \ac{UDP} auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Ressourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
+Dies wird in RFC7252 auch Resource Discovery genannt. Das verwendete Datenformat zum Austausch ist das Constrained RESTful Environments Link Format, was in \ac{RFC} 6690 beschrieben wird. \cite{shelby_constrained_2014}
 
 \noindent Die direkte Suche von Ressourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also
 effizienter zu gestalten, gibt es sogenannte Resource Directories, welche Buch führen über Ressourcen auf anderen Servern. Das Format, was dabei genutzt wird, entspricht auch RFC6690. \cite{amsuss_constrained_2022}
@@ -264,21 +264,21 @@ Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_c
     \label{fig:coap-paket}
 \end{figure}
 
-\noindent Im Vergleich zu HTTP, bei dem die Anfrage mit der bestehenden Verbindung beantwortet wird, setzt CoAP das Request/Response Pattern durch Nachrichten um, bei dem die Anfrage und die Antwort separate asynchrone UDP-Nachrichten sind, deren
+\noindent Im Vergleich zu \ac{HTTP}, bei dem die Anfrage mit der bestehenden Verbindung beantwortet wird, setzt CoAP das Request/Response Pattern durch Nachrichten um, bei dem die Anfrage und die Antwort separate asynchrone UDP-Nachrichten sind, deren
 Zugehörigkeiten durch Tokens geregelt werden. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
 ``stop-and-wait retransmission'' bei confirmable Nachrichten verwendet. \cite{shelby_constrained_2014} Das bedeutet, dass man beim Absenden für jeden gesendeten Frame auf eine Acknowledge Nachricht wartet, um weiterzusenden. Erhält man diese
-Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response Schicht realisiert ein REST-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
-entwickeln und nicht streng ressourcenorientiert wie bei REST. \cite{burke_restful_2013} Dabei werden Ressourcen und Dienste ähnlich zu REST mit URIs realisiert und auch sind die Status-Codes angelehnt an HTTP mit 2.xx für eine erfolgreiche Übertragung, 4.xx für clientseitigen und 5.xx für 
+Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response Schicht realisiert ein \ac{REST}-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
+entwickeln und nicht streng ressourcenorientiert wie bei \ac{REST}. \cite{burke_restful_2013} Dabei werden Ressourcen und Dienste ähnlich zu \ac{REST} mit \acp{URI} realisiert und auch sind die Status-Codes angelehnt an \ac{HTTP} mit 2.xx für eine erfolgreiche Übertragung, 4.xx für clientseitigen und 5.xx für 
 serverseitigen Fehler.
 
 \subsection{MQTT}
 \label{mqtt-definition}
 
-Wendzel definiert MQTT als ein Protokoll, was auch in resourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish Subscribe Architektur, wodurch
+Wendzel definiert \ac{MQTT} als ein Protokoll, was auch in ressourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish Subscribe Architektur, wodurch
 Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, welche die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
 Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Vermittler zwischen dem Publisher und den Subscribern. Damit hier Nachrichten auch an die gewünschten Geräte versendet werden, werden 
 Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscriber'' \cite{brandes_mikrocontroller_2024}. Publisher und Subscriber haben keine Kenntnis voneinander und sind auf einer logischen Ebene entkoppelt. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008} Die Architektur von MQTT wird vereinfacht in Abbildung \ref{fig:mqtt-architektur} dargestellt. 
-Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines Quality of Service (kurz: QoS) möglich.\cite{brandes_mikrocontroller_2024}
+Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines \ac{QoS} möglich.\cite{brandes_mikrocontroller_2024}
 
 
 \begin{figure}[H]
@@ -296,13 +296,13 @@ Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung s
 Unter einem Socket versteht man eine "Verallgemeinerung des Mechanismus für den Dateizugriff unter UNIX, das einen Endpunkt für die Kommunikation bereitstellt.
 [...] Der wesentliche Unterschied zwischen Datei- und Socket-Deskriptoren besteht darin, dass das Betriebssystem einen Datei-Deskriptor an eine bestimmte Datei
 oder ein bestimmtes Gerät bindet,[...], aber es kann Sockets erstellen, ohne sie an bestimmte Zieladressen binden zu müssen. Die Applikation kann jedes Mal, wenn sie das 
-Socket nutzt [...], eine Zieladresse angeben[...] (z.B. wenn eine TCP-Verbindung aufgebaut wird)" \cite{comer_tcpip_2003} Nach Inden bieten Sockets dabei eine streambasierte
+Socket nutzt [...], eine Zieladresse angeben[...] (z.B. wenn eine \ac{TCP}-Verbindung aufgebaut wird)" \cite{comer_tcpip_2003} Nach Inden bieten Sockets dabei eine streambasierte
 Kommunikationsmöglichkeit, um Daten bidirektional zu übertragen. \cite{inden_weg_2020}
 
 \section{WebSockets}
 \label{websocket-definition}
 
 Gemäß RFC6455 versteht man unter WebSockets ein Kommunikationsprotokoll, das Browser basierten Anwendungen
-eine bidirektionale Verbindung zum Server ermöglicht. Diese wurden davor mit mehreren HTTP-Anfragen realisiert, 
-während WebSockets mittels eines Handshakes via HTTP, eine WebSocket Verbindung anfragt und man nach erfolgreichem 
+eine bidirektionale Verbindung zum Server ermöglicht. Diese wurden davor mit mehreren \ac{HTTP}-Anfragen realisiert, 
+während WebSockets mittels eines Handshakes via \ac{HTTP}, eine WebSocket Verbindung anfragt und man nach erfolgreichem 
 Handshake eine bidirektionale Verbindung aufgebaut hat. \cite{fette_websocket_2011}
