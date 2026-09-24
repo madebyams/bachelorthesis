@@ -1,32 +1,77 @@
 \chapter{Fazit}
 \label{fazit}
 
-Wie im vorigen Kapitel schon erwähnt, wurden die Ziele der einheitlichen Anbindung und Ansteuerung heterogener Systeme, prozesseinhaltenden Produktionen und der transparenten Aufbereitung des Produktionsprozesses für alle Stakeholder (siehe Kapitel \ref{motivation-und-zielsetzung}) zum Großteil erreicht. Es wurde aus einem
-Prozessmodell, welches den Soll-Zustand eines Prozesses aufzeigt, ein ausführbarer Ablaufplan in Form eines Ausführungsmodells erzeugt. Dieses kann zur Entwicklung von Firmware und 
-der daraufhin folgenden Orchestrierung von IoT-Geräten mit der programmierten Firmware verwendet werden. 
+In der industriellen Praxis besteht eine Lücke zwischen dem modellierten Soll-Prozess und 
+seiner tatsächlichen Ausführung: Prozessmodelle dienen der Dokumentation und Analyse, 
+steuern die Produktion jedoch nicht selbst. Ziel dieser Arbeit war es daher, ein 
+Prozessmodell direkt zur Grundlage der Ausführung auf IoT-Geräten zu machen, um 
+heterogene Anlagen einheitlich anzubinden, eine prozesseinhaltende Produktion zu 
+ermöglichen und den Produktionsprozess für alle Stakeholder transparent aufzubereiten 
+(siehe Kapitel~\ref{motivation-und-zielsetzung}).
+
+\section{Zusammenfassung der Arbeit}
+
+Hierzu wurde zunächst ein formales Prozessmodell auf Basis azyklischer EPKs sowie ein 
+Ausführungsmodell definiert, das Funktionen und Ereignisse als ausführbare Schritte und 
+die Verknüpfungsoperatoren als Kontrollstrukturen abbildet. Ein eigens entwickelter 
+Compiler validiert EPK-Modelle mithilfe eines Kellerautomaten und übersetzt sie in dieses 
+Ausführungsmodell. Eine Execution-Engine arbeitet das Ausführungsmodell schrittweise ab 
+und ruft jeden Prozessschritt über eine einheitliche CoAP-Schnittstelle auf einem 
+ESP32-Mikrocontroller auf. Aus demselben Modell wird ein Firmware-Grundgerüst für den 
+Mikrocontroller generiert, sodass Entwickler nur noch die anlagenspezifische Logik 
+implementieren müssen. Die Ausführung wird live im Prozessmodell animiert und in einem 
+Ereignisprotokoll aufgezeichnet, das sich für Process-Mining-Analysen exportieren lässt. 
+Alle Komponenten wurden prototypisch in die Prozessverwaltungsplattform ARIS integriert.
+
+\section{Ergebnisse}
+
+Der Prototyp wurde anhand eines Versuchsaufbaus validiert, in dem ein ESP32 zwei 
+Modellanlagen zum Bau eines Bauklötzchenhauses steuert. Drei Prozessvarianten wurden 
+jeweils fünfmal ausgeführt; in allen Durchläufen wählte die Execution-Engine an den 
+XOR-Verzweigungen den zum Anlagenzustand passenden Pfad 
+(siehe Tabelle~\ref{tab:eventlog-varianten}). Das exportierte Ereignisprotokoll ließ sich 
+ohne weitere Aufbereitung in ARIS Process Mining auswerten. Die Latenz der einzelnen 
+CoAP-Anfragen lag überwiegend im Bereich von etwa 15 bis 75 Millisekunden; lediglich die 
+erste Funktionsausführung benötigte mit rund 2,5 Sekunden deutlich länger 
+(siehe Tabelle~\ref{tab:latenzmessung}).
+
+\noindent Von den sechs in Kapitel~\ref{analyse-und-konzeption} definierten User-Stories 
+wurden fünf erfüllt; lediglich die Information von Kunden über eine eigene Sicht wurde 
+nicht umgesetzt (siehe Abschnitt~\ref{requirements-check}). Damit wurden alle drei 
+übergeordneten Ziele zu einem Großteil erreicht (siehe Abschnitt~\ref{reflection}): Anlagen 
+lassen sich einheitlich anbinden, die Produktion folgt nachweislich dem modellierten 
+Prozess, und der Prozessverlauf ist sowohl live als auch nachträglich nachvollziehbar.
+
+\section{Einschränkungen und Praxistauglichkeit}
+
+Die Arbeit zeigt, dass sich die Lücke zwischen Prozessmodell und Ausführung softwareseitig 
+schließen lässt und darüber hinaus ein Rahmen entsteht, in dem Firmware direkt entlang von 
+Geschäftsprozessen entwickelt wird. Der Prototyp unterliegt jedoch Einschränkungen: Es 
+werden nur azyklische Prozessmodelle unterstützt, die Kommunikationswege sind noch nicht 
+abgesichert, und die Live-Animation kann mit der Ausführungsgeschwindigkeit der Hardware 
+nicht immer Schritt halten. Für den praktischen Einsatz liegt die größte Hürde auf der 
+Hardwareseite: Bestehende Anlagen müssen über eine Schnittstelle verfügen, an die ein 
+Mikrocontroller angebunden werden kann. Standardisierte Schnittstellen, wie sie etwa mit 
+CAN in der Automobilindustrie etabliert sind \cite{noauthor_road_2024} 
+\cite{hristu-varsakelis_vehicle_2005}, würden diese Integration deutlich erleichtern.
 
 \section{Ausblick}
 
-Neben der Umsetzung der Lösungen der kritischen Punkte gibt es die folgenden möglichen Aussichten für das Resultat dieser Arbeit:
+Neben der Behebung der genannten Einschränkungen, insbesondere der Unterstützung zyklischer 
+Prozessmodelle und der Absicherung der Kommunikation über TLS und DTLS, ergeben sich 
+folgende Weiterentwicklungsmöglichkeiten:
 
-\subsection{Modularisierung durch Einführung von unterschiedlichen Notationsfrontends, Zielbackends und Eventloggingformaten}
+\subsection{Modularisierung durch weitere Notationen, Plattformen und Zielsysteme}
 
-Aktuell unterstützt der Prototyp die EPK-Notation, läuft auf ARIS und generiert Code für den ESP32. Jedoch können auch Frontends für andere Notationen
-wie BPMN oder BPMN-2.0 entwickelt werden und auch kann man für unterschiedliche Prozessverwaltungsplattformen das passende Backend entwickeln.
-Neben diesen zwei Aspekten kann auch die Codegenerierung für weitere Mikrocontroller wie Arduino oder STM32 ausgeweitet werden. Auch kann das Logging der
-Ausführung in anderen Formaten umgesetzt werden, sodass weitere Auswertungen auf Basis dieser Daten durchgeführt werden können.
+Der Prototyp unterstützt derzeit die EPK-Notation, läuft auf ARIS und generiert Code für 
+den ESP32. Durch zusätzliche Frontends ließen sich weitere Notationen wie BPMN anbinden, 
+durch zusätzliche Backends andere Prozessverwaltungsplattformen. Ebenso kann die 
+Codegenerierung auf weitere Mikrocontroller wie Arduino oder STM32 und das Ereignisprotokoll 
+auf weitere Formate ausgeweitet werden, um zusätzliche Auswertungen zu ermöglichen.
 
-\subsection{Open-Sourcing des Ausführungsmodells, Codegeneration, Event-Logging und Live-Monitoring}
+\subsection{Veröffentlichung als Open Source}
 
-Der Eigenanteil dieser Arbeit ist der Compiler, das Ausführungsmodell sowie die Codegenerierung und das Live-Monitoring. Dadurch, dass es sehr viel Potenzial gibt, das Ganze weiter
-auszubauen, ist es sinnvoll, diese Anteile (mit Ausnahme der ARIS-Komponenten) der Öffentlichkeit zugänglich zu machen, um die Automatisierung und Orchestrierung von industriellen Geschäftsprozessen
-durch Open-Source-Entwicklung voranzutreiben.
-
-\section{Praxistauglichkeit}
-
-Durch die Arbeiten in Kapitel \ref{related-work} hat man schon gesehen, dass Prozesse automatisiert werden und somit die Lücke zwischen Prozessmodellierung und tatsächlicher Ausführung geschlossen werden kann. Jedoch legt diese Arbeit auch neben dieser Prozessautomatisierung ein Rahmenwerk fest,
-sodass Software gemäß von Geschäftsprozessen entwickelt werden kann. Diese prozessorientierte Softwareentwicklung kann in der Praxis sehr sinnvoll sein und durch Vereinfachung von Entwicklungsprozessen und 
-Lösungen wie Codegenerierung ist es umsetzbar. Kritisch kann es jedoch werden bei der Aufrüstung der industriellen Komponenten, da hier Anbindungen gemacht werden müssen zwischen der Anlage und dem Mikrocontroller, 
-für eine Verbindung zwischen ARIS und den Anlagen, wie in Abschnitt \ref{reflection} angesprochen. Es ist also zusammenfassend softwareseitig umsetzbar, jedoch kann es auf der Hardwareseite zu Schwierigkeiten kommen. Sei es durch Inkompatibilität
-oder einfach der fehlenden Möglichkeit der Anbindung an die Anlage. Es benötigt Anlagen mit Peripherien oder einer Schnittstelle, um einen Mikrocontroller zu integrieren. Hierbei kann man sich ein Beispiel an
-Peripherien wie CAN aus der Automobilindustrie nehmen, welche zur Realisierung von \ac{OBD} verwendet wird. \cite{noauthor_road_2024} \cite{hristu-varsakelis_vehicle_2005}
+Der Eigenanteil dieser Arbeit umfasst den Compiler, das Ausführungsmodell, die 
+Codegenerierung sowie das Live-Monitoring. Eine Veröffentlichung dieser Komponenten 
+(ohne die ARIS-spezifischen Teile) als Open Source könnte die modellgetriebene 
+Automatisierung und Orchestrierung industrieller Geschäftsprozesse weiter voranbringen.

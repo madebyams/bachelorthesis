@@ -10,8 +10,8 @@ des Entwurfes sowie der Umsetzung traf.
 
 \section{Evaluationsmethodik und Kriterien}
 
-Die Evaluierung findet anhand von Akzeptanzkriterien statt. Hierfür werden zunächst die Anforderungen 
-aufgesetzt durch User-Stories, deren Akzeptanzkriterien durch eine Definition of Done definiert werden.
+Die Evaluierung erfolgt anhand der in Kapitel \ref{analyse-und-konzeption} definierten User-Stories. 
+Für jede User-Story wird geprüft, ob ihre Akzeptanzkriterien (Definition of Done) erfüllt sind.
 
 \subsection{Erfüllung der Geschäftsanforderungen}
 \label{requirements-check}
@@ -26,7 +26,7 @@ dieser User-Stories zu evaluieren, muss man die Definition of Done der User-Stor
     $\to$ Definitions of Done:
 
     \begin{itemize}
-        \item Man kann aus einem EPK-Prozessmodell eine Schablone erstellen zur Entwicklung von Firmwarecode.
+        \item Aus einem EPK-Prozessmodell lässt sich eine Schablone zur Entwicklung von Firmwarecode erstellen.
         \item Die Schablone lässt sich fehlerfrei kompilieren.
     \end{itemize}
 
@@ -42,14 +42,14 @@ dieser User-Stories zu evaluieren, muss man die Definition of Done der User-Stor
 
     \begin{itemize}
         \item Ein EPK-Modell lässt sich in das Ausführungsformat übersetzen.
-        \item Das Ausführungsformat wird gemäß des EPK-Modells ausgeführt.
-        \item Am Ende einer Ausführung hat man Zugang zu einem Ausführungsbericht.
+        \item Das Ausführungsformat wird gemäß dem EPK-Modell ausgeführt.
+        \item Am Ende einer Ausführung steht ein Ausführungsbericht zur Verfügung.
     \end{itemize}
 
-    $\to$ Dadurch, dass der Firmwarecode sich an dem Prozessmodell orientiert und die Orchestrierung gemäß des Prozessgraphen 
+    $\to$ Dadurch, dass der Firmwarecode sich an dem Prozessmodell orientiert und die Orchestrierung gemäß dem Prozessgraphen 
     stattfindet, ist diese Anforderung erfüllt. Auch ist die Messbarkeit durch sowohl die Schnittstelle in Abschnitt \ref{coap-interface} 
-    als auch durch das Logging gegeben. Die Umsetzung in dieser Arbeit ist jedoch für eine eingeschränkte Version von EPK umgesetzt worden.
-    Dieses kann man aber auch einbauen durch Tracking von Schleifen.
+    als auch durch das Logging gegeben. Die Umsetzung beschränkt sich allerdings auf azyklische EPK-Modelle.
+    Eine Unterstützung zyklischer Modelle ist durch eine Erweiterung um Schleifen möglich (siehe Abschnitt \ref{process-model-limitations}).
 
     \item Ich als \textbf{Controller} möchte \textbf{laufende Prozesse überwachen}, sodass \textbf{die Effizienz von Geschäftsprozessen 
     gemessen und optimiert werden kann}.
@@ -57,7 +57,7 @@ dieser User-Stories zu evaluieren, muss man die Definition of Done der User-Stor
     $\to$ Definitions of Done:
 
     \begin{itemize}
-        \item Die Ausführung eines Prozessdurchlaufs lässt sich auf der Prozesssicht visuell mitverfolgen.
+        \item Die Ausführung eines Prozessdurchlaufs lässt sich in der Prozesssicht visuell mitverfolgen.
     \end{itemize}
 
     $\to$ Die Implementierung des Livestreamings während der Ausführung eines Prozesses erlaubt eine Überwachung der laufenden Prozesse, sodass 
@@ -69,8 +69,8 @@ dieser User-Stories zu evaluieren, muss man die Definition of Done der User-Stor
     $\to$ Definitions of Done:
 
     \begin{itemize}
-        \item Nach einer Ausführung ist es möglich einen Ausführungsbericht zu generieren.
-        \item Dieser Ausführungsbericht ist in einem Format, welches verwendet werden kann, um Engpässe zu ermitteln.
+        \item Nach einer Ausführung ist es möglich, einen Ausführungsbericht zu generieren.
+        \item Dieser Ausführungsbericht liegt in einem Format vor, mit dem sich Engpässe ermitteln lassen.
     \end{itemize}
 
     $\to$ Dadurch, dass die einzelnen Ausführungsschritte geloggt werden, bekommt man so den Verlauf der vergangenen Prozesse. Durch Informationen wie 
@@ -90,17 +90,17 @@ dieser User-Stories zu evaluieren, muss man die Definition of Done der User-Stor
     die Live-Daten an den Kunden zu übermitteln, sodass dieser auch über den aktuellen Stand der Produktion informiert ist.
     
     \item Ich als \textbf{Administrator} möchte \textbf{ein wartbares IoT-System haben}, sodass \textbf{im Falle eines Ausfalls schnell reagiert
-    werden kann, um den Produktionsfluss nicht stark zu beeinträchtigen}.
+    werden kann, um den Produktionsfluss nicht zu stark zu beeinträchtigen}.
 
     $\to$ Definitions of Done:
 
     \begin{itemize}
-        \item Es ist möglich die Prozesshardware einfach auszutauschen, ohne das gesamte System zu beeinflussen.
-        \item Durch Ausführungsberichte ist es möglich die fehlerhafte Hardware schnell ausfindig zu machen.
+        \item Die Prozesshardware lässt sich einfach austauschen, ohne das gesamte System zu beeinflussen.
+        \item Anhand der Ausführungsberichte lässt sich fehlerhafte Hardware schnell ausfindig machen.
     \end{itemize}
 
     $\to$ Der generierte Code ist für ESP32-Mikrocontroller konzipiert. Im Falle eines Ausfalls kann durch das Livestreaming und Logging erfasst werden, an welcher 
-    Stufe der Ausfall stattfand. Durch einen Lookup in der Resource-Directory kann man dann den Mikrocontroller ermitteln, welcher für den Ausfall verantwortlich war. 
+    Stufe der Ausfall stattfand. Durch einen Lookup im Resource-Directory kann man dann den Mikrocontroller ermitteln, welcher für den Ausfall verantwortlich war. 
     Die entsprechende Firmware kann auf einen neuen ESP32-Mikrocontroller geladen und mit dem defekten Mikrocontroller ausgetauscht werden, falls der Mikrocontroller 
     die Fehlerquelle war. Aber auch im Falle, dass der Mikrocontroller nicht die Fehlerquelle ist, kann durch den Ausführungsbericht die Fehlerquelle erfasst werden, was das Suchen von Fehlern 
     erleichtert und man effizient und schnell auf Ausfälle reagieren kann. Damit kann der Produktionsfluss schneller wiederhergestellt werden.
@@ -118,7 +118,7 @@ Der Schaltplan des Hardwaremodellaufbaus, der den Prozess ausführen soll, wird 
     \label{fig:brick-house-diagram}
 \end{figure}
 
-\noindent Beim Modellaufbau dient der ESP32 zum Empfang und der Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit
+\noindent Beim Modellaufbau dient der ESP32 zum Empfang und zur Weitergabe der Befehle, welche von ARIS über CoAP vermittelt werden. Dieser ESP32 kommuniziert mit
 2 Arduino-Unos, welche jeweils einen HC-SR04-Abstandssensor und einen MS-18-Servomotor haben. Der HC-SR04-Sensor ist zur Erkennung von Objekten (in diesem
 Fall die Existenz eines Bauklotzes), während der MS-18 zur Platzierung verwendet wird. Die Kommunikation zwischen dem ESP und den Arduino-Unos
 erfolgt über \ac{I2C}.
@@ -126,7 +126,7 @@ erfolgt über \ac{I2C}.
 \noindent Als Nächstes wird der Prozess mittels EPK modelliert. Die Modellierung ist unter Abbildung \ref{fig:brick-house-epk-diagram} vorzufinden.
 
 \noindent Dieser Aufbau soll die Verwendung in der Industrie zeigen: 
-Eine schon vorhandene Anlage (Das System aus Arduino-Uno mit dem Sensor und Aktor) wird an das Prozessfrontend (ARIS) über ein Modul angebunden (ESP32), welches 
+Eine schon vorhandene Anlage (das System aus Arduino-Uno mit dem Sensor und Aktor) wird an das Prozessfrontend (ARIS) über ein Modul angebunden (ESP32), welches 
 die Orchestrierung ermöglicht. Die Abbildungen \ref{fig:versuchsaufbau-1} bis \ref{fig:versuchsaufbau-5} zeigen Bilder des Versuchsaufbaus.
 
 \begin{figure}[H]
@@ -182,11 +182,11 @@ Diese wird in ESP-IDF-Komponenten aufgeteilt. Dabei ist jede einzelne Komponente
 ein Prozessschritt.
 
 \noindent Neben der Firmware des ESP32 muss auch die Firmware der Unos programmiert werden. Dies geschieht ebenfalls mit C++ über das
-PlatformIO-Framework, da diese den Build-Prozess wesentlich erleichtert und auch Möglichkeiten bietet, die Firmware auch mit Continuous Integration
+PlatformIO-Framework, da dieses den Build-Prozess wesentlich erleichtert und auch Möglichkeiten bietet, die Firmware auch mit Continuous Integration
 zu testen.
 
 \noindent Diese Trennung von Anlage und Orchestrierungsmodul ermöglicht ein modulares System, bei dem jede Komponente ihre eigene Verantwortung hat. Dies ermöglicht auch
-einfachere Erweiterbarkeit von Funktionen, ohne dass der Netzwerk- und Protokollcode sich mit dem Code zur Anlagensteuerung vermischt. Dies nennt man auch
+eine einfachere Erweiterung von Funktionen, ohne dass der Netzwerk- und Protokollcode sich mit dem Code zur Anlagensteuerung vermischt. Dies nennt man auch
 Separation of Concerns.
 
 \noindent Die \ac{I2C}-Kommunikation zwischen dem ESP32 und dem Arduino-Uno wird gemäß der Abbildung \ref{fig:i2c-esp32-arduino-uno} durchgeführt.
@@ -226,25 +226,24 @@ Separation of Concerns.
 \subsection{Ausführung des Automationsprozesses}
 \label{ausfuehrung-des-automationsprozesses}
 
-Dadurch, dass die Firmware entwickelt wurde, kann bei ARIS der Prozess gestartet werden. Dieser hat schon beim Programmstart eine Hash-Map aller verfügbaren Ressourcen
-gemäß der Resource-Directory erstellt. Hierbei ist der Schlüssel die ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID und der Wert ist die URL
+Nachdem die Firmware entwickelt wurde, kann bei ARIS der Prozess gestartet werden. Dieser hat schon beim Programmstart eine Hash-Map aller verfügbaren Ressourcen
+gemäß dem Resource-Directory erstellt. Hierbei ist der Schlüssel die ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID und der Wert ist die URL
 zur Ressource. Dies ist meist die IP-Adresse des Mikrocontrollers mit den ersten 15 Zeichen der SHA256-Prüfsumme der ARIS-Objekt-ID als Pfad. Dadurch, dass
 es eine lokale Kopie des Resource-Directory schon gibt, muss also kein CoAP-Aufruf an das Resource Directory gemacht werden, was die Ausführung des Prozesses wesentlich
-beschleunigt. Die Rückverfolgung ist sehr schnell, da sie versucht, mit der Ausführung des ESP auf der Hardware mitzukommen. Da diese aber sehr schnell ist, ist es oft
-ein schnelles Herunterschnellen der Animation. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es auch eine Latenz durch das Netzwerk. Dies ist anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen, wobei die erste Funktion (``Baue Geschoss'') mit 2484 Millisekunden die meiste Zeit bei der Übertragung benötigte. Die Vermutung liegt dabei nahe, dass die Initialisierung von Strukturen für die \ac{I2C} Kommunikation zwischen dem ESP32 und den Modellanlagen ein Grund sein könnte. Auch werden
-lokale IP-Adressen der Hardware auf dem Resource-Directory hinterlegt. Dadurch muss sich der Rechner mit der ARIS-Instanz im selben Netzwerk befinden wie die Hardware.
-Jedoch könnte man hier durch Tunneling arbeiten, wo alle Geräte sich in einem virtuellen Netzwerk befinden \cite{penaflor_rey_designing_2022} \cite{dymora_performance_2014}. Auch die Entscheidungsfindung läuft passend. Bei dem XOR
+beschleunigt. Die Animation kann mit der Ausführungsgeschwindigkeit der Hardware nicht Schritt halten, sodass mehrere Prozessschritte in kurzer Folge aufleuchten. Dies ist auch eine Schwäche der Implementierung. Darüber hinaus gibt es auch eine Latenz durch das Netzwerk. Dies ist anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen, wobei die erste Funktion (``Baue Geschoss'') mit 2484 Millisekunden die meiste Zeit bei der Übertragung benötigte. Die Vermutung liegt dabei nahe, dass die Initialisierung von Strukturen für die \ac{I2C}-Kommunikation zwischen dem ESP32 und den Modellanlagen ein Grund sein könnte. Auch werden
+lokale IP-Adressen der Hardware auf dem Resource-Directory hinterlegt. Dadurch muss sich der Rechner mit der ARIS-Instanz im selben Netzwerk wie die Hardware befinden.
+Jedoch könnte man hier Tunneling einsetzen, sodass sich alle Geräte in einem virtuellen Netzwerk befinden \cite{penaflor_rey_designing_2022} \cite{dymora_performance_2014}. Auch die Entscheidungsfindung entspricht dem modellierten Prozess. Bei dem XOR
 zur Überprüfung des Aufbaus des Geschosses werden die passenden Pfade verwendet (der ``Geschoss nicht eingebaut''-Pfad bei fehlendem Geschoss und der Aufbau des Daches bei aufgebautem Geschoss).
-Es wird also prozessgetreu ausgeführt.
+Der Prozess wird also modellgetreu ausgeführt.
 
 \noindent Es wurden mehrere Szenarien ausprobiert: ``Geschoss nicht eingebaut'', ``Geschoss eingebaut'' und ``Geschoss und Dach eingebaut''. Jedes Szenario wurde fünfmal durchlaufen, um konsistente Ergebnisse
-zu erhalten (siehe Tabelle \ref{tab:eventlog-varianten}). Es wurden die entsprechenden Pfade genommen. Am Ende konnte man den Ausführungsbericht als CSV-Datei exportieren. Dieser wurde in das Process-Mining einer ARIS-Cloudinstanz eingespeist und man erhält
-Daten wie Aktivitäten pro Durchlauf, Durchlaufanzahl, Aktivitäten pro Tag sowie eine durchschnittliche Durchlaufzeit. Bildschirmfotos der Process-Mining-Sichten sind unter Abbildung \ref{fig:process-mining-overview} und
-Abbildung \ref{fig:process-mining-overview-2} in der Anlage zu finden.
+zu erhalten (siehe Tabelle \ref{tab:eventlog-varianten}). Die jeweils erwarteten Pfade wurden ausgeführt. Anschließend konnte der Ausführungsbericht als CSV-Datei exportiert werden. Dieser wurde in das Process-Mining einer ARIS-Cloudinstanz eingespeist, wodurch
+Daten wie Aktivitäten pro Durchlauf, Durchlaufanzahl, Aktivitäten pro Tag sowie eine durchschnittliche Durchlaufzeit gewonnen werden konnten. Bildschirmfotos der Process-Mining-Sichten sind unter Abbildung \ref{fig:process-mining-overview} und
+Abbildung \ref{fig:process-mining-overview-2} im Anhang zu finden.
 
-\noindent Aus Abbildung \ref{fig:process-mining-overview} (siehe Anlage) ist zu erkennen, dass bei diesem Versuchsaufbau eine durchschnittliche Durchlaufzeit von 38,67 Sekunden vorliegt. 
+\noindent Aus Abbildung \ref{fig:process-mining-overview} (siehe Anhang) ist zu erkennen, dass bei diesem Versuchsaufbau eine durchschnittliche Durchlaufzeit von 38,67 Sekunden vorliegt. 
 Diese Durchlaufzeit wird von ARIS Process Mining berechnet. Welche Zeitanteile genau darin sind, lässt sich von außen nicht nachvollziehen. Die reinen Kommunikationszeiten liegen gemäß 
-Tabelle \ref{tab:latenzmessung} (siehe Anlage) deutlich darunter.
+Tabelle \ref{tab:latenzmessung} (siehe Anhang) deutlich darunter.
 
 \begin{table}[H]
   \centering
@@ -283,26 +282,55 @@ Tabelle \ref{tab:latenzmessung} (siehe Anlage) deutlich darunter.
 
 \section{Diskussion}
 
-Nach der Validierung und den daraus resultierenden Ergebnissen kann man deuten, dass die Ziele größtenteils erreicht wurden. Nichtsdestotrotz gibt es einige Hürden und auch Aspekte, welche noch keine vollständige Erfüllung 
-der anfangs in Kapitel \ref{motivation-und-zielsetzung} erwähnten Ziele aufzeigt. Diese werden im Folgenden beschrieben.
+Nach der Validierung und den daraus resultierenden Ergebnissen lässt sich festhalten, dass die Ziele größtenteils erreicht wurden. Nichtsdestotrotz gibt es einige Hürden und auch Aspekte, die noch keine vollständige Erfüllung 
+der anfangs in Kapitel \ref{motivation-und-zielsetzung} erwähnten Ziele aufzeigen. Diese werden im Folgenden beschrieben.
 
 \subsection{Einschränkungen des Prozessmodells}
+\label{process-model-limitations}
 
-Das Prozessmodell, welches in dem Kapitel \ref{grundlagen-und-theoreitscher-rahmen} und Kapitel \ref{systemdesign-und-spezifikation} definiert wurde, deckt zwar schon einen Großteil an EPK-Modellen ab.
+Das Prozessmodell, das in Kapitel \ref{grundlagen-und-theoreitscher-rahmen} und Kapitel \ref{systemdesign-und-spezifikation} definiert wurde, deckt zwar schon einen Großteil der EPK-Modelle ab.
 Jedoch gibt es in der Praxis auch Prozessmodelle mit Zyklen, welche durch die azyklische Eigenschaft des Modells in dieser Arbeit nicht abgedeckt werden. Dafür muss zum einen das Ausführungsmodell aus Abschnitt 
 \ref{ausfuehrungsmodell} um eine Schleifenstruktur erweitert werden und zum anderen muss der Compiler (siehe Abschnitt \ref{epk-compiler}) den Zyklus entsprechend in eine Schleife übersetzen.
 
 \section{Reflexion des Projekts im Hinblick auf Zielsetzung}
 \label{reflection}
 
+Im Folgenden wird für jedes der drei übergeordneten Ziele aus 
+Kapitel~\ref{motivation-und-zielsetzung} betrachtet, inwieweit es durch die umgesetzten 
+Arbeitsziele erreicht wurde. Die Integration in ARIS (AZ8) und die Validierung am 
+Versuchsaufbau (AZ9) bilden dabei die gemeinsame Grundlage für alle drei Ziele.
 
-Durch die Codegenerierung wurde das Ziel der einheitlichen Anbindung und Ansteuerung von heterogenen Systemen (siehe Kapitel \ref{motivation-und-zielsetzung}) praktisch demonstriert, da man Anlagen nun mit einem ESP32 verbinden und somit eine direkte Anbindung an die Prozessverwaltungsplattform und somit auch an die Orchestrierungsschicht hat. Ein kritischer Punkt in dieser Hinsicht ist jedoch, dass Personal für diese Features geschult werden muss bzw. die Systeme, welche dieses Feature nutzen möchten, dementsprechende Updates
-durchführen müssen. Auch kommt noch die Umrüstung der Industrieanlagen dazu, bei der die Anlagen auch über eine Schnittstelle verfügen müssen, um mit dem ESP32 verbunden zu werden. Da wäre es am besten, auf andere Mikrocontroller zu schauen, welche zu den Umständen und verfügbaren Schnittstellen der entsprechenden Anlage passen. Dabei muss diese Alternative aber auch eine Möglichkeit besitzen, sich mit dem Internet zu verbinden, um mit der Orchestrierungsschicht der Prozessplattform zu kommunizieren.
+\noindent \textbf{Einheitliche Anbindung und Ansteuerung heterogener Systeme.} 
+Durch die Definition einer einheitlichen CoAP-Schnittstelle (AZ1) und die automatische 
+Generierung des Firmware-Grundgerüsts (AZ2) wurde dieses Ziel praktisch demonstriert: 
+Anlagen lassen sich über einen ESP32 direkt an die Prozessverwaltungsplattform und damit 
+an die Orchestrierungsschicht anbinden. Kritisch ist jedoch, dass Personal für diese 
+Funktionen geschult werden muss und bestehende Systeme entsprechend aktualisiert werden 
+müssen. Hinzu kommt die Umrüstung der Industrieanlagen, die über eine geeignete 
+Schnittstelle zum Mikrocontroller verfügen müssen. Je nach vorhandenen Schnittstellen 
+der Anlage sollten daher auch andere Mikrocontroller in Betracht gezogen werden, sofern 
+diese eine Netzwerkanbindung zur Orchestrierungsschicht ermöglichen.
 
-\noindent Die Orchestrierungsschicht der Prozessverwaltungsplattform ARIS erfüllt das Ziel der Prozesseinhaltung einer Produktion (siehe Kapitel \ref{motivation-und-zielsetzung}). Durch das schrittweise Durchlaufen und Versenden der Befehle gemäß des Prozessmodells wird dies sichergestellt.
-Hierbei sollte aber darauf geachtet werden, dass eine stabile Netzwerkverbindung besteht, um Latenzen zu verringern und somit ein flüssiges Produktionsgeschehen zu ermöglichen.
+\noindent \textbf{Prozesseinhaltende Produktion.} 
+Dieses Ziel wurde durch das formal definierte Prozess- und Ausführungsmodell (AZ3), den 
+EPK-Compiler (AZ4) und die Execution-Engine (AZ5) erreicht. Da die Befehle schrittweise 
+gemäß dem Prozessmodell an die Anlagen versendet und Verzweigungen anhand der 
+Rückgabewerte aufgelöst werden, läuft die Produktion so ab, wie sie modelliert wurde. 
+Voraussetzung ist allerdings eine stabile Netzwerkverbindung, um Latenzen gering zu 
+halten und ein flüssiges Produktionsgeschehen zu ermöglichen.
 
-\noindent Durch die Live-Animation der Ausführung sowie dem Ausführungsbericht (Event-Log) wurde das Ziel der transparenten Aufbereitung des Produktionsprozesses (siehe Kapitel \ref{motivation-und-zielsetzung}) zu einem Großteil abgedeckt. Während der Ausführungsbericht hierbei eine Übersicht der abgeschlossenen Prozesse bietet, hat die Live-Animation der Ausführung eine Schwäche. Wie in Abschnitt \ref{ausfuehrung-des-automationsprozesses} beschrieben wurde, schnellt die Ausführung herunter. Dies kommt daher, dass die Ausführung meist schneller ist als die Erfassung der Produktionsplattform. Dies kann mit Performanceunterschieden der Programmiersprachen begründet werden, was in Abschnitt \ref{jvm-bottleneck} näher erläutert wird.
+\noindent \textbf{Transparente Aufbereitung für alle Stakeholder.} 
+Durch die Live-Darstellung der Ausführung im Prozessmodell (AZ6) und das exportierbare 
+Ereignisprotokoll (AZ7) wurde dieses Ziel zu einem Großteil abgedeckt. Während das 
+Ereignisprotokoll eine vollständige Übersicht über abgeschlossene Durchläufe bietet und 
+sich in ARIS Process Mining auswerten lässt, weist die Live-Animation eine Schwäche auf: 
+Wie in Abschnitt~\ref{ausfuehrung-des-automationsprozesses} beschrieben, kann sie mit der 
+Ausführungsgeschwindigkeit der Hardware nicht Schritt halten, sodass mehrere 
+Prozessschritte in kurzer Folge aufleuchten. Ursache hierfür sind unter anderem 
+Performanceunterschiede der eingesetzten Laufzeitumgebungen, die in 
+Abschnitt~\ref{jvm-bottleneck} näher erläutert werden. Die Benachrichtigung von Kunden 
+(User-Story~E) wurde, wie in Abschnitt~\ref{requirements-check} beschrieben, nicht 
+umgesetzt und bleibt daher offen.
 
 \section{Sicherheitsrisiken}
 
@@ -311,26 +339,26 @@ Auch wenn der Prototyp gemäß der Zielsetzung funktioniert, gibt es einige Risi
 \subsection{Absicherung des Animationssockets}
 
 Zurzeit laufen die TCP-Sockets zur Animation während der Ausführung ohne jegliche Absicherung. Dies kann dazu 
-führen, dass Daten abgelesen werden können zwischen dem ARIS-Server und Client. Hier kann durch Nutzung von \ac{TLS}
-die Verbindung abgesichert werden. \cite{wendzel_it-sicherheit_2018}
+führen, dass Daten zwischen dem ARIS-Server und dem Client mitgelesen werden können. Die Verbindung kann durch den Einsatz von \ac{TLS}
+abgesichert werden. \cite{wendzel_it-sicherheit_2018}
 
 \subsection{Absicherung des Resource-Directory-Servers und IoT-Hardware}
 
 Auch beim Resource-Directory-Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser
-ist kritischer, da dort die Zieladressen der ESP32 liegen, welche angesteuert werden sollen. Hier kann man eine Absicherung
-gewährleisten durch Nutzung von \ac{DTLS} \cite{wendzel_it-sicherheit_2018} für den Resource-Directory-Server. Dies gilt auch für den ESP32.
+ist kritischer, da dort die Zieladressen der ESP32 liegen, welche angesteuert werden sollen. Eine Absicherung kann
+durch den Einsatz von \ac{DTLS} \cite{wendzel_it-sicherheit_2018} für den Resource-Directory-Server gewährleistet werden. Dies gilt auch für den ESP32.
 
 \section{Kritische Bewertung der Architektur und Systemlimitationen}
 
-Die Arbeit wurde mit der Software ARIS umgesetzt, welche modifiziert wurde. Auch gab es hier während
-der Umsetzung einige kritische Punkte, welche diskutiert werden sollten.
+Die Arbeit wurde mit der Software ARIS umgesetzt, welche modifiziert wurde. Während
+der Umsetzung ergaben sich zudem einige kritische Aspekte, die im Folgenden diskutiert werden.
 
 \subsection{Latenz durch Netzwerkkommunikation}
 
 Das Ziel der Arbeit war, dass Prozesse in Echtzeit von ARIS angesteuert werden. Durch Nutzung von CoAP auf Basis von UDP kann man 
 einiges an Latenz und Overhead durch die kompakte Paketgröße einsparen. Jedoch wird es immer eine Latenz geben, welche abhängig von den Netzwerkgegebenheiten ist. Dies ist auch anhand der Tabelle \ref{tab:latenzmessung} im Anhang zu erkennen. 
-Diese zeigt eine zweite Messung des Versuchsaufbaus. Dabei wurde das Szenario mit vorhandenem Geschoss und Dach fünfmal ausgeführt. Dabei ist auch zu erkennen, dass dieser sich vom Szenario aus Tabelle \ref{tab:eventlog-varianten} unterscheidet,
-da es zu Inkonsistenzen der Sensoren von der Anlage kam.
+Diese zeigt eine zweite Messung des Versuchsaufbaus. Dabei wurde das Szenario mit vorhandenem Geschoss und Dach fünfmal ausgeführt. Dabei ist zu erkennen, dass sich dieser Messdurchlauf von den Ergebnissen aus Tabelle \ref{tab:eventlog-varianten} unterscheidet,
+da es zu Inkonsistenzen bei den Sensorwerten der Anlage kam.
 
 \subsection{Bottleneck durch die JVM auf Server und Client}
 \label{jvm-bottleneck}
@@ -342,19 +370,19 @@ Fällen ist es hilfreich, mit Sprachen wie C++ zu arbeiten, bei denen man durch 
 \subsection{Fehlerbehandlung (synchron und asynchron)}
 
 Aktuell ist die Fehlerbehandlung auf dem ESP32 durch ein passendes Request-Response-Muster gewährleistet. Auf ARIS hingegen ist die Fehlerbehandlung mit
-Laufzeitausnahmen umgesetzt. Hier kann durch normale Ausnahmen eine bessere Fehlerbehandlung umgesetzt werden, sodass es nicht zu einem hängenden Programm kommt.
+Laufzeitausnahmen umgesetzt. Hier könnte durch eine gezieltere Ausnahmebehandlung eine robustere Fehlerbehandlung realisiert werden, sodass es nicht zu einem hängenden Programm kommt.
 
 \subsection{Continuous Integration und Continuous Delivery}
 
 Die Nutzung von Continuous Integration und Continuous Delivery für ARIS ist durch dessen Infrastruktur auf GitHub gegeben. Für die Firmware des ESP32 kann Continuous Integration
-umgesetzt werden. Dies erfolgt durch Test und Bauen vom Firmwarecode auf \ac{CICD}-Plattformen wie GitHub-Actions oder GitLab-CI.
+umgesetzt werden. Dies kann durch das Testen und Bauen des Firmwarecodes auf \ac{CICD}-Plattformen wie GitHub Actions oder GitLab CI/CD erfolgen.
 
 \subsection{Erhöhtes Kollisionsrisiko durch verkürzten Hashwert des Prozessschrittes}
 
-In Abschnitt \ref{codegeneration-model} wird zur einheitlichen Zuweisung von Prozessschritten ein verkürzter SHA256-String verwendet. Dies hat zwar den Vorteil, dass die URI eines Prozessschrittes nicht allzu lang werden und für IDs kein erheblicher Speicherverbrauch vorliegt, jedoch erhöht sich damit das Kollisionsrisiko. Hier könnte man durch weitere Metadaten wie Gerätename oder auch Ort (bspw. ``Lagerhalle'') eindeutigere und auch für Menschen verständlichere Namen verwenden.
+In Abschnitt \ref{codegeneration-model} wird zur einheitlichen Zuweisung von Prozessschritten ein verkürzter SHA256-String verwendet. Dies hat zwar den Vorteil, dass die URI eines Prozessschrittes nicht allzu lang wird und für IDs kein erheblicher Speicherverbrauch vorliegt, jedoch erhöht sich damit das Kollisionsrisiko. Hier könnte man durch weitere Metadaten wie Gerätename oder auch Ort (bspw. ``Lagerhalle'') eindeutigere und auch für Menschen verständlichere Namen verwenden.
 
 \section{Zusammenfassung}
 
-In diesem Kapitel wurde das konzeptionierte System, sowie dessen technische Umsetzung gegen die in Kapitel \ref{analyse-und-konzeption} aufgeführten Anforderungen überprüft. Dabei
+In diesem Kapitel wurde das konzeptionierte System sowie dessen technische Umsetzung gegen die in Kapitel \ref{analyse-und-konzeption} aufgeführten Anforderungen überprüft. Dabei
 wurde ein Großteil der Anforderungen erfüllt. Die fehlenden Komponenten sowie weitere Aspekte, welche während der Konzeption und Implementierung aufkamen, wurden anschließend beleuchtet und
-diskutiert. Die Ziele und Anforderungen wurden zwar großflächig erreicht, jedoch kann man in den Bereichen Sicherheit und Leistung noch einige Verbesserungen durchführen.
+diskutiert. Die Ziele und Anforderungen wurden zwar weitgehend erreicht, jedoch kann man in den Bereichen Sicherheit und Leistung noch einige Verbesserungen durchführen.

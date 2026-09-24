@@ -1,23 +1,27 @@
 \chapter{Motivation und Zielsetzung}
 \label{motivation-und-zielsetzung}
 
-In diesem Kapitel werden die Beweggründe dieser Arbeit geschildert. Aus diesen Beweggründen werden dann die übergeordneten Ziele ausgearbeitet, welche als Leitlinie für diese Arbeit dienen. Diese Ziele sind Bestandteil der Forschungsfrage, aus welcher die Geschäftsanforderungen in Kapitel \ref{analyse-und-konzeption} ausgearbeitet werden und bilden ebenfalls eine Grundlage für das Vorgehen in den nächsten Kapiteln.
+In diesem Kapitel werden die Beweggründe dieser Arbeit geschildert. Aus diesen Beweggründen 
+werden dann die übergeordneten Ziele ausgearbeitet, welche als Leitlinie für diese Arbeit 
+dienen. Diese Ziele sind Bestandteil der Forschungsfrage, aus der die 
+Geschäftsanforderungen in Kapitel \ref{analyse-und-konzeption} abgeleitet werden, und 
+bilden ebenfalls eine Grundlage für das Vorgehen in den nächsten Kapiteln.
 
 \section{Motivation}
 
 Wie in Kapitel \ref{einleitung} schon am Ende erwähnt wurde, gibt es eine Lücke zwischen dem Modell und der 
 Ausführung bei Geschäftsprozessen. Der Soll-Zustand wird im Modell zwar beschrieben, aber der Ist-Zustand in der Produktion ist 
-ein anderer. Die Motivation ist es, diese beiden Zustände durch diese Arbeit näherzubringen, indem man durch eine Übersetzung 
+ein anderer. Ziel ist es, diese beiden Zustände durch diese Arbeit einander anzunähern, indem man durch eine Übersetzung 
 des Prozessmodells in ein Ausführungsmodell eine Art Ablaufplan bekommt, der viel näher am Prozess liegt. Dies verspricht 
 zum einen den Vorteil, dass alle Stakeholder einen klaren Überblick über das Prozessgeschehen haben. Bei der Produktion im Industriebereich
 ist das ein starker Vorteil, da man als Produktionsleiter jeden Produktionsschritt auch anhand des Prozessdiagramms ablesen kann, anstatt hier ein
-separates mentales Modell zu haben. Dadurch haben dann sowohl Management- als auch Produktionsebenen eine gleiche Modellbasis und können so den Produktionsprozess
+separates mentales Modell zu haben. Dadurch haben sowohl Management- als auch Produktionsebene dieselbe Modellbasis und können so den Produktionsprozess
 leichter nachverfolgen und auch Optimierungen leichter durchführen. Diese Erleichterung in der Optimierung ist auch der zweite Vorteil. Viele Prozessverwaltungsplattformen
-bieten Lösungen zur Prozessoptimierung an. Das sind meist Operationen, die auf dem Prozessdiagramm oder auf dessen Basis stattfinden. Dadurch, dass das Prozessmodell nun auch Basis 
-für die Ausführung ist, sind die Optimierungen auch viel näher am echten Geschehen und müssen nicht durch Richtlinien zunächst theoretisch festgelegt werden. Man spart sich also 
-dadurch auch die Zwischenstufe von Richtlinie zu tatsächlicher Umsetzung der Optimierung. Das spart Zeit und auch Ressourcen ein.
-Auch wird dadurch das Produktionsgeschehen für alle transparenter, denn die Wissensbasis für das Prozessgeschehen sind nicht mehr Dokumente, welche aus dem Prozessdiagramm entstammen, 
-sondern das Prozessdiagramm selbsterklärend. Das Live-Streaming der Ausführung trägt zu diesem Aspekt am stärksten bei, da nun der laufende Produktionsprozess auf diesem Diagramm abgebildet wird.
+bieten Lösungen zur Prozessoptimierung an. Dabei handelt es sich meist um Operationen, die auf dem Prozessdiagramm oder auf dessen Basis stattfinden. Dadurch, dass das Prozessmodell nun auch Basis 
+für die Ausführung ist, sind die Optimierungen auch viel näher am echten Geschehen und müssen nicht durch Richtlinien zunächst theoretisch festgelegt werden. Dadurch entfällt 
+auch die Zwischenstufe von der Richtlinie zur tatsächlichen Umsetzung der Optimierung. Das spart Zeit und auch Ressourcen ein.
+Auch wird dadurch das Produktionsgeschehen für alle transparenter, denn die Wissensbasis für das Prozessgeschehen ist nicht mehr eine Sammlung aus dem Diagramm abgeleiteter Dokumente, 
+sondern das Prozessdiagramm selbst. Das Live-Streaming der Ausführung trägt zu diesem Aspekt am stärksten bei, da nun der laufende Produktionsprozess auf diesem Diagramm abgebildet wird.
 
 \section{Zielsetzung}
 
@@ -33,11 +37,27 @@ Aus dieser Ausgangsposition können folgende Ziele ausgearbeitet werden:
 
 \subsection{Fabriken können heterogene Systeme einheitlich anbinden und ansteuern}
 
-In den meisten Fällen hat man in einer Produktionsstätte ein Produktionssystem bestehend aus unterschiedlichen Maschinen. Diese haben dann eigene Schnittstellen, welche auch proprietär sein können, was zu Datensilos führen kann. Diese Arbeit soll durch Nutzung von offenen Kommunikations- und Schnittstellenstandards die Anbindung von heterogenen Systemen sowie die Ansteuerung erleichtern. Dies ist durch Schaffung einer einheitlichen Plattform möglich, welche die Übersetzung auf die unterschiedlichen Systeme übernimmt.
+In den meisten Fällen hat man in einer Produktionsstätte ein Produktionssystem bestehend aus unterschiedlichen Maschinen. 
+Diese haben dann eigene Schnittstellen, welche auch proprietär sein können, was zu Datensilos führen kann. Diese Arbeit soll durch Nutzung von 
+offenen Kommunikations- und Schnittstellenstandards die Anbindung von heterogenen Systemen sowie die Ansteuerung erleichtern. Dies ist durch Schaffung einer einheitlichen Plattform möglich, 
+welche die Übersetzung auf die unterschiedlichen Systeme übernimmt.
+
+Um dieses Ziel zu erreichen, werden in dieser Arbeit folgende Arbeitsziele verfolgt:
+
+\begin{itemize}
+  \item \textbf{AZ1:} Auswahl eines offenen Kommunikationsprotokolls für die Ansteuerung von 
+  IoT-Geräten und Definition einer einheitlichen Schnittstelle, über die jeder Prozessschritt als Endpunkt aufgerufen werden kann.
+
+  \item \textbf{AZ2:} Automatische Generierung eines Firmware-Grundgerüsts für 
+  Mikrocontroller aus dem Prozessmodell. Kommunikation, Netzwerkanbindung und Registrierung 
+  der Endpunkte sind darin bereits enthalten, sodass Entwickler nur noch die 
+  anlagenspezifische Logik implementieren.
+\end{itemize}
 
 \subsection{Produktionen laufen prozesseinhaltend}
 
-In der Praxis laufen Prozesse nicht immer gemäß der Modellierung. Hierbei können die Gründe unterschiedlichster Art sein:
+In der Praxis laufen Prozesse nicht immer gemäß der Modellierung. Hierbei können die Gründe 
+unterschiedlichster Art sein:
 
 \begin{itemize}
   \item Menschliches Versagen
@@ -45,8 +65,59 @@ In der Praxis laufen Prozesse nicht immer gemäß der Modellierung. Hierbei kön
   \item Zustände der Umgebung
 \end{itemize}
 
-Durch das Nutzen des Prozessmodells als Basis für die automatische Prozessausführung wird sichergestellt, dass Produktionen prozessnäher funktionieren.
+Durch das Nutzen des Prozessmodells als Basis für die automatische Prozessausführung wird 
+sichergestellt, dass Produktionen prozessnäher funktionieren.
+
+Dazu werden folgende Arbeitsziele umgesetzt:
+
+\begin{itemize}
+  \item \textbf{AZ3:} Formale Definition eines Prozessmodells auf Basis der EPK sowie eines 
+  Ausführungsmodells, das die Prozessschritte und Verknüpfungsoperatoren in eine ausführbare 
+  Form überführt.
+  
+  \item \textbf{AZ4:} Entwicklung eines Compilers, der ein EPK-Modell validiert und in das 
+  Ausführungsmodell übersetzt.
+  
+  \item \textbf{AZ5:} Entwicklung einer Execution-Engine, die das Ausführungsmodell Schritt 
+  für Schritt auf den angebundenen Geräten ausführt und Verzweigungen anhand der 
+  Rückgabewerte gemäß dem Modell auflöst.
+\end{itemize}
 
 \subsection{Der Produktionsprozess wird für alle Stakeholder transparent aufbereitet}
 
-Die Produktion findet in der Fabrikhalle statt. Hierbei können nicht alle Stakeholder einen Einblick haben. Dies wird aktuell ermöglicht durch Daten aus bspw. \ac{ERP}-Systemen. Hier wäre es also wichtig näher am Prozessgeschehen zu sein. Am besten in Echtzeit.
+Die Produktion findet in der Fabrikhalle statt. Hierbei können nicht alle Stakeholder einen 
+Einblick haben. Dies wird derzeit beispielsweise durch Daten aus \ac{ERP}-Systemen ermöglicht. Hier 
+wäre es also wichtig, näher am Prozessgeschehen zu sein, idealerweise in Echtzeit.
+
+Dafür werden folgende Arbeitsziele verfolgt:
+
+\begin{itemize}
+  \item \textbf{AZ6:} Live-Darstellung der laufenden Ausführung direkt im Prozessmodell der 
+  Prozessverwaltungsplattform.
+  \item \textbf{AZ7:} Protokollierung jedes Ausführungsschritts in einem Ereignisprotokoll, 
+  das für Process-Mining-Analysen exportiert werden kann.
+\end{itemize}
+
+Abschließend werden alle Komponenten in die Prozessverwaltungsplattform ARIS integriert (\textbf{AZ8}) und 
+anhand eines Versuchsaufbaus validiert (\textbf{AZ9}).
+
+\section{Vorgehen und Aufbau der Arbeit}
+
+Nachdem in diesem Kapitel die Motivation sowie die übergeordneten Ziele und Arbeitsziele 
+dargelegt wurden, legt Kapitel \ref{grundlagen-und-theoreitscher-rahmen} die theoretischen 
+Grundlagen zur Lösung des Problems. In Kapitel \ref{related-work} werden verwandte Arbeiten betrachtet, 
+welche ein ähnliches Problem lösen. Daraufhin wird ermittelt, welche Anteile dieser Arbeiten 
+verwendet und welche neuen Beiträge geleistet werden. Als Nächstes werden in Kapitel 
+\ref{analyse-und-konzeption} die Anforderungen an die Lösung der vorliegenden Arbeit definiert, 
+zur Überprüfung in einem geschäftlichen Kontext. Basierend auf den Grundlagen von Kapitel 
+\ref{grundlagen-und-theoreitscher-rahmen} sowie den Anforderungen aus Kapitel 
+\ref{analyse-und-konzeption} wird in Kapitel \ref{systemdesign-und-spezifikation} das System 
+zur Kompilierung und Ausführung von Prozessen formal entworfen. Darauf aufbauend findet in 
+Kapitel \ref{technische-umsetzung} eine technische Umsetzung statt, welche das formal 
+definierte System in der Praxis umsetzt. Anschließend erfolgt in Kapitel \ref{ergebnisse} 
+eine Prüfung gegen die Anforderungen aus Kapitel \ref{analyse-und-konzeption} sowie eine 
+Validierung durch die Anwendung des Prototyps der technischen Umsetzung in einem 
+Beispielszenario. Folglich findet eine Diskussion bezüglich der Zielsetzung und der 
+Umsetzung statt. Anschließend wird in Kapitel \ref{fazit} ein Fazit gezogen, gefolgt 
+von einem zukünftigen Ausblick des Resultats der Arbeit sowie einer Bewertung der 
+Praxistauglichkeit dieser Arbeit.

@@ -1,26 +1,50 @@
 \chapter{Einleitung}
 \label{einleitung}
 
-Im industriellen Umfeld werden Prozesse komplexer. Diese beinhalten die folgenden Aspekte:
+Im industriellen Umfeld werden Prozesse komplexer. Dazu tragen unter anderem die folgenden 
+Punkte bei:
 
 \begin{itemize}
   \item Der Einsatz von Sensoren und Aktoren.
   \item Die Abhängigkeiten zwischen dem aktuellen Produktionsprozess und anderen Prozessschritten oder Zuständen.
-  \item Zunahme von Komponenten und Anlagen im Bereich der Industrie 4.0 mit der Anforderung von Interoperabilität.
+  \item Zunahme von Komponenten und Anlagen im Bereich der Industrie 4.0 mit der Anforderung an Interoperabilität.
 \end{itemize}
 
-\noindent Um diese Prozesse übersichtlich zu machen und
-auch zu optimieren, nutzt man in der Wirtschaftsinformatik die Prozessmodellierung.
-Diese gibt allen Stakeholdern eine Leitlinie und gewährleistet die Einhaltung von
-Standards und Konsistenz bei der Produktion. Jedoch ist es meist so, dass Modell und Praxis nicht
-immer miteinander übereinstimmen. Es kommt zu Engpässen oder anderweitigen Unstimmigkeiten, welche
-den Prozessverlauf beeinflussen. Oft werden Prozesse durch Daten in \ac{ERP}- und \ac{CRM}-Systemen
-oder auch Simulationen optimiert. Jedoch sind es die Aspekte der Ausführung, welche in der Industrie signifikante Unterschiede mit sich bringen.
-Das Problem ist also eine Lücke zwischen Modell und Ausführung. Diese Arbeit versucht diese Lücke durch Übersetzung des Modells in ein Ausführungsmodell zur 
-Orchestrierung\footnote{siehe Abschnitt \ref{orchestration-definition}} von IoT-Geräten zu schließen.
+\noindent Um diese Prozesse übersichtlich darzustellen und zu optimieren, werden sie in der
+Wirtschaftsinformatik mit Notationen wie der Ereignisgesteuerten Prozesskette (\acs{EPK})\acused{EPK} modelliert.
+Plattformen wie ARIS verwalten diese Modelle, simulieren sie und bieten Möglichkeiten, Optimierungen zu 
+erfassen. Das Prozessmodell beschreibt somit den Soll-Zustand, an dem sich alle Stakeholder orientieren.
 
-\section{Vorgehen und Aufbau der Arbeit}
+Das Modell steuert die Produktion nicht selbst. Zwischen Modell und Ausführung liegen mehrere manuelle 
+Übersetzungsschritte: Aus dem Modell werden Arbeitsanweisungen und Richtlinien abgeleitet. Die 
+eigentliche Steuerungssoftware der einzelnen Anlagen wird jedoch getrennt von diesen Anweisungen und Richtlinien entwickelt. \cite{mcginnis_formalizing_2019} \cite{venturamartins_applying_2017}
 
-Zuallererst wird in Kapitel \ref{motivation-und-zielsetzung} die Motivation dieser Arbeit erläutert. Aus dieser werden dann die übergeordneten Ziele herausgearbeitet. Kapitel \ref{grundlagen-und-theoreitscher-rahmen} legt zunächst die theoretischen Grundlagen zur Lösung des Problems. In Kapitel \ref{related-work} werden verwandte Arbeiten betrachtet, welche ein ähnliches Problem lösen. Daraufhin wird ermittelt, welche Anteile dieser Arbeiten verwendet und welche neuen Beiträge geleistet werden. Als Nächstes werden in Kapitel \ref{analyse-und-konzeption} die Anforderungen an die Lösung der vorliegenden Arbeit gesetzt, zur Überprüfung in einem geschäftlichen Kontext. Basierend auf den Grundlagen von Kapitel \ref{grundlagen-und-theoreitscher-rahmen} sowie den Anforderungen aus Kapitel \ref{analyse-und-konzeption} wird in Kapitel \ref{systemdesign-und-spezifikation} das System zur Kompilierung und Ausführung von Prozessen formal entworfen. Darauf aufbauend findet in Kapitel \ref{technische-umsetzung} eine technische Umsetzung statt, welche das formal 
-definierte System in der Praxis umsetzt. Gefolgt davon kommt in Kapitel \ref{ergebnisse} eine Prüfung gegen die Anforderungen aus Kapitel \ref{analyse-und-konzeption} sowie eine Validierung durch die Anwendung des Prototyps 
-der technischen Umsetzung in einem Beispielszenario. Folglich findet eine Diskussion bezüglich der Zielsetzung und der Umsetzung statt. Anschließend wird in Kapitel \ref{fazit} ein Fazit gezogen, gefolgt von einem zukünftigen Ausblick des Resultats der Arbeit sowie einer Bewertung der Praxistauglichkeit dieser Arbeit.
+Dies bringt drei Folgen mit sich:
+
+\begin{itemize}
+  \item \textbf{Abweichungen vom Modell:} Da die Ausführung nicht direkt an das Modell gebunden ist, 
+  weicht der tatsächliche Ablauf durch menschliche Fehler, Verschleiß oder Umgebungseinflüsse vom modellierten 
+  Prozess ab, ohne dass dies unmittelbar auffällt. \cite{van_der_aalst_replaying_2012} \cite{dumas_grundlagen_2021}
+
+  \item \textbf{Aufwändige Änderungen:} Jede Änderung am Modell muss erneut manuell in Richtlinien und Anlagensoftware
+  übertragen werden. \cite{vanderaalst_business_2016} \cite{machado2022bridging}
+
+  \item \textbf{Fehlende Rückkopplung:} Informationen über den tatsächlichen Ablauf liegen meist erst nachträglich in \acs{ERP}- oder \acs{CRM}-Systemen\acused{ERP}\acused{CRM}
+  vor. Welcher Prozessschritt gerade ausgeführt wird, ist im Modell selbst nicht sichtbar. \cite{bundela_integration_2026} \cite{singh_eventdriven_2025}
+\end{itemize} 
+
+Modell und Ausführung existieren also nebeneinander, ohne technisch miteinander verbunden zu sein. 
+Diese Lücke zwischen Modell und Ausführung ist das Problem, mit dem sich diese Arbeit beschäftigt.
+
+Um diese Lücke zu schließen, wird in dieser Arbeit das EPK-Prozessmodell selbst zur Grundlage 
+der Ausführung gemacht. Ein eigens entwickelter Compiler übersetzt das in ARIS modellierte 
+EPK-Modell in ein Ausführungsmodell. Dieses bildet die Funktionen und Ereignisse des Prozesses 
+als ausführbare Schritte und die Verknüpfungsoperatoren (AND, OR, XOR) als Kontrollstrukturen 
+ab. Eine Execution-Engine arbeitet dieses Ausführungsmodell ab und orchestriert\footnote{siehe Abschnitt \ref{orchestration-definition}} dabei die 
+angebundenen IoT-Geräte: Sie ruft jeden Prozessschritt in der modellierten Reihenfolge auf 
+einem ESP32-Mikrocontroller auf, der die jeweilige Anlage steuert, und entscheidet anhand der 
+zurückgelieferten Ergebnisse, welcher Pfad des Prozesses weiter ausgeführt wird. Die 
+Firmware-Grundstruktur für die Mikrocontroller wird dabei aus demselben Modell generiert. So 
+wird genau der Prozess ausgeführt, der modelliert wurde. Gleichzeitig fließen die 
+Ausführungsdaten als Live-Animation und als Ereignisprotokoll zurück in die Prozessplattform.
+

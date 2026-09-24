@@ -11,7 +11,7 @@ Die Begriffe der Rechnernetze (Abschnitt \ref{sockets-definition} und \ref{webso
 \section{Prozesse}
 \label{prozesse-definition}
 
-Geschäftsprozesse (kurz: Prozesse) sind ``[...] zielgerichtete zeitlich-logische Folgen oder Vorgangsketten von Tätigkeiten [...], dessen Ziele aus der 
+Geschäftsprozesse (kurz: Prozesse) sind ``[...] zielgerichtete zeitlich-logische Folgen oder Vorgangsketten von Tätigkeiten [...], deren Ziele aus der 
 Unternehmensstrategie abgeleitet sind.'' \cite{stahlknecht_einfuhrung_2005} Diese Abfolge muss durch ein Startereignis beginnen und mit einem Endereignis 
 abgeschlossen werden. \cite{leimeister_einfuhrung_2015} 
 
@@ -36,11 +36,11 @@ bei Mitarbeitern und Fachexperten sichergestellt werden kann. Auf der Basis der 
 
 Leimeister definiert \ac{EPK} als einen gerichteten Graphen, welcher aus Sequenzen, Funktionen, Ereignissen und
 Verknüpfungsoperatoren besteht. \cite{leimeister_einfuhrung_2015} Bei EPK sind diese Verknüpfungsoperatoren ``AND'', ``OR'' und ``XOR''. \cite{nuttgens_geschaftsprozesmodellierung_1998}
-Ein wesentliches Merkmal von EPK ist die Darstellung eines Prozesses in eine zeitlich-logische Abfolge von Funktionen und dem Einbau von Entscheidungslogik durch
+Ein wesentliches Merkmal von EPK ist die Darstellung eines Prozesses als eine zeitlich-logische Abfolge von Funktionen sowie die Abbildung von Entscheidungslogik durch
 Ereignisse und Verknüpfungsoperatoren. \cite{nuttgens_geschaftsprozesmodellierung_1998}
 Prozessmodelle auf Basis von EPK sind für Stakeholder wie Projektpartner oder Kunden intuitiv verständlich, was von Vorteil ist. \cite{langner_ereignisgesteuerte_1997} 
 
-\noindent Die Abbildung \ref{fig:beispiel_epk} (siehe Anlage) ist ein Beispieldiagramm in der EPK-Notation. Es modelliert den Geschäftsprozess einer Kundenbestellung. Ereignisse beschreiben Zustände eines Prozesses (bspw. ``Bestellung erhalten'' oder ``Produkt nicht verfügbar''), welcher den Verlauf eines Prozesses beeinflusst. \cite{gadatsch_grundkurs_2008}
+\noindent Die Abbildung \ref{fig:beispiel_epk} (siehe Anhang) ist ein Beispieldiagramm in der EPK-Notation. Es modelliert den Geschäftsprozess einer Kundenbestellung. Ereignisse beschreiben Zustände eines Prozesses (bspw. ``Bestellung erhalten'' oder ``Produkt nicht verfügbar''), die den Verlauf eines Prozesses beeinflussen. \cite{gadatsch_grundkurs_2008}
 Vergleichbar sind Ereignisse mit logischen Aussagen, deren Ergebnisse wahr oder falsch sind. Somit kann man diese als boolesche Aussagen interpretieren. Funktionen (oder auch Aktivitäten) hingegen beschreiben 
 eine Tätigkeit oder eine Aufgabe eines Geschäftsprozesses (bspw. ``Prüfe den Produktbestand'' oder ``Erstelle Rechnung'') und überführen einen Eingangszustand in einen Ausgangszustand \cite{gadatsch_grundkurs_2008}. Dies kann man mit Anweisungen im Programmcode 
 interpretieren. Ereignisse und Funktionen können durch Kanten verbunden und in eine logische Reihenfolge gebracht werden. Dadurch wird der
@@ -88,7 +88,7 @@ aus einem Kelleralphabet zu hinterlegen. Kellerautomaten werden verwendet, um ko
 Kellerautomaten, $\Gamma$ beschreibt das Alphabet aller Symbole des Kellerspeichers, $\delta: Q \times (\Sigma \cup \{\epsilon\}) \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma*)$ beschreibt 
 die Übergangsfunktion, $q_0$ beschreibt den Anfangszustand, $Z_0$ das Startsymbol auf dem Kellerspeicher und $Q_F \subset Q$ ist die Menge
 aller akzeptierten Zustände. Ein Kellerautomat akzeptiert ein Wort, wenn entweder ein Endzustand erreicht oder der 
-Kellerspeicher leer ist. In dieser Arbeit wird bei einem Endzustand akzeptiert.\cite{hopcroft_einfuhrung_nodate} 
+Kellerspeicher leer ist. In dieser Arbeit wird bei einem Endzustand akzeptiert. \cite{hopcroft_einfuhrung_nodate} 
 
 \section{Prozessautomatisierung}
 \label{process-automation-definition}
@@ -100,7 +100,7 @@ Tätigkeiten ausgeführt werden. \cite{heinrich_wirtschaftsinformatik-lexikon_19
 \noindent Dumas et al. definieren die Prozessautomatisierung als ``die Konfiguration oder Implementierung eines \acs{IT}-Systems [...], um den zukünftigen Prozess
 zu unterstützen.'' \cite{dumas_grundlagen_2021}
 
-\noindent Die Automatisierung der Schritte selbst geschieht mit den ESP32 Mikrocontrollern (siehe Abschnitt \ref{esp32-definition}).
+\noindent Die Automatisierung der Schritte selbst geschieht mit den ESP32-Mikrocontrollern (siehe Abschnitt \ref{esp32-definition}).
 
 \section{Orchestrierung}
 \label{orchestration-definition}
@@ -111,20 +111,20 @@ Seidlmeier definiert die Steuerung eines Prozesses von einer organisatorischen E
 \noindent Neben dem Begriff Orchestrierung gibt es auch den Begriff Choreographie. Papazoglu beschreibt den Unterschied zwischen diesen beiden Begriffen wie folgt:
 
 \noindent ``Orchestration describes how services interact [...], including the business logic and execution order [...] Choreography is typically associated with [...], rules of interactions and agreements that occur between
-business-process end points rather than a specific business process[...]'' \cite{papazoglou_service-oriented_2007}. Orchestrierung ist also somit auf einen Prozess bezogen, während Choreographie
+business-process end points rather than a specific business process[...]'' \cite{papazoglou_service-oriented_2007}. Orchestrierung ist somit auf einen Prozess bezogen, während Choreographie
 sich auf mehrere Prozesse ausdehnt.
 
 \noindent Aus dieser Definition und der Definition zur Automation lässt sich also schlussfolgern: Automation beschäftigt sich innerhalb eines Prozesses mit der Ausführung eines Schrittes, die Orchestrierung verantwortet
 die Ausführung eines gesamten Prozesses, während die Choreographie sich über mehrere Prozesse hinweg bewegt.
 
-\noindent In dieser Arbeit wird Orchestrierung umgesetzt durch Ausführung der Prozessschritte gemäß der Modellierung. 
+\noindent In dieser Arbeit wird die Orchestrierung durch die Ausführung der Prozessschritte gemäß der Modellierung umgesetzt. 
 
 \section{ARIS-Toolset}
 \label{aris-definition}
 
 Das ARIS-Toolset ist gemäß Scheer ein [...] Softwaresystem zur Analyse, Modellierung und
 Navigation von Geschäftsprozessen. [...] Die Grundlage für das ARIS-Toolset wird von der 
-Repository-Struktur gelegt, welche sich aus dem Konzept des ARIS-Haus gebildet hat. \cite{scheer_aris_1994} \cite{rump_geschaftsprozesmanagement_1999}
+Repository-Struktur gelegt, welche sich aus dem Konzept des ARIS-Hauses gebildet hat. \cite{scheer_aris_1994} \cite{rump_geschaftsprozesmanagement_1999}
 
 \noindent Nach Leimeister bietet ARIS eine Umsetzung prozessorientierter Organisationsgestaltung [...] an. Der Anspruch liegt dabei auf der 
 Reduktion der Komplexität der Prozessmodellierung durch Spaltung der Unternehmensarchitektur in fünf 
@@ -159,7 +159,7 @@ Beschreibungssichten durch die \ac{ARIS}: \cite{leimeister_einfuhrung_2015}
     \item ARIS Process Mining
 \end{itemize} \cite{seidlmeier_prozessmodellierung_2019} \cite{software_gmbh_aris_nodate}
 
-\noindent In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation zur Implementierung des Prototypen verwendet. EPK ist Teil des ARIS-Konzepts und wird somit auch im ARIS-Toolset unterstützt. \cite{rump_geschaftsprozesmanagement_1999}
+\noindent In dieser Arbeit werden die Produkte ARIS Business Architect und ARIS Simulation zur Implementierung des Prototyps verwendet. EPK ist Teil des ARIS-Konzepts und wird somit auch im ARIS-Toolset unterstützt. \cite{rump_geschaftsprozesmanagement_1999}
 
 
 \section{Eingebettete Systeme}
@@ -170,7 +170,7 @@ Mikroprozessor, der Teil eines größeren Systems ist, dessen primäre Funktion 
 
 \noindent Barr und Massa definieren ein eingebettetes System als eine Kombination aus Computer-Hardware und Software mit zusätzlichen mechanischen und elektronischen Bauteilen,
 um eine spezifische Funktion zu erfüllen. [...] Der Kontrast dazu ist der PC, bei welchem der Hersteller nicht weiß, wofür dieser verwendet wird. [...] ``Eingebettete 
-Systeme sind oft eine Komponente in einem größeren System. Beispielsweise enthalten moderne Autos und LKW's viele eingebettete Systeme. Ein eingebettetes System ist 
+Systeme sind oft eine Komponente in einem größeren System. Beispielsweise enthalten moderne Autos und Lkw viele eingebettete Systeme. Ein eingebettetes System ist 
 für das \acs{ABS} zuständig, ein anderes überwacht und steuert die Emissionen des Fahrzeugs, während ein drittes die Informationen dem Nutzer am Cockpit anzeigt.'' \cite{barr_programming_2006}
 
 \noindent Prozessoren, welche dabei in eingebetteten Systemen verwendet werden, sind Mikroprozessoren, Mikrocontroller und \ac{DSP}-Chips. \cite{barr_programming_2006} \cite{marwedel_eingebettete_2008} In dieser Arbeit wird ein Mikrocontroller des
@@ -179,7 +179,7 @@ Herstellers Espressif Systems verwendet.
 \subsection{ESP32}
 \label{esp32-definition}
 
-Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte \ac{WLAN}- und Bluetooth-
+Der ESP32 ist ein Mikrocontroller \cite{hercog_design_2023} des Herstellers Espressif Systems (Shanghai, China) und bietet einen Zweikern-Prozessor, integrierte \ac{WLAN}- und Bluetooth-%
 Anbindung, \ac{GPIO}-Pins und hat einen niedrigen Stromverbrauch, weshalb dieser sehr oft für IoT-Anwendungen genutzt wird. \cite{hercog_design_2023} \cite{farhan_real-time_2026}
 Neben den angegebenen Features verfügt der ESP32 über Peripherien wie \ac{SPI}, \ac{I2C}, \ac{I2S}, \ac{CAN}, \ac{UART}, etc. \cite{brandes_mikrocontroller_2024}
 
@@ -219,8 +219,8 @@ Zusammenfassend also:
 \end{enumerate} \cite{meinhardt_iot_2021} \cite{fleisch_geschaftsmodelle_2015}
 
 \noindent Die Geräte, an welche Sensoren und Aktoren angeschlossen sind, nennt man auch ``constrained devices'', welche durch ihre Konnektivität ein Netzwerk formen. Diese einzelnen Sensoren und Aktoren in
-diesem Netzwerk nennt man dann ``constrained nodes''. \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern \cite{shelby_constrained_2014} wie dem ESP32. Ein Protokoll, welches genutzt wird um mit Knoten 
-in solchen Umständen zu kommunizieren ist CoAP. \cite{bormann_terminology_2014} \cite{shelby_constrained_2014}
+diesem Netzwerk nennt man dann ``constrained nodes''. \cite{bormann_terminology_2014} Diese Knoten laufen meist auf Mikrocontrollern \cite{shelby_constrained_2014} wie dem ESP32. Ein Protokoll, welches genutzt wird, um mit Knoten 
+unter solchen Bedingungen zu kommunizieren, ist CoAP. \cite{bormann_terminology_2014} \cite{shelby_constrained_2014}
 
 
 \subsection{CoAP}
@@ -231,18 +231,18 @@ Diese Knoten haben meist einen leistungsschwachen Mikrocontroller mit kleinem \a
 welche einen typischen Durchfluss von einigen 10 kbit/s hat. Das Protokoll ist konzipiert für Maschine-zu-Maschine-Anwendungen wie etwa
 Smart-Energy oder Bauautomatisierung. \cite{thaller_software-engineering_1997}\cite{wendzel_it-sicherheit_2018}
 CoAP baut dabei auf das \ac{UDP} auf und bringt damit einen kompakten Header mit. Zudem können CoAP-Clients auch Dienste und Ressourcen selbst finden. \cite{wendzel_it-sicherheit_2018}
-Dies wird in RFC7252 auch Resource Discovery genannt. Das verwendete Datenformat zum Austausch ist das Constrained RESTful Environments Link Format, was in \ac{RFC} 6690 beschrieben wird. \cite{shelby_constrained_2014}
+Dies wird in RFC7252 auch Resource Discovery genannt. Das verwendete Datenformat zum Austausch ist das Constrained RESTful Environments Link Format, das in \ac{RFC} 6690 beschrieben wird. \cite{shelby_constrained_2014}
 
 \noindent Die direkte Suche von Ressourcen ist meist nicht effizient oder praktikabel, da Geräte nicht ansprechbar sind oder sich in Netzwerken befinden, wo Multicast nicht effizient ist. Um die Suche also
-effizienter zu gestalten, gibt es sogenannte Resource Directories, welche Buch führen über Ressourcen auf anderen Servern. Das Format, was dabei genutzt wird, entspricht auch RFC6690. \cite{amsuss_constrained_2022}
+effizienter zu gestalten, gibt es sogenannte Resource Directories, welche Buch führen über Ressourcen auf anderen Servern. Das Format, das dabei genutzt wird, entspricht auch RFC6690. \cite{amsuss_constrained_2022}
 
-\noindent Dieses Protokoll setzt ein Request-Response Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichtenschicht und der Request-Response Schicht. Diese Schichtentrennung zeigt die Abbildung \ref{fig:coap-layers} nochmals auf.
+\noindent Dieses Protokoll setzt ein Request-Response-Pattern um, welches durch ein zweischichtiges Modell realisiert wird: der Nachrichtenschicht und der Request-Response-Schicht. Diese Schichtentrennung zeigt die Abbildung \ref{fig:coap-layers} nochmals auf.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Graphics/coap_zwei_schichten_modell.pdf}
     \captionsetup{justification=centering}
-    \caption{Das Schichten-Modell des CoAP Protokolls \\ \noindent Quelle: eigene Darstellung in Anlehnung an \cite{shelby_constrained_2014}}
+    \caption{Das Schichten-Modell des CoAP-Protokolls \\ \noindent Quelle: eigene Darstellung in Anlehnung an \cite{shelby_constrained_2014}}
     \label{fig:coap-layers}
 \end{figure}
 
@@ -251,8 +251,8 @@ zuständig, dass eine Nachricht zunächst per UDP übermittelt wird. Dabei gibt 
 Bestätigung der Nachricht, während Non-confirmable analog das Gegenteil beschreibt. Ein Acknowledgement ist genau diese Bestätigung einer Confirmable Nachricht. Dabei gibt es die Möglichkeit, dass die Bestätigung separat (``Separate Response'') oder
 mit der Antwort zusammen (``Piggybacked Response'') übermittelt wird. Die Reset-Nachricht teilt mit, dass die Nachricht zwar angekommen ist, diese aber aufgrund von fehlendem Kontext nicht verarbeitet werden kann. Solch eine Reset-Nachricht wird auch 
 verwendet, um die Erreichbarkeit des Kommunikationspartners sicherzustellen.
-Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4-byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einen Statuscode
-bei einer Antwort oder die Methode (GET, DELETE, PUT, POST) bei einer Anfrage und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haben kann. Dies verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
+Generell spricht man bei der Message in CoAP von einem Paket, welches einen 4 Byte großen Header hat. Dieser Header gibt die Version, einen von den vier vorher genannten Typen, einen Statuscode
+bei einer Antwort oder die Methode (GET, DELETE, PUT, POST) bei einer Anfrage und einer Message-ID, um Duplikate zu erkennen. Nach diesem Header kommt ein Token, welcher eine Größe im Intervall von 0 und 8 Bytes haben kann. Diesen verwendet man, um eine Korrelation zwischen einer Anfrage und einer Antwort herzustellen,
 um zur passenden Anfrage die passende Antwort zu übermitteln. Danach können weitere Optionen hinzugefügt werden, welche dann mit dem Payload-Marker (Ein Byte gefüllt mit Einsen) abgeschlossen werden. Nach dem Payload 
 Marker kann der Payload (also zu übermittelnde Daten) beigefügt werden. Der Aufbau eines CoAP-Pakets ist grafisch in der Abbildung \ref{fig:coap-paket} dargestellt.
 Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_constrained_2014}
@@ -265,27 +265,27 @@ Die Übermittlung dieser Nachrichten erfolgt asynchron über UDP. \cite{shelby_c
 \end{figure}
 
 \noindent Im Vergleich zu \ac{HTTP}, bei dem die Anfrage mit der bestehenden Verbindung beantwortet wird, setzt CoAP das Request/Response Pattern durch Nachrichten um, bei dem die Anfrage und die Antwort separate asynchrone UDP-Nachrichten sind, deren
-Zugehörigkeiten durch Tokens geregelt werden. Um hier trotz der asynchronen Übertragung, Zuverlässigkeit zu gewährleisten wird die Duplikatserkennung durch die Message-IDs und eine 
+Zugehörigkeiten durch Tokens geregelt werden. Um hier trotz der asynchronen Übertragung Zuverlässigkeit zu gewährleisten, wird die Duplikatserkennung durch die Message-IDs und eine 
 ``stop-and-wait retransmission'' bei confirmable Nachrichten verwendet. \cite{shelby_constrained_2014} Das bedeutet, dass man beim Absenden für jeden gesendeten Frame auf eine Acknowledge Nachricht wartet, um weiterzusenden. Erhält man diese
-Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response Schicht realisiert ein \ac{REST}-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
+Bestätigung nicht, so wird der Frame nochmal verschickt. \cite{hasegawa_throughput_1995} Die Request-Response-Schicht realisiert ein \ac{REST}-ähnliches Modell, wobei der Fokus darauf liegt ein generisches Protokoll zu 
 entwickeln und nicht streng ressourcenorientiert wie bei \ac{REST}. \cite{burke_restful_2013} Dabei werden Ressourcen und Dienste ähnlich zu \ac{REST} mit \acp{URI} realisiert und auch sind die Status-Codes angelehnt an \ac{HTTP} mit 2.xx für eine erfolgreiche Übertragung, 4.xx für clientseitigen und 5.xx für 
 serverseitigen Fehler.
 
 \subsection{MQTT}
 \label{mqtt-definition}
 
-Wendzel definiert \ac{MQTT} als ein Protokoll, was auch in ressourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish Subscribe Architektur, wodurch
-Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, welche die Daten zur Verfügung stellen werden dabei als Publisher bezeichnet, während Empfänger dieser 
+Wendzel definiert \ac{MQTT} als ein Protokoll, das auch in ressourcenbeschränkten Situationen eingesetzt werden kann. Im Vergleich zu CoAP jedoch, verwendet MQTT eine Publish-Subscribe-Architektur, wodurch
+Daten nicht abgefragt werden. Stattdessen wird man über Veränderungen von Werten informiert. \cite{wendzel_it-sicherheit_2018} Geräte, welche die Daten zur Verfügung stellen, werden dabei als Publisher bezeichnet, während Empfänger dieser 
 Daten als Subscriber definiert werden. Verteilt werden die Daten an die Subscriber über einen Broker: einem Vermittler zwischen dem Publisher und den Subscribern. Damit hier Nachrichten auch an die gewünschten Geräte versendet werden, werden 
 Topics verwendet, welche man abonnieren kann, daher auch der Begriff ``Subscriber'' \cite{brandes_mikrocontroller_2024}. Publisher und Subscriber haben keine Kenntnis voneinander und sind auf einer logischen Ebene entkoppelt. \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008} Die Architektur von MQTT wird vereinfacht in Abbildung \ref{fig:mqtt-architektur} dargestellt. 
-Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines \ac{QoS} möglich.\cite{brandes_mikrocontroller_2024}
+Wie bei CoAP ist MQTT auch ein asynchrones Protokoll, sodass keine Blockierung stattfindet, wenn man Nachrichten verschickt. Auch ist das Dazuschalten von Empfangsbestätigungen durch das Setzen eines \ac{QoS} möglich.\cite{brandes_mikrocontroller_2024}
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Graphics/mqtt_architektur.pdf}
     \captionsetup{justification=centering}
-    \caption{Architektur des MQTT Protokolls \\ Quelle: eigene Darstellung in Anlehnung an  \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008}}
+    \caption{Architektur des MQTT-Protokolls \\ Quelle: eigene Darstellung in Anlehnung an  \cite{wendzel_it-sicherheit_2018} \cite{hunkeler_mqtt-s_2008}}
     \label{fig:mqtt-architektur}
 \end{figure}
 
@@ -302,7 +302,7 @@ Kommunikationsmöglichkeit, um Daten bidirektional zu übertragen. \cite{inden_w
 \section{WebSockets}
 \label{websocket-definition}
 
-Gemäß RFC6455 versteht man unter WebSockets ein Kommunikationsprotokoll, das Browser basierten Anwendungen
+Gemäß RFC6455 versteht man unter WebSockets ein Kommunikationsprotokoll, das browserbasierten Anwendungen
 eine bidirektionale Verbindung zum Server ermöglicht. Diese wurden davor mit mehreren \ac{HTTP}-Anfragen realisiert, 
-während WebSockets mittels eines Handshakes via \ac{HTTP}, eine WebSocket Verbindung anfragt und man nach erfolgreichem 
+während WebSockets mittels eines Handshakes via \ac{HTTP} eine WebSocket-Verbindung anfragt und man nach erfolgreichem 
 Handshake eine bidirektionale Verbindung aufgebaut hat. \cite{fette_websocket_2011}

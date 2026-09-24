@@ -45,7 +45,7 @@ und in das Ausführungsmodell kompiliert wird.
 
 Für das Ausführungsmodell wird die Listendefinition gemäß Smolka \cite{smolka_programmierung_2012} verwendet.
 
-\noindent Das Ausführungsmodell ist eine Folge an Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
+\noindent Das Ausführungsmodell ist eine Folge von Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
 Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
 Modell wird dann von der Execution-Engine eingelesen, welche anschließend die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
 auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses modellieren. Formal kann es wie folgt definiert werden:
@@ -73,7 +73,7 @@ Dies geschieht durch Einlesen der Prozesssprache, welche dann in jedem Schritt d
 \subsection{Eingabe- und Ausgabesprache}
 
 Bei der Eingabesprache handelt es sich um einen Prozess, der gemäß der Definition des Abschnitts \ref{prozessmodell} modelliert wurde. 
-Der Compiler übersetzt diese als ein Ausführungsmodell, das der Definition aus Abschnitt \ref{ausfuehrungsmodell} entspricht.
+Der Compiler übersetzt diese in ein Ausführungsmodell, das der Definition aus Abschnitt \ref{ausfuehrungsmodell} entspricht.
 
 \subsection{Statische Analyse und Vorverarbeitung der Konnektoren}
 
@@ -83,7 +83,7 @@ Vor der Kompilierung findet eine Vorverarbeitung statt, bei der die Abbildung $\
 Die Validierung kann man formal wie folgt modellieren:
 
 \noindent Gegeben sei ein Prozess $P$. $e_I \in E \setminus \{e_S, e_E\}$ beschreibt alle Zwischenereignisse von $P$. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G_P$ enthält. 
-Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge an Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
+Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge von Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
 
 \begin{align}
     S := e_S \; B \; e_E \\
@@ -130,7 +130,7 @@ Aus dieser kontextfreien Grammatik lässt sich folgender Kellerautomat konstruie
 
 \newpage
 
-\noindent Diese formale Definition des Kellerautomaten, lässt sich auch in eine grafische Repräsentation überführen (siehe Abbildung \ref{fig:kellerautomat}).
+\noindent Diese formale Definition des Kellerautomaten lässt sich auch in eine grafische Repräsentation überführen (siehe Abbildung \ref{fig:kellerautomat}).
 
 \begin{figure}[H]
     \centering
@@ -181,7 +181,7 @@ ID & Zustand & Übergang \\
 \label{tab:kellerautomat-uebergaenge}
 \end{table}
 
-\noindent Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem Endzustand. Wie vorhin schon erwähnt 
+\noindent Mit diesem Kellerautomaten wird ein EPK-Modell evaluiert. Dieser Automat akzeptiert mit einem Endzustand. Wie bereits erwähnt, 
 wird nach erfolgreicher Validierung der Graph kompiliert, sodass man eine ExecutionQueue $x_q \in X_Q$ erhält:
 
 $$x_q = \gamma(e_S)$$
@@ -388,10 +388,10 @@ Der Automationsserver bietet eine Schnittstelle an, welche die Automation von Pr
 Name                        &   Parameter                                                           & Funktion \\
 \midrule
 getSessionID                &   keine Parameter                                                     & -         \\
-initSimulation              &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells und Aufbau des Ausführungsmodell  \\
+initSimulation              &   Dateipfad des serialisierten EPK-Modells, Sprache                   & Kompilierung des EPK-Modells und Aufbau des Ausführungsmodells \\
 terminateCache              &   keine Parameter                                                     & Wird nicht verwendet, da Caching nicht benötigt wird           \\ 
-runSimulation               &   keine Parameter                                                     & Ausführung des Ausführungsmodell und Livestreaming über Socket \\
-stopSimulation              &   keine Parameter                                                     & Stoppen der Ausführung und des Livestreaming  \\
+runSimulation               &   keine Parameter                                                     & Ausführung des Ausführungsmodells und Livestreaming über Socket \\
+stopSimulation              &   keine Parameter                                                     & Stoppen der Ausführung und des Livestreamings \\
 getNextStepGroup            &   Parameter                                                           & Vorheriger Endpunkt um den nächsten Prozessschritt zu bekommen  \\
 getAvailableStatistics      &   Sprache                                                             & Abfragen des Statistikkatalogs (Verfügbare Statistiken)  \\
 getVersion                  &   keine Parameter                                                     & Serverversion  \\
@@ -411,7 +411,7 @@ closeStreamConnection       &   keine Parameter                                 
 
 \subsection{Schnittstelle zwischen Prozessverwaltungsplattform und IoT-Geräten}
 
-Bevor die Schnittstelle zwischen diesen beiden Parteien muss das Protokoll festgelegt werden, welches zur Kommunikation genutzt wird. Im IoT-Kontext hat man hierbei die 
+Bevor die Schnittstelle zwischen diesen beiden Parteien definiert werden kann, muss das Kommunikationsprotokoll festgelegt werden. Im IoT-Kontext hat man hierbei die 
 folgenden zwei Optionen: CoAP (siehe Abschnitt \ref{coap-definition}) und MQTT, welches in Abschnitt \ref{mqtt-definition} definiert wurde. \cite{wendzel_it-sicherheit_2018} Diese werden im Folgenden gegenübergestellt.
 
 \begin{table}[H]
@@ -420,7 +420,7 @@ folgenden zwei Optionen: CoAP (siehe Abschnitt \ref{coap-definition}) und MQTT, 
 \toprule
 \textbf{MQTT} & \textbf{CoAP} \\
 \midrule
-$-$ Nutzt Publish-Subscribe Pattern, wodurch Warte-Mechanismus für den Erhalt des Rückgabewerts eingebaut werden muss \cite{al-fuqaha_internet_2015} & $+$ Nutzt Request-Response Pattern, sodass man eine Antwort nach Ausführung eines Schrittes erhält \cite{al-fuqaha_internet_2015} \\
+$-$ Nutzt Publish-Subscribe-Pattern, wodurch Warte-Mechanismus für den Erhalt des Rückgabewerts eingebaut werden muss \cite{al-fuqaha_internet_2015} & $+$ Nutzt Request-Response-Pattern, sodass man eine Antwort nach Ausführung eines Schrittes erhält \cite{al-fuqaha_internet_2015} \\
 \addlinespace
 $-$ MQTT basiert auf TCP. Dieses bringt beim Verbindungsaufbau mit dem Drei-Wege-Handshake Latenz ein. \cite{kurose_computernetzwerke_2014} & $+$ UDP benötigt keinen Drei-Wege-Handshake und baut die Verbindung schneller auf \cite{kurose_computernetzwerke_2014} \\
 \addlinespace
@@ -481,10 +481,10 @@ ist hierbei wie folgt:
 
 \section{Zusammenfassung}
 
-Die nötigen Modelle und Schnittstellen, um eine Ausführung und Codegenerierung zu realisieren, sind nun definiert. Als erstes kam das Prozessmodell,
-welches ein 3-Tupel aus Startereignis, Endereignis und dem Prozessgraphen ist. Darauffolgend wurde das Ausführungsmodell definiert, welches aus einzelnen Ausführungsschritten
+Die nötigen Modelle und Schnittstellen, um eine Ausführung und Codegenerierung zu realisieren, sind nun definiert. Zunächst wurde das Prozessmodell definiert,
+welches ein 3-Tupel aus Startereignis, Endereignis und dem Prozessgraphen ist. Anschließend wurde das Ausführungsmodell definiert, welches aus einzelnen Ausführungsschritten
 und Ausführungsgruppen besteht. Dabei modellieren die Ausführungsgruppen die Kontrollstrukturen des Prozessmodells. Mit diesen zwei Modellen sind Ein- und Ausgabesprache gegeben,
 um den Compiler zu definieren. Dabei findet die Validierung auf Basis eines Kellerautomaten statt und die Übersetzung erfolgt durch eine Funktion, welche von
-der Prozessdomäne auf die Ausführungsdomäne abbildet. Darauf aufbauend wurde die Codegenerierung behandelt. Dafür wurde zunächst das entsprechende Codegenerierungsmodell definiert, auf welches das Ausführungsmodell überführt wird und die Überführung vom Ausführungsmodell zum
+der Prozessdomäne auf die Ausführungsdomäne abbildet. Darauf aufbauend wurde die Codegenerierung behandelt. Dafür wurde zunächst das entsprechende Codegenerierungsmodell definiert, in welches das Ausführungsmodell überführt wird und die Überführung vom Ausführungsmodell zum
 Codegenerierungsmodell wurde beschrieben. Als nächstes wurde das Ausführungs- und Animationsverhalten der Execution-Engine festgelegt. Schließlich wurden die Schnittstellen definiert,
 um die Kommunikation zwischen Nutzer, Prozessverwaltungsplattform und IoT-Geräten festzulegen.

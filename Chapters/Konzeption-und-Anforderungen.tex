@@ -1,12 +1,20 @@
 \chapter{Konzeption und Anforderungen}
 \label{analyse-und-konzeption}
 
-In diesem Kapitel wird das Vorgehen konzipiert durch die Definition der Anforderungen in Form von User-Stories. Aus diesen User-Stories werden dann die Aufgaben zur Realisierung dieser Anforderungen sowie die Akzeptanzkriterien abgeleitet.
+In diesem Kapitel werden die Anforderungen an die zu entwickelnde Lösung in Form von 
+User-Stories nach Cohn \cite{cohn_user_2004} definiert. Aus jeder User-Story werden 
+anschließend die Aufgaben zu ihrer Umsetzung sowie Akzeptanzkriterien (Definition of Done) 
+abgeleitet, anhand derer in Abschnitt~\ref{requirements-check} überprüft wird, ob die 
+jeweilige Anforderung erfüllt ist.
 
-\noindent Während die übergeordneten Ziele (heterogene Systemanbindung und -ansteuerung, Prozesseinhaltung und Stakeholdertransparenz) sich auf diese Arbeit fokussieren, werden die Anforderungen an ein Endprodukt gestellt, welches aus dieser Arbeit entsteht und diese übergeordneten Ziele in der Praxis umsetzt: die Prozessverwaltungsplattform, welche die Orchestrierung übernimmt, sowie der Compiler, welcher die Ausführung und
-Codegenerierung ermöglicht.
-
-\noindent Diese Anforderungen werden nach dem Verfahren von Cohn \cite{cohn_user_2004} definiert.
+\noindent Die User-Stories bilden dabei das Bindeglied zwischen den Zielen aus 
+Kapitel~\ref{motivation-und-zielsetzung} und dem Endprodukt dieser Arbeit: Während die 
+übergeordneten Ziele und die daraus abgeleiteten Arbeitsziele beschreiben, was in dieser 
+Arbeit umgesetzt wird, beschreiben die User-Stories aus Sicht der späteren Nutzer, welchen 
+Nutzen diese Umsetzung stiften soll. Das Endprodukt besteht aus der 
+Prozessverwaltungsplattform, welche die Orchestrierung übernimmt, sowie dem Compiler, der 
+die Ausführung und Codegenerierung ermöglicht. Zu jeder User-Story wird daher angegeben, 
+welche Arbeitsziele zu ihrer Erfüllung beitragen.
 
 \label{requirements}
 
@@ -30,60 +38,67 @@ Codegenerierung ermöglicht.
     werden kann, um den Produktionsfluss nicht zu stark zu beeinträchtigen}.
 \end{enumerate}
 
-\noindent Aus diesen User-Stories lassen sich die einzelnen Aufgaben (Tasks) und Akzeptanzkriterien (Definition of Done) für die Umsetzung herleiten.
 
+\noindent \textbf{User-Story A: Softwareentwickler}
 
-\noindent \textbf{Ich als Softwareentwickler möchte Produktionsanlagen einfach an die Prozessschicht anbinden, sodass neue Anlagen integriert werden können.}
+\textbf{\textit{Zugehörige Arbeitsziele}}: AZ1, AZ2
 
 \textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung eines \ac{SDK} zur Kommunikation mit der Prozessschicht auf Ebene der Anlage.
-    \item Entwicklung eines Werkzeuges zur Überführung des Prozessmodells in Firmwarecode.
+    \item Entwicklung eines Werkzeugs zur Überführung des Prozessmodells in Firmwarecode.
 \end{itemize}
 
 \textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
-    \item Man kann aus einem EPK-Prozessmodell eine Schablone erstellen zur Entwicklung von Firmwarecode.
+    \item Aus einem EPK-Prozessmodell lässt sich eine Schablone zur Entwicklung von Firmwarecode erstellen.
     \item Die Schablone lässt sich fehlerfrei kompilieren.
 \end{itemize}
 
 
-\noindent \textbf{Ich als Geschäftsleiter möchte meine Produktionsprozesse gemäß meiner Modellierung durchführen, sodass die Produktionen selbst konsistent und messbar sind.}
+\noindent \textbf{User-Story B: Geschäftsleiter}
+
+\textbf{\textit{Zugehörige Arbeitsziele}}: AZ3, AZ4, AZ5, AZ7
 
 \textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
-    \item Entwicklung eines Compilers zur Übersetzung des EPK-Modells in eine ausführbare Form
+    \item Entwicklung eines Compilers zur Übersetzung des EPK-Modells in eine ausführbare Form.
     \item Entwicklung einer Execution-Engine zur eigentlichen Ausführung.
-    \item Einbau von Logging zur Zeitmessung bei der Ausführung
+    \item Einbau von Logging zur Zeitmessung bei der Ausführung.
 \end{itemize}
 
 \textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
     \item Ein EPK-Modell lässt sich in das Ausführungsformat übersetzen.
-    \item Das Ausführungsformat wird gemäß des EPK-Modells ausgeführt.
-    \item Am Ende einer Ausführung hat man Zugang zu einem Ausführungsbericht.
+    \item Das Ausführungsformat wird gemäß dem EPK-Modell ausgeführt.
+    \item Am Ende einer Ausführung steht ein Ausführungsbericht zur Verfügung.
 \end{itemize}
 
-\noindent \textbf{Ich als Controller möchte laufende Prozesse überwachen, sodass die Effizienz von Geschäftsprozessen gemessen und optimiert werden kann.}
+
+\noindent \textbf{User-Story C: Controller}
+
+\textbf{\textit{Zugehörige Arbeitsziele}}: AZ6
 
 \textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
-    \item Entwicklung von Live-Monitoring bei einem laufenden Prozess 
+    \item Entwicklung von Live-Monitoring für einen laufenden Prozess.
 \end{itemize}
 
 \textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
-    \item Die Ausführung eines Prozessdurchlaufs lässt sich auf der Prozesssicht visuell mitverfolgen.
+    \item Die Ausführung eines Prozessdurchlaufs lässt sich in der Prozesssicht visuell mitverfolgen.
 \end{itemize}
 
 
-\noindent \textbf{Ich als Analyst möchte einen Verlauf vergangener Prozesse einsehen, sodass Schwachstellen und Engpässe ermittelt werden können.}
+\noindent \textbf{User-Story D: Analyst}
+
+\textbf{\textit{Zugehörige Arbeitsziele}}: AZ7
 
 \textbf{\textit{Abzuleitende Tasks}}:
 
@@ -94,40 +109,45 @@ Codegenerierung ermöglicht.
 \textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
-    \item Nach einer Ausführung ist es möglich einen Ausführungsbericht zu generieren.
-    \item Dieser Ausführungsbericht ist in einem Format, welches verwendet werden kann, um Engpässe zu ermitteln.
+    \item Nach einer Ausführung ist es möglich, einen Ausführungsbericht zu generieren.
+    \item Dieser Ausführungsbericht liegt in einem Format vor, mit dem sich Engpässe ermitteln lassen.
 \end{itemize}
 
 
-\noindent \textbf{Ich als Kunde möchte über den aktuellen Stand meines Produktes informiert werden, sodass ich die nächsten Schritte mit dem Produkt planen kann.}
+\noindent \textbf{User-Story E: Kunde}
+
+\textbf{\textit{Zugehörige Arbeitsziele}}: keine -- diese User-Story geht über den Umfang 
+der Arbeitsziele hinaus und wird in dieser Arbeit nur konzeptionell betrachtet.
 
 \textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
-    \item Entwicklung von Live-Monitoring bei einem laufenden Prozess 
+    \item Entwicklung von Live-Monitoring für einen laufenden Prozess.
 \end{itemize}
 
 \textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
-    \item Die Ausführung eines Prozessdurchlaufs lässt sich visuell mitverfolgen für den Kunden über eine eigene Sicht.
+    \item Die Ausführung eines Prozessdurchlaufs lässt sich für den Kunden über eine eigene Sicht visuell mitverfolgen.
     \item Es können Benachrichtigungen an den Kunden verschickt werden, wenn ein bestimmter Schritt ausgeführt wurde.
 \end{itemize}
 
 
-\noindent \textbf{Ich als Administrator möchte ein wartbares IoT-System haben, sodass im Falle eines Ausfalls schnell reagiert werden kann, um den Produktionsfluss nicht zu stark zu beeinträchtigen.}
+\noindent \textbf{User-Story F: Administrator}
+
+\textbf{\textit{Zugehörige Arbeitsziele}}: AZ1, AZ2, AZ7
 
 \textbf{\textit{Abzuleitende Tasks}}:
 
 \begin{itemize}
     \item Entwicklung einer modularen Hardwarearchitektur.
-    \item Entscheidung eines Kommunikationsprotokolls zwischen Prozessgateway und Produktionshardware.
+    \item Auswahl eines Kommunikationsprotokolls zwischen Prozessgateway und Produktionshardware.
     \item Definition eines Datenformats für die Kommunikation zwischen Prozessgateway und Produktionshardware.
 \end{itemize}
 
 \textbf{\textit{Definitions of Done}}:
 
 \begin{itemize}
-    \item Es ist möglich die Prozesshardware einfach auszutauschen, ohne das gesamte System zu beeinflussen.
-    \item Durch Ausführungsberichte ist es möglich die fehlerhafte Hardware schnell ausfindig zu machen.
+    \item Die Prozesshardware lässt sich einfach austauschen, ohne das gesamte System zu beeinflussen.
+    \item Anhand der Ausführungsberichte lässt sich fehlerhafte Hardware schnell ausfindig machen.
 \end{itemize}
