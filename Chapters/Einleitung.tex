@@ -7,7 +7,7 @@ Punkte bei:
 \begin{itemize}
   \item Der Einsatz von Sensoren und Aktoren.
   \item Die Abhängigkeiten zwischen dem aktuellen Produktionsprozess und anderen Prozessschritten oder Zuständen.
-  \item Zunahme von Komponenten und Anlagen im Bereich der Industrie 4.0 mit der Anforderung an Interoperabilität.
+  \item Die Zunahme von Komponenten und Anlagen im Bereich der Industrie 4.0 mit der Anforderung an Interoperabilität.
 \end{itemize}
 
 \noindent Um diese Prozesse übersichtlich darzustellen und zu optimieren, werden sie in der
@@ -15,11 +15,11 @@ Wirtschaftsinformatik mit Notationen wie der Ereignisgesteuerten Prozesskette (\
 Plattformen wie ARIS verwalten diese Modelle, simulieren sie und bieten Möglichkeiten, Optimierungen zu 
 erfassen. Das Prozessmodell beschreibt somit den Soll-Zustand, an dem sich alle Stakeholder orientieren.
 
-Das Modell steuert die Produktion nicht selbst. Zwischen Modell und Ausführung liegen mehrere manuelle 
+\noindent Das Modell steuert die Produktion jedoch nicht selbst. Zwischen Modell und Ausführung liegen mehrere manuelle 
 Übersetzungsschritte: Aus dem Modell werden Arbeitsanweisungen und Richtlinien abgeleitet. Die 
 eigentliche Steuerungssoftware der einzelnen Anlagen wird jedoch getrennt von diesen Anweisungen und Richtlinien entwickelt. \cite{mcginnis_formalizing_2019} \cite{venturamartins_applying_2017}
 
-Dies bringt drei Folgen mit sich:
+\noindent Dies bringt drei Folgen mit sich:
 
 \begin{itemize}
   \item \textbf{Abweichungen vom Modell:} Da die Ausführung nicht direkt an das Modell gebunden ist, 
@@ -33,10 +33,11 @@ Dies bringt drei Folgen mit sich:
   vor. Welcher Prozessschritt gerade ausgeführt wird, ist im Modell selbst nicht sichtbar. \cite{bundela_integration_2026} \cite{singh_eventdriven_2025}
 \end{itemize} 
 
-Modell und Ausführung existieren also nebeneinander, ohne technisch miteinander verbunden zu sein. 
-Diese Lücke zwischen Modell und Ausführung ist das Problem, mit dem sich diese Arbeit beschäftigt.
+\noindent Modell und Ausführung existieren also nebeneinander, ohne technisch miteinander verbunden zu sein. 
+Diese Lücke zwischen Modell und Ausführung ist das Problem, mit dem sich diese Arbeit beschäftigt, um eine 
+Produktion zu ermöglichen, die näher am modellierten Prozess liegt.
 
-Um diese Lücke zu schließen, wird in dieser Arbeit das EPK-Prozessmodell selbst zur Grundlage 
+\noindent Um diese Lücke zu schließen, wird in dieser Arbeit das EPK-Prozessmodell selbst zur Grundlage 
 der Ausführung gemacht. Ein eigens entwickelter Compiler übersetzt das in ARIS modellierte 
 EPK-Modell in ein Ausführungsmodell. Dieses bildet die Funktionen und Ereignisse des Prozesses 
 als ausführbare Schritte und die Verknüpfungsoperatoren (AND, OR, XOR) als Kontrollstrukturen 
@@ -46,5 +47,7 @@ einem ESP32-Mikrocontroller auf, der die jeweilige Anlage steuert, und entscheid
 zurückgelieferten Ergebnisse, welcher Pfad des Prozesses weiter ausgeführt wird. Die 
 Firmware-Grundstruktur für die Mikrocontroller wird dabei aus demselben Modell generiert. So 
 wird genau der Prozess ausgeführt, der modelliert wurde. Gleichzeitig fließen die 
-Ausführungsdaten als Live-Animation und als Ereignisprotokoll zurück in die Prozessplattform.
+Ausführungsdaten als Live-Animation und als Ereignisprotokoll zurück in die Prozessplattform. Die 
+Ausführungsdaten können dann weiter verarbeitet werden mit Prozessoptimierungstools wie ARIS 
+Process Mining.
 

@@ -92,6 +92,7 @@ dieser User-Stories zu evaluieren, muss man die Definition of Done der User-Stor
     \item Ich als \textbf{Administrator} möchte \textbf{ein wartbares IoT-System haben}, sodass \textbf{im Falle eines Ausfalls schnell reagiert
     werden kann, um den Produktionsfluss nicht zu stark zu beeinträchtigen}.
 
+    \newpage
     $\to$ Definitions of Done:
 
     \begin{itemize}
@@ -173,13 +174,11 @@ Mit ARIS wurde der Prozess modelliert. Das EPK-Modell ist unter Abbildung \ref{f
 \noindent Durch die Codegenerierung erhält man ein ESP-IDF-Projekt zur Entwicklung der prozessorientierten Firmware.
 Diese wird in C/C++ entwickelt. Die Projektstruktur eines generierten Projektes wird in Abbildung \ref{fig:firmware-code-project-structure} (siehe Anhang) gezeigt.
 
-\newpage
-
 \subsection{Entwicklung anhand des Firmwarecodeframeworks}
 
 Die Firmware ist in einem ESP-IDF-Projekt, welches C/C++ verwendet.
 Diese wird in ESP-IDF-Komponenten aufgeteilt. Dabei ist jede einzelne Komponente mit dem \texttt{handler}-Suffix
-ein Prozessschritt.
+der Endpunkt ein Prozessschritt.
 
 \noindent Neben der Firmware des ESP32 muss auch die Firmware der Unos programmiert werden. Dies geschieht ebenfalls mit C++ über das
 PlatformIO-Framework, da dieses den Build-Prozess wesentlich erleichtert und auch Möglichkeiten bietet, die Firmware auch mit Continuous Integration
@@ -347,6 +346,8 @@ abgesichert werden. \cite{wendzel_it-sicherheit_2018}
 Auch beim Resource-Directory-Server ist es so, dass dieser auf Port 5683 hört, welcher nicht abgesichert ist. Dieser
 ist kritischer, da dort die Zieladressen der ESP32 liegen, welche angesteuert werden sollen. Eine Absicherung kann
 durch den Einsatz von \ac{DTLS} \cite{wendzel_it-sicherheit_2018} für den Resource-Directory-Server gewährleistet werden. Dies gilt auch für den ESP32.
+
+\newpage
 
 \section{Kritische Bewertung der Architektur und Systemlimitationen}
 

@@ -11,9 +11,10 @@ jeweilige Anforderung erfüllt ist.
 Kapitel~\ref{motivation-und-zielsetzung} und dem Endprodukt dieser Arbeit: Während die 
 übergeordneten Ziele und die daraus abgeleiteten Arbeitsziele beschreiben, was in dieser 
 Arbeit umgesetzt wird, beschreiben die User-Stories aus Sicht der späteren Nutzer, welchen 
-Nutzen diese Umsetzung stiften soll. Das Endprodukt besteht aus der 
-Prozessverwaltungsplattform, welche die Orchestrierung übernimmt, sowie dem Compiler, der 
-die Ausführung und Codegenerierung ermöglicht. Zu jeder User-Story wird daher angegeben, 
+Zweck diese Umsetzung haben soll. Das Endprodukt besteht aus dem Compiler, der 
+das Modell zur Ausführung und Codegenerierung zur Verfügung stellt, der 
+Prozessverwaltungsplattform mit einer Execution-Engine, welche die Orchestrierung und Ausführung übernimmt,
+sowie einem Codegenerator, um die Firmware des ESP32 an die Orchestrierungsschicht der Execution-Engine anzubinden. Zu jeder User-Story wird außerdem angegeben, 
 welche Arbeitsziele zu ihrer Erfüllung beitragen.
 
 \label{requirements}
@@ -49,6 +50,8 @@ welche Arbeitsziele zu ihrer Erfüllung beitragen.
     \item Entwicklung eines \ac{SDK} zur Kommunikation mit der Prozessschicht auf Ebene der Anlage.
     \item Entwicklung eines Werkzeugs zur Überführung des Prozessmodells in Firmwarecode.
 \end{itemize}
+
+\newpage
 
 \textbf{\textit{Definitions of Done}}:
 
@@ -113,11 +116,11 @@ welche Arbeitsziele zu ihrer Erfüllung beitragen.
     \item Dieser Ausführungsbericht liegt in einem Format vor, mit dem sich Engpässe ermitteln lassen.
 \end{itemize}
 
+\newpage
 
 \noindent \textbf{User-Story E: Kunde}
 
-\textbf{\textit{Zugehörige Arbeitsziele}}: keine -- diese User-Story geht über den Umfang 
-der Arbeitsziele hinaus und wird in dieser Arbeit nur konzeptionell betrachtet.
+\textbf{\textit{Zugehörige Arbeitsziele}}: AZ6
 
 \textbf{\textit{Abzuleitende Tasks}}:
 

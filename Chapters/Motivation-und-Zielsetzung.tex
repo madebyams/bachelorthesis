@@ -13,10 +13,10 @@ Wie in Kapitel \ref{einleitung} schon am Ende erwähnt wurde, gibt es eine Lück
 Ausführung bei Geschäftsprozessen. Der Soll-Zustand wird im Modell zwar beschrieben, aber der Ist-Zustand in der Produktion ist 
 ein anderer. Ziel ist es, diese beiden Zustände durch diese Arbeit einander anzunähern, indem man durch eine Übersetzung 
 des Prozessmodells in ein Ausführungsmodell eine Art Ablaufplan bekommt, der viel näher am Prozess liegt. Dies verspricht 
-zum einen den Vorteil, dass alle Stakeholder einen klaren Überblick über das Prozessgeschehen haben. Bei der Produktion im Industriebereich
-ist das ein starker Vorteil, da man als Produktionsleiter jeden Produktionsschritt auch anhand des Prozessdiagramms ablesen kann, anstatt hier ein
+zum einen den Vorteil, dass alle Stakeholder einen klaren Überblick über das Prozessgeschehen haben. Zum anderen hat es bei der Produktion im Industriebereich
+einen starken Vorteil, da man als Produktionsleiter jeden Produktionsschritt auch anhand des Prozessdiagramms ablesen kann, anstatt hierfür ein
 separates mentales Modell zu haben. Dadurch haben sowohl Management- als auch Produktionsebene dieselbe Modellbasis und können so den Produktionsprozess
-leichter nachverfolgen und auch Optimierungen leichter durchführen. Diese Erleichterung in der Optimierung ist auch der zweite Vorteil. Viele Prozessverwaltungsplattformen
+leichter nachverfolgen und auch Optimierungen leichter durchführen. Diese Erleichterung in der Optimierung ist der nächste Vorteil. Viele Prozessverwaltungsplattformen
 bieten Lösungen zur Prozessoptimierung an. Dabei handelt es sich meist um Operationen, die auf dem Prozessdiagramm oder auf dessen Basis stattfinden. Dadurch, dass das Prozessmodell nun auch Basis 
 für die Ausführung ist, sind die Optimierungen auch viel näher am echten Geschehen und müssen nicht durch Richtlinien zunächst theoretisch festgelegt werden. Dadurch entfällt 
 auch die Zwischenstufe von der Richtlinie zur tatsächlichen Umsetzung der Optimierung. Das spart Zeit und auch Ressourcen ein.
@@ -27,22 +27,24 @@ sondern das Prozessdiagramm selbst. Das Live-Streaming der Ausführung trägt zu
 
 In der heutigen Zeit steht die Digitalisierung von Produktionsprozessen mit Industrie 4.0 im Vordergrund. Jedoch gibt es hierbei Herausforderungen in der Interoperabilität\footnote{Die Fähigkeit, dass zwei oder mehrere Systeme Informationen austauschen und diese auch gegenseitig nutzen können. \cite{interoperability_iso}} durch fragmentierte Daten und Systeme \cite{huebner_semantic_2026}, Prozesseinhaltung durch Abweichungen des modellierten Prozesses \cite{van_der_aalst_replaying_2012} sowie Transparenz des Produktionsprozesses für Stakeholder \cite{jawad_adoption_2022}.
 
-Aus dieser Ausgangsposition können folgende Ziele ausgearbeitet werden:
+\newpage
+
+\noindent Aus dieser Ausgangsposition können folgende Ziele ausgearbeitet werden:
 
 \begin{enumerate}
-    \item Fabriken können heterogene Systeme einheitlich anbinden und ansteuern 
-    \item Produktionen laufen prozesseinhaltend
-    \item Der Produktionsprozess wird für alle Stakeholder transparent aufbereitet
+    \item Fabriken können heterogene Systeme einheitlich anbinden und ansteuern.
+    \item Produktionen laufen prozesseinhaltend.
+    \item Der Produktionsprozess wird für alle Stakeholder transparent aufbereitet.
 \end{enumerate}
 
 \subsection{Fabriken können heterogene Systeme einheitlich anbinden und ansteuern}
 
 In den meisten Fällen hat man in einer Produktionsstätte ein Produktionssystem bestehend aus unterschiedlichen Maschinen. 
-Diese haben dann eigene Schnittstellen, welche auch proprietär sein können, was zu Datensilos führen kann. Diese Arbeit soll durch Nutzung von 
+Diese haben eigene Schnittstellen, welche auch proprietär sein können, was zu Datensilos führen kann. Diese Arbeit soll durch Nutzung von 
 offenen Kommunikations- und Schnittstellenstandards die Anbindung von heterogenen Systemen sowie die Ansteuerung erleichtern. Dies ist durch Schaffung einer einheitlichen Plattform möglich, 
 welche die Übersetzung auf die unterschiedlichen Systeme übernimmt.
 
-Um dieses Ziel zu erreichen, werden in dieser Arbeit folgende Arbeitsziele verfolgt:
+\noindent Um dieses Ziel zu erreichen, werden in dieser Arbeit folgende Arbeitsziele verfolgt:
 
 \begin{itemize}
   \item \textbf{AZ1:} Auswahl eines offenen Kommunikationsprotokolls für die Ansteuerung von 
@@ -65,14 +67,14 @@ unterschiedlichster Art sein:
   \item Zustände der Umgebung
 \end{itemize}
 
-Durch das Nutzen des Prozessmodells als Basis für die automatische Prozessausführung wird 
-sichergestellt, dass Produktionen prozessnäher funktionieren.
+\noindent Da das Prozessmodell als Basis für die automatische Prozessausführung dient, wird 
+sichergestellt, dass Produktionen näher am modellierten Prozess agieren.
 
-Dazu werden folgende Arbeitsziele umgesetzt:
+\noindent Dazu werden folgende Arbeitsziele aufgesetzt:
 
 \begin{itemize}
   \item \textbf{AZ3:} Formale Definition eines Prozessmodells auf Basis der EPK sowie eines 
-  Ausführungsmodells, das die Prozessschritte und Verknüpfungsoperatoren in eine ausführbare 
+  Ausführungsmodells, das die Prozessschritte und Verknüpfungsoperatoren des Prozessmodells in eine ausführbare 
   Form überführt.
   
   \item \textbf{AZ4:} Entwicklung eines Compilers, der ein EPK-Modell validiert und in das 
@@ -80,7 +82,7 @@ Dazu werden folgende Arbeitsziele umgesetzt:
   
   \item \textbf{AZ5:} Entwicklung einer Execution-Engine, die das Ausführungsmodell Schritt 
   für Schritt auf den angebundenen Geräten ausführt und Verzweigungen anhand der 
-  Rückgabewerte gemäß dem Modell auflöst.
+  Rückgabewerte analog zum Prozessmodell auflöst.
 \end{itemize}
 
 \subsection{Der Produktionsprozess wird für alle Stakeholder transparent aufbereitet}
@@ -89,16 +91,16 @@ Die Produktion findet in der Fabrikhalle statt. Hierbei können nicht alle Stake
 Einblick haben. Dies wird derzeit beispielsweise durch Daten aus \ac{ERP}-Systemen ermöglicht. Hier 
 wäre es also wichtig, näher am Prozessgeschehen zu sein, idealerweise in Echtzeit.
 
-Dafür werden folgende Arbeitsziele verfolgt:
+\noindent Dafür werden folgende Arbeitsziele verfolgt:
 
 \begin{itemize}
   \item \textbf{AZ6:} Live-Darstellung der laufenden Ausführung direkt im Prozessmodell der 
   Prozessverwaltungsplattform.
-  \item \textbf{AZ7:} Protokollierung jedes Ausführungsschritts in einem Ereignisprotokoll, 
+  \item \textbf{AZ7:} Protokollierung jedes Ausführungsschrittes in einem Ereignisprotokoll, 
   das für Process-Mining-Analysen exportiert werden kann.
 \end{itemize}
 
-Abschließend werden alle Komponenten in die Prozessverwaltungsplattform ARIS integriert (\textbf{AZ8}) und 
+\noindent Abschließend werden alle Komponenten in die Prozessverwaltungsplattform ARIS integriert (\textbf{AZ8}) und 
 anhand eines Versuchsaufbaus validiert (\textbf{AZ9}).
 
 \section{Vorgehen und Aufbau der Arbeit}

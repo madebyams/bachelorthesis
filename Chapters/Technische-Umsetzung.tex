@@ -29,7 +29,8 @@ auch die Konstruktion der \texttt{Process}-Klasse statt.
 
 \noindent Die Klassen zur Realisierung der Prozessmodellkonstruktion sind als \ac{UML}-Diagramm unter Abbildung \ref{fig:process-builder-uml} im Anhang aufgeführt.
 Die einzelnen \texttt{*Extractor}-Klassen erfüllen die Funktion, aus dem \ac{XML}-Dokument die Elemente zu extrahieren. Diese Elemente werden in \texttt{ProcessExtractor} gesammelt
-und zu einem \texttt{Process} (siehe Abbildung \ref{fig:prozess-uml} im Anhang) konstruiert. Nach der Konstruktion des \texttt{Process}-Objekts wird die Vorverarbeitung durchgeführt, um $\tau$ zu
+und zu einem \texttt{Process} (siehe Abbildung \ref{fig:prozess-uml} im Anhang) konstruiert. Analog zum Modell in Kapitel \ref{systemdesign-und-spezifikation} enthält \texttt{Process} 
+einen Graphen, dargestellt durch eine Adjazenzliste. Nach der Konstruktion des \texttt{Process}-Objekts wird die Vorverarbeitung durchgeführt, um $\tau$ zu
 realisieren mittels \texttt{OperatorPreprocessor}.
 
 \section{Ausführungsmodell}
@@ -61,7 +62,7 @@ Diese wird in der \texttt{ISimulation}-Implementierung \texttt{AAutomationDispat
 
 Die Execution-Engine ist mit der \texttt{ExecutionQueueRunner}-Klasse realisiert. Das entsprechende \ac{UML}-Diagramm ist unter Abbildung \ref{fig:execution-queue-runner-uml} zu finden. Diese enthält den \texttt{AutomationEventBuffer}, um Live-Streaming zu ARIS
 und Logging zu ermöglichen. Darüber hinaus enthält die Klasse die CoAP-Verbindung, um die Befehle an die Hardware zu übermitteln. Die \texttt{ExecutionQueue} wird durch eine
-\texttt{forEach}-Schleife bis zum Ende iteriert.
+\texttt{forEach}-Schleife bis zum Ende iteriert. Analog zum Pseudocode in Abschnitt \ref{execution-engine} dient die \texttt{run} Methode zur Ausführung der \texttt{ExecutionQueue}. 
 
 \begin{figure}[H]
     \centering
@@ -79,8 +80,8 @@ Dabei wird die Realisierung eines Prozesses durch einen CoAP-PUT-Endpoint realis
 aus Abschnitt \ref{coap-interface} entspricht der Pfadname eines Endpunktes den ersten 15 Zeichen eines SHA256-Hexstrings. 
 
 \noindent Alle CoAP-Endpunkte, welche die Funktionalität des SingleExecutables zur Verfügung stellen, werden beim Start des Servers aus
-einem Resource-Directory abgefragt, welches die CoAP-\acp{URL} enthält. Das Ergebnis wird in einer Hash-Map hinterlegt, bei der der gekürzte
-SHA256-Hexstring der Schlüssel und die CoAP-URL der Wert ist. Bei der Ausführung eines \texttt{SingleExecutable} wird anhand der ID des \texttt{SingleExecutable}
+einem Resource-Directory abgefragt, welches die CoAP-\acp{URI} enthält. Das Ergebnis wird in einer Hash-Map hinterlegt, bei der der gekürzte
+SHA256-Hexstring der Schlüssel und die CoAP-URI der Wert ist. Bei der Ausführung eines \texttt{SingleExecutable} wird anhand der ID des \texttt{SingleExecutable}
 der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die CoAP-Anfrage wird direkt an den ESP32 verschickt. Die beschriebene Ausführung und Kommunikation zwischen den einzelnen Akteuren wird auch in der Abbildung \ref{fig:coap-single-executable-execution} aufgezeigt.
 
 \begin{figure}[H]
@@ -92,7 +93,7 @@ der gekürzte Hexstring erzeugt, der CoAP-Pfad wird entnommen und die CoAP-Anfra
 
 \subsection{Pfadgenerierung durch SHA256}
 
-Der SHA256-Hexstring aus dem Abschnitt \ref{iot-interface-impl} wird für jeden Knoten $(i, t) \in X_S$ erzeugt. Dafür 
+Der SHA256-Hexstring aus dem Abschnitt \ref{iot-interface-impl} wird für jede SingleExecutable $(i, t) \in X_S$ erzeugt. Dafür 
 wird $sha256(i)$ berechnet. Diese Prüfsumme wird in Java als Hexstring hinterlegt. Aus diesem Hexstring wird 
 ein Substring aus den ersten 15 Zeichen entnommen. Dieser Substring ist die URI des Endpoints. Es wird so 
 vorgegangen, da die ID in ARIS Zeichen enthält, welche für URIs nicht kompatibel sind. Zur Generierung des 
@@ -109,17 +110,25 @@ was die Lesbarkeit und Wartbarkeit des Codes negativ beeinflusst. Vereinfacht wi
 \subsection{Aufsetzen des Resource-Directory-Servers}
 Für das Resource Directory wird \texttt{cf-rd} verwendet. Dies ist eine Resource-Directory-Implementierung vom Eclipse-Californium-%
 Projekt. Dieses wurde in ein Docker-Image überführt, sodass die Einrichtung effizient durchgeführt werden kann und auch
-Konfigurationsänderungen schneller umgesetzt werden können. Dieses Docker-Image wurde auf einer \ac{AWS}-\ac{EC2}-Instanz ausgeführt.
+Konfigurationsänderungen schneller umgesetzt werden können. Dieses Docker-Image wurde auf einer \ac{AWS} \ac{EC2}-Instanz ausgeführt.
 
 \section{Firmwarecodegenerierung}
 
-Bei der Firmwarecodegenerierung werden alle SingleExecutable-Instanzen in \texttt{ExecutionNodeDTO}-Instanzen überführt. Diese Instanzen werden zu \ac{JSON} serialisiert und an ein Python-Skript übergeben,
-welches ein ESP-IDF-Projekt anlegt und anhand der serialisierten SingleExecutables die einzelnen CoAP-Handler-Klassen erzeugt.
-Der generierte Firmwarecode behandelt schon Aspekte wie den Aufbau einer WLAN- und CoAP-Verbindung sowie die Registrierung bei dem Resource Directory.
-Für jede \texttt{SingleExecutable} gibt es in dem generierten Code eine Klasse, welche die CoAP-Anfrage annimmt und die Ausführungslogik ansteuert. Diese Ausführungslogik 
-wird vom Entwickler entweder in der Funktion \texttt{measure} (für Executables mit Rückgabetyp \texttt{bool}) oder in der Funktion \texttt{act} (für Executables mit Rückgabetyp \texttt{int})
+Bei der Firmwarecodegenerierung werden alle SingleExecutable-Instanzen in \texttt{ExecutionNodeDTO}-Instanzen überführt. Die Klasse \texttt{ExecutionNodeDTO} stellt dabei die 
+Codegenerierungselemente aus Abschnitt \ref{code-generation-model} dar. Das UML-Diagram der Klasse ist unter Abbildung \ref{fig:execution-node-dto-uml} zu sehen. Diese Instanzen werden zu \ac{JSON} serialisiert und an ein Python-Skript übergeben,
+welches ein ESP-IDF-Projekt anlegt und anhand der serialisierten \texttt{ExecutionNodeDTO}-Instanzen die einzelnen CoAP-Handler-Klassen erzeugt.
+Der generierte Firmwarecode behandelt schon Aspekte wie den Aufbau einer WLAN- und CoAP-Verbindung sowie die Registrierung des Gerätes und der Endpunkte bei dem Resource Directory.
+Für jede \texttt{ExecutionNodeDTO}-Instanz gibt es in dem generierten Code eine Klasse, welche die CoAP-Anfrage annimmt und die Ausführungslogik ansteuert. Diese Ausführungslogik 
+wird vom Entwickler entweder in der Funktion \texttt{measure} (beim Rückgabetyp \texttt{bool} im Ausführungsmodell) oder in der Funktion \texttt{act} (beim Rückgabetyp \texttt{int} im Ausführungsmodell)
 implementiert. Nach der Kompilierung erhält man Firmware, welche man auf einen ESP32 lädt. Dieser verbindet sich zunächst mit dem WLAN-Netzwerk, welches man während der Entwicklung angegeben hat.
-Dann werden alle Handler initialisiert und beim Resource-Directory registriert.
+Dann werden alle Handler initialisiert und beim Resource-Directory registriert. Anschließend ist der ESP32 bereit die CoAP-Anfragen anzunehmen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Graphics/ExecutionNodeDTO_UML.pdf}
+    \caption{UML Diagramm der Klasse \texttt{ExecutionNodeDTO}}
+    \label{fig:execution-node-dto-uml}
+\end{figure}
 
 \subsection{Integration in ESP-IDF}
 
@@ -127,13 +136,11 @@ Für den Firmwarecode wurde ESP-IDF als Basis genommen. Aspekte wie der Aufbau e
 sowie Einrichtungscode eines CoAP-Endpoint-Handlers sind schon eingebaut. Die dafür implementierten Klassen sind als \ac{UML}-Diagramme in der Abbildung \ref{fig:idf-project-classes} im Anhang zu sehen. 
 Nach der Codegenerierung muss nur noch die Ausführungslogik implementiert werden. 
 
-\newpage
-
 \subsection{Übersetzung des Ausführungsmodells in C++}
 
 Aus der Abbildung \ref{fig:epk-compiler-uml} ist zu entnehmen, dass der Compiler eine Menge an SingleExecutables enthält.
 Diese Menge wird zu einem dynamischen Array von Codegenerierungselementen gemäß Abschnitt \ref{code-generation-model} überführt. In Java wird das 
-Codegenerierungsmodell mit der Klasse \texttt{ExecutionNodeDTO} implementiert. Dieses dynamische Array wird anhand des JSON-Formats serialisiert, sodass man ein 
+Codegenerierungsmodell mit der Klasse \texttt{ExecutionNodeDTO} implementiert. Die Menge an SingleExecutables wird anhand des JSON-Formats serialisiert, sodass man ein 
 JSON-Dokument der folgenden Form erhält: 
 
 \noindent Sei $(i, n, t) \in C$:
@@ -141,9 +148,9 @@ JSON-Dokument der folgenden Form erhält:
 \begin{lstlisting}
 [
     {
-        "id": <i>,
-        "name": <n>, 
-        "type": <t>
+        "id": "i",
+        "name": "n", 
+        "type": "t"
     }, 
     
     ...
@@ -176,7 +183,7 @@ Optimierungszwecken des Prozesses oder auch zur Nachverfolgung von Durchläufen 
 In dieser Arbeit wurde ARIS Version 10 verwendet. Hierbei handelt es sich um ein verteiltes System aus Servern, welche unterschiedliche
 Funktionen anbieten, sowie aus zwei Arten von Clients: einem webbasierten Client und einem Rich-Client, welcher in Java entwickelt wurde. Die Beziehung zwischen den einzelnen Softwarekomponenten wird in Abbildung \ref{fig:aris-system-diagram} aufgezeigt. Sowohl der Web-Client als auch der 
 Java-Client bieten die Simulation von modellierten Prozessen an, jedoch bietet der Rich-Client noch die Möglichkeit, die einzelnen Prozessschritte zu animieren. Dabei
-sind alle Prozessschritte ausgegraut und der aktive Prozessschritt leuchtet in der jeweiligen Farbe auf. Unter dem verteilten System aus Servern gibt es auch einen 
+sind alle Prozessschritte ausgegraut und der aktive Prozessschritt leuchtet bei Ereignissen magenta und bei Funktionen grün auf. Unter dem verteilten System aus Servern gibt es auch einen 
 Server, welcher für die Simulation zuständig ist. Da Live-Monitoring auch eine der Systemanforderungen war, wurde für die Entwicklung des Prototyps der Rich-Client sowie 
 der Simulationsserver als Basis genommen.
 
@@ -237,7 +244,7 @@ welcher die aktuell ausgeführte Executable-ID vom Server erhält und diese ID a
 \subsubsection{Serverseitige Umsetzung}
 
 Auf dem Server wird bei der Verbindungsanfrage ein \texttt{java.net.ServerSocket}-Objekt erzeugt. Dabei wird ein freier Port vom Betriebssystem angefragt, welcher
-nach erfolgreicher Instanziierung des ServerSockets an den Client als Antwort zur Verbindungsanfrage übermittelt wird. Dazu wird ein neuer Thread erstellt, welcher auf eine
+zur Instanziierung des ServerSockets verwendet wird. Die Portnummer wird an den Client als Antwort zur Verbindungsanfrage übermittelt. Auf dem Server wird ein neuer Thread erstellt, welcher auf eine
 Client-Verbindung wartet. Beim Starten der Simulation wird überprüft, ob eine Client-Socket-Verbindung besteht. Ist das der Fall, so wird die Client-Referenz an den
 \texttt{AutomationEventBuffer} übergeben, sodass während der Ausführung die ID der aktuell ausgeführten \texttt{SingleExecutable} übertragen wird.
 

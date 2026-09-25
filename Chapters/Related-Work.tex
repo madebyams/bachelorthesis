@@ -1,7 +1,10 @@
 \chapter{Related Work}
 \label{related-work}
 
-Diese Arbeit beschäftigt sich mit der Fragestellung, wie die Lücke zwischen Prozessmodellierung und Prozessdurchführung im industriellen Kontext geschlossen werden kann. Um sich in dieser Thematik einen Überblick zu verschaffen, werden in diesem Kapitel ähnliche Arbeiten vorgestellt. Schließlich wird die vorliegende Arbeit in diesem Rahmen eingeordnet. Für dieses Kapitel werden die folgenden Arbeiten betrachtet:
+Diese Arbeit beschäftigt sich mit der Fragestellung, wie die Lücke zwischen Prozessmodellierung und Prozessdurchführung im industriellen Kontext geschlossen werden kann, um eine 
+prozesseinhaltendere Produktion zu ermöglichen.
+Um sich in dieser Thematik einen Überblick zu verschaffen, werden in diesem Kapitel ähnliche Arbeiten vorgestellt. 
+Schließlich wird die vorliegende Arbeit in diesem Rahmen eingeordnet. Für dieses Kapitel werden dabei die folgenden Arbeiten betrachtet:
 
 \begin{itemize}
 \item \textit{Using BPMN to Model Internet of Things Behaviour within Business Process} von Domingos und Martins \cite{domingos_using_2022}
@@ -15,7 +18,7 @@ Diese Arbeit beschäftigt sich mit der Fragestellung, wie die Lücke zwischen Pr
 
 \section{Using BPMN to Model Internet of Things Behaviour within Business Process (Domingos \& Martins)}
 
-\noindent Domingos und Martins stellen in ihrer Arbeit den Ansatz vor, dass BPMN-Modelle in die plattformunabhängige Programmiersprache Callas übersetzt werden. Dies ermöglicht es, dass Teile des Geschäftsprozesses auf IoT-Hardware ausgeführt werden können. Dabei müssen technische Details der Hardware nicht berücksichtigt werden, solange die IoT-Hardware eine Callas-Laufzeitumgebung ausführen kann. Die Prozessteile, welche auf der IoT-Hardware ausgeführt werden, werden manuell aussortiert und in Callas übersetzt. Dies beschreiben die Autoren als einen Aspekt, welcher in Zukunft automatisiert werden sollte. \cite{domingos_using_2022} Während Domingos und Martins mit der Callas-Programmiersprache und der dementsprechenden Laufzeitumgebung arbeiten, wird in dieser Arbeit C++ mithilfe des ESP-IDF-Frameworks verwendet, um die Möglichkeiten des ESP32 effizient zu nutzen. Auch wird statt BPMN das EPK-Modell verwendet, da es eine einfache Syntax besitzt. Beispiele dafür sind die erforderliche Abfolge von Ereignis und Funktion oder auch dass ein Start- und Endereignis zwingend notwendig sind. Jedoch wird das Prinzip der Übersetzung des Prozessmodells in ein maschinenverständliches Format von Domingos und Martins in dieser Arbeit verwendet.
+\noindent Domingos und Martins stellen in ihrer Arbeit den Ansatz vor, dass BPMN-Modelle in die plattformunabhängige Programmiersprache Callas übersetzt werden. Dies ermöglicht es, dass Teile des Geschäftsprozesses auf IoT-Hardware ausgeführt werden können. Dabei müssen technische Details der Hardware nicht berücksichtigt werden, solange die IoT-Hardware eine Callas-Laufzeitumgebung ausführen kann. Die Prozessteile, welche auf der IoT-Hardware ausgeführt werden, werden manuell aussortiert und in Callas übersetzt. Dies beschreiben die Autoren als einen Aspekt, welcher in Zukunft automatisiert werden sollte. \cite{domingos_using_2022} Während Domingos und Martins mit der Callas-Programmiersprache und der dementsprechenden Laufzeitumgebung arbeiten, wird in dieser Arbeit C++ mithilfe des ESP-IDF-Frameworks verwendet, um die Möglichkeiten des ESP32 effizient zu nutzen. Auch wird statt BPMN das EPK-Modell verwendet, da es eine einfachere Syntax besitzt. Beispiele dafür sind die erforderliche Abfolge von Ereignis und Funktion oder auch, dass ein Start- und Endereignis zwingend notwendig sind. Jedoch wird das Prinzip der Übersetzung des Prozessmodells in ein maschinenverständliches Format von Domingos und Martins in dieser Arbeit verwendet.
 
 \newpage
 
@@ -36,4 +39,4 @@ IoT-gekoppelten Prozessen. Dabei werden die Prozesse in BPMN notiert und mit der
 
 \noindent All diese Arbeiten verfolgen das Ziel, die Lücke zwischen der Prozessmodellierung und der Ausführung auf IoT-Hardware zu schließen. Das übergeordnete Prinzip, das Prozessmodell in eine von Maschinen ausführbare Form zu übersetzen, dient der vorliegenden Arbeit als konzeptionelle Grundlage. Das Konzept wird aber durch die Entwicklung eines eigenen Compilers mitsamt Execution-Engine und Codegenerierung realisiert, statt Plattformen wie Camunda oder Callas zu nutzen. Als konkretes Werkzeug zur Prozessmodellierung wird ARIS eingesetzt, welches noch um die Ausführung und Codegenerierung erweitert wird.
 
-\noindent Tabelle \ref{tab:related-work-comparison} im Anhang zeigt eine Vergleichsmatrix, um die Unterschiede und Gemeinsamkeiten der verwandten Arbeiten mit der vorliegenden Arbeit übersichtlich darzustellen:
+\noindent Tabelle \ref{tab:related-work-comparison} im Anhang zeigt eine Vergleichsmatrix, um die Unterschiede und Gemeinsamkeiten der verwandten Arbeiten mit der vorliegenden Arbeit übersichtlich darzustellen.

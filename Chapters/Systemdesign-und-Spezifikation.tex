@@ -45,9 +45,9 @@ und in das Ausführungsmodell kompiliert wird.
 
 Für das Ausführungsmodell wird die Listendefinition gemäß Smolka \cite{smolka_programmierung_2012} verwendet.
 
-\noindent Das Ausführungsmodell ist eine Folge von Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
-Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie Namen und Rückgabetyp. Dieses 
-Modell wird dann von der Execution-Engine eingelesen, welche anschließend die Folge Schritt für Schritt ausführt. Dabei enthält das Modell
+\noindent Das Ausführungsmodell ist eine Liste von Befehlen, welche die Prozessschritte darstellen. Dabei wird nicht mehr zwischen Ereignis und 
+Funktion unterschieden. Dieses Modell ist näher am Programmcode und ein Befehl enthält Metadaten wie ID vom Prozessmodell sowie den Rückgabetypen. Dieses 
+Modell wird dann von der Execution-Engine eingelesen, welche anschließend die Liste Schritt für Schritt ausführt. Dabei enthält das Modell
 auch Kontrollflussstrukturen, welche die Verknüpfungsoperatoren des Prozesses modellieren. Formal kann es wie folgt definiert werden:
 
 \noindent Sei $X$ die Menge aller Executables und $T = \{int, bool\}$ die Menge der Rückgabetypen. Dann gilt:
@@ -77,12 +77,12 @@ Der Compiler übersetzt diese in ein Ausführungsmodell, das der Definition aus 
 
 \subsection{Statische Analyse und Vorverarbeitung der Konnektoren}
 
-Vor der Kompilierung findet eine Vorverarbeitung statt, bei der die Abbildung $\tau$ gefüllt wird.
+Vor der Kompilierung findet eine Vorverarbeitung statt, bei der die Abbildung $\tau$ (siehe Abschnitt \ref{epk-definition}) gefüllt wird.
 
 \noindent Danach findet nochmals eine Traversierung gemäß der Tiefensuche statt, um den Graph zu validieren. Nach dieser Validierung findet die Kompilierung statt. 
 Die Validierung kann man formal wie folgt modellieren:
 
-\noindent Gegeben sei ein Prozess $P$. $e_I \in E \setminus \{e_S, e_E\}$ beschreibt alle Zwischenereignisse von $P$. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G_P$ enthält. 
+\noindent Gegeben sei ein Prozess $P$. $e_I \in E \setminus \{e_S, e_E\}$ beschreibt ein beliebiges Zwischenereignis aus $P$. Aus der Definition kann man entnehmen, dass $P$ einen gerichteten Graphen $G_P$ enthält. 
 Durch die Tiefensuche in $G_P$ bekommt man alle möglichen Pfade des Graphen. Dabei ist der Pfad eine Folge von Knoten $v \in V$ aus $G$. Gegeben sei nun eine kontextfreie Sprache $L$ mit folgender Grammatik:
 
 \begin{align}
@@ -230,16 +230,18 @@ in ein Modell umgewandelt werden, welches die Generierung von Quellcode ermögli
 \subsection{Codegenerierungsmodell}
 \label{codegeneration-model}
 
-Sei $C = \{(i, n, t) | i \in \mathbb{N} \land n \in S \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
-den Rückgabetyp sowie die ersten 15 Zeichen des Hexstrings einer \ac{SHA256}-Prüfsumme der ID $i$. Dieser Codeknoten wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
+Sei $C = \{(h, n, t) | h \in \mathbb{S} \land n \in \mathbb{S} \land t \in T\}$ die Menge aller Codekomponenten. $c \in C$ enthält mit $h$ die ersten 15 Zeichen des Hexstrings einer \ac{SHA256}-Prüfsumme der ID $i$ im Prozessmodell, mit $n$ den Namen des Ereignisses oder der Funktion eines Prozesses $P$,
+sowie mit $t$ den Rückgabetypen, welcher aus dem kompilierten Ausführungsmodell entnommen wird. Dieser Codekomponente wird später in eine C++-Klasse überführt, um den Firmwarequellcode zu generieren.
 
 \subsection{Generierung des Firmwarequellcodes}
 
-Bei der Generierung des Firmwarequellcodes wird rekursiv durch das Ausführungsmodell traversiert, um alle SingleExecutables $x_S$ in die entsprechenden
-Codeelemente $c \in C$ umzuwandeln.
+Bei der Generierung des Firmwarequellcodes wird rekursiv durch das Prozess- und Ausführungsmodell traversiert, um anhand aller Ereignisse und Funktionen des Prozessmodells, sowie anhand aller SingleExecutables $x_S$ des Ausführungsmodells die entsprechenden
+Codeelemente $c \in C$ zu erzeugen.
+
 
 
 \section{Execution-Engine}
+\label{execution-engine}
 
 Durch den EPK-Compiler erhält man nun das Ausführungsmodell. Dieses kann von der Execution-Engine entgegengenommen und zur Orchestrierung verwendet
 werden, sodass eine Ausführung des Prozesses ermöglicht wird. Im Folgenden wird die Bezeichnung \textit{ExecutionQueue} verwendet, um auf das
@@ -351,9 +353,9 @@ $-$ Blockierendes Request Response erhöht Schwankungen in der Netzwerkbandbreit
 
 Auf dieser Grundlage wurde entschieden, mit bidirektionalen Verbindungen statt Polling für die Animation zu arbeiten.
 
-\noindent Vor der Ausführung wird eine Anfrage gestellt, um eine Live-Streaming-Verbindung aufzubauen. Bei einer Anfrage wird das Betriebssystem nach einem freien TCP-Port 
-gefragt. Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Die Abbildung \ref{fig:live-streaming} zeigt auch grafisch den Kontrollfluss auf. Über diese
-Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten zu 
+\noindent Dabei wird vor der Ausführung eine Anfrage gestellt, um eine Live-Streaming-Verbindung aufzubauen. Bei der Anfrage wird dann das Betriebssystem nach einem freien TCP-Port 
+gefragt. Bei einem freien Port wird ein TCP-Socket aufgesetzt, welches auf eingehende Verbindung wartet (Server). Die Portnummer wird dem Client zurückgegeben, sodass dieser auch einen TCP-Socket erstellt, um eine bidirektionale Verbindung mit dem Server herzustellen. Die Abbildung \ref{fig:live-streaming} zeigt auch grafisch den Kontrollfluss auf. Über diese
+Verbindung wird dann die ID des aktuell laufenden Prozesses übermittelt. Dies wird vom Client verwendet, um die aktiven EPK-Knoten auf der Prozessverwaltungsplattform ARIS zu 
 animieren.
 
 \begin{figure}[H]
@@ -364,12 +366,12 @@ animieren.
 \end{figure}
 
 
-\noindent Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), bei denen zunächst eine WebSocket-Verbindungsanfrage per \ac{HTTP} verschickt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
+\noindent Dieses Verhalten ist sehr ähnlich zu WebSockets (siehe Abschnitt \ref{websocket-definition}), bei denen zunächst eine WebSocket-Verbindungsanfrage per \ac{HTTP} gestellt wird und die Antwort ein Protokollwechsel ist. \cite{lombardi_websocket_2015}
 
 \section{Schnittstellen}
 
-Es müssen zwei Schnittstellen für diese Arbeit definiert werden. Die erste Schnittstelle stellt dem Nutzer die Funktionalitäten des Compilers und der Execution-Engine zur Verfügung.
-Die zweite Schnittstelle definiert die Kommunikation der Orchestrierungsschicht der Prozessverwaltungsplattform mit IoT-Geräten.
+Es müssen zwei Schnittstellen für diese Arbeit definiert werden. Die erste Schnittstelle stellt der Prozessverwaltungsplattform ARIS, die Funktionalitäten des Compilers und der Execution-Engine zur Verfügung.
+Die zweite Schnittstelle definiert die Kommunikation der Orchestrierungsschicht in ARIS mit der IoT-Hardware.
 
 \subsection{Schnittstelle für Compiler und Execution-Engine}
 \label{automation-server-interface}
@@ -459,15 +461,14 @@ Die Schemata werden in einer TypeScript-ähnlichen Syntax dargestellt.
 
 \newpage
 
-\noindent Sei $h$ die SHA-256-Prüfsumme der Single-Executable-ID.
-
-
 \noindent \textbf{PUT /<$h$[0:15]>}
 
+\noindent Dabei sei $h$ der Hex-String der SHA-256-Prüfsumme der Single-Executable-ID.
 
 \noindent Führt die Operation einer Single-Executable mit der passenden ID aus. Auch wenn es sich hier um eine PUT-Anfrage handelt, muss 
 kein Payload mitgegeben werden. Dies begründet auch die Entscheidung, PUT zu verwenden. Normalerweise wird für eine Ausführung POST
-genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload zwingend benötigt wird, erschien PUT sinnvoller.
+genutzt. Da für die Ausführung aber keine Parameter oder eingehender Payload zwingend benötigt wird, erschien PUT sinnvoller. Außerdem 
+passt die Ausführung zum Idempotenz Charakter einer PUT Anfrage. \cite{burke_restful_2013}
 
 \noindent Die Antwort ist der Rückgabewert und die Ausführungszeit auf dem Mikrocontroller. Das Schema
 ist hierbei wie folgt:
