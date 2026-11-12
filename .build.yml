@@ -1,0 +1,16 @@
+image: debian/stable
+packages:
+  - latexmk
+  - texlive-latex-extra
+  - texlive-fonts-recommended
+  - texlive-lang-german
+  - texlive-bibtex-extra
+  - texlive-science
+sources:
+  - https://git.sr.ht/~itsams_wav/bachelorthesis
+tasks:
+  - build-pdf: |
+      cd "$HOME/bachelorthesis"
+      latexmk -pdf -interaction=nonstopmode -file-line-error htwsaar-i-mst-vorlage.tex
+artifacts:
+  - bachelorthesis/htwsaar-i-mst-vorlage.pdf
